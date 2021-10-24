@@ -1,0 +1,42 @@
+In this lab we aim to practice problem solving using Mathematica. We have four options of projects to work on and present. In this notebook we aim to tackle the RSA project, but in other notebooks we aim to also tackle the pendulum and energy contours, data fitting, and the Fibonacci sequence.
+
+When we are finished with the problem, we should write a report (20% of the course assessment, using LaTeX) explaining the background theory and the solution to one of these four problems. 
+- Include a short introduction of the mathematical background. Cite appropriate references.
+- Describe main results, showing graphs, examples, etc. using Mathematica (but not necessarily the code)
+- Include references section
+The length of the report should be about 3 pages.
+
+---
+The RSA algorithm consists of 3 stages: Public and Private key generation,  Using the public key to encrypt a message, and Decrypt the message using the private key. We shall implement the RSA algorithm and exchange messages with class members.
+p=NextPrime[1000,420];
+q=NextPrime[1000,690];
+nMod=p q;
+mPriv=(p-1) (q-1);
+ePub=69;
+(*p,q will be odd, and mPriv even, so any even number won't be coprime to mPriv, hence start with an odd number and keep adding 2, to search only for odd numbers, and hence speed up the linear search*)
+While[GCD[ePub,mPriv]!=1,
+  ePub=ePub+2;
+]
+
+dPriv = PowerMod[ePub,-1,mPriv];
+
+(*Keys *)
+pubKey={nMod,ePub};
+privKey={nMod,dPriv};
+
+(*Encryts integer 0<M<nMod. Returns c=M^e mod n*)
+RSAEncryptPriv[M_List,n_,e_]:= PowerMod[M,e,n];
+RSAEncrypt[S_String, n_,e_]:=RSAEncryptPriv[ToCharacterCode[S],n,e];
+(*Decryption*)
+RSADecryptPriv[c_List,n_,d_]:=PowerMod[c,d,n];
+RSADecrypt[c_List,n_,d_]:=FromCharacterCode[RSADecryptPriv[c,n,d]];
+
+(*Messaging*)
+msg="Hello, Neo :)! <.-.>";
+encrMsg=RSAEncrypt[msg,nMod,ePub]
+RSADecrypt[encrMsg,nMod,dPriv]
+Out[32]= {10028758,12391392,7794932,7794932,20119497,28059177,8930002,18761489,12391392,20119497,8930002,24274922,9908423,14740789,8930002,26156314,11713355,27560654,11713355,17699761}
+Out[33]= Hello, Neo :)! <.-.>
+In[34]:= n:=4
+In[35]:= n
+Out[35]= 4

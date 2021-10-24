@@ -1,0 +1,69 @@
+\section{Lecture 10 - 11 Oct 2021}
+We keep on with the previous example. We found the indicial equation, taken by looking the
+lowest power of the series. We also found the recurrence relation for $a_N$.
+
+For $r=1$ we have
+\[a_n = \frac{-a_{n-1}}{n(2n+1)}\]
+And so the series solution is, with $a_0=1$. 
+\[y_1 = x\left\{ \sum \frac{(-1)^n x^n 2^n n!}{n!(2n+1)!} \right\}\]
+
+We can find the second solution with $r=1/2$. We have
+\[a_{n} = \frac{-a_{n-1}}{(2n-1)(n)}\]
+And so the power series,
+\[y_{2} = x^{1/2} \left\{ \sum \frac{(-1)^n 2^n x^n}{(2n)!} \right\}\]
+
+Next, we have to check convergence, using the ratio test. For $y_1$,
+\[\lim_{n\to\infty} |\frac{x}{(n+1)(2n+3)}| = 0\]
+For $y_2$, we have
+\[\lim_{n\to\infty} |\frac{x}{(2n+1)(n+1)}|= 0\]
+And so the power series converge absolutely for $x>0$. If we have complex roots for $r$,
+we proceed in the same way, but $y_1,y_2$ will be complex-valued. 
+
+In the case where we get \emph{repeated roots} for $r_1$, we have that the first solution is
+\[y_1 = \sum a_n(r_1) (x-x_0)^{n+r_1}\]
+And so the second solution is 
+\[y_2 = y_1 \ln (x-x_0) + \sum_{n=0}^{\infty} \frac{\partial a_n}{\partial r} (r_1)
+(x-x_0)^{n+r_1}\]
+We'll see the motivation for this motivation with the following example.
+
+\begin{example}[Bessel's equation of order 0]
+  Find a power series solution around $x=0$ for 
+  \[L[y]=x^2y'' + xy' + x^2 y = 0\]
+\end{example}
+\begin{proof}[Solution]
+  We see that $x=0$ is a singular point. Test for regularity (otherwise the method does
+  not make sense).
+  \[\lim_{x\to 0} (\frac{x a}{b}) = \lim_{x\to 0} (\frac{x x}{x^2}) = 1\]
+  \[\lim_{x\to 0} (\frac{x^2 c}{b}) = \lim_{x\to 0} (\frac{x^2 x^2}{x^2}) = 0\]
+  Hence both limits are finite -- i.e. $x=0$ is a regular singular point, and we can use
+  power series method. Then we're looking for a series
+  \[y = \sum a_n x^{n+r}\]
+  \[y' = \sum a_n(n+r) x^{n+r-1}\]
+  \[y = \sum a_n(n+r)(n+r-1) x^{n+r-2}\]
+  For $a_0\neq 0$. Thenwe substitute into the equation
+  \[\sum_{n=0}^{\infty} [a_n(n+r)(n+r-1)x^{n+r} + a_n (n+r) x^{n+r} + a_n x^{n+r+2} ]= 0\]
+  Then, the coefficient of $x^r$ (when $n=0$) is, by the \emph{indicial equation}
+  \[a_0 r (r-1) + a_0 r + a_0 = 0\]
+  \[\iff r(r-1) + r = r^2= 0\]
+  Here we have a repeated root. However, if we look for the coefficient of $n=1$, we get
+  $a_1(r+1)^2 =0$, which implies that $a_1=0$ since we know $r=0$. For a general $N$ we
+  get
+  \[a_N (N+r)(N+r-1) + a_N (N+r) + a_{N-2} = 0\]
+  When then find our recurrence relation,
+  \[a_N = \frac{-a_{N-2}}{(N+r)^2}\]
+  Since we have $a_1=0$, we know that this series depends only on even powers. With $r=0$
+  for $y_1$, we have
+  \[a_N = \frac{-a_{N-2}}{N^2}\]
+  Since we have only even power, we can write $N=2m$ for $m\in\ZZ$,
+  \[a_{2m} = \frac{-a_{2(m-1)}}{4m^2}\]
+  \[\implies a_{2} = \frac{-a_{0}}{4}\]
+  \[\implies a_{4} = \frac{-a_{2}}{4*2^2} = \frac{+a_0}{4 * 4^2}\]
+  \[\implies a_{6} = \frac{-a_{4}}{4 * 3^2} = \frac{-a_0}{4* (1*2*3)^2}\]
+  \[a_{2m} = \frac{(-1)^m a_0}{2^{2m} (m!)^2}\]
+  And so we can write the solution
+  \[y_1 = \sum_{m=0}^{\infty} \frac{(-1)^m x^{2m}}{2^{2m}(m!)^2}\]
+  This is Bessel's function of the first kind.
+
+
+\end{proof}
+

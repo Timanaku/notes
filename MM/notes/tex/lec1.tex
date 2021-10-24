@@ -1,0 +1,50 @@
+\section{Lecture 1 - 20 Sep 2021}
+\subsection{Introduction}
+A 2OLDE has the following form,
+\[ y'' = f(t,y,y')\]
+\[ y' = \frac{dy}{dt}\]
+The order of the DE is the degree of the highest derivative. The function $f:\RR^3\to\RR$
+defines the DE. The DE is linear if $f$ is linear in arguments $y,y'$.
+\begin{definition}
+  A second order linear differential equation (2OLDE) with unkown $y$ is an expression of
+  the form
+  \[a(t)y'' + b(t)y' + c(t)y = h(t)\]
+  Where $a,b,c,h:I\subset\RR\to\RR$ are given functions. When $h(t)=0$ the equation is
+  said to be homogeneous. Otherwise it's said to be non-homogeneous. If the functions
+  $a,b,c$ are constant, the DE is said to be constant coefficient. Otherwise it's said to
+  be variable coefficient.
+
+  By dividing the above expression by $a(t)$ we reduce the 2OLDE to
+  \[y'' + p(t)y' + q(t)y = f(t)\]
+  \label{2olde}
+\end{definition}
+
+
+\begin{theorem}
+  If the functions $p,q,f:I\subset\RR\to\RR$ are continuous in their domain, and for
+  boundary conditions $y(t_0)=y_0$ and $y'(t_0)=y_1$ for $t_0\in I$ and $y_0,y_1\in\RR$,
+  then there exists a unique solution to that initial value problem (IVP).
+  
+  \label{uniquenessSolutionIVP}
+  \begin{proof}
+    Omitted. It's an aplication of the contraction mapping theorem from metric spaces.
+  \end{proof}
+\end{theorem}
+
+
+\subsection{Homogeneous Eq}
+Questions we will pose and solve in the course are the following:
+\begin{itemize}
+  \ii Why did we add two solutions to get the general one? 
+  \ii Why is this solution the general one?
+  \ii What does a solution to the non-homogeneous DE look like?
+\end{itemize}
+To address these questions, operators are useful.
+
+\subsubsection{Operators}
+One can think of an operation such as differentiting or integrating as mapping with
+function inputs and function outputs. For example, $L$ would make an operation on a
+function $y:\RR\to\RR$ as 
+\[ L: y\mapsto y''+y \]
+Such an $L$ is referred to as functional or operator.
+

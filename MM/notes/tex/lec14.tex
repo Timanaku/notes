@@ -1,0 +1,98 @@
+\section{Lecture 14 - 20 Oct 2021}
+Self-adjoint operators, canonical forms.
+Recall that for an operator of the form $L=aDD+bD+c$ we have $\overline{L}=D(pD) + q$
+(where $D$ represents the derivative operator), for $a,b,c,p,q$ being functions of $x$.
+\begin{theorem}
+  Let $L[y]=aDD[y]+bD[y]+cy=f(x)$ be any linear operator. Then $\overline{L}=D(pD[y]) + qy=H(x)$ exists. Moreover, 
+  \[p(x)=\exp{\int\frac{b(x)}{a(x)}dx}\]
+  \[q(x)=p(x)\frac{c(x)}{a(x)}\]
+  \[H(x)=p(x)\frac{f(x)}{a(x)}\]
+  \label{thm:anyLinAdj}
+\end{theorem}
+\begin{proof}
+  Take $L[y]$ as given above, and divide by $a$, assuming $a(x)\neq 0$ for any $x\in\dom
+  a$. We get
+  \[y''+\frac{b}{a}y'+\frac{c}{a}y = \frac{f}{a}\]
+  And multiply by the integrating factor $p=\exp{\int\frac{b}{a}dx}$ we get
+  \[D[pD[y]]+\frac{pc}{a}y = \frac{fp}{a}\]
+  Define $q=\frac{pc}{a}$ and $H=\frac{fp}{a}$, and we get the required result.
+\end{proof}
+
+
+\begin{example}
+  Put the equation 
+  \[y''-xy'-2y=0\]
+  Into self-adjoint form.
+\end{example}
+\begin{proof}[Solution]
+  $p(x)=\exp{-\int x dx}=\exp -\frac{x^2}{2}$. Hence we have 
+  \[D(D[y]\exp -\frac{x^2}{2}) - 2y\exp \frac{-x^2}{2}=0\]
+  The self-adjoint form.
+\end{proof}
+
+\section{Canonical form}
+
+\begin{theorem}
+  Let $L$ be any linear operator. Then $L$ can be written in cannonical form,
+  \[DD[y] + \tilde{Q}y = \tilde{H}\]
+  \label{thm:anyLinCan}
+\end{theorem}
+\begin{proof}
+  Take $ay''+by'+cy=f$ and use the Theorem \ref{thm:anyLinAdj} to transform it into self
+  adjoint form
+  \[D(pD[y]) +qy=H\]
+  And change variables as $pD[y]=pD_x[y]=D_t[y]$. By the chain rule, we have 
+  \[D_t[y]= D_x[y]D_t[x]\]
+  Hence take $p=D_y[x]$. This can be solved by separation of variables
+  \[\int \frac{1}{p}dx = \int dt=t\]
+  Multiply the self-adjoint form by $p$ and get 
+  \[pD[pD[y]]+pqy = pH\]
+  recall $p=D_t[x]$ and $D=D_x$ above, so $pD=D_t[x]D_x=D_t$ by the chain rule and so  the
+  above reduces to 
+  \[D_t[D_t[y]]+\tilde{Q}(t)y=\tilde{H}(t)\]
+  Where $\tilde{Q}(t)=p(x)q(x)$ and $\tilde{H}(t)=H(x)p(x)$ with
+  $p(x)=\frac{dx(t)}{dt}$. This is the canonical form with $x(t)$ determined from $t=\int
+  \frac{1}{p(x)}dx$.
+\end{proof}
+
+
+\begin{example}
+  Put Bessel's equation
+  \[x^2y''+xy'+(x^2-p^2)y=0\]
+  Into self adjoint and canonical forms.
+\end{example}
+\begin{proof}[Solution]
+  We have by Theorem \ref{thm:anyLinAdj} that $p=\exp\int\frac{b}{a}dx$ and then
+  $q=\frac{pc}{a}$ and $H=\frac{pf}{a}=0$. Note that 
+  \[p=\exp\frac{1}{x}dx = x\]
+  And so it follows that $q=\frac{x^2-p^2}{x}$, and the adjoint form follows,
+  \[\overline{L}[y]=\frac{d}{dx}(xy')+ \frac{(x^2-p^2)}{x}y=0\]
+
+  By Theorem \ref{thm:anyLinCan} we have that $x(t)$ can be found from
+  $t=\frac{1}{x}dx=\ln|x|$ so $x=e^t$ and it follows that $\tilde{H}=H(x(t))p(x(t))=0$ and
+  $\tilde{Q}=pq= e^{2t}-p^2$, hence
+  \[L[y]=\frac{d^2}{dt^2}y + (e^{2t}-p^2)y=0\]
+\end{proof}
+
+\begin{example}
+  Put  the equation
+  \[4xy''+2y'+y=0\]
+  Into canonical form and then solve it.
+\end{example}
+\begin{proof}[Solution]
+  First transform the equation into self-adjoint form to get 
+  \[\overline{L}[y]= \frac{d}{dx}(\sqrt{x}y')+ \frac{1}{4\sqrt{x}}y=0\]
+  By following Theorem \ref{thm:anyLinAdj}. We then can transform it into canonical form
+  by followin Theorem \ref{thm:anyLinCan} to get
+  \[L[y]=y''+\frac{1}{4}y=0\]
+  This is an equation with constant coefficients, and we have $x=\frac{t^2}{4}$. Let
+  $y=e^r$ and we find $r=\pm \frac{i}{2}$, so the solution follows
+  \[y=c_1\sin\frac{t}{2} + c_2\cos\frac{t}{2}\]
+  Substituting by $t=2\sqrt{x}$ we find the solution 
+  \[y=c_1\sin\sqrt{x} + c_2\cos\sqrt{x}\]
+  As required.
+
+\end{proof}
+
+
+

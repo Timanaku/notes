@@ -1,0 +1,81 @@
+\section{Lecture 9 - 8 Oct 2021}
+Last time we were solving an Euler-type equation, which has the from
+\[(x-x_0)^2 y'' + (x-x_0)p_0y' + q_0 y = 0 \]
+In our example, we had
+\[x^2 y'' + 5xy' + 4y = 0\]
+\[W = Ax^{-5}\]
+And we have one solution. $y_1 = x^{-2}$.
+\begin{example}
+  Find the general solution to the above equation
+\end{example}
+\begin{proof}[Solution]
+  Using Abel, we have
+  \[y_2 = y_1 \int \frac{W_0\exp \left\{ -p(s) ds \right\}}{y_1^{2}} dx\]
+  Which comes from solving 
+  \[y_2' + \frac{y_1'}{y_1} y_{2} = \frac{W}{y_1}\]
+  Hence we have
+  \[y_2 = x^{-2} \int \frac{Ax^{-5}}{x^{-4}} dx = x^{-2}\int \frac{A}{x} dx = x^{-2}(A\ln x + C)\]
+  However the constant part is just $y_1$, so we just let $C=0$, and get
+  \[y_2 = \frac{A\ln x}{x^2}\]
+  Note the solution is singular at $x_0=0$.
+\end{proof}
+
+\subsection{Frobenius method}
+Consider the standard form of a second order equation,
+\[y'' + py' + q y = 0\]
+And consider an euler equation, 
+\[(x-x_0)^2 y'' + (x-x_0)[(x-x_0)p(x)] y' + [(x-x_0)^2 q(x)]y = 0\]
+With
+\[(x-x_0)p(x)= \sum_{k=0}^{\infty} p_k (x-x_0)^k\]
+\[(x-x_0)^2q(x)= \sum_{k=0}^{\infty} q_k (x-x_0)^k\]
+So writing the first term explicitly, we get
+\[(x-x_0)^2 y'' + (x-x_0)p_0 y' + q_0 y + (x-x_0) \left\{ p_1(x-x_0)y' + q_1y + \cdots
+\right\} = 0\]
+Where the terms in the curly braces, of higher order, do not introduce more singularities.
+Look for solutions of the form
+\[y(x) = (x-x_0)^r \sum_{n=0}^{\infty} a_n(x-x_0)^n\]
+\[y(x) = \sum_{n=0}^{\infty} a_n(x-x_0)^{n+r}\]
+Called \emph{Frobenius series}.
+\begin{definition}[Frobenius method]
+  To get a solution to an equation of the form
+  \[(x-x_0)^2 y'' + (x-x_0)[(x-x_0)p(x)] y' + [(x-x_0)^2 q(x)]y = 0\]
+  we follow the steps
+  \begin{enumerate}
+    \item Find the value of $r$
+    \item Get a recurrence relation for $a_n$
+    \item Check convergence
+  \end{enumerate}
+  \label{frobeniusMethod}
+\end{definition}
+
+\begin{example}
+  Solve
+  \[ 2x^2 y'' - x y' + (1+x) y =0 \]
+\end{example}
+\begin{proof}[Solution]
+  we have $a(x)=2x^2$, so we get singular point at $x_0=0$. Check the singular point
+  \emph{severity},
+  \[\lim_{x\to 0} \frac{(x-0)b(x)}{a(x)} = \lim_{x\to 0} \frac{-x^2}{2x^2} =
+  \frac{-1}{2}\]
+  \[\lim_{x\to 0} \frac{x^2 (1-x)}{2x^2} = \frac{1}{2}\]
+  So the singular point is well behaved. We look for a Frobenius series expansion,
+  \[y= \sum_{n=0}^{\infty} a_n x^{n+r}\]
+  \[\implies y'= \sum_{n=0}^{\infty} (n+r)a_n x^{n+r-1}\]
+  \[\implies y''= \sum_{n=0}^{\infty} (n+r)(n+r-1)a_n x^{n+r-2}\]
+  Hence we get in the equation
+  \[\sum_{n=0}^{\infty} \left\{ 2x^2 a_n(n+r)(n+r-1) x^{n+r-2} - xa_n(n-r)x^{n+r-1} +
+  (1+x)a_n x^{n+r} \right\} = 0\]
+  Simplifying, we get
+  \[\sum_{n=0}^{\infty} \left\{ 2a_n(n+r)(n+r-1) x^{n+r} - a_n(n-r)x^{n+r} +
+  a_n x^{n+r} + a_n x^{n+r+1} \right\} = 0\]
+  The lowest possible power here is when $n=0$, so then we get the $x^r$ power coefficient as 
+  \[2a_0(r)(r-1) - a_0 r + a_0 = 0 ; a_0\neq 0\]
+  \[\implies 2(r)(r-1) - r + 1 = 0\]
+  \[\implies (2r-1)(r-1) = 0\]
+  And this is called \emph{indicial equation}, which will give $r= 1/2$ or $r=1$. The
+  coefficient of a general power of $x$, $x^{N+r}$ is (note substitution to include all
+  powers),
+  \[a_N 2 (N+r)(N+r-1) - a_N (N+r) + a_N + a_{N-1} = 0\]
+  Which gives us a recurrence relation
+  \[a_{N} = \frac{a_{N-1}}{(N+r-1)(2(N+r) - 1)}\]
+\end{proof}<++>

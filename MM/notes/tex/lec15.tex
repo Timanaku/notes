@@ -1,0 +1,65 @@
+\section{Lecture 15 - 22 Oct 2021}
+\subsection{Boundary Value Problems and Sturm-Liouville Theory}
+Boundary value problems (BVPs) are problems where conditions are given on the boundary or
+extremes of independent variables in the equation, say $y(x=a),y(x=b)$ for $a<b$. Meanwhile, initial value
+problems (IVP) have to specify two conditions at one point, $y(x=a), y'(x=a)$.
+\begin{definition}
+  A two point boundary value problem is given by a second order ODE
+  $L[y]=a(x)y''+b(x)y'+c(x)y=f(x)$ subject to the unmixed homogeneous boundary conditions
+  \[\alpha_1 y(a) + \alpha_2 y'(a)=0\]
+  \[\beta_1 y(b) + \beta_2 y'(b)=0\]
+  For $\alpha_i,\beta_i\in\RR$ and $a(x),b(x),c(x),f(x),y(x)$ being functions $\SCC [a,b]$.
+  \label{<+label+>}
+\end{definition}
+
+Unmixed above means that one equation depends only on $a$ and the other only on $b$.
+$\SCC [a,b]$ is the set of continuous functions on $[a,b]$ and $\SCC^2 [a,b]$ is the set
+of twice-differentiable functions on $[a,b]$.
+
+There're different boundary conditions:
+\begin{enumerate}
+  \item Newman boundary conditions: $y'(a)=y'(b)=0$
+  \item Dirichlet boundary conditions: $y(a)=y(b)=0$
+  \item Periodic boundary condition: $y(a)=y(b), y'(a)=y'(b)$ (Not homogeneous).
+\end{enumerate}
+
+We can solve some equations using eigenvalue expansions.
+\begin{definition}
+  The eigenvalues $\lambda$ and eigenfunction $\phi$ of the operator $L$ are non-trivial
+  solutions to 
+  \[L\phi = \lambda\phi\]
+  Subject to appropriate boundary conditions.
+  \label{def:eigenFun}
+\end{definition}
+
+If we can ding $\lambda_i$ and $\phi_i$ then we seek solutions to the BVP as an expansion
+of the eigenfunctions,
+\[y=\sum_{n=1}^{\infty} c_n\phi_n\]
+Notice how it resembles power series expansion method. However, we're not guaranteed to
+get nice eigenfunctions. It would be nice to have orthogonal eigenfunctions, this will
+allow us to solve for $c_n$. Turns out self-adjoint operators have nice properties.
+\begin{definition}[Sturm-Liouville operator]
+  Let $L$ be an operator of the form
+  \[L= \frac{d}{dx}(p(x)\frac{d}{dx}) + q(x)\]
+  Notice $L=\hat{L}$, a self-adjoint operator. Then $L$ is a Sturm-Liouville operator.
+  Then the Sturm-Liouville eigenvalue problem is 
+  \[\hat{L}[y(x)] = -\lambda \omega(x)y(x)\]
+  Where $\omega$ is a weight function and $x\in(a,b)$. The functions $p,p',q,\omega$ are
+  continuous on $(a,b)$ and $p(x)>0,\omega(x)>0$ for all $x\in[a,b]$.
+  Subject to unmixed boundary conditions, if $[a,b]$ is finite and the above assumptions
+  hold on $[a,b]$ then the problem is \emph{regular} otherwise it \emph{singular}.
+  \label{def:sturmLiouvilleOp}
+\end{definition}
+Several properties can be proven for the regular Sturm-Liouville eigenvalue problem. These
+are a few of them:
+\begin{enumerate}
+  \item The eigenvalues are real, countable, ordered, and there is a smallest eigenvalue.
+    We can write $\lambda_1<\lambda_2<\cdots$. There's no largest eigenvalue and it may be
+    unbounded.
+  \item For each eigenvalue $\lambda_n$ there's a corresponding eigenfunction $\phi_n$.
+  \item Eigenfunctions corresponding to different eigenvalues are orthogonal (with respect
+    to the weight function $\omega(x)$).
+  \item The set of eigenfunctions is \emph{complete}, i.e. any piecewise smooth function
+    can be represented by an eigenfunction expansion.
+\end{enumerate}
+

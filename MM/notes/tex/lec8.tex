@@ -1,0 +1,46 @@
+\section{Lecture 8 - 6 Oct 2021}
+\subsection{Euler's equation}
+Recalling from last lecture, we want $(x-x_0)p(x)$ and $(x-x_0)^2q(x)$ to be analytical
+about $x_0$, so (sums from 0 to infinity),
+\[(x-x_0)p(x)=\sum p_k(x-x_0)^k\]
+\[(x-x_0)^2q(x)=\sum q_k(x-x_0)^k\]
+For some $|x-x_0|<\rho$ for some $\rho>0$. Multiplying the ODE by $(x-x_0)^2$ we get
+\[(x-x_0)^2y'' + (x-x_0)^2 p y' + (x-x_0)^2 q y = 0\]
+\[\iff (x-x_0)^2y'' + (x-x_0)y'\sum p_k(x-x_0)^k + y\sum q_k(x-x_0)^k = 0\]
+If all $p_k$ are 0 but $p_0$, we get \emph{Euler's equation},
+\[(x-x_0)^2 y'' + (x-x_0)p_0y' + q_0 y = 0\]
+Note that the equation contains a singular point, at $x_0$. However, we have
+\[\lim_{x\to x_0} (x-x_0)\frac{p_0}{x-x_0} = p_0\]
+\[\lim_{x\to x_0} (x-x_0)^2\frac{p_0}{(x-x_0)^2} = q_0\]
+We solve Euler's equation by choosing $y=(x-x_0)^r$, so 
+\[y' = r(x-x_0)^{r-1}\]
+\[y'' = r(r-1)(x-x_0)^{r-2}\]
+Substituting back to the equation, we get
+\[(x-x_0)^r (r(r-1) + p_0 r + q_0 = 0\]
+\[\iff r^2 + (p_0 -1)r + q_0 = 0\]
+So by using the quadratic equation,
+\[ r_{\pm} = \frac{1}{2}(-(p_0-1)\pm \sqrt{(p_0 -1)^2 - 4q_0}) \]
+So if the roots are real, we have
+\[y(x)= c_1(x-x_0)^{r_{+}} + c_2 (x-x_0)^{r_-}\]
+For some $c_1,c_2\in\RR$. If the roots are complex, we just get 
+\[(x-x_0)^{\lambda \pm i\mu} = (x-x_0)^{\lambda} e^{\pm i\mu \ln (x-x_0)}\]
+And so the solution is
+\[y(x)= (x-x_0)^{\lambda} [c_1\cos (\mu \ln |x-x_0|) + c_2 \sin (\mu \ln |x-x_0|)]\]
+Finally, the third case when we have only one root $r$, we get one solution and use the
+Wronskian approach to find the second solution,
+\[y_1 = (x-x_0)^r\]
+
+
+\begin{example}
+  Solve $x^{2} y'' - 2y = 0$
+\end{example}
+\begin{proof} [Solution]
+  The equation is of Euler type, centered at $0$. We look for solutions of the form
+  $y=x^r$, and proceed as above to get 
+  \[x^2r(r-1) x^{r-2} - 2x^r = x^r(r^2 - r - 2)=0\]
+  So we have $r^2 - r -2 = (r+1)(r-2)=0$. Hence the general solution is
+  \[y(x) = c_1x^2 + c_2 x^{-1}\]
+  for some $c_1,c_2\in\RR$. Note that $y(0)$ is not defined, i.e. $0$ is a singular point.
+\end{proof}
+
+

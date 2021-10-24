@@ -1,0 +1,176 @@
+\section{Lecture 2 - 30 Sep 21}
+\subsection{Intermediate value theorem}
+\begin{theorem}[Intermediate value theorem]
+  Let $f:[a,b]\to\RR$ be continuous and let $d\in\RR$ be such that
+  \[f(a)<d<f(b) \nt{ or } f(a)>d>f(b)\]
+  Then there exists $c\in(a,b)$ s.t. $f(c)=d$.
+  \label{ivt}
+\end{theorem}
+\begin{proof}
+  Consider the set $S=\left\{ x\in [a,b] :f(x)\leq d <f(b)\right\}$, the set of the point
+  in the domain of $f$ s.t. the function takes values at most $d$.
+  Notice that $S$ is not empty, since $a\in S$, plus $S$ is bounded above by $f(b)$, and
+  by completeness we have $c:=\sup S$. We
+  aim to show that $f(c)=d$. 
+
+  Note that, since $c$ is a supremum, for any $n\geq 1$ there exists $x_n\in S$ s.t.
+  $c-\frac{1}{n}\leq x_n\leq c$, in particular $x_n\to c$. By definition, we have
+  $f(x_n)\leq d$ for any $n$, so $f(c)=\lim_{n\to\infty} f(x_n)\leq d$.
+
+  Next, note that $c$ is the largest point at which $f(x)\leq d$ can occur. The for any
+  $x\in [a,b]$ s.t. $x>c$ we must have $f(x)\geq d$. Notice that $f(b)>d$ by assumption,
+  and that $c< b$. We can define a sequence $x_n=c+\frac{b-c}{n}\to c$, so that
+  $f(x_n)\geq d$ for all n, we have that $f(c)=\lim_{n\to\infty} f(x_n)\geq d$. Hence
+  $f(c)=d$.
+\end{proof}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{ivt-proof}
+    \caption{Illustration of the argument used to prove the intermediate value theorem}
+    \label{fig:ivt-proof}
+\end{figure}
+\begin{example}
+  Let $f:[a,b]\to\RR$ be a continuous function s.t. $f(x)$ takes only integer values. Then
+  $f$ must be a constant function.
+\end{example}
+\begin{proof}[Solution]
+  Let us assume that there exists $s,t\in[a,b]$ with $a\leq s<t\leq b$ s.t. $f(s)\neq
+  f(t)$. Let us restrict the domain of $f$ and define $g:[s,t]\to\RR:x\mapsto f(x)$, which
+  is also continuous. Assume $f(s)<f(t)$, and note that between two integer numbers there
+  exists infinitely real numbers, so let $d\in(f(s),f(t))$. By the IVT, there exists
+  $c\in(s,t)$ s.t. $f(c)=d$, but $d$ is not an integer, a contradiction. The case is
+  similar for $f(s)>f(t)$. 
+\end{proof}
+\begin{example}
+  Let $f:(a,b)\to\RR$ be continuous and non-zero everywhere. Show that either $f(x)>0$ or
+  $f(x)<0$ for all $x\in\RR$.
+\end{example}
+\begin{proof}[Solution]
+  Let us assume that there exists $c\in(a,b)$ s.t. $f(c)>0$, and while looking for a
+  contradiction, let $d\in(a,b)$ s.t. $f(d)<0$. Let us construct another function
+  $g:S=[c,d]\to\RR:x\mapsto f(x)$ (or $S=[d,c]$, for which the argument is similar), which
+  is continuous and non-zero everywhere too. However, note that since $g$ is continuous,
+  by the initial value theorem we have that, since $g(c)<0<g(d)$, $\exists e\in S$ s.t.
+  $g(e)=0$, a contradiction. 
+\end{proof}
+\begin{example}
+  Let $S:=\left\{ x\in\RR^2 :||x||=1 \right\}$ denote the unit circle. Suppose that
+  $f:S\to\RR$ is any function that is continuous in the sense that the function
+  $g:\RR\to\RR:t\mapsto (\sin(t),\cos(t))$ is continuous. Show that there always exists
+  $x\in S$ s.t. $f(x)=f(-x)$.
+\end{example}
+\begin{proof}[Solution]
+  Let us define $h:[0,2\pi]\to\RR:t\to f(\sin(t),\cos(t))$, and note that $h(0)=h(2\pi)$
+  for continuity. Moreover, note that $h$ is continuous in $[0,2\pi ]$, and the condition
+  $f(x)=f(-x)$ for some $x$ is equivalent to a condition on $h$ that $h(t)=h(t+\pi);t\leq\pi$ and
+  $h(t)=h(t-pi);t>\pi$ for some $t\in [0,2\pi ]$. Note that we either have
+  $h(\pi)=h(0)$,$h(\pi)\leq h(0)$, or $h(\pi)\geq h(0)$. For the first case, the proof is trivial.
+  For the second case, note that 
+  \[h(\pi)\leq h(0) \iff h(\pi)-h(0)\leq 0 \iff h(1)-h(\pi)>0\]
+  And by the intermediate value theorem, the proof follows. For the third case, the
+  reasoning is equivalent.
+\end{proof}
+\begin{example}
+Prove that there exists $x\in\RR$ s.t. $42=x^{27}-52x^{15}+7x^2+2$.
+\end{example}
+\begin{proof}[Solution]
+  Note that 
+  \[42=x^{27}-52x^{15}+7x^2+2 \iff 0=x^{27}-52x^{15}+7x^2-40\]
+  Define an odd-polynomial $h(x)=x^{27}-52x^{15}+7x^2-40$, and note that $h$ will have at
+  least one root. Another way of viewing this is that for sufficiently high $c\in\RR$ we
+  will have $h(c)>0$, $h(-c)<0$. The result follows from the IVT.
+\end{proof}
+
+\subsection{Extreme value theorem}
+This theorem basically states that for a continuous function on a closed interval, that
+function will always attain its maximum and minimum in that interval. 
+\begin{theorem}
+  Let $f:[a,b]\to\RR$ be continuous. Then, $\exists u,v\in [a,b]$ s.t. $\forall
+  x\in[a,b]$,
+  \[f(u)\leq f(x)\leq f(v)\]
+
+  \label{evt}
+\end{theorem}
+\begin{proof}
+  \todo{Undestand it first, then write from memory}
+  We only show we can get maximum of $f$ since the minimum can be obtained by the same
+  process in $-f$. We claim $M=\left\{ f(x) : x\in [a,b] \right\}$ is a bounded set, and
+  that $\sup M=f(v)$ for some $v\in [a,b]$.
+  
+  To show boundedness, assume $M$ is unbounded. Then for any $n\geq 1$ we can get a
+  sequence $(x_n)$ that converges in $[a,b]$ s.t. $f(x_n)\geq n$ (since by assumption
+  $f(x)$ diverges). Since $x_n$ does converge, by Bolzano-Weirstrass we can get a
+  subsequence $x_{k_n}$ that converges to the same value as $x_n$, say $v\in [a,b]$, and
+  satisfies $f(k_n)\leq f(v)$. By the sequential characterisation of continuity we have
+  $f(v)=\lim_{n\to\infty} f(x_{k_n})$, and so $f(v)\geq f(x_{k_n})\geq n$, a
+  contradiction. Hence $M$ is bounded. 
+
+  Next we need to show that the supremum of $M$ is in $M$, which is not trivial. The
+  supremum exists by completeness, since $M$ is bounded (shown above), so we define
+  $m:=\sup M$. By definition of supremum, we can get a bounded sequence $(x_n)$ in
+  $[a,b]$ s.t. $m-\frac{1}{n}\leq f(x_n)\leq m$, and by Bolzano-Weirstrass again, we can
+  get a \emph{converging} sequence $(x_{k_n})$ converging to $v\in[a,b]$. Since
+  $m-\frac{1}{k_n} \leq f(x_{k_n}) \leq m$, and by the sandwich principle, we conclude
+  that $m=f(v)$.
+\end{proof}
+\begin{example}
+  Let $f:[a,b]\to\RR$ be a continuous function s.t. $f(x)>0$ for all $x\in[a,b]$. Show
+  that there exists $\eps >0$ s.t. $f(x)\geq \eps$ for all $x\in[a,b]$.
+\end{example}
+\begin{proof}[Solution]
+  By the extreme value theorem we have that $u,v\in[a,b]$ s.t. 
+  \[f(u)\leq f(x) \leq f(v)\]
+  Let $\eps=f(u)>0$, and we get the expected result.
+\end{proof}
+
+
+\begin{example}[Exercise 1 of tutorial]
+  Let $f:[0,1]\to\RR$ be a continuous function such that $f(0)=f(1)$. Show that there
+  exists $p,q\in[0,1]$ s.t. $|p-q|=\frac{1}{2}$ and $f(p)=f(q)$.
+\end{example}
+\begin{proof}[Solution]
+  Note that $f(p)=f(q) \iff f(p)-f(q)=0$. The constraint
+  $|p-q|=\frac{1}{2}$ can be described by a parmetric constraint of 1 argument,
+  $p(q)=q+1/2$, for $q\in[0,\frac{1}{2}]$. Let us define the function
+  $g(t):[\frac{1}{2},1]\to\RR:t\mapsto f(t)-f(t-1/2)$, a continuous function since the sum
+  of two continuous functions is continuous. We aim to find $c,d\in [0,\frac{1}{2}]$ s.t.
+  $g(c)>0$ and $g(d)<0$, so that by the IVT we assure the existance of
+  $k\in[0,\frac{1}{2}]$ s.t. $g(k)=0$. 
+
+  Note that by the axioms of order, we must have $f(1/2)>f(0), f(1/2)<f(0)$ or
+  $f(1/2)=f(0)$. If the third case is true, we're done. However, note that for the first
+  case,
+  \[f(1/2)>f(0)\implies g(1/2)= f(1/2)-f(0)>0 \implies g(1)=f(1)-f(1/2)<0\] 
+  As required. A similar argument can be given for the second case.
+\end{proof}
+
+
+\begin{example}[Generalisation]
+  Let $n\in\ZZ_{>0}$ and $f:[0,1]\to\RR$ be a continuous function such that $f(0)=f(1)$.
+  Show that there exists $p,q\in[0,1]$ s.t. $|p-q|=\frac{1}{n}$ and $f(p)=f(q)$.
+\end{example}
+\begin{proof}[Solution]
+  Following a similar reasoning to the above, let us define functions
+  $g_1:[\frac{1}{n},1]\to\RR:t\mapsto f(t)-f(t-\frac{1}{n})$ and
+  $g_2:[0,\frac{1}{n}]\to\RR:t\mapsto f(t)-f(t+\frac{1}{n})$. Note that we have
+  $g_1(1/n)=g_2(1/n)$, so we define a piecewise continuous function $g:[0,1]\to\RR$,
+  \[
+    g(t)=\begin{cases} 
+      g_1(t) & t\geq \frac{1}{n} \\
+      g_2(t) & t\leq \frac{1}{n} \\
+    \end{cases}
+  \]
+  
+  Let $x_m,y_m$ denote the points in the domain of $f$ at which the supremum and infimum
+  happen in $f$ (guaranteed to happen by the extreme value theorem). We find 4 possible
+  cases,
+  \[g(x_m+1/2)<0 \land g(y_m+1/2)>0 \quad x_m\leq\frac{1}{n},y_m\leq\frac{1}{n}\]
+  \[g(x_m-1/2)<0 \land g(y_m-1/2)>0 \quad x_m\geq\frac{1}{n},y_m\geq\frac{1}{n}\]
+  \[g(x_m-1/2)<0 \land g(y_m+1/2)>0 \quad x_m\geq\frac{1}{n},y_m\leq\frac{1}{n}\]
+  \[g(x_m+1/2)<0 \land g(y_m-1/2)>0 \quad x_m\leq\frac{1}{n},y_m\geq\frac{1}{n}\]
+  Note that for each case, the intermediate value theorem implies that $g(t)=0$ for
+  some $t\in [0,1]$, as required.
+  \todo{Finish this. Note that $g_1(1/n)\neq g_2(1/n)$ for $n>2$}
+
+\end{proof}

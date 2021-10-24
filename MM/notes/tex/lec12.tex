@@ -1,0 +1,106 @@
+\section{Lecture 12 - 15 Oct 2021}
+\begin{definition} [Exact equation]
+  Let us consider the equation 
+  \[a y'' + by' + cy = f(x)\]
+  Then we have an \emph{exact equation} if 
+  \[a''-b'+c =0\]
+  Hence we have
+  \[(ay'-a'y +by)' = f(x)\]
+  \label{exactEq}
+\end{definition}
+\begin{example}
+  Find the general solution to 
+  \[\frac{1}{x}y'' + (\frac{1}{x} - \frac{2}{x^2})y' - (\frac{1}{x^2} -
+  \frac{2}{x^3})y = e^x\]
+\end{example}
+\begin{proof}[Solution]
+  We have,
+  \[a' = \frac{-1}{x^2}\]
+  \[a'' = \frac{2}{x^3}\]
+  \[b' = \frac{-1}{x^2} + \frac{4}{x^3}\]
+  And so,
+  \[a''-b'+c = \frac{2}{x^3} - (\frac{-1}{x^2} - \frac{4}{x^3}) - (\frac{1}{x^2} -
+  \frac{2}{x^3}) =0\]
+  And so our equation is exact. Hence we have
+  \[\frac{1}{x}y' + \frac{1}{x^2}y + (\frac{1}{x}-\frac{2}{x^2})y = \int e^x dx\]
+  \[\frac{1}{x}y' + y(- \frac{1}{x^2} + \frac{1}{x}) = e^x +c_1 \]
+  \[y' + y(- \frac{1}{x} + 1) = xe^x +xc_1 \]
+  Hence we can use an integrating factor
+  \[\mu (x) = \exp \left\{ \int 1 -\frac{1}{x} dx \right\}\]
+  \[\mu (x) = \frac{e^x}{x}\]
+  Hence we get
+  \[(y \frac{e^x}{x})' = \frac{e^x}{x}(xe^x +xc_1)\]
+  \[y = xe^{-x} \int e^{2x} + c_1e^x dx\]
+  \[y = \frac{x}{2} e^x + c_1 x + c_2 xe^{-x}\]
+  For some constants $c_1,c_2$.
+\end{proof}
+
+\subsection{Adjoint equations and integrating factors}
+If the equations can be multiplied by a function $z(x)$ so that the resulting equation is
+exact, then $z(x)$, then it's called \emph{integrating factor} for that equation.
+Consider,
+\[ay''+by'+cy=f(x)\]
+Then with our integrating factor,
+\[zay'' + zby' + czy = zf\]
+The equation is exact if we can write this as 
+\[zay'' + zby' + czy =\frac{d}{dx}(U(x)y' + V(x) y)\]
+If such a $z$ exists, we have
+\[\frac{d}{dx}(U(x)y' + V(x) y) = zf\]
+\[\implies Uy' + Vy = \int zf dx\]
+We want to calculate $z,U,V$. We have 
+\[zay'' + zby' + czy = U y'' + (U'+V)y' + V' y\]
+We have
+\[U = za\]
+\[(U'+V) = zb\]
+\[V' = zc\]
+Differentiating the first and second equations,
+\[U'' + V' = z'b + b'z\]
+\[U' = z'a + a'z\]
+And subtracting the fifth one by the second one we get 
+\[V = z(b-a') -z'b\]
+We then can differentiate and get two expressions for $V'$,
+\[V' = (zb)'-(za)''\]
+And so, 
+\[(za)'' -(zb)' + zc = 0\]
+This is called \emph{adjoint equation}. Let us define
+\[\bar{L} [z] = \frac{d^{2}}{dx^2}(za) - \frac{d}{dx}(zb) + zc\]
+Where the operator $\bar{L}[z]$ is called the adjoint operator of $L[y]$.
+This equation is easier to solve than the original equation. When solved, we can get
+$U,V$, which depend on $z$ and things we know.
+
+\begin{example}
+  Solve the following equation with the adjoint,
+  \[L[y] = y''+4y=x^2\]
+\end{example}
+\begin{proof}[Solution]
+  We have
+  \[zy'' +4zy= (Uy' + Vy)'\]
+  So equating coefficients,
+  \[z=U\]
+  \[0=U'+V \implies V=-U'=-z'\]
+  \[4z = V' \implies 4z= -z''\]
+  We also have
+  \[(za)'' - (zb)' + (zc)' = z'' - 0 +4z =0\]
+  \[z'' = -4z\]
+  \[\bar{L}[z]=0\]
+  And solving this homogeneous equation gives $z$. We use a solution of the form
+  $z=x^{mx}$ and the auxiliar equation gives
+  \[m^2 + 4 = 0\]
+  \[\implies m= \pm 2 i\]
+  Since $z$ is only an integrating factor, we only need one solution, and not a general
+  one. We use the solution $2z=e^{2ix}+e^{-2ix} = 2\sin(2x)$.
+  From here,
+  \[U = z = \sin(2x)\]
+  \[V = -U' = -2\cos(2x)\]
+  And so our original equation becomes
+  \[\frac{d}{dx} (\sin(2x) \frac{dy}{dx} - 2\cos(2x) y) = x^2 \sin(2x)\]
+  So integrating, 
+  \[\sin(2x)y' -2\cos(2x)y = \int x^2 \sin(2x) dx\]
+  \[\implies y' -2\cot(2x)y = \sin^{-1}(2x)\int x^2 \sin(2x) dx\]
+  Then using the integrating factor $\mu = \frac{1}{\sin 2x}$ we get 
+  \[y = \sin(2x) \int \frac{1}{sin^2(2x)}\int s^2 \sin (2s) ds dx\]
+  \[y = c_1 \sin(2x) + c_2 \cos(2x) - \frac{1}{8} + \frac{1}{4}x^2\]
+  The computation is left as an exercise to the reader. The last part is the particular
+  solution, and the whole $y$ is the general solution.
+
+\end{proof}

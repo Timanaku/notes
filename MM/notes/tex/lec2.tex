@@ -1,0 +1,155 @@
+\section{Lecture 2 - 24 Sep 2021}
+\subsection{Operators continuation}
+\begin{theorem} [Superposition Property]
+  If $L$ is a linear operator, and $y_1, y_2$ are solutions of the homogeneous equation,
+  $L[y_1]=0$, $L[y_2]=0$, then for any constants $c_1,c_2$ we have $L[c_1y_1+c_2y_2]=0$.
+\end{theorem}
+\begin{proof}
+  Since $L$ is a linear operator, we have that $L[c_1y_1+c_2y_2]=0 \implies
+  c_1L[y_1]+c_2L[y_2]=c_1 0 + c_2 0 = 0$.
+\end{proof}
+
+\begin{definition}
+  Two continuous functions $y_1,y_2\in I\to \RR$ are linearly dependent on $I\in\RR$ if
+  there exists constants $c_1, c_2$ non-trivial such that $\forall t\in I$ 
+  \[ c_1 y_1(t) + c_2 y_2(t) =0 \]
+  Otherwise, they are linearly independent.
+  \label{linearDependenceFunctions}
+\end{definition}
+
+\begin{definition}
+  For solutions $y_1,y_2$i, we say they are fundamental solutions of $L[y]=0$ if $L[y_1]=0
+  and L[y_2]=0$ with linearly independent $y_1, y_2$.
+  \label{fundamentalSolutions}
+\end{definition}
+\begin{definition}
+  The general solution of $L[y]=0$ is a two parameter family of functions $y_G$ given by 
+  \[y_G = c_1 y_1 + c_2 y_2\]
+  Where $c_1,c_2$ are the parameters of the family and $y_1,y_2$ are fundamental
+  solutions of the ODE.
+  \label{generalSolution}
+\end{definition}
+\begin{theorem}
+  If $y_1,y_2$ are linearly independent solutions of an ODE on $I\in\RR$, such that
+  $L[y]=y''+p(t)y'+q(t)y$ with continuous functions $p,q:I\to \RR$, then there exists
+  unique constants $c_1,c_2\in\RR$ such that every solution $y$ of the differential
+  equation $L[y]=0$ can be written as a linear combination $y= c_1y_2 +c_2 y_2$.
+\end{theorem}
+\begin{proof}
+  We claim that for any pair of fundamental solutions $y_1, y_2$ any other solution $y$ of
+  the ODE must be a unique linear combination of the fundamental solutions. I.e. for fixed
+  $c_1,c_2$
+  \[y = c_1 y_1 + c_2 y_2\]
+  \begin{itemize}
+      \ii The superposition property implies that any function $y(t)$ as above (a linear
+      combination of other solutions) is a solution of $L[y]=0$ for every pair of
+      constants $c_1,c_2$.
+
+      \ii We claim that for $y$, if the above holds for some $c_1,c_2$ then these are
+      unique. Consider $c_1', c_2'$ that are other constants that satisfy the above. Then
+      $0=y-y=(c_1-c_1') y_1 + (c_2-c_2') y_2 \implies c_1-c_1'=0, c_2-c_2'=0$, since
+      $y_1,y_2$ are linearly independent.
+
+      \ii We claim that given $y$ we can express it as by the equation above. We show this
+      by the existance and uniqueness theorem.
+      
+      Given $y=c_1y_1 + c_2y_2$ being a solution, it must satisfy the initial conditions
+      as well, i.e. $y(t_0)=a, y'(t_0) = b$, we have a system of equations
+      \[ c_1 y_1(t_0) + c_2 y_2(t_0) = a\]
+      \[ c_1 y_1'(t_0) + c_2 y_2'(t_0) = b\]
+      So this will have solution only if $|A|\neq 0$, where $A=[ [ y_1 y_2] [y_1' y_2']]$,
+      so we require $y_1(t_0) y_2'(t_0) - y_1'(t_0) y_2(t_0) \neq 0$ for all $t_0$ since
+      it was chosen arbitrarily. The matrix $A$ is usually denoted by $W$, and it's called
+      the wronskian.
+
+      Hence $y$ satisfy the initial conditions if $|W|\neq 0$. Given $y$ satisfies the
+      initial conditions, the uniqueness theorem tells us that $y$ must be a solution for
+      all $t\in I$. Since we chose arbitrary initial conditions, any solution $y$ can be
+      written as a linear combination of $y_1, y_2$.
+
+      What's left is to prove that for linearly independent solutions $y_1,y_2$ in the
+      interval $I\subset \RR$, we must have $W(y_1, y_2)\neq 0$. We do this is the
+      corollary of the next section.
+  \end{itemize}
+\end{proof}
+
+\subsection{The wronskian function}
+\begin{definition}
+  The wronskian of the differentiable functions $y_1,y_2$ is the function $W(y_1,y_2) =
+  y_1(t) y_2'(t) - y_2(t) y_1'(t)$.
+\end{definition}
+
+\begin{theorem}
+  If the Wronskian $W(y_1,y_2)\neq 0$ at a single point $t_0\in I$, then the functions
+  $y_1,y_2:I\to\RR$ are linearly independent.
+\end{theorem}
+\begin{proof}
+  Assume $y_1,y_2$ are linearly dependent, then there exists $c\neq 0$ s.t. $y_1= cy_2$,
+  so
+  \[W(y_1,y_2) = y_1 y_2' - y_1' y_2 = cy_2 y_2' - c_2 y_2' y_2 = 0\]
+  Which is a contradiction, since we have that $W\neq 0$ at one point $t_0\in I$.
+  Therefore $y_1,y_2$ are linearly independent.
+\end{proof}
+
+\begin{theorem}
+  Let $y_1,y_2:I\to\RR$ be both solutions to an ODE on $I$. If $\exists t_0\in I$ s.t.
+  $W(y_1(t_0), y_2(t_0))=0$ then $y_1,y_2$ are linearly dependent.
+\end{theorem}
+\begin{proof}
+  Abel's theorem states that if the Wronskian is 0 at one point, then it will be 0
+  everywhere. 
+  Assume $y_1,y_2$ are not the zero function (otherwise they're not linearly indep). Let
+  $t_1\in I$ be a non-zero point s.t. $y_1(t_1)\neq 0$. By continuity there exists a
+  neighborhood around $t_1$, call it $I_1\subset I$ s.t. $y_1$ is non-zero. Then
+  \[ \frac{W}{y_1^2} = \frac{y_1y_2' - y_2 y_1'}{y_1^2} = 0 \]
+  \[\implies (\frac{y_2}{y_1})' = 0 \implies y_2 = c y_1\]
+  on $I_1$ for a $c\in\RR$ being arbitrary. Since $y_1,y_2$ are both solutions, the lienar
+  combination $y(t) = y_2 -cy_1=0$ for all $t\in I_1$ and $y'(t)=0$ for all $t\in I_1$.
+
+  Note that the above applies only for the neighborhood around $t_1$ that is non-zero
+  (which must exist since both functions are not the zero function), while we have a zero
+  Wronskian. However, the zero function also satisfies the aforementioned conditions of
+  $y(t_1)=y'(t_1)=0$. By the existence and uniqueness theorem, we must have $y(t)$ be the
+  zero function on $I$. This follows from having a zero Wronskian. Hence $y_1,y_2$ are
+  linearly dependent, as required.
+\end{proof}
+
+\begin{cor}
+  Let $y_1,y_2$ be solutions of the ODE on $I$. If $y_1,y_2$ are linearly independent on
+  $I$ then their Wronskian $W(y_1,y_2)\neq 0$ for any $t\in I$.
+\end{cor}
+
+
+
+\begin{theorem} [Abel's Theorem]
+  If $y_1,y_2$ are twice continuously differentiable solutions of $L[y]=0$ where $p,q$ are
+  continuous on $I\subset\RR$ then the Wronskian $W(y_1,y_2)$ satisfies
+  \[\frac{dW}{dt} + p(t) W =0\]
+  So for any $t_0\in I$ the Wronskian $W(y_1,y_2)$ is given by 
+  \[W(y_1, y_2) = W_0 \exp{-\int_{t_0}^t p(s) ds}\]
+  Where $W_0= W(y_1(t_0), y_2(t_0))$.
+\end{theorem}
+\begin{proof}
+ Note that we have 
+ \[\frac{dW}{dt} = y_1y_2'' - y_1'' y_2\]
+ Since $L[y_1]=0$ we have $y_1''=-p(t)y_1 - q(t)y_1$, and $L[y_2]=0$ so $y_1''=-p(t)y_1 -
+ q(t)y_1$, which substituting back into the expression for $\frac{dW}{dt}$ we have
+ \[\frac{dW}{dt} = y_1 (-py_2' - qy_2) - (-py_1'-qy_1)y_2 = -p(y_1y_2'-y_1'y_2) = -pW\]
+ \[\implies \frac{dW}{dt}+pW = 0\]
+ Solving this ODE, we get $W = W_0 \exp{-\int_{t_0}^{t}p(s) ds}$.
+\end{proof}
+
+
+\subsubsection{Summary}
+Let $y_1,y_2$ be solutions of $y''+p(t) y' + q(t) y=0$ on $I\subset\RR$, then the
+following statements are equivalent:
+\begin{itemize}
+  \ii $y_1,y_2$ are a fundamental set of solution on $I$.
+  \ii $y_1,y_2$ are linearly independent on $I$.
+  \ii $W(y_1,y_2)(t_0)\neq 0$ for some $t_0\in I$.
+  \ii $W(y_1,y_2)(t)\neq 0$ for all $y\in I$.
+\end{itemize}
+
+Note that if $f,g$ are linearly dependent on $I$ then $W(f,g)=0\forall t\in I$ is a
+one-way implication. We may have $W(f,g)=0\forall t\in I$ and $f,g$ be linearly 
+independent.

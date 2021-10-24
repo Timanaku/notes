@@ -1,0 +1,58 @@
+\section{Lecture 7 - 4 Oct 2021}
+Following the above problem, if we're given an IVP, then we have $y(0)=A,y'(0)=B$, and so
+we have $y(0)=a_0=A$ and $y'(0)=a_1=B$. We use the ratio test to check convergence,
+\[L = \lim_{n\to\infty} |\frac{x^{2n+1}2^n n!}{2^{n+1}(n+1)!x^{2n}}|= \]
+\[=\lim_{n\to\infty} |\frac{x^2}{2(n+1)}=0|\]
+And so the series converges for any $x\in\RR$. For the second series, we have
+\[L'=\lim_{n\to\infty} |\frac{x^{2(n+1)+1}2^{n+1}(n+1)! (2n+1)!}{(2(n+1)+1)! x^{2n+1}2^n n!}|\]
+\[= \lim_{n\to\infty} |\frac{x^2 (n+1)2}{(2n+3)(2n+2)}|=0\]
+Hence the series converges for all $x\in\RR$.
+
+
+\begin{example}
+  Find the recurrence relation corresponding to the power series solution of
+  \[y''+xy=0\]
+  around the point $x_0\in 2$.
+\end{example}
+\begin{proof}[Solution]
+  We have that every point is ordinary. Then, we look for power series,
+  \[y=\sum a_n (x-2)^n\]
+  \[y'=\sum na_n (x-2)^{n-1}\]
+  \[y''=\sum n(n-1)a_n (x-2)^{n-2}\]
+  So substituting back and rewriting $x=(x-2)+2$ we get
+  \[\sum ( n(n-1)a_n (x-2)^{n-2} + xa_n(x-2)^n )= 0\]
+  \[\iff \sum ( n(n-1)a_n (x-2)^{n-2} + (x-2)a_n(x-2)^n + 2a_n(x-2)^n )= 0\]
+  And changing labels as before,
+  \[\sum ( (N+2)(N+1)a_{N+2} + a_{N-1} + 2a_N )(x-2)^n= 0\]
+  \[\iff (N+2)(N+1)a_{N+2} + a_{N-1} + 2a_N =0 \]
+  \[\iff a_{N+2} = - a_{N-1} - 2a_N /(N+2)(N+1) \]
+  \[\implies a_2 = -a_0\]
+
+\end{proof}
+
+\subsection{Regular singular points}
+When we consider the standard form of an ODE, i.e. written as above but dividing by
+$a(x)$, we have to take care of the singular points.
+
+Recall that the Taylor series around $x_0\in\RR$ can be written as 
+\[y(x)= \sum_{n=0}^{\infty} \frac{y^{(n)}(x_0) (x-x_0)^n}{n!}\]
+If we're given an IVP, $y(x_0)=A, y'(x_0)=B$, we would have in the initial equation,
+\[y''(x_0) = -p(x_0) y'(x_0) - q(x_0) y(x_0)\]
+We can use this to calculate higher derivatives of $y$ and find $a_n$ by repeated
+differentation of the ODE. This is allowed as long as $p,q$ are infinitely differentiable
+(analytic, i.e. they must have a convergent Taylor series) at $x_0$. 
+
+So to solve the ODE in the neighborhood of $x_0$ we need to have not too severe
+singularities in $p,q$, i.e. $p$ must not be \emph{worse than} $\frac{1}{x-x_0}$, and $q$
+must not be \emph{worse than} $\frac{1}{(x-x_0)^2}$. These points are called
+\emph{regular singular points}
+
+\begin{definition}
+  Given a singular point $x_0$, it is a regular singular point of the equation
+  $a(x)y''+b(x)y'+c(x)y =0$ if 
+  \[\lim_{x\to x_0} \frac{(x-x_0) b(x)}{a(x)}\]  
+  \[\lim_{x\to x_0} \frac{(x-x_0)^2 c(x)}{a(x)}\]  
+  Are both finite. Otherwise, we call then irregular singular points.
+  \label{regularSingularPoint}
+\end{definition}
+

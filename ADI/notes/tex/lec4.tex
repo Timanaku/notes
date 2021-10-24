@@ -1,0 +1,63 @@
+\section{Lecture 4 - 14 Oct 21}
+Continuity and product rule, chain rule.
+\subsection{Continuity and product rule}
+\begin{proposition}
+  Let $f:I\to\CC$ be a differentiable function at $c\in I$. Then $f$ in continuous at $c$.
+  \label{prop:trivialDiff}
+\end{proposition}
+\begin{proof}
+  Let $F:I\to\CC$ be defined as 
+  \[F=
+    \begin{cases}
+      \frac{f(x)-f(c)}{x-c} & x\neq c \\
+      f'(c) & x=c
+    \end{cases}\]
+    Notice that $F$ is continuous at $c$ since, for $x\neq c$ (condition for limit
+    definition) we have
+    \[F(x)=\frac{f(x)-f(c)}{x-c}\]
+    \[\iff f(x)=f(c)+(x-c)F(x)\]
+    \[\implies \lim_{x\to c}f(x)= f(c)+ (c-c)F(c)=f(c)\]
+    Hence $f$ is continuous at $c$.
+\end{proof}
+
+We'll prove the product rule now.
+\begin{proposition}[Product Rule]
+  Let $f,g:I\to\CC$ and $c\in I$. Assume $f'(c),g'(c)$ exist. Then $f(x)g(x)$ is
+  differentiable at $c$ and 
+  \[(f\cdot g)'(c)= f'(c)g(c) + f(c)g'(c)\]
+  \label{prop:productRule}
+\end{proposition}
+\begin{proof}
+  Note,
+  \[\frac{(fg)(x)-(fg)(c)}{x-c} = \frac{f(x)g(x) - f(c)g(c)}{x-c}\]
+  \[=\frac{f(x)g(x)-f(c)f(c) + f(c)g(x)-f(c)g(c)}{x-c}\]
+  \[=\frac{f(x)-f(c)}{x-c}g(x) + \frac{g(x)-f(c)}{x-c}f(c)\]
+  \[\implies \lim_{x\to c}\frac{(fg)(x)-(fg)(c)}{x-c}=f'(c)g(c)-f(c)g'(c) \]
+  As required.
+\end{proof}
+
+\begin{exercise}
+  Show by induction on the order of a polynomial $n$ that all polynomials are
+  differentiable on $\RR$.
+\end{exercise}
+\begin{proof}[Solution]
+  We have that a polynomial of degree $1$, of the form $a_1x$ for some $a_1\in\CC$, is
+  continuous in $\RR$. Assume that $a_{n-1}x^{n-1}$ is continuous in $\RR$. We claim
+  $a_nx^n$ is also continuous in $\RR$. Note that since $a_{n-1}x^{n-1}$ is continuous and
+  $a_1x$ is continuous, their product, $a_{n-1}a_n x^{n-1+1}=a_nx^n$ is also continuous,
+  as required. By the principle of induction, we have that any monomial of degree
+  $n\in\NN$ is continuous in $\RR$. Moreover, since a polynomial is an addition of
+  monomials, it follows by Theorem \ref{thm:elementaryLimits} that any polynomial of
+  degree $n$ will be continuous, as required.
+\end{proof}
+
+\begin{exercise}
+  Prove the quotient rule. For $f,g:I\to\CC$ differentiable at $c\in I$ and $g(c)\neq 0$,
+  we have 
+  \[(\frac{f}{g})'(c) = \frac{f'(c)g(c) - f(c)g'(c)}{g(c)^2}\]
+\end{exercise}
+\begin{proof}[Solution]
+  
+\end{proof}<++>
+
+\subsection{Chain rule}

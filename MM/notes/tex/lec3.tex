@@ -1,0 +1,21 @@
+\section{Lecture 3 - 24 Sep 2021}
+I didn't attend this lecture but as far as I know, the material that was covered is
+already in the previous section. I'll cover here the method for reduction of order of a
+second order ODE.
+\subsection{Reduction of order}
+This method is helpful when we want to find out a second solution to a homogeneous ODE
+$L[y]=0$, given another solution by using Abel's theorem.
+
+We find the Wronskian $W$ as given by Abel, and if $W\neq 0$ for some $t$, we can find
+$y_2$ that satisfies the ODE and is linearly independent to $y_1$.
+
+From the definition of the Wronskian and given that $y_1\neq 0$ we have,
+\[ y_2' - \frac{y_1'}{y_1}y_2 = \frac{1}{y_1} W\]
+Using the integrating factor $\mu (t) = \exp{-\int \frac{y_1'}{y_1}dt} =
+1\frac{1}{y_1}$, so we have
+\[\frac{y_2'}{y_1}-\frac{y_1'}{y_1^2}y_2 = \frac{W}{y_1^2}\]
+\[\implies (\frac{y_2}{y_1})' = \frac{W}{y_1^2} \]
+\[\implies y_2(t) = y_1(t) \int \frac{W}{y_1(x)^2} dx\]
+Where we have $W=W_0\exp{-\int_{t_0}^t p(s) ds}$ by Abel, hence
+\[\implies y_2(t) = y_1(t) \int \frac{W_0\exp{-\int_{t_0}^t p(s) ds}}{y_1(x)^2} dx\]
+

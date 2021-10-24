@@ -1,0 +1,199 @@
+\documentclass[11pt]{scrartcl}
+\usepackage{evan}
+\usepackage[
+  backend=biber,
+  style=phys,
+]{biblatex}
+\addbibresource{RSAref.bib}
+
+\title{W\&P: RSA Encryption project}
+\author{2480326P}
+\date{Fall 2021}
+
+\begin{document}
+\section{Introduction}\label{intro}
+Exchanging messages secretly and securely has been a challenge for the whole history of
+civilization \cite{historyCrypto}. The main challenge has been to securely agree on a
+method of \emph{encrypting} messages, i.e. using an agreed scheme of encoding and decoding
+messages in a way that any non-wanted third-party can't read these. 
+
+Numerous methods have appeared throughout history \cite{historyCrypto} which required the
+sender and the receiver to previously agree on keys. Now called \emph{symmetric key}
+cryptography, this method's historical implementations have been proven weak over and over
+again \cite{historyCrypto}.  Notwithstanding the drawbacks, given a clever implementation,
+symmetric key strategies can be useful and have been even used in practical applications
+\cite{AESpaper}. 
+
+However, in 1976 a significant milestone in this problem was achieved when cryptologists
+Whitfield Diffie and Martin Hellman published the first system that did not require on
+sender and receiver to \emph{previously} agree on keys. Instead they could \emph{exchange}
+keys over a public channel securely and create new keys on which they could agree
+\cite{diffieHellman}, solving the problem of distributing the keys in a symmetric key
+encryption system.
+
+Shortly after and leveraging this work, in 1977, mathematicians and cryptographers Ron
+Rivest, Adi Shamir, and Leonard Adleman came up with a method of \emph{asymmetric key}
+encryption -- i.e. a method where sender and receiver don't need to agree on using the same keys to
+communicate -- that has been used ever since, called RSA named after the authors
+themselves \cite{rsaPaper}. In this report the RSA asymmetric key encryption system is presented.
+
+\section{Overview of secure communication}\label{overview}
+In a public communication channel two individuals, let us call them Alice and Bob,
+exchange messages that anyone can read. Let $S$ be the symbol alphabet that Alice and Bob
+agreed on, which may be the english alphabet. Let $m$ be the original message Alice writes
+for Bob, so $m=s_1 s_2 s_3\dots s_n$, where $s_i\in S$. This could be, for example, an
+english sentence.  Due to scope of this report, we will ignore technical implementation
+details like source coding and channel coding (for compression and error correction). 
+
+In order to communicate through the channel, the message $m$ must be transformed to a
+numeric representation (so that a signal can be sent) in a bijective way -- otherwise it
+would be impossible for Bob to retrieve the message.  Let the sent message be $m^*=a_1 a_2
+a_3 \dots a_n$, where $a_i\in\ZZ$ and $m^*=\phi (m):=\phi(s_1)\phi(s_2)\dots\phi(s_n)$.
+The bijective mapping $\phi:S\to\ZZ$ is called character encoding \cite{characterEncoding}, and
+for the majority of modern-day computer applications the American Standard Code for
+Information Interchange (ASCII) is used as the character encoding strategy. After Bob
+receives the message and decodes it by using $\phi^{-1}$, the communication process
+concludes.
+
+The challenge is introduced if a third-party intercepts $m^*$ (hence the name of public
+channel), which by using $\phi^{-1}(m^*)$ they can read the message. Under the RSA
+encryption system, this challenge is solved by introducing a public and private keys
+system. Let $A_{pub},A_{priv}\in P$ denote Alice's public and private keys, and
+$B_{pub},B_{priv}\in P$ denote Bob's public and private keys, respectively. These keys, as
+their names suggest, are kept public and private, respectively. Here $P$ represents the
+set of possible keys, whose elements are in practice pairs of integers. 
+
+RSA works in the following manner. Let $m$ be the message Alice sends to Bob, as above.
+Alice undergoes an extra step before sending the message, a map $m'=\psi(m^*,
+B_{pub})=a'_1 a'_2 a'_3 \dots a'_n$ where $a'_i\in\ZZ$ and $\psi: \ZZ\times P \to \ZZ$ is
+a non-bijective mapping. The message $m'$ is sent through the public channel, and Bob
+\emph{decrypts} the message by using the same mapping but different parameters
+$m^*=\psi(m', B_{priv})=a_1 a_2 a_3 \dots a_n$. Then $m=\psi^{-1}(m^*)$, and the
+communication process concludes. Note that $B_{priv}$ was kept secret throughout, and that
+the \emph{only} (more on this later) way to decrypt the message is with $B_{priv}$, hence
+the message is secure to third-party interception. Bob can send a message to Alice by
+following the same process, using $A_{pub}$.
+
+\section{Background and Theorems}\label{background}
+The above was an explanation of the communication process and an overview of what
+encryption by asymmetric key is. In this section, before we explain the RSA algorithm, we
+will introduce theorems that will be necessary to back claims done in its description.
+
+\begin{definition}[Euler's Totient Function]
+  Let $n$ be a natural number. Euler's Totient function, $\phi (n)$, is defined as the
+  number of positive integers less than or equal to $n$ that are coprime to $n$.
+  \label{totient}
+\end{definition}
+
+\begin{theorem} [Fermat's Little Theorem]
+  Let $p$ be a prime integer and $a\in\ZZ$ s.t. $\gcd (a,p)=1$. We have
+  \[a^{p-1}\cong 1 \mod p\]
+  \label{fermat}
+\end{theorem}
+
+\begin{theorem}[Euler's Theorem]
+  If $n$ and $a$ are integers with $\gcd (a,n)=1$, we have
+  \[a^{\phi (n)} \cong 1 \mod n\]
+  \label{euler}
+\end{theorem}
+
+\begin{lemma}
+  Let $p$ be a prime number. Then $\phi(n) = n-1$.
+  \label{trivialP}
+\end{lemma}
+\begin{lemma}
+  If $p$ and $q$ are prime, then $\phi (pq)=\phi(p) \phi(q)$.
+  \label{compositePhi}
+\end{lemma}
+Proofs to the above theorems and lemmas can be found in \cite{liebeck},\cite{maxey}.
+
+\section{The Algorithm}\label{algo}
+In Section \ref{overview} we explained the private key approach used by RSA. In this
+section, we will specify this process. In particular, we will define how Bob generates
+their $B_{pub}, B_{priv}$ keys, and how the non-bijective mapping $\psi$ is defined. Hence
+we will specify how Alice is able to encrypt a message directed to Bob, and how Bob is
+able to decrypt it.
+
+In order to compute Bob's keys (a process called key generation), they must first choose
+two prime numbers. Let $p, q$ denote two large prime integers, of Bob's choice. Then, by using
+Euler's Totient function and Lemma \ref{compositePhi} we define,
+\[n:=pq\]
+\[m:=\phi(pq) = (p-1)(q-1)\]
+Then we aim to find $e$ s.t. $1<e<m$ with $\gcd (e, m)=1$. This can be done by choosing
+some odd number, and iteratively adding $2$ and checking $\gcd (e, m)=1$ at every iteration.
+The addition by $2$ is because we know even numbers won't be coprime to $m$ (a product of
+two even numbers), hence it doesn't make sense to check for them. We must have $e$ and $m$
+coprime to use Theorem \ref{euler}.  Then we define $d:=e^{-1}\mod m$, the multiplicative
+inverse of $e$.  Then, we define Bob's keys as $B_{pub}=\left\{ n, e \right\}$ and
+$B_{priv}=\left\{ n, d \right\}$. At this point, the reader might see how, by finding $n$
+factors, an attacker could unravel all the numbers we just defined.
+
+Once Alice has access to Bob's public key $B_{pub}$, she is able to send a message by
+using $\psi$ introduced in Section \ref{overview}, which is defined as follows. Let $a\in
+S$, $a' = \phi(a)$ -- encoding the character with the agreed scheme--, and $P_{r}\in P$ some
+key pair $P=\{n',k'\}$, may it be public or private. Then we have
+\[\psi (a', P_{r}) := (a')^{P_{r}^{(2)}}\mod P_{r}^{(1)} = (a')^{k'}\mod n'\]
+Note that we're using the superscript notation to refer to the element in the $i$-th
+position of the key pair. Hence, for Alice to encrypt a message for Bob, applying the
+mapping character by character (or by symbol blocks \cite{paddingCrypto}, which is
+outside the scope of this report) obtains the mapping 
+\[a_i' = \psi(a_i, B_{pub}) = a_i^{B_{pub}^{(2)}}\mod B_{pub}^{(1)} = a_i^e \mod n\]
+By following the notation introduced in Section \ref{overview}. . Once Bob receives the
+message, as explained before, they just use the same mapping but with the private key,
+\[a_i = \psi(a_i', B_{priv}) = a_i'^{B_{priv}^{(2)}}\mod B_{priv}^{(1)} = a_i'^d \mod n\]
+Finally, using the inverse encoding scheme, $s_i=\phi (a_i)$, and the communication
+process concludes. Note that this expression follows from Theorem \ref{euler}, since $a_i=
+a_i'^d\mod n = a_i^{ed}\mod n = a_i^{lm + 1}\mod n$ for some integer $l$. This equality
+follows from the fact that $e$ is the multiplicative inverse of $d\mod m$. Hence $a_i=
+a_i (1)^l\mod n$. This process generalises for 2-way communication between Alice and Bob
+after Alice generates their private and public keys in the same fashion but with $p,q$ of
+their own choice.
+
+\section{Limitations and vulnerabilities}\label{limitations}
+Even though the mapping $\psi$ is non-bijective, the nature of the RSA algorithm,
+language, and the integers leave open doors to the inverse problem of finding prime
+factors of large numbers.
+
+
+Due to predictability of language, one can potentially break RSA codes with frequency
+analysis \cite{cypherTextAttack}. Under this strategy, one uses the predictability of
+language to look for patterns in the encrypted data. Due to the fact that RSA is a
+deterministic algorithm (i.e. two equal numbers are encrypted to the same number), one can
+potentially exploit this feature to decrypt a message. However, defense against these kind
+of attacks are used in commercial applications. For instance, the primal example of this
+is the padding technique \cite{paddingCrypto}, where gibberish data is added at the
+beginning, middle, and end of a message before encrypting, to render frequency analysis
+useless.
+
+
+Nevertheless, there exists a more dangerous approach for breaking RSA. This is converting it
+into the factoring problem. As seen in previous sections, the public key contains the
+semiprime integer $n$. This is what enables the asymmetric cryptography communications
+between Alice and Bob, but it also leaves room for exploits. The key generation algorithm
+of the RSA turns the public number $e$ into the private number $d$, which allows us to
+decipher messages. Hence, if we're able to factor $n$, we can get the private key. This
+problem, however, is not an easy one to solve for very large $n$ \cite{factorization}
+\cite{tale2009}. 
+
+Although it's not been proven to be infeasable, by using a brute-force approach,
+trying to factor large numbers -- which in commercial applications are in the order of
+$2^{1024}$, a number with more than 100 digits -- with current computing capabilities
+would take around $10^6$ years to solve \cite{factorization} \cite{tale2009}. However,
+there are threats to the infeasability of this problem, naming quantum computing. The Shor
+algorithm, named after Peter Shor, demonstrates that, given an ideal quantum computer, it
+is efficient to factor large integers \cite{shorAlgorithm}. Even though RSA faces a threat with quantum
+computing, as Shor put it himself \cite{shor2020}, the security of the internet is not \emph{too}
+threatened by it, since other encryption algorithms exists.
+
+\section{Conclusions}
+In conclusion, RSA cleverly leveraged centuries of knowledge of number theory to provide a
+solution to secure communications over public channels. In this report we presented how
+this is possible, how the \emph{theoretical} process works, and what limitations it has.
+Notwithstanding the current threats and potential obsolence of the algorithm, the RSA
+algorithm has provided a way to grow a secure internet, allow online payments possible,
+and give the possibility to people like the reader to securely send cat memes over email.
+
+\newpage
+
+\printbibliography
+\end{document}

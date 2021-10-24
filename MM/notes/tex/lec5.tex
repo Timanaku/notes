@@ -1,0 +1,48 @@
+\section{Lecture 5 - 28 Sep 2021}
+Examples of the method reduction of order presented in Lecture 3.
+\begin{ex}
+  $y(t)=\exp{t}$ is a solution to
+  \[ y'' -2y' + y = 0\]
+  Find the general solution.
+\end{ex}
+\begin{proof}
+  By the method of reduction of order we have
+  \[y_2 = y_1 \int\frac{\exp{-\int p(s)ds}}{y_1^2} dt\]
+  And we have $\exp{-\int p(s)ds} = A\exp{-\int -2ds}=A\exp{2t}$, for some constant $A$.
+  Hence we have 
+  \[y_2 = \exp{t} \int\frac{A\exp{2t}}{\exp{2t}} dt\]
+  \[= \exp{t} (At + C)\]
+  Since $C\exp{t}$ is a scaling of $y_1$ we set $C=0$, and we let $A=1$, hence 
+  \[y_2 = t\exp{t}\]
+  As required. So the general solution is 
+  \[y_G(t) = c_1\exp{t} + c_2 t\exp{t}\]
+\end{proof}
+
+\begin{ex}
+  Verify that $y_1(t)=t$ is a solution to the ODE
+  \[(1-t^2)y''-2ty'+2y=0\]
+  Find a second, linearly independent solution.
+\end{ex}
+\begin{proof}
+  Note that we have $p(t)=\frac{-2t}{(1-t^2)}$ in the standard form. hence we have 
+  \[y_2 = y_1 \int \frac{\exp{-\int p(s)ds}}{y_1^2} dt\]
+  Observe that for the integral inside the exponential we have
+  \[-\int p(s)ds = -\int \frac{-2s}{1-s^2}ds = \int \frac{-1}{u}du\]
+  For $u=1-s^2$. Hence we have 
+  \[-\int p(s)ds = - \ln{1-s^2} + k\]
+  For some constant $k$. However, this function is inside an exponential, so this reduces to 
+  \[\exp{-\int p(s)ds} = \frac{A}{1-s^2} \]
+  So we have 
+  \[y_2 = At \int \frac{1}{t^2(1-t^2)} dt\]
+  Which can be solved by partial fractions. We have that
+  \[\frac{1}{t^2(1-t^2)} = \frac{1}{t^2} + \frac{1}{1-t^2}\]
+  But we need to reduce the second term, which we find to be 
+  \[\frac{1}{1-t^2} = \frac{1}{2(1-t)} + \frac{1}{2(1+t)}\]
+  Therefore we have
+  \[\int \frac{1}{t^2(1-t^2)} = \int \frac{1}{t^2} + \frac{1}{2(1-t)} + \frac{1}{2(1+t)}\]
+  \[= -\frac{1}{t} + \frac{1}{2}(\ln{\frac{1+t}{1-t}}) + C\]
+  Finally we find the second linearly independent solution
+  \[y_2 = A(-1+ \frac{t}{2}\ln{\frac{1+t}{1-t}} + Ct)\]
+  As given by Abel.
+  
+\end{proof}

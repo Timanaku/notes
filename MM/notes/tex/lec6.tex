@@ -1,0 +1,67 @@
+\section{Lecture 6 - 1 Oct 2021}
+From now on, we'll focus on Power series solutions to ODEs. Previously we'd find a
+solution of a homogeneous ODE when we knew another solution (using Abel). We need some way
+of finding the initial solution. Sometimes it's okay to find by inspections, but it's
+usual that this is not effective. 
+
+For a homogeneous ODE $a(x)y''+b(x)y'+c(x)y=0$, if $a,b,c$ are polynomials in $x$, then we
+can look for power-series solutions. I.e. we look for solutions of the form
+\[y(x)=\sum_{n=0}^{\infty} a_n(x-x_0)^n\]
+We need to determine the coefficients $a_0,a_1,a_2,\cdots$.
+\subsection{Review of Taylor series}
+Recall that for a function $f(x)=\sum_{n=0}^{\infty} a_n(x-x_0)^n$, we have 
+\[f'(x)= a_1 + 2a_2(x-x_0) + 3a_3(x-x_0)^2+\cdots\]
+\[f''(x)=2a_2 + 3*2 a_3(x-x_0) + \cdots\]
+Hence we have $f(x_0)=a_0, f'(x_0)=a_1, f''(x_0)=2a_2$, etc. We observe a pattern to find
+the desired coefficients, called the Taylor expansion,
+\[f(x)= f(x_0) + f'(x_0)(x-x_0) + f''(x_0)(x-x_0)^2/2! + \cdots\]
+
+However, note that for the series to be useful, it must converge (otherwise, it's not
+defined!). Recall that we have absolute convergence if 
+\[\lim_{N\to \infty} \sum_{n=0}^N |a_n(x-x_0)^n|\]
+Converges. By using the ratio test, we can check convergence,
+\[\lim_{n\to \infty} |\frac{a_{n+1}(x-x_0)^{n+1}}{a_n(x-x_0)^n}|\]
+\[=|x-x_0|\lim_{n\to\infty} |\frac{a_{n+1}}{a_n}=L\]
+If $L<1$, the series converges. If $L=1$, the ratio test is inconclusive. If $L>1$, the
+series diverges. 
+
+Recall, the radius of convergence is the largest $x$ for which $L<1$. So if $L<1$ for some
+$|x-x_0|<p$, this gives the radius of convergence.
+
+\subsection{ Chapter 2 - Power series solutions}
+Consider the ODE
+\[a(x)y''+b(x)y'+c(x)y=0\]
+With $a,b,c$ polynomials in $x$. We look for a power series expansion about $x_0$
+\begin{definition}
+  A point $x_o\in\RR$ is called ordinary of the equation above if $a(x_0)\neq 0$.
+  Otherwise, the point is called singular.
+  \label{ordinaryPoint}
+\end{definition}
+
+\begin{example}
+  Solve $y''-xy'-y=0$ about $x_0=0$.
+\end{example}
+\begin{proof}[Solution]
+  Every point is ordinary. THen, we have $y=\sum a_n x^n$, $y'=\sum na_nx^{n-1}$, and
+  $y''=n(n-1)a_nx^{n-2}$. Substituting in the equation at the tob, we have (all the sums
+  being from 0 to infinity).
+  \[ \sum n(n-1)a_nx^{n-2} - x\sum na_nx^{n-1} - \sum a_n x^n = 0\] 
+  \[\iff \sum (n (n-1)a_n x^{n-2} - na_nx^{n} - a_n x^n ) = 0\]
+  Note that $x^0,x,x^2,\cdots$ are all linearly independent, so every element should
+  vanish. Hence, every coefficient should be 0. Note that we can rewrite the above as 
+  \[\sum ((N+2)(N+1)a_{N+2} x^N - Na_Nx^N - a_Nx^N)=0\]
+  \[\iff\sum ((N+2)(N+1)a_{N+2}  - Na_N - a_N)x^N=0\]
+  Hence we must have that for every $N$, 
+  \[(N+2)(N+1)a_{N+2} - (N+1)a_N = 0\]
+  \[\iff a_{N+2}= \frac{a_N}{N+2}\]
+  This is a recurrence relation, which will be useful in the future. Given $a_0$ we can
+  find out even coefficients, and given $a_1$ we can find out odd coefficients.
+  Hence we can write
+  \[y = a_{0} (1+ x^{2}/2 + x^{3}/2*4 + x^{4}/2*4*6+\cdots) + a_1(x + x^3/3 + x^{5}/3*5 +
+  \cdots) \]
+  \[y= a_{0}\sum \frac{x^2n}{2^n n!} + a_1 \sum \frac{2^n n! x^{2n+1}}{(2n+1)!}\]
+  And this is exactly what we'd expect to see, a linear combination of two linearly
+  independent functions, the series.
+
+
+\end{proof}

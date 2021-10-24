@@ -1,0 +1,312 @@
+\section{Lecture 3 - 12 Oct 21}
+Function limits and differentiability.
+\subsection{Function Limits}
+\begin{definition}
+  Let $f:S\to\CC$  be a function and let $c\in\RR$. Say $f$ approaches $L\in\CC$ as $x$
+  tends to $c$, written as 
+  \[\lim_{x\to c} f(x) = L\]
+  If for all $\eps>0$ there exists $\delta>0$ s.t. if $x\in S$ with $0<|x-c|<\delta$, then
+  $|f(x)-L|<\eps$.
+  \label{def:functionLimit}
+\end{definition}
+Observe how closely related this definition is to the definition of continuity. Also
+observe that we don't require $x=c$.
+\begin{theorem}
+  Let $c\in S\subseteq \RR$. A function $f:S\to\CC$ is continuous at $c$ iff
+  $\lim_{x\to c}f(x)=f(c)$.
+\end{theorem}
+\begin{proof}
+  ($\implies$) We have that $f$ is continuous at $c$. Then note that,
+  \[\forall\eps>0\exists\delta>0 : x\in S \quad |x-c|<\delta \implies|f(x)-f(c)|<\eps\]
+  Note that given this condition, it follows that $\lim_{x\to c} f(x)=f(c)$ by definition
+  when using $S'=S\setminus \left\{ c \right\}$. Also observe that if $f$ is continuous in
+  $S$, it will also be continuous in $S'$ by completeness.
+
+  ($\Leftarrow$) We're given that $\lim_{x\to c} f(x)=f(c)$ and we claim that $f$ is
+  continuous at $c$. Note that we have
+  \[\forall\eps>0\exists\delta>0 : x\in S \quad 0<|x-c|<\delta \implies|f(x)-f(c)|<\eps\]
+  And observe that for any sequence $(x_n)$ converging to $c$, the claim follows. Hence
+  using the sequential characterisation of continuity, we get the expected result.
+  \todo{I'm not writing down the whole formalisation. If you want to practice, do it.}
+\end{proof}
+
+\begin{example}
+  Compute the limit
+  \[\lim_{x\to 2} \frac{x^2-4}{x-2}\]
+\end{example}
+\begin{proof}[Solution]
+  Notice that for all $x\neq 2$ we have
+  \[\frac{x^2-4}{x-2} = (x+2) \frac{x-2}{x-2} = x+2\]
+  We claim 
+  \[\lim_{x\to 2} \frac{x^2-4}{x-2} = \lim_{x\to 2} x+2 = 4\]
+  This is proved by the following proposition
+\end{proof}
+
+\begin{proposition}
+  let $f,g:S\to\CC$ and $c\in\RR$. Assume $f(x)=g(x)$ for all $x\in S\setminus\left\{
+  c \right\}$. It's the case that
+  \[\lim_{x\to c}f(x) = \lim_{x\to c}g(x)\]
+  Both limits exist and are equal.
+  \label{prop:limitsEq}
+\end{proposition}
+\begin{proof}
+  Assume $\lim_{x\to c} f(x)=L$ for some $L\in\CC$. We show that $\lim_{x\to c}
+  g(x)=L$. The argument is similar for the opposite direction. 
+
+  Our assumption tells us 
+  \[\forall\eps>0\exists\delta>0 : \forall x\in S, \quad 0<|x-c|<\delta \implies |f(x)-L|<\eps\]
+  Notice that since $x\neq c$, we have $|f(x)-L|=|g(x)-L|$ because $f(x)=g(x)$.
+  Therefore for any $\eps>0$ there exists $\delta>0$ s.t. $\forall x\in S$ we have 
+  \[0<|x-c|<\delta \implies |g(x)-L|<\eps\]
+  By definition this means that $\lim_{x\to c}g(x)=L$.
+\end{proof}
+
+\begin{exercise}
+  Let $f:\RR\setminus\left\{ 0 \right\}\to\RR: x\mapsto \sin \frac{1}{x}$. Show that there
+  is no point $L\in\RR$ s.t. 
+  \[\lim_{x\to 0} f(x)=L\]
+\end{exercise}
+\begin{proof}
+  Let us proceed by contradiction. Assume that there exists such a point $L\in\RR$ s.t.
+  $\lim_{x\to 0}f(x)=L$. Note that $L$ is bounded above by $1$ and bounded below by $-1$.
+  Then we have 
+  \[\forall\eps>0\exists\delta>0 : \forall x\in S, \quad 0<|x|<\delta \implies |f(x)-L|<\eps\]
+  \[\iff |\sin\frac{1}{x} - L| <\eps\]
+  Let us define a sequence $(x_n)$ that converges to $0$ by  
+  \[
+    x_n = 
+    \begin{cases}
+      \frac{1}{\frac{2}{\pi} + 2\pi n} & n=2k \exists k\in\NN \\
+      \frac{1}{\frac{2}{3\pi} + 2\pi n} & n=2k+1 \exists k\in\NN \\
+    \end{cases}
+  \]
+  And observe that $x_n\to 0$ as $n\to\infty$. Let $\eps=1/2$, so $\exists N(1/2)\geq 1$
+  s.t. for any $n\geq N(1/2)$ we have $|f(x_n)-L|<1/2$. Observe that $f(x_n)=1$ for even
+  $n$ and $f(x_n)=-1$ for odd $n$ and note that $L\in[-1,1]$.
+  
+  Assume that $|L|<\frac{1}{2}$, but for even $n$, $f(x_n)=1>L+\frac{1}{2}$ and for odd
+  $n$ $f(x_n)=-1 < L-\frac{1}{2}$ so $|f(x_n) -L| >1/2$, therefore we must have  $|L|\geq
+  \frac{1}{2}$. Assume that $\frac{1}{2}\leq L \leq 1$, but for odd $n$  we have
+  $|f(x_n)-L|>1/2$. Assume that $-1\leq L\leq-\frac{1}{2}$, but for even $n$ we have
+  $|f(x_n)-L|>1/2$. Since we can always find $0<|x_n|<\delta$ and $|f(x_n)-L|>1/2$, this is
+  a contradiction to our assumption. Hence $L$ does not exist.
+\end{proof}
+
+\begin{theorem}
+  Let $f,g:S\to\CC$, $c\in\RR$. Assume 
+  \[\lim_{x\to c}f(x)=L, \quad \lim_{x\to c}g(x)=M\]
+  For $L,M\in\CC$. The following hold
+  \begin{enumerate}
+    \item For any $a,b\in\CC$, we have $\lim_{x\to c} (af(x)+bg(x))=aL+bM$
+    \item $\lim_{x\to c}f(x)g(x) = LM$.
+    \item If $M\neq 0$, we have $\lim_{x\to c} \frac{f(x)}{g(x)}= \frac{L}{M}$
+    \item For complex conjugates, we have $\lim_{x\to c} \overline{f}(x)= \overline{L}$.
+  \end{enumerate}
+  \label{thm:elementaryLimits}
+\end{theorem}
+\begin{proof}
+  Define $F,G:S\cup\left\{ c \right\}\to\CC$ by 
+  \[ F(x)=
+    \begin{cases}
+      f(x) & x\neq c \\
+      L & x=c
+    \end{cases}
+  \]
+  \[ G(x)=
+    \begin{cases}
+      g(x) & x\neq c \\
+      M & x=c
+    \end{cases}
+  \]
+  Note that $F,G$ are continuous at $c$. 
+
+  For 1, by Proposition \ref{prop:limitsEq} note that $\lim_{x\to c} af(x)+bg(x)$ is 
+  \[\lim_{x\to c} = a (\lim_{x\to c} F(x)) + b(\lim_{x\to c} G(x))\]
+  By Example \ref{ex:trivialCont}, and so
+  \[\lim_{x\to c} = aF(c) + bG(c) = aL + bM\]
+
+
+  For 2, we proceed similarly as above,
+  \[\lim_{x\to c} f(x)g(x) = \lim_{x\to c} F(x)G(x) = F(c)G(c) =LM\]
+  
+  For 3, we first show that $g(x)\neq 0$ for some neighbourhood $S\cap (c-r,c+r)$, for
+  some $r>0$. Notice that $G(x)$ is continuous at $c$ and $G(c)=M\neq 0$. Suppose by
+  contradiction that for any $r>0$, there is $x(r)\in S\cap (c-r,c+r)$ s.t.
+  $g(x(r))=0=G(x(r))$. Let $x_n=x(\frac{1}{n})$. Notice that
+  $|x_n-c|<\frac{1}{n}$ for all $n$. Notice $\lim_{n\to \infty} x_n=c$. By sequential
+  characterisation of continuity, we have $0=\lim_{n\to \infty}G(x_n)=G(C)=M$, a
+  contradiction. Hence, $\frac{f(x)}{g(x)}$ is well-defined on $S\cap\left\{ c-r,c+r
+  \right\}$. Recall that $h(x)=\frac{1}{x}$ is continuous at $\RR\setminus\left\{ 0
+  \right\}$, so $F(x)\cdot h\circ G(x)$ is continuous at $c$, and so $\lim_{x\to
+  c}\frac{f(x)}{g(x)}= \lim_{x\to c} F(x) h\circ G(x) = F(c) h(G(c)) =
+  \frac{L}{M}$, by Example \ref{ex:trivialCont}.
+
+  Finally, for 4, let $\eps>0$ and let $\delta>0$ s.t. if $x\in S$ and $0<|x-c|<\delta$
+  then $|f(x)-L|<\eps$. Then recall that $|\overline{f}(x)-\overline{L}| = \overline{|f(x)-L|}=
+  |f(x)-L|$, so the result follows.
+  \[\]
+\end{proof}
+
+
+\begin{proposition}[Sequential Characterisation of Limits]
+  Let $f:S\to\CC$,$c\in S,L\in\CC$. We have
+  $\lim_{x\to c}f(x)=L \iff$ for any sequence $(x_n)$ in $S\setminus \left\{ c
+  \right\}$ s.t. $\lim_{n\to \infty} x_n=c$, we have $\lim_{n\to \infty} f(x_n)=L$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Let $f,S,c,L$ be as in the statement above.
+
+  ($\Rightarrow$) Assume that $\lim_{x\to c}f(x)=L$. Then we have 
+  \[\forall\eps>0\exists\delta>0 : x\in S \quad 0<|x-c|<\delta \implies|f(x)-L|<\eps\]
+  Observe that we require $x\neq c$. Then, let $(x_n)$ be a sequence in $S\setminus\{c\}$,
+  with $x_n\to c$. Then we have $\lim_{n\to \infty} x_n=c$, and so we have
+  $0<|x_n-c|<\delta$ for every $n\geq N(\eps)$ for some $N(\eps)\geq 1$. Therefore we have
+  $|f(x_n)-L|<\eps$, which is precisely $\lim_{n\to \infty} f(x_n)=L$.
+
+  ($\Leftarrow$) Assume that for any sequence $(x_n)$ in $S\setminus \left\{ c
+  \right\}$ with $\lim_{n\to \infty}x_n=c$ we have $\lim_{n\to \infty}f(x_n)=L$. Notice
+  that the above argument can be used since we do not require $x=c$.
+\end{proof}
+
+
+\begin{example}
+  Let $S\subseteq\RR, c\in S, L\in\CC$. Let $f:S\to\CC$ with $f(x)\to L$ as $x\to c$ from
+  the left, denoted $\lim_{x\to c^-}f(x)=L$ if for any $\eps>0$ there is $\delta>0$ s.t.
+  if $x\in S$ with $x\in (c-\delta, c)$, then $|f(x)-L| < \eps$
+
+  Similarly, $\lim_{x\to c^+}f(x)=L$ if for all $\eps>0$ there is $\delta>0$ s.t. if $x\in
+  S$ with $x\in (c,c+\delta)$ then $|f(x)-L|<\eps$. 
+
+  Let $f:S\to\CC$, $c\in\RR,L\in\CC$. Show that 
+  \[\lim_{x\to c} f(x)=L \iff \lim_{x\to c^-}f(x)=\lim_{x\to c^+}f(x)=L\]
+  \label{ex:limitsSides}
+\end{example}
+\begin{proof}[Solution]
+  ($\Rightarrow$) By the assumption we have
+  \[\forall\eps>\exists\delta>0 : x\in S\cap (c-\delta, c+\delta)\setminus\{c\} \implies |f(x)-L|<\eps\]
+  Note that we require $x\in S\cap (c-\delta, c+\delta)\setminus\{c\}$ and that $S\cap
+  (c-\delta, c+\delta)\setminus\{c\} = S\cap[(c-\delta,c)\cup(c,c+\delta)]$. Hence the
+  statement holds for $x\in S\cap (c-\delta, c)$ \emph{and} $x\in S\cap (c,c+\delta )$,
+  i.e. $\lim_{x\to c^-} f(x) = \lim_{x\to c^+} f(x) = L$, as required.
+
+  ($\Leftarrow$) By the assumption we have 
+  \[\lim_{x\to c^-} f(x) = \lim_{x\to c^+} f(x) = L\]
+  Therefore, 
+  \[\forall\eps>\exists\delta>0 : x\in S\cap (c-\delta, c)\setminus\{c\} \implies |f(x)-L|<\eps\]
+  \[\forall\eps>\exists\delta'>0 : x'\in S\cap (c, c+\delta')\setminus\{c\} \implies |f(x')-L|<\eps\]
+  Let $S'=S\cap(c-\delta,c) \cup S\cap (c,c+\delta) = S\cap (c-\delta, c+\delta)\setminus
+  \left\{ c \right\}$, and the claim follows.
+\end{proof}
+
+\subsection{Differentiability}
+\begin{definition}
+  Let $-\infty\leq a\leq c \leq b \leq \infty$. Suppose $I\subseteq\RR$ is one of
+  $(a,b),[a,b],[a,b),(a,b]$. Say a function $f:I\to\CC$ is differentiable at $c$ if and
+  only if the limit
+  \[\lim_{x\to c} \frac{f(x)-f(c)}{x-c}\]
+  exists. In this case, call the limit the derivative of $f$ at $c$, denoted
+  $f'(c)\in\CC$. 
+
+  Say $f$ is differeniable on $I$ if $f'(c)$ exists for all $c\in I$.
+  \label{def:differentiability}
+\end{definition}
+
+\begin{exercise}
+  Show that $f(x)=x^n$ for some $n\in\RR_{\geq 1}$ is differentiable in $\RR$.  Also show
+  that $f'(x)=nx^{n-1}$.
+  [Hint: $x^n-y^n = (x-y)(\sum_{k=0}^{n-1} x^ky^{n-1-k})$]
+\end{exercise}
+\begin{proof}[Solution]
+  For any $c\in\RR$ and $f$ as in the statement above. We have,
+  \[\lim_{x\to c} \frac{f(x)-f(c)}{x-c}= \lim_{x\to c} \frac{x^n - c^n}{x-c} =
+  \lim_{x\to c} \frac{(x-c)\sum_{k=0}^{n-1}x^kc^{n-k-1}}{x-c}.\]
+  Note that since we have $x\neq c$ (a requirement for the limit definition), we can
+  cancel out the common factors and we're left with
+  \[\lim_{x\to c} \frac{(x-c)\sum_{k=0}^{n-1}x^kc^{n-k-1}}{x-c} = \lim_{x\to
+  c}\sum_{k=0}^{n-1}x^kc^{n-k-1}\]
+  And note that this converges to $\sum_{k=0}^{n-1}c^k c^{n-1-k}= (n)c^{n-1}$, as
+  required.
+\end{proof}
+
+\begin{example}
+  Consider $f(x)=|x|$. Let $g:(0,\infty)\to\RR:x\mapsto x$ and
+  $h:(-\infty,0)\to\RR:x\mapsto -x$. Note that $g'(x),h'(x')$ exist for all
+  $x\in(0,\infty),x'\in(0,\infty)$ and $g'(x)=1$, $h'(x)=-1$, which follows from the above
+  exercise.
+
+  Notice that for $c,x>0$ we have $\frac{f(x)-f(c)}{x-c}=\frac{g(x)-g(c)}{x-c}$, and since
+  limits only care about neighbourhoods, we have $f'(c)=\lim_{x\to
+  c}\frac{f(x)-f(c)}{x-c}= \lim_{x\to c}\frac{g(x)-g(c)}{x-c} = g'(c)=1$. Similarly for
+  $x'<0$ we have $f'(x)=-1$. Hence $f$ is differentiable on $\RR\setminus\{0\}$. Note that
+  the limit as $c$ approaches $0$ is not the same in the right as in the left, and by
+  Example \ref{ex:limitsSides}, we have that the limit does not exist.
+
+  Let $x_n=(-1)^n\frac{1}{n}$ and notice $\lim_{n\to \infty}x_n=0$. If $f'(0)$ exists,
+  then by Proposition \ref{prop:limitsEq} we have $\lim_{n\to \infty}
+  \frac{f(x_n)}{x_n}$ exists. But 
+  \[\frac{f(x_n)}{x_n} = (-1)^n\]
+  And this doesn't converge to any number. Hence $f'(0)$ doesn't exist.
+  \label{ex:absoluteLimits}
+\end{example}
+
+
+\begin{exercise} [Left and right derivatives]
+  Let $f:I\to\CC$ w interval $I$. Define the left and right derivatives of $f$ at $c\in I$
+  as 
+  \[f_L'(c) = \lim_{x\to c^-} \frac{f(x)-f(c)}{x-c}\]
+  \[f_R'(c) = \lim_{x\to c^+} \frac{f(x)-f(c)}{x-c}\]
+  (If these limits exist). Show for $I=[a,b]$ for $a<b\in\RR$, $f$ is differentiable on
+  $I$ if and only if the following hold
+  \begin{enumerate}
+    \item $f_L'(c)$,$f_R'(c)$ exists and $f_L'(c)=f_R'(c)$ for $c\in(a,b)$.
+    \item $f_R'(a)$ exists.
+    \item $f_L'(a)$ exists.
+  \end{enumerate}
+
+  Also show for $f(x)=|x|$ then $f_L',f_R'$ exist on $\RR$.
+\end{exercise}
+\begin{proof} [Solution]
+  ($\Rightarrow$) The three claims follow by definition of differentiability and Exercise
+  \ref{ex:limitsSides}.
+
+  ($\Leftarrow$) 
+  The first claim is equivalent to having $f$ differentiable on $(a,b)$, i.e. for any $c\in(a,b)$ we
+  have 
+  \[f'(c)=\lim_{x\to c} \frac{f(x)-f(c)}{x-c}\]
+  Moreover, consider $f'_R(a)$ which exists, so
+  \[f'_R(a)=\lim_{x\to a^+}\frac{f(x)-f(a)}{x-a} \in\RR\]
+  Note that for this to be true, we have 
+  \[\forall\eps>0\exists\delta>0 : x\in I\cap (a,a+\delta)\implies
+  |\frac{f(x)-f(a)}{x-a} - f'(a)|<\eps\]
+  Observe the condition $\forall x\in I\cap (a,a+\delta)$ is equivalent to $\forall x\in
+  I=[a,b]$ and $0<|x-a|<\delta$, which implies precisely that
+  $f'(a)=f'_R(a)$, as required. Case 3 can be proven by a similar proceadure.
+
+  We've already shown that $f'(x)=f'_R(x)=f'_L(x)$ for $x\neq 0$ in Example
+  \ref{ex:absoluteLimits}, and we've shown that $f'_R(0)=-1$ and $f'_L(0)=1$.
+\end{proof}
+
+\begin{exercise}
+  Suppose $f,g:I\to\CC$ for some interval $I$. Let $c\in I$ and assume $f'(c),g'(c)$
+  exist. Show 
+  \begin{enumerate}
+    \item For any $a\in\CC$, $(a\cdot f)'(c)=af'(c)$ and it exists
+    \item $(f+g)'(c)$ exists and $(f+g)'(c)=f'(c) + g'(c)$.
+    \item $(\overline{f})(c)$ exists and $(\overline{f})(c)= \overline{f'(c)}$
+  \end{enumerate}
+  Deduce that $f$ is differentiable at $c$ if and only if $\Re f$ and $\Im f$ are
+  differentiable.
+\end{exercise}
+\begin{proof} [Solution]
+  For case 1, we have that for any $x\in I$
+  \[\frac{(af)(x)-(af)(c)}{x-c} = a\frac{f(x)-f(c)}{x-c}\]
+  Which convergest to $af'(c)$ as $x\to c$ by Theorem \ref{thm:elementaryLimits}.
+
+  For case 2, the claim follows by Theorem \ref{thm:elementaryLimits}.
+
+  For case 3, we have 
+  \[\frac{\overline{f}(x) - \overline{f}(c)}{x-c} = \frac{\overline{f(x)-f(c)}}{x-c}\]
+  An by Theorem \ref{thm:elementaryLimits} the result follows.
+\end{proof}
+

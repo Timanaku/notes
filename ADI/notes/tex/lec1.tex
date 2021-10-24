@@ -1,0 +1,236 @@
+\section{Lecture 1 - 28 Sep 21}
+\subsection{Complex numbers}
+In this course we consider functions of the form $f:S\subset\RR\to\CC$. Recall that $M_2$
+is the vector space of $2\times 2$ matrices. We define the complex numbers $\CC$ as the
+subspace 
+\[\CC := \left\{  A\in M_2 | A_{11} =A_{22} \& A_{12}=-A_{21} \right\}\]
+In other words, any element $z\in\CC$ is an element of the form
+\[
+\begin{pmatrix}
+  a & b \\
+  -b & a
+\end{pmatrix}
+\]
+One may get the question as to why this is the case. The answer lays in the fact that
+there exists a matrix $J$ with the property $J^2=-I$ where $I$ is the identity matrix.
+This matrix is the following,
+\[
+J = \begin{pmatrix}
+  0 & 1 \\
+  -1 & 0
+\end{pmatrix} \implies J^2 = JJ= -I
+\]
+Hence any complex number of the form $z=a+bi$ with $a,b\in\RR$ can be written as $Z=
+aI+bJ$ for a one-to-one correspondence, and that $Z$ matrix is precisely the
+aforementioned matrix. This matrix $J$ is the corresponding to the complex number $i$.
+Note that the transpose operation of any complex number $Z^T$ corresponds to the complex
+conjugate of $Z$, usually written as $\bar{z}$ in $\CC$.
+The modulus of $z$ is defined as $|z|=\sqrt{z\bar{z}}$, which can be shown to be a metric.
+
+\begin{example}
+  Show that $\Re{z}=\frac{z+\bar{z}}{2}, \Im{z}=\frac{z-\bar{z}}{2i}$. Also show that for
+  any $z,w\in\CC$ we have $|zw|=|z||w|, |z+w|\leq |z|+|w|$.
+\end{example}
+\begin{proof}[Solution]
+  Note that for $z=a+bi$ where $\Re{z}=a$ and $\Im{z}=b$, we have,
+  \[\frac{z+\bar{z}}{2} = \frac{a+bi + a -bi}{2} = \frac{2a}{2}=a\]
+  \[\frac{z-\bar{z}}{2i} = \frac{a+bi - a +bi}{2} = \frac{2bi}{2i}=b\]
+
+  Moreover, note that for $w=c+di$ we have $wz=ac-bd + (ad +bc)i$ and it follows
+  $|wz|= \sqrt{(ac-bc + i(ad+bc))(ac-bc - i(ad+bc))} = \sqrt{(ac-bc)^2 + (ad+bc)^2}$
+  \[\sqrt{(ac)^2 + (bc)^2 + (ad)^2 + (bc)^2 - 2acbc +2adbc}\]
+  Whereas
+  \[|w||z|=\sqrt{(c^2+d^2)(a^2+b^2)} = \sqrt{(ac)^2 + (cb)^2 + (da)^2 + (db)^2}\]
+  Hence $|wz|=|w||z|$.
+
+  Finally, $z+w = (a+c) +i(b+d)$, and so 
+  \[|z+w| = \sqrt{(a+c)^2 + (b+d)^2}=\sqrt{a^2 + c^2 +b^2+d^2 + 2ac+2bd}\]
+  While $|z|+|w|=\sqrt{a^2 + b^2} + \sqrt{c^2+d^2}$
+  Hence we see that $|z+w|<|z|+|w|$. Where the equality happens when both $z,w$'s real or
+  imaginary part are 0.
+\end{proof}
+\begin{example}
+  Prove that no ordering $<$ exists on $\CC$.
+\end{example}
+\begin{proof}[Solution]
+  We prove the above by counter example, by multiplying by $i$ iteratively. Let $i<0$, so
+  $i^2<0\implies -1<0$. Moreover, observe that $i>0\implies -1>0 \implies  -i>0 \implies
+  -(-1)>0 \implies 1>0$. However, we can only have $a>0,a=0$, or $a<0$, exactly once. But
+  we have just shown that $i<0$ and $i>0$. Hence no ordering exists.
+\end{proof}
+
+
+\subsection{Sequential characterisation of continuity}
+
+\begin{definition}
+  Let $f:S\subset\RR\to\CC$ be a function. We say that $f$ is continuous at $c\in S$ if
+  $\forall\epsilon >0\exists \delta>0$ s.t.
+  \[|x-c|<\delta \implies |f(x)-f(c)|<\epsilon\]
+  Moreover we say that $f$ is continuous if $f$ is continuous at $c$ for all $c\in S$.
+  \label{continuity}
+\end{definition}
+We may rewrite this definition using set notation and the forward image as follows, by
+noting that using a bound for a modulus function implies intervals, which implies sets.
+Note that in a definition $\forall \eps>0 \exists \delta>0 \nt{ s.t. } \forall x\in S$,
+$|x-c|<\delta \implies |f(x)-f(c)|<\eps$, we can define $B_{\delta}(p):=\left\{ x\in\RR :
+|x-p|<\delta \right\}$ as the set of points that lie at most $\delta$ away from $p$, a
+ball centered at $p$. Similarly we can define $B_{\eps}(p):=\left\{ f(x)\in\RR :
+|f(x)-f(p)|<\eps \right\}$. Hence we may rewrite the above definition as
+\[\forall\eps>0\exists\delta>0 \nt{ s.t. } f^{\to}(B_{\delta}(p))\subset B_{\eps}(f(p))\]
+Which is a rather illustrating and intuitive way of stating the definition. The operator
+$f^{\to}$ is called the forward image, and it's defined as follows. 
+\begin{definition}[Forward Image]
+  Let $f:X\to Y$, for nonempty sets $X,Y$. We define the forward image $f^{\to}:2^{X}\to
+  2^{Y}$ by $f^{\to}(A):=\bigcup_{a\in A} \left\{ f(a) \right\}$, where $2^S$ for some
+  nonempty set $S$ denotes the powerset of $S$.
+  \label{<+label+>}
+\end{definition}<++>
+
+
+We can rewrite this definition using sequences, which is the purpose of the following
+theorem
+\begin{theorem} [Sequential Characterisation of Continuity]
+  Let $f:S\subset\RR\to\CC$ be a function and let $c\in\RR$. $f$ is continuous iff, whenever a
+  sequence $\left\{ x_n \right\}$ in $S$ converging to $c$, the sequence $\left\{ f(x_n)
+  \right\}$ converges to $f(c)$.
+\end{theorem}
+\begin{proof}
+  \todo{Do this}
+  First, assume $f$ is continuous at $c$, and elt $\left\{ x_n \right\}$ be any sequence
+  converging to $c\in S$. We claim that $f(x_n)\to f(c)$. Since $f$ is continuous at $c$
+  we have
+  \[ \forall\epsilon>0\exists\delta>0 ; |x-c|<\delta \implies |f(x)-f(c)|<\epsilon\]
+  Let $N(\epsilon)\geq 1$ be s.t. $\forall n\geq N(\epsilon)$, $|x_n-c|<\epsilon$. Hence
+  for any $n\geq N(\delta)$ we have $|x_n-c|<\delta$ which by the above implies
+  $|f(x_n)-f(c)|<\epsilon$, as required.
+
+  Next let's prove the oppposite direction by contraposition. Assume $f$ is not
+  continuous at $c\in S$. We aim to find a sequence $\left\{ x_n \right\}$ s.t. $x_n\to c$
+  but that $f(x_n)$ does not converge to $c$. Since $f$ is not continuous, there must
+  exists $\epsilon>0$ s.t. for any $\delta>0$ there exists $x(\delta)\in S$ s.t. 
+  \[|x(\delta)-c|<\delta \land |f(x)-f(c)|\geq \epsilon\]
+  Let $x_n$ be some $x$ function of $1/n$, or $x_n:=x(\frac{1}{n})$ so that
+  $|x_n-c|<\frac{1}{n}$, hence $x_n\to c$. However, if $f(x_n)\to f(c)$ (which is implied
+  by the aforementioned argument), then $\exists N(\epsilon)\geq 1$ s.t. $\forall
+  n>N(\epsilon), |f(x_n)-f(c)|<\epsilon$, a contradiction to the statement above, hence
+  $f(x_n)$ can't converge to $f(c)$.
+\end{proof}
+
+\begin{example}
+  Let $f,g:S\in\RR\to\CC$ be functions and let $c\in S$ s.t. $f,g$ are continuous in $c$.
+  Show
+  \begin{enumerate}
+    \item $f+g$ is continuous at $c$
+    \item $fg$ is continuous at $c$
+    \item if $k\in\CC$, then $kf$ is continuous at $c$.
+    \item Let $h:T\in\RR\to S$ be a continuous function at a point $d\in T$, s.t.
+      $h(d)=c$. Then $f(h(d))$ is continuous.
+    \item Conclude that polynomial functions are continuous.
+  \end{enumerate}
+  \label{ex:trivialCont}
+\end{example}
+\begin{proof}[Solution]
+  We have the following through out. 
+  \[\forall \epsilon_1,\epsilon_2\, \exists\delta_1,\delta_2 s.t. |x-c|<\delta_1 \implies
+  |f(x)-f(c)|<\epsilon_1\]
+  \[|x-c|,<\delta_2 \implies |g(x)-g(c)|<\epsilon_2\]
+
+  For the first statement we claim that $\forall \epsilon_3\exists\delta_3 ; 
+  |x-c|<\delta_3\implies |(f+g)(x)-(f+g)(c)|<\epsilon_3$. Observe that
+  $|f(x)+f(c)|+|g(x)-g(c)|<\epsilon_1+\epsilon_2$, so by the triangle inequality and
+  commutativity we have $|(f+g)(x) - (f+g)(c)|<\epsilon_1+\epsilon_2\leq \epsilon_3$.
+  Hence we aim to find an expression for $\delta_3$ such that it enables the previous
+  inequality. Observe that since $f,g$ are continuous, any value of
+  $\epsilon_1,\epsilon_2$ work, so we can set them as we wish. Note that if we set
+  $\epsilon_1=\epsilon_2=\frac{\epsilon_3}{2}$
+  Then $\delta_3=\min{\delta_1,\delta_2}$, so such a delta exists and hence $f+g$ is
+  continuous at $c$ as required.
+
+  Next, we claim \[\forall\epsilon_4\exists\delta_4;|x-c|<\delta_4\implies
+  |fg(x)-fg(c)|<\epsilon_4\] Note that 
+  \[|fg(x)-fg(c)|=|fg(x)-fg(c) + (f(x)g(c)-f(x)g(c))|\]
+  \[= |f(x)(g(x)-g(c)) + g(c)(f(x)-f(c))| \leq |f(x)||g(x)-g(c)| + |g(c)||f(x)-f(c)| \]
+  \[< |f(x)|\epsilon_2 + |g(c)|\epsilon_1 \leq \epsilon_4\] by the triangle inequality.  Note
+  that we can choose $\epsilon_1,\epsilon_2$. By starting with the constant factor, we
+  note that $\epsilon_1|g(c)|=\frac{\epsilon_4|g(c)|}{2|g(c)|+69}<\frac{\epsilon_4}{2}$,
+  where the addition of $69$ is to avoid division by $0$. For $\epsilon_2$ we need to find
+  an upper bound for the value of $|f(x)|$. Let $\phi$ be that upper bound, so
+  $\epsilon_2|f(x)|=\frac{\epsilon_4|f(x)|}{2\phi}<\frac{\epsilon_4}{2}$. To find the
+  upper bound $\phi$, note that we can get it with the triangle inequality, as follows,
+  \[|f(x)-f(c)|<\epsilon_1\implies|f(x)|<\epsilon_1+|f(c)|\] Since $|a-b+b| <
+  |a-b|+|b|\implies |a|-|b|<|a-b|$. Hence letting $\phi=\epsilon_1+|f(c)|$, we get the
+  required upper bound, and so \[|f(x)|\epsilon_2+|g(c)|\epsilon_1 =
+    \frac{|f(x)|\epsilon_4}{2(\epsilon_1+|f(c)|)}+\frac{|g(c)|\epsilon_4}{2|g(c)|+69} <
+  \frac{\epsilon_4}{2} + \frac{\epsilon_4}{2} = \epsilon_4\] Therefore by the presented
+  logic, $\delta_4=\min{\delta_1,\delta_2}$ as required.
+
+
+  For the third section, we claim $\exists\epsilon_5>0\exists\delta_5>0;
+  |x-c|<\delta_2\implies|kf(x)-kf(c)|<\epsilon_5$. Observe that
+  $|kf(x)-kf(c)|<|k|\epsilon_1$. Hence letting $\epsilon_1=\frac{\epsilon_5}{|k|}$, and so
+  $\delta_5=\delta_1$, as required.
+
+  Finally, we claim that for a continuous function $h:T\to S$ at $d\in T$ and $h(d)=c$,
+  then $f(h(d))$ is continuous. Note that we we have 
+  \[\forall \epsilon_1 \exists\delta_1 s.t. |x-c|<\delta_1 \implies
+  |f(x)-f(c)|<\epsilon_1\]
+  \[\forall \epsilon_6 \exists\delta_6 s.t. |x'-d|<\delta_6 \implies
+  |h(x')-h(d)|<\epsilon_6\]
+  For $x\in S$ and $x'\in T$, and we observe that, given the domains and co-domains, the
+  first expression is equivalent to saying,
+  \[\forall \epsilon_1 \exists\delta_1 s.t. |h(x')-h(d)|<\delta_1 \implies
+  |f(h(x'))-f(h(d))|<\epsilon_1\]
+  Which is exactly our claim.
+
+\end{proof}
+
+
+\begin{definition}
+  A function $f:S\subset\RR\to\CC$ is uniformly continuous if
+  $\forall\epsilon>0\exists\delta>0$ s.t. for any $x,y\in S$,
+  \[|x-y|<\delta\implies |f(x)-f(y)|<\epsilon\]
+  Note that $\delta$ is independent of $c,x\in S$, hence uniformly continuous functions
+  have, for any $\epsilon$, a $\delta$ s.t. the above is true, in the whole domain.
+  \label{uniformlyContinuous}
+\end{definition}
+An example of a function that is continuous but not uniformly continuous is the function
+$f(x)=\frac{1}{x}$, whereas a uniformly continuous function could be $g(x)=
+\sqrt{x}$. Recall that for $f$ continuous, $\forall\epsilon>0,y\in S\exists
+\delta(\epsilon,y)>0 s.t. \forall x\in S, |x-y|<\delta\implies|f(x)-f(y)|<\epsilon$.
+
+\begin{example}
+  Let $n\geq 1$. Show that $f:\RR\to\RR : x\mapsto x^n$ is uniformly continuous iff $n=1$.
+\end{example}
+\begin{proof}[Solution]
+  We have that $f$ is uniformly continuous. In order to prove by contradiction, let $n>1$.
+  Hence we have that for any $\eps>0\exists\delta>0$ s.t. $\forall x,y\in\RR$,
+  \[|x-y|<\delta \implies |f(x)-f(y)|=|x^n-y^n|<\eps\]
+  \[\iff |x-y||\sum_{i=0}^{n-1}x^iy^{n-1-i}|<\eps \iff |x-y|<
+  \frac{\eps}{|\sum_{i=0}^{n-1}x^iy^{n-1-i}|}\]
+  Fix $x,y\in\RR$ s.t. the above is true for any $\eps$. Then we have some
+  $\delta (\eps)$ s.t. 
+  \[|x-y|<\delta (\eps )\implies |x-y|<\frac{\eps}{|\sum_{i=0}^{n-1}x^iy^{n-1-i}|}|\]
+  Hence we let some $\delta (\eps )<\frac{\eps}{|\sum_{i=0}^{n-1}x^iy^{n-1-i}|}$. However, now let
+  $x',y'\in\RR$ be s.t. $\delta (\eps
+  )>\frac{\eps}{|\sum_{i=0}^{n-1}(x')^i(y')^{n-1-i}|}$ and
+  $|x'-y'|>\frac{\eps}{|\sum_{i=0}^{n-1}(x')^i(y')^{n-1-i}|}$, which is guaranteed to
+  exist since $\dom f=\RR$. This is a contradiction to $f$ being uniformly continuous. Hence $n\leq 1$, and by the initial
+  condition we must have $n=1$.
+
+  The right to left implication is trivial by letting $\delta=\eps$.
+\end{proof}
+
+\begin{example}
+  Show that if $f:[a,b]\subset\RR \to\CC$ is continuous, then $f$ is uniformly continuous.
+\end{example}
+\begin{proof}[Solution]
+  \todo{Do this, observe the use of closed intervals}
+  First, let $f$ be as in the hypothesis above. Then, let $\varepsilon>0$ and $c\in [a,b]$
+  be arbitrary.  Let us define $S_{\delta(\varepsilon)}$ as follows, 
+  \[S_{\delta(\varepsilon)} := \left\{
+  \delta(\varepsilon)>0 ; |x-c|<\delta \implies |f(x)-f(c)|<\varepsilon\right\}\]
+  Note that since $c$ is in a closed interval and $f$ is continuous in $c$, given
+  $\varepsilon$, the set $S_{\delta (\varepsilon)}$ is bounded and non-empty. Hence let us
+  define $\delta_m=\sup{S_{\delta(\varepsilon)}}$, and note that for any $c$ we can have
+  $\delta'=\inf \delta_m |c\in[a,b]$, hence $f$ is uniformly continuous.
+\end{proof}

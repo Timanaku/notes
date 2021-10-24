@@ -1,0 +1,80 @@
+\section{Lecture 13 - 18 Oct 2021}
+Examples of exact equations, self-adjoint operators, 
+\begin{example}
+  We have 
+  \[L[y]=(x^2-x)y'' + (2x^2+4x-3)y' + 8xy = 1\]
+  Find the adjoint and use it to find the general solution.
+\end{example}
+\begin{proof}[Solution]
+  Following the same proceadure as before, we multiply by $z$, and unknown, and use the
+  condition $a''-b'+c =0$.We then get the adjoint equation as
+  \[((x^2-x)z)'' - ((2x^2+4x-3)z)' + 8xz =0\]
+  \[\implies (x^2-x)z'' - (2x^2-1)z' + (4x-2)z=0\]
+  After re-arranging. And so,
+  \[\overline{L}= (x^2-x)\frac{d^2}{dx^2} - (2x^2-1)\frac{d}{dx} + (4x-2)\]
+  Recall that we want to rewrite the equation in an exact-form, so we need
+  \[azy''+bzy'+czy = (Uy'+Vy)' = Uy''+(U'+V)y'+V'y\]
+  Again, by equating coefficients we find
+  \[U=(x^2-x)z\]
+  \[U'+V = (2x^2+4x-3)z\]
+  \[V'=8xz\]
+  So by solving $\overline{L}[z]=0$ we find $z$ and hence find $U,V$ to get the exact
+  equation. Recall that we only need one solution for $z$, not the general one. Try a
+  solution of the form $z(x)=x^r$. We get
+  \[(x^2-x)r(r-1)x^{r-2} - rx^{r-1}(2x^2-1) + x^r(4x-2)=0\]
+  And rearranding coefficients we get
+  \[2(2-r)x^{r+1}+(r-2)(r+1)x^r -r(r-2)x^{r-1}=0\]
+  Since we know each function is linearly independent, we have that each coefficient must
+  be $0$. $r=2$ satisfy the equation, hence the solution we're looking for is $z(x)=x^2$.
+  We then can find $U,V$,
+  \[U=z(x^2-x) = x^4-x^3\]
+  \[V=-U'+z(2x^2+4x-3) = 2x^4\]
+  And so our equation reduces to
+  \[(Uy'+Vy)'= z\cdot 1\]
+  \[\implies (x^4-x^3)y' +2x^4y = \int x^2 dx\]
+  \[\implies (x^4-x^3)y' +2x^4y = \frac{x^3}{4}+c_1\]
+  Using integrating factor $\mu=e^{2x}(x-1)^2$ we have 
+  \[(y\cdot e^{2x}(x-1)^2)'= \frac{e^2x}{x^4-x^3} (\frac{x^{3}}{3} +c_1)(x-1)^2\]
+  \[y e^{2x}(x-1)^{2} = \int\frac{1}{3}(x-1)e^{2x}dx + c_1\int \frac{e^2x(x-1)}{x^3}dx +
+  c_2\]
+  Hence by integrating and re-arranging we get the general solution.
+  \[y= \frac{1}{(x-1)^2} (\frac{x}{6}-\frac{1}{4} + \frac{c_1}{x^2} +c_2e^{-2x})\]
+\end{proof}
+
+
+\subsection{Self adjoint operators}
+\begin{definition}[Self adjoing operator]
+  A linear operator $L$ is self adjoint if $L=\overline{L}$.
+  \label{def:selfAdjOp}
+\end{definition}
+\begin{example}[Legendre's equation]
+  Let $L=(1-x^2)\frac{d^2}{dx^2}- 2x\frac{d}{dx} + \lambda$.
+  Show that $L$ is self-adjoint.
+\end{example}
+\begin{proof}
+To get the adjoint, we multiply $L[y]$ by $z$ and get $zL[y]=(Uy'+Vy)'$ and find
+\[\overline{L}[z]=[(1-x^2)z]'' - [-2xz]'+\lambda z\]
+\[= (1-x^2)z'' + 2(-2x)z' + (-2)z + (2xz')+2z +\lambda z\]
+\[=(1-x^2)z''-2xz'+\lambda z\]
+\[=L[z]\]
+Hence the operator is self adjoint.
+\end{proof}
+
+In fact, we can write any seconde order ODE in self adjoint forms. We can solve then the
+equation in self-adjoint form and write the solution in canonical form.
+
+
+\begin{theorem}
+  A necessary condition for the operator 
+  \[L=a\frac{d^2}{dx^2} +b\frac{d}{dx}+c\]
+  To be self adjoint is that $a'=b$. Given this, the self adjoint operator can be written
+  as 
+  \[L=\frac{d}{dx}(a\frac{d}{dx})+c\]
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  We have $\overline{L}[y]= (ay)''-(by)'+cy = ay''+(2a'-b)y'+ (a''-b'+c)y$. Note that for
+  $L=\overline{L}$ we require $2a'-b=b\implies a'=b$ and $a''-b'+c=c\implies a''=b'$. So
+  $L$ is self adjoint if $a'=b$.
+
+\end{proof}<++>
