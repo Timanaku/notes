@@ -1,4 +1,4 @@
-\section{Lecture 4 - 14 Oct 21}
+\section{Lecture 4 - 14 Oct 2021}
 Continuity and product rule, chain rule.
 \subsection{Continuity and product rule}
 \begin{proposition}
@@ -57,7 +57,92 @@ We'll prove the product rule now.
   \[(\frac{f}{g})'(c) = \frac{f'(c)g(c) - f(c)g'(c)}{g(c)^2}\]
 \end{exercise}
 \begin{proof}[Solution]
-  
-\end{proof}<++>
+  Following the definition we have 
+  \[(\frac{f}{g})'(c)=\lim_{x\to c} \frac{(f/g)(x) - (f/g)(c)}{x-c} =
+  \lim_{x\to c}\frac{1}{x-c}(\frac{f(x)g(c)}{g(x)g(c)} - \frac{f(c)g(x)}{g(x)g(c)})\]
+  By using common denominators, and for $g(x)\neq 0$ for $x$ in the neighbourhood of $c$.
+  Moreover we can rearrange and add $0=f(c)g(c)-f(c)g(c)$,
+  \[(\frac{f}{g})'(c)= \lim_{x\to c}\frac{f(x)g(c)-f(c)g(x)+f(c)g(c)-f(c)g(c)}{g(x)g(c)(x-c)}\]
+  \[=\lim_{x\to c} \frac{g(c)(f(x)-f(c)) - f(c)(g(x)-g(c))}{g(x)g(c)(x-c)}\]
+  \[=\frac{g(c)}{g(c)}(\lim_{x\to c}\frac{f(x)-f(c)}{x-c})(\lim_{x\to
+    c}\frac{1}{g(x)}) - \frac{f(c)}{g(c)}(\lim_{x\to
+  c}\frac{g(x)-g(c)}{x-c})(\lim_{x\to c}\frac{1}{g(x)}) \]
+  \[(\frac{f}{g})'(c)=\frac{g(c)f'(c) - f(c)g'(c)}{g(c)^2}\]
+  As required.
+\end{proof}
 
 \subsection{Chain rule}
+\begin{theorem}[Chain Rule]
+  Let $I,J$ be open intervals. Suppose 
+  \[f: J\to \CC\]
+  \[g: I\to \RR\]
+  Suppose $g$ is differentiable at $c\in I$, $g(c)\in J$, and $f$ is differentiable at
+  $g(c)\in J$. Then $f\circ g$ is differentiable at $c$ and 
+  \[(f\circ g)'(c) = f'(g(c))g'(c)\]
+  \label{thm:chainRule}
+\end{theorem}
+\begin{proof}
+  Let us define continuous functions $F,G$ as 
+  \[F(t)=
+    \begin{cases}
+      \frac{f(g(c)+t)-f(g(c))}{t} & t+g(c)\in J\setminus\{g(c)\} \\
+      f'(g(c)) & t=0 
+    \end{cases}
+  \]
+  \[G(t)=
+    \begin{cases}
+      \frac{g(c+t)-g(c)}{t} & t+c\in I\setminus\{c\} \\
+      g'(c) & t=0 
+    \end{cases}
+  \]
+  Hence observe that for any $t\neq 0$ we have 
+  \[f(g(c)+t) = f(g(c))+tF(t)\]
+  \[g(c+t) = g(c)+tG(t)\]
+  And observe that these functions have the shape of a line (degree one polynomial), being
+  functions of $t$. Then, take a look at the slope function of the composition of
+  functions. For any $t\neq 0$ we have
+  \[S(t)= \frac{(f\circ g)(c+t)-(f\circ g)(c)}{t} = \frac{f(g(c+t))-f(g(c))}{t}\]
+  Using the previously defined degree one polynomial for $g(c+t)$ we have
+  \[S(t)= \frac{f(g(c)+tG(t))-f(g(c))}{t}=\frac{f(g(c))-f(g(c)+tG(t)F(tG(t))}{t}\]
+  And note the trivial cancellations, leaving
+  \[S(t)=G(t)F(tG(t))\]
+  Hence, since $F,G$ are continuous, we find 
+  \[\lim_{t\to 0}S(t)=S(0)=G(0)F(0)=f'(g(c))g'(c)\]
+\end{proof}
+
+\begin{exercise}
+  Let $a<b$ and suppose that $f:[a,b]\to\RR$ is a continuous function such that $f'$
+  exists in $(a,b)$ and such that $f'(c)>0$ for any $c\in(a,b)$. Show that for
+  any $x<y$ we have $f(x)<f(y)$. [Hint: Use contradiction]
+  \label{ex:stricIncreasing}
+\end{exercise}
+\begin{proof}
+  We proceed by contradiciton. Let us assume that there exist $x<y$ s.t. $f(x)\geq f(y)$.
+  First we show that $\exists x_0<x_1\in[x,y$] s.t.  $f(x_0)>f(x_1)$. Let $x_0<x_1$ in
+  $[x,y]$ and assume that $f(x_0)=f(x_1)$ (note, for any $x_0<x_1$). Consider the point
+  $c=x+\frac{y-x}{2}$, then $f'(c)=0$ by assumption, a contradiction to the fact that
+  $f'(c)>0$ for all $c\in[a,b]$.  Hence there must exist $x_0<x_1\in[x,y]$ such that
+  $f(x_0)>f(x_1)$.
+
+  Next, let us define $r=a-x_0$, $s=b-x_0$ and let $g:(r,s)\to\RR:t\to f(x_0+t)-f(x_0)$ be
+  a continuous function. Let us define $h(t)=x_0+t$. We claim $g'(c)=f'(x_0+c)$ for all
+  $c\in(r,s)$. Notice that $g=(f\circ h)(t) - f(x_0)$ so $g'=(f\circ h)'$ and by applying
+  the chain rule we get $g'= f'(x_0+t)$.
+
+  Let us define now $S:=\left\{ t\in[0,x_1-x_0) : g(t)\geq 0 \right\}$, guaranteed to be
+  nonempty since $g(0)=0$. We claim that $t_0\sup S\in S$. Notice that there
+  exists a sequence $t_n$ in $S$ s.t. $t_n\to t_0$ with
+  \[t_0-\frac{1}{n}\leq t_n \leq t_0\]
+  By the sequential characterisation of continuity we must have
+  $\lim_{n\to\infty}g(t_n)=g(t_0)$. Since $g(t_n)\geq 0$ for all $n$, it follows
+  $g(t_0)\geq 0$, hence $t_0\in S$. Observe that $t_0<x_1-x_0$ since
+  $g(x_1-x_0)=f(x_1)-f(x_0)<0$. Furthermore, any $t\in(t_0,x_1-x_0)$ must have $g(t)<0$,
+  by definition of supremum of $S$.
+
+  Finally, consider the sequence $t_n=t_0+\frac{x_1-x_0-t_0}{n}\to t_0$. By the sequential
+  characterisation of limits, we have 
+  \[g'(t_0)= \lim_{n\to \infty} \frac{g(t_n)-g(t_0)}{t_n-t_0}\]
+  Observe that we have ot have $g(t_n)\leq 0$ by the argument in the paragraph above, hence it
+  follows that $\frac{g(t_n)-g(t_0)}{t_n-t_0}\leq 0$ for all $n$, and so $g'(t_0)\leq 0$,
+  a contradiction. Hence we must have $x<y\implies f(x)<f(y)$, strictly increasing.
+\end{proof}

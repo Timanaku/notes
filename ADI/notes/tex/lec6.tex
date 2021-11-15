@@ -1,0 +1,246 @@
+\section{Lecture 6 - 21 Oct 2021}
+Exponential function and inverse function theorem.
+\subsection{Exponential function}
+We consider the differential equation $\gamma'(t)=i\gamma(t)$. What if we replace $i$ by
+$1$. That gives us the exponential function. We'll assume the following theorem. The rest
+of the course is dedicated to proving it.
+\begin{theorem}
+  For all $x>0$ there's a unique function 
+  \[f:\RR\to\RR\]
+  That satisfies the initial value problem
+  \[f'(t)=f(t)\]
+  \[f(0)=x\]
+  When $x=1$, the solution is called exponential, denoted $\exp(t)$ for $t\in\RR$.
+  \label{thm:expFunc}
+\end{theorem}
+
+\begin{exercise}
+  Show for all $s,t\in\RR$ that
+  \[\exp(s+t)=\exp(s)\exp(t)\]
+  \[\exp(-s)=\exp(s)^{-1}\]
+  Moreover, for all $n\geq 1$ the $n$th derivative $\exp^{(n)}(t)$ is continuous for all 
+  $t\in\RR$.
+\end{exercise}
+\begin{proof}[Solution]
+  Fix $s\in\RR$. Let $\tau:\RR\to\RR:t\mapsto \exp(s+t)$ and $\theta:\RR\to\RR:t\mapsto
+  \exp(s)\exp(t)$. Notice that both functions satisfy the IVP $f'(t)=f(t), f(0)=f(s)$. By
+  uniqueness, it follows that $\tau=\theta$ and so $\exp(s+t)=\exp(s)\exp(t)$.
+
+  Furthermore, we have $\exp(s)\exp(s)^{-1}=1$ and $exp(0)=1$. Note 
+  \[\exp(0)=\exp(s-s)=\exp(s)\exp(-s)=1\exp(s)\exp(s)^{-1}\]
+  The result follows.
+
+  Finally, note that $exp^{(1)}(t)=\exp(t)$ by definition and note that it's continuous
+  everywhere in $\RR$. Then it follows that if $\exp^{(n)}(t)$ is continuous (which it is,
+  and equals $\exp(t)$) then $\exp^{(n+1)}(t)$ is also continuous everywhere. By
+  induction this means that for all $n\geq 1$ $\exp^{(n)}(t)$ is continuous for all
+  $t\in\RR$.
+\end{proof}
+
+\begin{proposition}
+  The function $\exp$ is strictly increasing and a bijection $\RR\to\RR^{+}=(0,\infty)$.
+  \label{prop:expStricIncrease}
+\end{proposition}
+\begin{proof}
+  To show the function is strictly increasing it's enough to show $\exp'(t)>0$ for all
+  $t>0$, and for the rest of the real line it follows from the properties shown in the
+  above exercise. Let us proceed by contradiction. Define $S=\left\{ t>0 | \exp'(t)\leq 0
+  \right\}$ and assume it's nonempty. Let $t_0=\inf S$ and notice that by continuity of
+  $\exp$ it follows that $\exp'(t_0)\leq 0$, i.e. $t_0\in S$. Notice $t_0\neq 0$ since
+  $\exp(0)=1$ by definition. Hence, if $t\in(0,t_0)$ we have $\exp'(t)>0$. We then have
+  that $\exp$ is strictly increasing in $[0,t_0]$. However, this implies 
+  \[\exp(t_0)>\exp(0)=1\]
+  Since we have $\exp'(t_0)=\exp(t_0)>1$, we find a contradiction. Hence $S$ must be empty.
+  Notice that strictly increasing functions are injective since $a<b\implies
+  \exp(a)<\exp(b)$.
+
+  We then proceed to show that $\exp$ is surjective onto $(0,\infty)$. First notice that
+  $\exp(t)> 0$ for all $t\in RR$, since if $t\geq 0$ it follows from strictly increasing
+  that $\exp(t)\geq 1$, and if $t<0$, then $s=-t$ implies
+  $\exp(-s)=\exp(s)^{-1}=\frac{1}{\exp(s)}$ where $\exp(s)>0$ by the previous argument.
+  Furthermore, we claim that $\exp(t)>t\forall t\geq 0$. Let $f:[0,\infty) \to\RR:t\mapsto
+  \exp(t)-t$. Notice that $f'(t)=\exp(t)-1$ and $f'(0)=0$, and that $\exp(t_a)>1$ for any
+  $t_a>0$. Then it follows that $f'(t)>0$ for any $t>0$, so $f$ is strictly increasing and
+  non-negative since $f(0)=1>0$. Hence $\exp(t)>t$.
+
+  Let $a\in(1,\infty)$ and notice 
+  \[\exp(1)<a<\exp(a)\]
+  Then, by IVT we have $\exists t_a \in(1,a)$ s.t. $\exp(t_a)=a$. If $a\in(0,\infty)$ we
+  have $\frac{1}{a}>1$ so $\exists t_a\in(1,\frac{1}{a})$ s.t.
+  $\exp(t_a)=\frac{1}{a}$, and by the previous exercise it follows $\exp(-t_a)=a$, as
+  required. 
+\end{proof}
+
+
+\begin{exercise}
+  Let $z\in\CC$. Consider the equations 
+  \[\begin{cases}
+      f'(t)=zf(t)\\
+      f(0)=1
+    \end{cases}
+  \]
+  Show that $f(t)=\exp(\Re(z) t)\gamma (\Im(z)t)$ is a solution to the above IVT.
+\end{exercise}
+\begin{proof}[Solution]
+  Let $a=\Re z$ and $b=\Im z$ where $a,b\in\RR$ and $z=a+bi$. Then we apply the product
+  rule to find
+  \[f'(t)= (\exp(at))'\gamma(bt) + \exp(at)(\gamma(bt))'\]
+  Note that $(\exp(at))'=a\exp(at)$ and $(\gamma(bt))'=bi\gamma(bt)$ by the chain rule, so
+  we have  
+  \[f'(t)=a\exp(at)\gamma(bt) + ib\exp(at)\gamma(bt) = \exp(at)\gamma(bt)(a+bi)= f(t)z\]
+  Furthermore, $f(0)=1\cdot 1=1$, as required.
+\end{proof}
+
+\subsection{Inverse function theorem}
+\begin{theorem}[Inverse function theorem]
+  Let $I,J$ be open intervals. Suppose that 
+  \[f:I\to J\]
+  Is a bijective and continuous function that is differentiable at $c\in I$ and $f'(c)\neq
+  0$. Let $d=f(c)$. Then, $(f^{-1}(d))'$ exists and
+  \[(f^{-1}(d))'= \frac{1}{f'(c)}\]
+  \label{thm:inverseFun}
+\end{theorem}
+We will see some examples before we prove it.
+
+\begin{exercise}
+  Show that $\sin:(\frac{-\pi}{2}, \frac{\pi}{2})\to (-1,1)$ is a bijective map.
+\end{exercise}
+\begin{proof}[Solution]
+  Note that $\sin'(t)=\cos(t)>0$ for all $t\in(-\frac{\pi}{2},\frac{\pi}{2})$, hence the
+  function is strictly increasing on this interval, and hence injective ($a\neq b \implies
+  \sin(a)\neq \sin(b)$). Furthermore, note $\sin(-\frac{\pi}{2})=-1$,
+  $\sin(\frac{\pi}{2})=1$, hence by the IVT it follows that $\sin$ is surjective in this
+  interval.
+\end{proof}
+
+\begin{example}
+  Since $\sin:(\frac{-\pi}{2}, \frac{\pi}{2})\to (-1,1)$ is the setup required for Theorem
+  \ref{thm:inverseFun}, we have 
+  \[(\sin^{-1}(d))= \frac{1}{\sin'(\sin^{-1}(d))}=\frac{1}{\cos(\sin^{-1}(d))}\]
+  Notice that $\cos(t)>0$ for all $t\in(\frac{-\pi}{2}, \frac{\pi}{2})$, hence we can
+  write 
+  \[\cos(\sin^{-1}(d))=\sqrt{1-(\sin(\sin^{-1}(d)))^2}\]
+  Notice $\sin(\sin^{-1}(d))=d$, so 
+  \[(\sin^{-1}(d))= \frac{1}{\sqrt{1-d^2}}\]
+\end{example}
+
+\begin{exercise}
+  Show that for $f:(0,\infty)\to(0,\infty):t\to t^{1/n}$ for $n\geq 1$ is differentiable
+  for all $x\in(0,\infty)$ and 
+  \[f'(t)=\frac{1}{n}t^{\frac{1}{n}-1}\]
+\end{exercise}
+\begin{proof}[Solution]
+  Fix $n\geq 1$ as in the statement above. Let $g(x)=x^n$ and recall $g'(x)=nx^{n-1}$.
+  Notice that $f$ defined above satisfies $f(x)=g^{-1}(x)$ for all $x\in(0,\infty)$.
+  Furthermore, since $f$ is strictly increasing ($x>0,n\geq 1$) it follows that it's
+  injective, and it's surjective onto $(0,\infty)$ since it's unbounded above. Notice that
+  $g(c)=0 \iff c=0$ for any $n\geq 1$, so we can apply IFT. Let $c\in(0,\infty)$. Hence we
+  find that by the IFT,
+  \[f'(c)=(g^{-1}(c))'=\frac{1}{n(g^{-1}(c))^{n-1}}= \frac{1}{n(x^{\frac{1}{n}(n-1)})}\]
+  \[=\frac{1}{n} x^{\frac{1}{n}(1-n)}= \frac{1}{n}x^{\frac{1}{n}-1}\]
+  As required.  
+\end{proof}
+
+\begin{exercise}
+  Consider $\tan:(\frac{-\pi}{2},\frac{\pi}{2})\to\RR$.
+  \begin{enumerate}
+    \item Consider $f:[0,\frac{\pi}{2})\to\RR:x\to\sin(x)-x\cos(x)$. Show $f(x)>0$ for all
+      $x>0$
+    \item Show $\tan(-x)=-\tan(x)\forall x>0$.
+    \item Show $\tan$ is bijective [Hint: use part 1]
+    \item Let $\tan^{-1}:\RR\to (-\frac{\pi}{2}, \frac{\pi}{2})$ be the inverse of $\tan$
+      and find its derivative in $\RR$.
+    \end{enumerate}
+\end{exercise}
+\begin{proof}[Solution]
+  For the first part, note that $f(0)=0$ and $f'(x)$ exists, since it's a composition of
+  differentiable functions. Then, 
+  \[f'(x)=x\sin(x)\]
+  And note that $f'(0)=0$, $f(x)>0$ for $x>0$ in the domain. Hence it follows that $f$ is
+  strictly increasing in $x>0$, thust $f(x)>0$.
+
+  For the second part, first consider
+  \[\sin(-x)=
+  \frac{1}{2i}(\gamma(-x)-\overline{\gamma(-x)})=\frac{1}{2i}(\overline{\gamma(t)-\gamma(t)})=-\sin(x)\]
+  Next, consider
+  \[\cos(-x)=\frac{1}{2}(\gamma(-x)+\overline{\gamma(-x)})=
+    \frac{1}{2}(\overline{\gamma(x)}+\gamma(x)) = \cos(x)\]
+  Hence it follows that $\tan(-x)=-\tan(x)$.
+
+  To show bijectivity, first notice that we already shown the function is strictly
+  increasing in Exercise \ref{ex:tanStrictInc}, and this shows injectivity. For
+  surjectivity, notice that from Part 1 we have, for $x\in(0,\frac{\pi}{2})$,
+  \[\sin(x)-x\cos(x)>0 \iff \tan(x)>x\]
+  Then, since $\tan(0)=0$, by the IVT we have $\forall r\in[0,\infty)$, $r\in[0,\tan(r)]$.
+  For $r<0$ we have some $x\in(0,\pi/2)$ such that $\tan(x)=-r\implies \tan(-x)=r$, as
+  required.
+
+  Since we have that $\tan$ is bijective in the open interval (its domain) and
+  $\tan'(x)>0$ by Exercise \ref{ex:tanStrictInc}, we apply the inverse function theorem
+  \[(\tan^{-1})'(c)=\frac{1}{(\tan(\tan^{-1}(c)))'} = \frac{1}{1+ (\tan(\tan^{-1}(c)))^2}=
+    \frac{1}{1+c^2}\]
+  For $c\in\RR$ as required.
+\end{proof}
+
+
+\subsection{Inverse function theorem proof}
+Warning: We're using notation $g:=f^{-1}$ for this section.
+\begin{proposition}
+  Let $I,J$ be open intervals and $f:I\to J$ be a continuous bijection. Then $f^{-1}:J\to
+  I$ is also continuous.
+  \label{prop:bijInvBij}
+\end{proposition}
+\begin{proof}
+  Recall Exercise \ref{ex:bijImpliesMonot}, so $f$ must be strictly monotonic. Assume it's
+  strictly increasing (the argument for strictly decreasing follows the same proceadure).
+  Let $d\in J$ and let $c\in I$ s.t. $f(c)=d$.
+
+  Let $\eps>0$. For any $a<b\in I$ we have by IVT
+  \[f((a,b))= (f(a),f(b))\]
+  In particular, the image of a neighbourhood of $c, (c-\eps,c+\eps)$ will follow the same
+  mechanics, and in particular $d\in (f(c-\eps), f(c+\eps))$. Let $\delta>0$ s.t. 
+  \[(d-\delta, d+\delta) \subseteq (f(c-\eps), f(c+\eps))\]
+  Suppose $x\in J$ s.t. $|x-d|<\delta$, so $x\in (d-\delta,d+\delta)$ so $x\in (f(c-\eps),
+  f(c+\eps))$. By definition this means $\exists y\in (c-\eps, c+\eps)$ s.t. $f(y)=x$,
+  i.e. $g(x)=y$. Hence $g(x)\in (g(d)-\eps, g(d)+\eps)$, i.e. $|g(x)-g(d)|<\eps$.
+  Hence the function $g$ is also continuous.
+\end{proof}
+
+\begin{proof}[Inverse function theorem proof]
+  Let $f,I,J,c$ be as in the theorem. We know that $g$ is continuous by Proposition
+  \ref{prop:bijInvBij}. Let $a>0$ s.t. $(c-a,c+a)\subseteq I$. Define
+  \[\Delta:(c-a,c+a)\to\RR:
+    \begin{cases}
+      \frac{t-c}{f(t)-f(c)} & t\neq c \\
+      \frac{1}{f'(c)} & t=c
+    \end{cases}
+  \]
+  Note that $\Delta$ is continuous at $c$. Let $d=f(c)$ so $g(d)=c$. Note 
+  \[\lim_{s\to d} \Delta(g(s)) = \Delta(g(d))= \delta(c) = \frac{1}{f'(c)}\]
+  Since we know that the above is continuous since it's a composition of continuous
+  functions. Furthermore,
+  \[\Delta(g(s))= \frac{g(s)-c}{f(g(s))-f(c)}= \frac{g(s)-g(d)}{s-d}
+  =\frac{1}{f'(c)}\]
+  \[\implies \lim_{s\to d} \Delta(g(s))= \lim_{s\to d}\frac{g(s)-g(d)}{s-d} = g'(d) =
+  \frac{1}{f'(c)}\]
+  As required.
+\end{proof}
+
+\begin{exercise}
+  Define $\log:(0,\infty)\to\RR$ to be the inverse of the exponential function. Show that
+  \begin{enumerate}
+    \item For all $a,b>0$, $\log(a)+\log(b)=\log(ab)$
+    \item $(\log x)'= \frac{1}{x}$ for all $x>0$.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}[Solution]
+  For the first part let $b=\exp(a), d=\exp(c)$ for some $c,a\in\RR$. Then $b,d>0$ and
+  since $\log$ is the inverse it follows that $\log(b)=a, \log(d)=c$. Notice that 
+  \[bd=\exp(a)\exp(c)=\exp(a+c) \implies \log(bd)=a+c\]
+  As required.
+
+  For the second part, let $c\in (0,\infty)$. Then
+  \[(\log c)'=\frac{1}{(\exp\log c)'} = \frac{1}{\exp\log c} = \frac{1}{x}\]
+  As required.
+  
+\end{proof}

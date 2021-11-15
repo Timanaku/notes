@@ -1,1 +1,204 @@
-\section{Lecture 5 - 19 October 21}
+\section{Lecture 5 - 19 October 2021}
+On trigonometric functions
+\subsection{Definitions and Basic properties}
+Intuitively, the lecturer explains that we can define sine and cosine functions as
+follows. Imagine a particle going around the unit circle in the complex plane at unit
+speed, as illustrated in \ref{fig:unit-circle-complex}. Then observe that we can describe
+the motion by a function $\gamma:\RR\to\CC:t\mapsto a(t)+ib(t)$ which needs a certain
+criteria. First, the velocity and the position vectors must be orthogonal to each other
+and must be of unit magnitude, meaning 
+\[\langle \gamma',\gamma \rangle =0\]
+\[|\gamma'|=|\gamma|=1\]
+\[|\overline{\gamma'}\gamma|=1\]
+Observe that $\gamma, \gamma'$ must be of the form
+\[\gamma= a+ib\]
+\[\gamma'= c+id\]
+And hence we can find
+\[\overline{\gamma'}\gamma= (ac+bd) + (cb-ad)i\]
+Note that $\Re (\overline{\gamma'}\gamma)=\langle \gamma',\gamma\rangle =0$. Combining the
+above conditions require that 
+\[\overline{\gamma'}\gamma =\pm i\]
+\[\implies \gamma'\overline{\gamma'}\gamma = \pm i \gamma'\]
+\[\iff |\gamma'|^2\gamma=\gamma=\pm i \gamma'\]
+Let us pick $-i$ and multiply both sides by $i$, to get 
+\[i\gamma = \gamma'\]
+This is a first order differential equation.
+\begin{figure}[ht]
+    \centering
+    \incfig{unit-circle-complex}
+    \caption{Particle in unit circle in the complex plane. Work by the author.}
+    \label{fig:unit-circle-complex}
+\end{figure}
+
+What we will try to do over these lectures is to prove that this differential equation
+indeed parametrizes the particle moving around the complex unit circle at unit speed.
+
+\begin{theorem}
+    Let $z\in\CC$ and suppose that it's a point on the complex unit circle, i.e. $|z|=1$.
+    Then there exists a solution to the initial value problem 
+    \[\gamma'(t)=i\gamma(t)\]
+    \[\gamma(0)=z\]
+    Furthermore, if we have another solution $\eta:(a,b)\to\CC$ with $a<0<b$ that
+    satisfies the above IVP, then $\eta(t)=\gamma(t)$ for all $t\in(a,b)$.
+    \label{thm:the-unnamed}
+\end{theorem}
+We will not prove this theorem in the course, but we will use it throughout. We will
+denote $\gamma$ the solution to the above IVP with $z=1$, so $\gamma(0)=1$.
+
+\begin{proposition}
+    Let $s,t\in\RR$. The following holds,
+    \begin{enumerate}
+        \item $\gamma(s+t)=\gamma(s)\gamma(t)$
+        \item $\overline{\gamma(t)}=\gamma(-t)$
+        \item $|\gamma|=1$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Let us fix $s\in\RR$. Then we define $\eta:\RR\to\CC:t\mapsto\gamma(s)\gamma(t)$ and
+    $\theta:\RR\to\CC:t\mapsto\gamma(s+t)$. We then find
+    \[\eta'(t)= \gamma(s)\gamma'(t)=i\gamma(s)\gamma(t)=i\eta(t)\]
+    \[\theta'(t)= \gamma'(s+t) (s+t)'= i\gamma(s+t)=i\theta(t)\]
+    We also check $\eta(0)=\gamma(s), \theta(0)=\gamma(s)$. Hence both functions are
+    solutions to the initial value problem. By uniqueness, it implies that
+    $\eta(t)=\theta(t)$ for all $t\in\RR$. Then,
+    $\eta(t)=\gamma(s)\gamma(t)=\theta(t)=\gamma(s+t)$.
+
+    For the second part, let us define $\eta(t)=\overline{\gamma(-t)}$, and we get
+    $\eta'(t)=\overline{\gamma'(-t)}(-1)=\overline{i\gamma(t)}(-1)=(-i)(-1)\overline{\gamma(t)}=
+    i\overline{\gamma(t)}\implies \eta'(t)=i\eta(t)$. Hence by uniqueness
+    $\eta(t)=\gamma(t)$ for all $t\in\RR$. Hence $\overline{\gamma(-t)}=\gamma(t)$ which
+    by changing variables $s=-t$ it yields the required results.
+    
+    Finally for the end result, we have $|\gamma(t)|^2=\overline{\gamma(t)}\gamma(t)=
+    \gamma(-t)\gamma(t)=\gamma(t-t)=\gamma(0)=1$.
+\end{proof}
+
+
+\begin{definition}
+    Define the function $\cos,\sin:\RR\to\RR$ by
+    \[\cos(t)=\Re(\gamma(t))=\frac{\gamma(t)+\overline{\gamma(t)}}{2}\]
+    \[\sin(t)=\Im(\gamma(t))=\frac{\gamma(t)-\overline{\gamma(t)}}{2i}\]
+    \label{def:sincos}
+\end{definition}
+Remark that $|\gamma(t)|^2=\Re(\gamma)^2+\Im(\gamma)^2=1$ for all $t$.
+
+\begin{exercise}
+    Show that the following hold for any $s,t\in\RR$,
+    \begin{enumerate}
+        \item $\sin(s+t)= \sin(s)\cos(t)+\sin(t)\cos(s)$
+        \item $\cos(s+t)= \cos(s)\cos(t)-\sin(t)\sin(s)$
+    \end{enumerate}
+    And deduce $\sin'(t)=\cos(t), \cos'(t)=-\sin(t)$.
+    \label{ex:trigIdG}
+\end{exercise}
+
+\subsection{Roots of cosine}
+The goal is to find $\alpha>0$ s.t. $\gamma:[0,\alpha)\to\CC$ is a bijection onto the unit
+circle
+\[\TT = \left\{ z\in\CC \Big| |z|=1 \right\}\]
+And $\gamma(t+\alpha)=\gamma(t)$ for any $t\in\RR$.
+\begin{theorem} [Root cos]
+    There exists $t>0$ s.t. $\cos(t)=0$.
+    \label{thm:rootCos}
+\end{theorem}
+\begin{proof}
+    Suppose $\forall t>0, \cos(t)\neq 0$. Notice,
+\[\cos(0)=\frac{\gamma(0)+\bar{\gamma}(0)}{2}= 1>0\]
+Since $\cos(t)$ is differentible, it must be continuous. By the IVT we have
+$\cos(t)>0\forall t\geq0$. Since $\sin'(t)=\cos(t)$ by Exercise \ref{ex:trigIdG}, we have
+that $\sin:[0,\infty)\to\RR$ is strictly increasing. Fix $t_0>0$. Then
+$\sin(t_0)>\sin(0)=0$. Define $f:[0,\infty)\to\RR:t\mapsto
+\cos(t_0)-\cos(t+t_0)+\sin(t_0)(t_0-t)$. We claim $f(t)>0$ for all $t\geq 0$. It suffices
+to show that $f'(t)>0$ for all $t>0$ and $f(0)=0$. Observe
+\[f'(t)= -cos'(t+t_0) + \sin(t_0)(-1)\]
+\[=\sin(t+t_0) - \sin(t_0)>0\]
+Furthermore, $f(0)=\cos(t_0)-\cos(t_0)+\sin(t_0)t_0>0$.
+Then $\sin(t_0)(t-t_0)=\cos(t_0)-\cos(t-t_0)-f(t)$ for all $t>0$, so
+$\sin(t_0)(t-t_0)<\cos(t_0)-\cos(t+t_0)\leq 2$ since $|\cos(x)|\leq 1$.
+Therefore, $\sin(t_0)(t-t_0)\leq 2$ for all $t>0$. Take any $t>t_0+\frac{2}{\sin(t_0)}$.
+Then it follows that
+\[\sin(t_0)(t-t_0)>\sin(t_0)\frac{2}{\sin(t_2)} = 2\]
+A contradiction. Hence $\cos\alpha =0$ for some $\alpha>0$.
+\end{proof}
+
+\begin{exercise}
+    Let $f:\RR\to\RR$ be a continuous function s.t. $f(0)>0$. Assume that $S:=\left\{
+    t\in(0,\infty) \Big| f(t)=0 \right\}$ is nonempty. Show that there is a smallest
+    $t_0>0$ s.t. $f(t_0)=0$.
+    [Hint: Check that $t_0:=\inf(S)$ works].
+\end{exercise}
+\begin{proof}[Solution]
+    Let $t_0=\inf S$. Let $t_n\in S$ be such that $t_0\leq t_n \leq
+    t_0+\frac{1}{n}$, which by definition of infinum it's guaranteed to exist. This means
+    that $\lim_{n\to \infty} t_n=t_0$ and by the sequential characterisation of continuity
+    we must have $0=f(t_0)=\lim_{n\to\infty}f(t_n)$, hence $t_0\in S$. 
+\end{proof}
+
+\subsection{Definition of Pi}
+We aim to finish the proof that $\gamma$ is indeed periodic. We already showed that there
+exists at least one positive root for $\cos$.
+\begin{definition}
+    Define $\pi\in\RR$ to be the least positive number satisfying the following
+    \[\cos(\frac{pi}{2})=0\]
+    I.e. define  $t$ from Theorem \ref{thm:rootCos} as $\frac{pi}{2}$.
+    \label{def:pi}
+\end{definition}
+Notice that $\sin'(t)=\cos(t)>0$ for all $t\in(0,\pi/2)$. In particular, we have that
+$\sin(t)$ is strictly increasing for $t\in[0,\pi/2]$ and $\sin(\pi/2)>0$. Furthermore, we
+have $\sin(t)^2+\cos(t)^2=1$ for all $t$, so we have $\sin(\pi/2)=1$ since
+$\cos(\pi/2)=0$.
+
+\begin{exercise}
+    Use the additive identities of $\sin,\cos$ to show that 
+    \[\cos(t+\frac{\pi}{2})=-\sin(t)\]
+    \[\sin(t+\frac{\pi}{2})=\cos(t)\]
+    And hence deduce that $\gamma(t+2\pi)=\pi(t)$.
+\end{exercise}
+
+\begin{theorem}
+    The map $\gamma:[0,2\pi)\to\TT$ is a bijection
+    \label{<+label+>}
+\end{theorem}
+\begin{proof}
+    Start by showing that $\gamma(t)\neq 1$ if $t\in(0,2\pi)$. Assume $t\in (0,2\pi)$ s.t.
+    $\gamma(t)\in\RR$. Set $s=\frac{t}{4}\in(0,\frac{\pi}{2})$ and let
+    $x=\cos(s),y=\sin(s)$. Note that $x,y\in(0,1)$. Then
+    \[\gamma(t) = \gamma(4s)=\gamma(s)^4 = (x+yi)^4\]
+    \[=x^4-6x^2y^2+y^4 + 4xy(x^2-y^2)i\]
+    We assumed $\gamma(t)\in\RR$ so $4xy(x^2-y^2)=0 \iff x^2=y^2$. We also know
+    $x^2+y^2=0$. Hence we have the solution $x^2=y^2=1/2$. Then,
+    \[\gamma(t) = (1/2)^2 - \frac{6}{4} + \frac{1}{2^2} = -1 \neq 1\]
+    Then, if $0\leq a<b<2\pi$ we have 
+    \[\overline{\gamma(a)}\gamma(b) = \gamma(b-a) \neq 1\]
+    Since we know $b-a\in(0,2\pi)$. Furthermore we have $|\gamma(a)|=1$, and hence by
+    multiplying in the left by $\gamma(a)$ we find 
+    \[\gamma(a)\neq \gamma(b)\]
+    Therefore the map is injective. 
+
+    To prove surjectivity, we claim that every $z\in \TT$ there exists $t\in [0,2\pi)$
+    s.t. $\cos(t)+\sin(t)i=z$, for $\Re z=x, \Im z= y\geq 0$. Since we have
+    $\cos(0)=1,\cos(\pi/2)=0$ by IVT we have that $\exists t\in[0,\pi/2] : \cos(t)=x$.
+    Then by taking the trigonometric identity $\sin^2(t)+\cos^2(t)=1$ we get $\sin(t)=y$.
+\end{proof}
+\begin{exercise}
+    Define 
+    \[\tan:S=\RR\setminus \left\{ \frac{\pi}{2}+\pi n | n\in\ZZ \right\}\to \RR\]
+    \[:t\mapsto \frac{\sin(t)}{\cos(t)}\] Show that $\tan$ is differentiable and 
+    \[\tan'(t)=1+\tan^2(t)\]
+    Deduce that $\tan$ is strictly increasing on $(-\frac{\pi}{2}, \frac{\pi}{2})$.
+    \label{ex:tanStrictInc}
+\end{exercise}
+\begin{proof}
+    We claim that $\tan$ is differentiable in $S$. Notice that $\sin(t)$ and
+    $\frac{1}{\cos(t)}$ are differentiable in $S$, and so their products are also
+    differentiable. Furthermore, applying the quotient rule from a previous exercise, we
+    find
+    \[\left( \frac{\sin t}{\cos t} \right)'= \frac{(\sin t)' \cos t - (\cos
+    t)'\sin(t)}{\cos^2 t}\]
+    Recall that $(\sin t)'=\cos t, (\cos t)'=-\sin t$ we find
+    \[=\frac{\cos^2t+\sin^2t}{\cos^2t}\]
+    And the result follows, as required. Since $(\tan t)'\geq 1+0>0$, it follows that the
+    function is strictly increasing on $(-\pi/2,\pi/2)$ by Exercise \ref{ex:stricIncreasing}.
+\end{proof}
+
+

@@ -1,4 +1,4 @@
-\section{Lecture 2 - 30 Sep 21}
+\section{Lecture 2 - 30 Sep 2021}
 \subsection{Intermediate value theorem}
 \begin{theorem}[Intermediate value theorem]
   Let $f:[a,b]\to\RR$ be continuous and let $d\in\RR$ be such that
@@ -81,6 +81,28 @@ Prove that there exists $x\in\RR$ s.t. $42=x^{27}-52x^{15}+7x^2+2$.
   least one root. Another way of viewing this is that for sufficiently high $c\in\RR$ we
   will have $h(c)>0$, $h(-c)<0$. The result follows from the IVT.
 \end{proof}
+
+
+\begin{exercise}
+  A function $f:(a,b)\to\RR$ is said to be
+  \begin{enumerate}
+    \item Strictly increasing if for all $x<y$ in $(a,b)$, we have $f(x)<f(y)$
+    \item Strictly decreasing if for all $x<y$ in $(a,b)$, we have $f(x)>f(y)$
+    \item Strictly monotonic if it's strictly increasing or strictly decreasing. 
+  \end{enumerate}
+  Let $a<b$ and $c<d$. Show that if $f:(a,b)\to (c,d)$ is a continuous bijection, then $f$
+  is strictly monotonic.
+  \label{ex:bijImpliesMonot}
+\end{exercise}
+\begin{proof}[Solution]
+  Let $f$ be a bijective and continuous function. Assume $f$ is not monotonic. Then there
+  exist $x<y<z$ s.t. either $f(x)>f(y)$ and $f(y)<f(z)$, or $f(x)<f(y)$ and $f(y)>f(z)$.
+  Let us take the first case since the second proceeds analogously. We can either have
+  $f(x)>f(z)$ or $f(x)<f(z)$ (no equality because $f$ is injective). In the first case, we
+  see $f(y)<f(z)<f(x)$ and by the IVT we have $\exists a\in(x,y)$ s.t. $f(a)=f(z)$, a
+  contradiction to injectivity. In the second case, we see $f(x)<f(y)<f(z)$ so $\exists
+  b\in(x,z) : f(b)=f(y)$, a contradiction again. Hence $f$ is monotonic.
+\end{proof}<++>
 
 \subsection{Extreme value theorem}
 This theorem basically states that for a continuous function on a closed interval, that
@@ -174,3 +196,4 @@ function will always attain its maximum and minimum in that interval.
   \todo{Finish this. Note that $g_1(1/n)\neq g_2(1/n)$ for $n>2$}
 
 \end{proof}
+

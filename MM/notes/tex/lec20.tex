@@ -1,0 +1,60 @@
+\section{Lecture 20 - 3 Nov 2021}
+\begin{example}
+  Solve the BVP $L[y]=y''=f(x)$ with BCs $y(0)=y(\pi)=0$.
+\end{example}
+\begin{proof}
+  The associated eigenvalue problem is 
+  \[y''=-\lambda\omega(x)y\]
+  Which we've solved before for $x\in[0,L]$. Let $L=\pi$, so the solution yields
+  \[\lambda_n=n^2\]
+  With eigenfunctions
+  \[\phi_n = A_n\sin(nx)\]
+  Normalising the eigenfunction, ($\langle \phi_n,\phi_n \rangle =\int \phi_n\phi_n
+  \omega(x)dx=1$):
+  \[1=\int_{0}^{\pi} A_n^2 \sin^2(nx) dx = A_n^2\frac{\pi}{2} \]
+  So $A_n= \sqrt{\frac{2}{\pi}}$. We then write the solution as a sum of these functions
+  \[y(x)=\sum_{n=0}^{\infty} \alpha_n \sqrt{\frac{2}{\pi}}\sin(nx)\]
+  So substituting this back into our BVP,
+  \[L[y]=f(x) \implies f(x)= -\sum_{n=0}^{\infty} \alpha_n\lambda_n\phi_n \]
+  So we multiply both sides by $\phi_m$ for some $m\in\NN$, and integrate,
+  \[\int_{0}^{\pi} f(x)\phi_m dx = -\lambda_m \alpha_m\]
+  Given orthonormality of $\phi_n$. Since $\lambda_m=m^2$, it follows that the solution is
+  \[\alpha_m= -\frac{1}{m^2} \int_{0}^{\pi} f(x) \sqrt{\frac{2}{\pi}}\sin(mx) dx\]
+  For the case $f(x)=x$, the solution follows
+  \[\alpha_m= \sqrt{\frac{2}{\pi}} \left[ \frac{\pi}{m^3} (-1)^m \right]\]
+  The integration is left as an exercise to the reader (cos no one cares, it's just an
+  integration by parts). Hence we find the solution for the case $f(x)=x$ to be 
+  \[y(x)= \sum_{n=1}^{\infty} \frac{2(-1)^n}{n^3} \sin(nx)\]
+  Which is a Fourier series.
+\end{proof}
+
+\subsection{Green's Functions}
+Green's functions can be used to solve a wide family of PDEs, BVPs, and IVPs.
+\emph{Good} functions are functions that live in $\SCC^{\infty}$ and decay rapidly, so
+that the derivatives decay to $0$ faster than $|x|^{-n}$ as $x\to\infty$ for any $n>0$. An
+example of such a function is $e^{-x^2}$.
+
+We then can talk about generalised functions, of which the following are examples
+\begin{enumerate}
+  \item Heaviside $H$-function: For some \emph{good} function $F(x)$, we define $H$ as
+    $\int_{-\infty}^{\infty} H(x)F(x)dx = \int_{0}^{\infty} F(x) dx$.
+  \item Sign $\sgn$-function: For some \emph{good} function $F(x)$, we define $\sgn$ as
+    $\int_{-\infty}^{\infty} \sgn(x)F(x) dx = \int_{0}^{\infty}F(x)dx - \int_{-\infty}^0
+    F(x)dx$.
+  \item Dirac $\delta$-function: For some good function $F$, we define $\delta$ as
+    $\int_{-\infty}^{\infty} \delta(x-x_0) F(x) dx = F(x_0)$. This delta function can be
+    taken to be the limit of a sequence of normal distributions,
+    $\delta_n=\frac{1}{n\sqrt{\pi}}e^{-x^2/n}$, so $\delta=\lim_{n\to\infty}\delta_n$,
+    which when integrating over $\RR$ gives $1$.
+\end{enumerate}
+
+\subsection{Green's function method}
+Consider $L[y]=ay''+by'+cy$ and the equation $L[y]=f(x)$ with
+$a,b,c\in\SCC[\alpha,\beta]$.§
+\begin{definition}[Green's Function]
+  The Green's function $G(x, \xi)$ of $L$ is the unique solution to the problem
+  \[L[G]= \delta(x-\xi)\]
+  With the BCs $G(\alpha,\xi)=G(\beta,\xi)=0$.
+  \label{def:greenFun}
+\end{definition}
+

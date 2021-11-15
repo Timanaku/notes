@@ -1,0 +1,106 @@
+\section{Lecture 16 - 25 Oct 2021}
+\begin{example}
+  Solve the eigenvalue problem
+  \[y'' + \lambda y=0 ; \quad \lambda\in\RR\]
+  Subject to the boundary conditions,
+  \[y(0)=0; \quad y(L)=0\]
+\end{example}
+\begin{proof}
+  We consider cases where $\lambda=0, \lambda>0, \lambda<0$.
+
+  When $\lambda =0$, note that we have $y''=0$, so $y=A+Bx$. Since we have $y(0)=y(L)=0= A
+  = A+BL$ we have $A=B=0$.
+  Therefore, $\lambda=0$ is a trivial solution and so not an eigenvalue and there are no
+  nontrivial eigenfunctions.
+
+  When $\lambda>0$. Let $\lambda=\mu^2$, so $y''+\mu^2y=0 \implies y(x)=A\sin(\mu
+  x)+B\cos(\mu x)$. We check BVP,
+  \[0= y(0) = B\]
+  \[0=y(L)= A\sin (\mu L) + 0\]
+  Choose $A\neq 0$ because otherwise we have a trivial solution. We then have
+  $\mu=\frac{n\pi}{L}$ and it follows $\lambda=\frac{n^2\pi^2}{L^2}$ and 
+  \[y(x)= A_n \sin (\frac{n\pi}{L}x)\]
+  Note that these solutions describe normal modes of a string
+
+  When we have $\lambda<0$, we let $\lambda=-\mu^2$ for some $\mu>0$ and get the equation
+  $y''+\mu^2 y = 0 \implies y(x)=Ae^{\mu x} + Be^{-\mu x}$.
+  Recall that $\cosh(x)=\frac{1}{2}(e^{x}+ e^{-x})$ and
+  $\sinh(x)=\frac{1}{2}(e^{x}-e^{-x}).$ THen we have 
+  \[y(x)=\alpha\cosh(\mu x) + \beta\sinh(\mu x)\]
+  With the BCs giving 
+  \[\alpha=0\]
+  \[\beta\sinh(\mu L)=0\]
+  However, note that $\sinh(\mu x)=0 \iff \mu =0$ but we have $\mu>0$, so we have
+  $\beta=0$. There're no eigenvalues for the trivial solution $y=0$.
+
+  To conclude, the problem has eigenvalues $\lambda_n=\frac{n^2\pi^2}{L^2}, n\in\NN$ with
+  eigenfunctions $\phi_n(x)=A_n\sin(\frac{n\pi x}{L})$.
+\end{proof}
+
+\subsection{Inner product spaces}
+\begin{definition}
+  Let $f,g$ be vectors in a vector space $V$ over the reals. The inner product is a
+  apping $\langle  \cdot, \cdot\rangle :V\times V \to \RR $ with the following properties
+  \begin{enumerate}
+    \item $\langle f,g \rangle =\langle g,f \rangle$
+    \item $\langle cf, g \rangle = c\langle f,g \rangle $
+    \item $\langle f,g+h \rangle =\langle f,g \rangle +\langle f,h\rangle $
+    \item $\langle f,f \rangle \geq 0$ with $\langle f,f \rangle =0 \iff f=0$.
+  \end{enumerate}
+  \label{def:innerProd}
+\end{definition}
+Note that a vector space plus an inner product is called an \emph{inner product space}. An
+example of an inner product space is $V=\SCC[a,b]$, the space of continuous functions with
+the inner product
+\[\langle f,g \rangle =\int_a^b f(x)g(x) dx\]
+For any $f,g\in \SCC[a,b]$.
+
+\begin{example}
+  Show that $\langle f,g \rangle =\int_a^b f(x)g(x)\omega(x) dx$ is an inner product on
+  the space $\SCC[a,b]$ where $\omega(x)>0\forall x\in $
+\end{example}
+\begin{proof}[Solution]
+  \[\langle f,g \rangle =\int_a^bf(x)g(x)\omega(x) dx = \int_{a}^b
+  g(x)f(x)\omega(x)dx=\langle g,f \rangle \]
+
+  \[\langle cf,g \rangle =\int_a^bcf(x)g(x)\omega(x) dx = c\int_{a}^b
+  f(x)g(x)\omega(x)dx=c\langle g,f \rangle \]
+
+  \[\langle f,g+h \rangle =\int_a^bcf(x)(g(x)+h(x))\omega(x) dx = \]
+  \[= \int_a^bfg\omega dx + \int_a^b fh\omega dx = \langle f,g \rangle +\langle f,h
+  \rangle \]
+
+  \[\langle f,g \rangle = \int_a^b ff\omega dx = \int_a^b f^2 \omega dx \]
+  \[= \int_a^b f^2\omega dx \geq 0\]
+\end{proof}
+
+
+\begin{definition}
+  Let $f,g$ be vectors in an inner product space. Then they are orthogonal iff
+  \[\langle f,g \rangle =0\]
+  A set of orthogonal vectors are orthonormal if
+  \[\langle f_i,f_j \rangle = 
+    \begin{cases}
+        1 & i=j \\
+        0 & i\neq j
+    \end{cases}\]
+  The inner product of a vector with itself denotes the norm of a vector, $||f||^2$.
+  \label{def:orthonormalSet}
+\end{definition}
+
+\begin{lemma}
+  If $L$ is a Sturm-Liouville operator with free term $q$ and non-free term $p$, then for
+  all $u,v\in\SCC^2[a,b]$ we have 
+  \begin{enumerate}
+    \item $uL[v]-vL[u] = [p(x)(uv'-vu')]'$ (Lagrange Identity)
+    \item $\int_a^b uL[v]-vL[u] = p(x)(uv'-vu')\Big|^{x=b}_{x=a}$ (Green's Identity)
+  \end{enumerate}
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  By using the definition of $L$ (a Sturm-Liouville operator), we get 
+  \[uL[v]-vL[u] = u([pv']'+qv)'- v([pu']'+qu) = u[p'v'+pv'']-v[p'u'+pu'']\]
+  Since $uqv-vqu=0$. Rearranging
+  \[=p'[uv'-vu'] +p[uv''-u''v] = [p(uv'-vu')']'\]
+  Proving Lagrange's identity. Green's identity is obtained by integrating both sides.
+\end{proof}

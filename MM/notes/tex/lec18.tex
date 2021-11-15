@@ -1,0 +1,67 @@
+\section{Lecture 18 - 29 Oct 2021}
+Last time we showed that the eigenvalues of a Sturm-Liouville operators must be real.
+\begin{theorem}
+  If $\phi_n(x)$ and $\phi_m(x)$ are eigenfunctions of a Sturm-Liouville eigenvalue
+  problem, with eigenvalues $\lambda_n, \lambda_m$, with $\lambda_n\neq \lambda_m$. Then
+  the eigenfunctions are orthogonal, i.e. $\langle \phi_n, \phi_m \rangle$ over the
+  boundary conditions $[a,b]$ with respect to the weight function $\omega$
+\end{theorem}
+\begin{proof}
+  \[\hat{L}[\phi_n]=-\lambda_n\phi_n\omega\]
+  \[\hat{L}[\phi_m]=-\lambda_m\phi_m\omega\]
+  Where $\hat{L}$ is a Sturm-Liouville operator. We have
+  \[\phi_m\hat{L}[\phi_n]-\phi_n\hat{L}[\phi_m]=(\lambda_m-\lambda_n)\phi_n\phi_m\omega\]
+  By integrating the equation and using Green's identity with unmixed boundary conditions,
+  we get
+  \[0=\int_a^b (\lambda_m-\lambda_n)\phi_n\phi_m\omega dx\]
+  Since $\lambda_m\neq \lambda_n$, 
+  \[\int_a^b \phi_n\phi_m\omega dx=0\]
+  So $\langle \phi_n, \phi_m \rangle =0$. The eigenfunctions are orthogonal with respect
+  to the weight function $\omega$.
+\end{proof}
+
+\begin{example}
+  Solve the eigenvalue problem
+  \[L[y]=(xy')'+\frac{2}{x}y=-\lambda\omega(x)y\]
+  Subject to the unmixed BCs,
+  \[y'(1)=0, y'(2)=0\]
+\end{example}
+\begin{proof}
+  Note that we don't know the weight function, so we will choose it to obtain solutions.
+  \[L[y]=xy''+x'y' +\frac{2}{x}y=-\lambda\omega(x)y\]
+  Multiply by $x$,
+  \[L[y]=x^2y''+xy' +2y=-\lambda\omega(x)x y\]
+  \[L[y]=x^2y''+xy' + (2+\lambda\omega(x)x )y=0\]
+  Notice that if $\omega(x)=\frac{1}{x}$, we get an equation of Euler type,
+  \[L[y]=x^2y''+xy' + (2+\lambda )y=0\]
+  Look for solutions $y=x^r$,
+  \[L[y]=x^2(r(r-1)x^{r-2})+x(rx^{r-1}) + (2+\lambda )x^{r}=0\]
+  \[L[y]=x^2(r(r-1)x^{r-2})+x(rx^{r-1}) + (2+\lambda )x^{r}=0\]
+  \[L[y]=r^2+(2+\lambda)=0 \implies r^2=-(\lambda+2)\]
+  For $\lambda+2<0$ we get a real value for $r$. The solution is trivial, hence
+  $\lambda$ isn't an eigenvalue (details omitted but the boundary conditions will force
+  the solution to be trivial). For $\lambda+r\geq 0$, we get the general solution
+  \[y(x)=A\cos(\sqrt{\lambda+2}\log |x|)+B\sin(\sqrt{\lambda+2})\log|x|\]
+  To compute the BCs we differentiate $y$ to get
+  \[y'(x)=(-A\sin(\sqrt{\lambda+2}\log |x|) \frac{\sqrt{\lambda+2}}{x} ) +
+  (B\cos(\sqrt{\lambda+2}\log |x|) \frac{\sqrt{\lambda+2}}{x})\]
+  \[y'(1)= B \cos (\sqrt{\lambda+2} 0) \frac{\sqrt{\lambda+2}}{1})\implies B=0\]
+  For $y'(2)=0$ to yield non-trivial solution we need
+  \[\sqrt{\lambda+2}\log 2=n\pi\]
+  \[\implies \sqrt{\lambda+2}=\frac{n\pi}{\log 2}\]
+  Hence,
+  \[y(x)=\cos(\frac{n\pi}{\log 2}\log x), \quad x\in[1,2]\]
+  With eigenvalue,
+  \[\lambda_n = \left( \frac{n\pi}{\log 2} \right)^2-2\]
+\end{proof}
+
+ Note that $\lambda_n$ are real, countable, and ordered. So checking orthogonality, wrt
+ $\omega(x)=\frac{1}{x}$.
+ \[\langle y_n,y_n \rangle =\int_1^2 \cos(\frac{n\pi}{\log 2}\log x)\cos(\frac{m\pi}{\log
+ 2}\log x)\frac{1}{x} dx\]
+ Change of  variable $u=\frac{\pi \log x}{\log 2}$,
+ \[\langle y_n,y_n \rangle =\int_0^{\pi} \cos(nu)\cos(mu)du\]
+ \[\implies \langle y_n, y_m \rangle =\frac{\log 2}{\pi}\delta_{n,m}\]
+ Where $\delta_{n,m}=0$ for $n\neq m$ and $\delta_{n,m}=1$ for $n=m$. Therefore, $y_n,
+ y_m$ are orthogonal.
+

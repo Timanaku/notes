@@ -1,0 +1,91 @@
+\section{Lecture 19 - 1 Nov 2021}
+\subsection{The weight function}
+In the last example, where we were solving the eigenfunction problem
+$L[y]=(xy')'+\frac{2}{x}y=-\lambda\omega(x)y$, the weight function caused a lot of
+confusion. In our example, we were given an arbitrary $\omega$ function but we chose
+$\omega=\frac{1}{x}$ to make the problem easier. However, one may think that choosing
+$\frac{2}{x}$ would give a different result, but the Lecturer argues that what changes
+is just a scaling of the eigenvalue.
+
+The following is an attempt of the author to answer to the question where does the weight
+funciton in the Sturm-Liouville eigenfunction problem come from. 
+\todo{Go to office hours or consult somewhere else, check this is true.}
+Starting from the definition, the eigenfunction problem is set as $L[y]=-\lambda y$
+(see Definition \ref{def:eigenFun}). We have by Theorem \ref{thm:anyLinAdj} that any
+operator of the form $ay''+by'+cy=-\lambda y$ for functions $a,b,c\in \SCC^2[a,b]$,
+can be written in self-adjoint form (or Sturm-Liouville operator by Definition
+\ref{def:sturmLiouvilleOp}),
+\[(py')'+qy=H\]
+With 
+\[p(x)=\exp{\int\frac{b(x)}{a(x)}dx}\]
+\[q(x)=p(x)\frac{c(x)}{a(x)}\]
+\[H(x)=p(x)\frac{-\lambda y}{a(x)}\]
+Which yields an eigenfunction problem of the form 
+\[(py')'+qy=-\lambda \omega(x) y\]
+With $\omega(x)=\frac{p(x)}{a(x)}$. This is where the weight function comes from. This
+weight function will vary with different boundary conditions. 
+
+\subsection{Eigenfunction expansion method}
+To solve the BVP
+\[L[y]=\frac{d}{dx}(p(x)\frac{d}{dx}y) + q(x) y = H(x)\]
+Where $H\in\SCC[a,b]$ and unmixed boundary conditions. We start by finding the
+eigenvalues $\lambda_1,\lambda_2,\cdots$ and the eigenfunctions $\phi_1,\phi_2,\cdots$ and
+an appropriate weight function $\omega(x)$ so as to make the problem as simple as
+possible. We then proceed to solve the problem
+\[\hat{L}[\phi_n]=-\lambda \omega(x) \phi_n\]
+Then assume that our solution $y(x)$ can be written as 
+\[y(x)=\sum_{n=1}^{\infty} \gamma_n \phi_n(x)\]
+
+Next, substitute this assumption into the equation we are interested in,
+\[H(x)= \sum_{n=1}^{\infty} \gamma_n \hat{L}[\phi_n]\]
+Since the operator is linear. Moreover, since $\hat{L}[\phi_n]=-\lambda_n\omega(x)\phi_n$,
+\[H(x)= \sum_{n=1}^{\infty} -\gamma_n\lambda_n\omega(x)\phi_n(x)\]
+Since the eigenfunctions are orthogonal, we can find $\gamma_n$. Multiply by $\phi_m$ for
+$m\neq n$ and integrate over boundaries,
+\[\int_a^b \phi_m(x)H(x)dx = -\sum_{n=1}^{\infty} \gamma_n\lambda_n
+\int_a^b\omega(x)\phi_m\phi_n dx\]
+Since $\int_a^b \omega(x)\phi_m\phi_n dx=0$ for $n\neq m$ we get 
+\[\int_a^b \phi_m(x)H(x)dx = -\gamma_m\lambda_m
+\int_a^b\omega(x)\phi_m\phi_m dx\]
+We then solve for $\gamma_m$,
+\[ \gamma_m = \frac{-\int_a^bH(x)\phi_m(x) dx}{\lambda_m\int_a^b\phi_m^2(x)\omega(x)dx}\]
+
+
+\begin{example}
+  Solve the BVP
+  \[L[y]=(xy')' + \frac{2}{x}y = \frac{1}{x}\]
+  At $x\in [1,2]$ and $y'(1)=0, y'(2)=0$.
+\end{example}
+\begin{proof}[Solution]
+  The equation is already in self adjoint form. We have already solved the associated
+  eigenvalue problem in the previous lecture. We chose the weight function
+  $\omega=\frac{1}{x}$. The eigenvalues $\lambda_n=-2+\left( \frac{n\pi}{\log 2}
+  \right)^2$ and the eigenfunctions
+  \[\phi_{n}= A_n\cos \left( \frac{n\pi}{\log 2} \log x \right)\]
+  It's useful to normalise the eigenfunctions so we choose $A_n$ s.t. the norm of $\phi_n$
+  is $1$, i.e. 
+  \[||\phi_n||=\int_1^2 \phi_n^2(x)\omega(x) dx = 1\]
+  It can be solved by change of variables and trigonometric identities. The solution is,
+  for $n\geq 1$,
+  \[1=A_n^2 \frac{\log 2}{2} \implies A_n= \sqrt{\frac{2}{\log 2}}\]
+  When $n=0$, we simply have 
+  \[A_0= \sqrt{\frac{1}{\log 2}}\]
+  Hence we have
+  \[\phi_0=\frac{1}{\log 2}\]
+  \[\phi_n = \frac{2}{\log 2} \cos\left( \frac{n\pi}{\log 2} \log x \right)\]
+  We now solve the BVP. We do this by expanding $y$ in terms of the eigenfunctions.
+  \[y(x) = \gamma_0 \frac{1}{\sqrt{\log 2}} + \sum_{n=1}^{\infty} \gamma_n
+  \sqrt{\frac{2}{\log 2}} \cos\left( \frac{n\pi}{\log 2}\log x \right)\]
+  Substituting back into the original equation we want to solve we find
+  \[\frac{1}{x} = \sum_{n=0}^{\infty}\gamma_n L[\phi_n] = -
+  \sum_{n=0}^{\infty}\gamma_n\lambda_n \phi_n(x)\omega(x) dx\]
+  Using orthogonality as above we have
+  \[\int_1^2 \frac{1}{x} \left( \sqrt{\frac{2}{\log 2}}\cos\left( \frac{m\pi}{\log 2}\log
+  x\right) \right)dx  = -\lambda_m\gamma_m\]
+  This integral evaluates to $0$ when $m\geq 1$. When $m=0$, we have 
+  \[\gamma_0=\frac{\sqrt{\log 2}}{2}\]
+  Since $\lambda_0=-2$.
+  Hence 
+  \[y(x)= \gamma_0 \frac{1}{\sqrt{\log 2}}= \frac{1}{2}\]
+  The solution to the BVP.
+\end{proof}

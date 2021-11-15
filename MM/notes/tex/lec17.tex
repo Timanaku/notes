@@ -1,0 +1,94 @@
+\section{Lecture 17 - 27 Oct 2021}
+\begin{definition}
+  A linear operator $L$ is adjoint on $\SCC[a,b]$ if
+  \[\langle u,L[v] \rangle =\langle \hat{L}[u],v \rangle \]
+  For all $u,v\in\SCC[a,b]$, where $\hat{L}$ is the adjoint operator of $L$.
+  \label{<+label+>}
+\end{definition}
+\begin{definition}
+  A linear operator $\hat{L}$ is self-adjoint on $\SCC[a,b]$ if 
+  \[\langle u,L[v] \rangle =\langle L[u], v \rangle \]
+  For all $u,v\in\SCC[a,b]$.
+  \label{<+label+>}
+\end{definition}
+
+\begin{example}
+  Find a condition for the Sturm-Liouville operator
+  \[\hat{L}=\frac{d}{dx}(p(x)\frac{d}{dx}) + q(x)\]
+  To be self-adjoint with respect to the inner product
+  \[\langle u,v \rangle =\int_a^b u(x)v(x)dx \]
+\end{example}
+\begin{proof}[Solution]
+  We have 
+  \[\langle u,L[v] \rangle -\langle L[u],v \rangle = \int_a^b uL[v]-L[u]v dx\]
+  Using Green's identity we have 
+  \[=\left[ p(x)(uv'-u'v) \right]_a^b =0\]
+  For this to be true, we require,
+  \[ p(b)(u(b)v'(b)-u'(b)v(b))- p(a)(u(a)v'(a)-u'(a)v(a))=0\]
+  Which is entirely set by boundary conditions. Hence the Sturm-Liouville operator is self
+  adjoint wrt $\langle  \rangle $ defined above depending on its initial conditions.
+
+  Recall that the \emph{unmixed boundary conditions} is a system of homogeneous equation which may be
+  written in matrix form as 
+  \[ A \alpha =
+    \begin{bmatrix}
+      u(a) & u'(a) \\
+      v(a) & v'(a) 
+    \end{bmatrix}
+    \begin{bmatrix}
+      \alpha_1\\
+      \alpha_2\\
+    \end{bmatrix} = 
+    \begin{bmatrix}
+      0\\0
+    \end{bmatrix}
+  \]
+  Which will have nontrivial solutions if and only if $\det A=0$. For the same matrix we
+  define the other boundary condition $\beta$ 
+  \[ A\beta=
+    \begin{bmatrix}
+      u(a) & u'(a) \\
+      v(a) & v'(a) 
+    \end{bmatrix}
+    \begin{bmatrix}
+      \beta_1\\
+      \beta_2\\
+    \end{bmatrix} =  0
+  \]
+  These two boundary conditions give 
+  \[=\left[ p(x)(uv'-u'v) \right]_a^b =0\]
+  Hence the $\hat{L}$ is self-adjoint wrt $\langle  \rangle$ for unmixed boundary
+  conditions.
+
+  For \emph{periodic BCs} if $p(a)=p(b)\neq 0$ the operator is also guaranteed to be
+  self-adjoint.
+\end{proof}
+
+\subsection{Orthogonality}
+\begin{remark}
+  We define the above inner product for a vector space over $\CC$ as 
+  \[\langle u,v \rangle =\int_a^b \overline{u(x)} v(x) dx\]
+  Which yields the identities
+  \[\overline{\langle u,v \rangle }=\langle v,u \rangle \]
+  \[\langle cf,g \rangle =\overline{c}\langle f,g \rangle \]
+\end{remark}
+\begin{theorem}
+  The eigenvalues of a Sturm-Liouville eigenvalue problem are real.
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Let $\phi_n$ be a solution of the eigenvalue problem associated with $\lambda_n$,
+  \[\hat{L}(\phi_n)=-\lambda_n\omega\phi_n\]
+  Where $\hat{L}$ is some Sturm-Liouville operator with functions $p,q$. The complex
+  conjugate of the equation is
+  \[\hat{L}(\overline{\phi_n})=-\overline{\lambda_n}\omega\overline{\phi_n}\]
+  We can then operatre on the above equations and get
+  \[\phi_n\hat{L}[\overline{\phi_n}]-\overline{\phi_n}\hat{L}[\phi_n]=(\overline{\lambda_n}-\lambda_n)w
+  \phi_n\overline{\phi_n}\]
+  By integrating both sides and using Green's identity we find, given unmixed boundary
+  conditions,
+  \[0=[p(x)(\phi_n'\overline{\phi_n})- \phi_n\overline{\phi_n}']_a^b =
+    (\overline{\lambda_n}-\lambda_n)\int_a^b w\phi_n\overline{\phi_n} dx\]
+    Since the integral is non-negative we must have
+    $\overline{\lambda_n}=\lambda_n$, hence $\lambda_n\in\RR$.
+\end{proof}

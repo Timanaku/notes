@@ -1,0 +1,192 @@
+\section{Lecture 7 - 26 Oct 2021}
+\subsection{Local Extrema, Rolle's Theorem}
+\begin{definition}
+  Fix $f:S\to\RR$. Let $c\in S$. Then 
+  \begin{enumerate}
+    \item $f$ has a local maxima in $c$ if there exists an interval $I\subset S$ around
+      $c$ s.t. if $x\in I\cap S$ then $f(x)\leq f(c)$.
+    \item $f$ has a local minima in $c$ if there exists an interval $I\subset S$ around
+      $c$ s.t. if $x\in I\cap S$ then $f(x)\geq f(c)$.
+    \item $f$ has a local extremum at $c$ if $f$ has either a local minima or local maxima
+      at $c$.
+  \end{enumerate}
+  \label{<+label+>}
+\end{definition}
+
+
+\begin{lemma}
+  Let $f:(a,b)\to\RR$ be differentiable at $c\in(a,b)$ and let $c$ be a local extremum for
+  $f$. Then $f'(c)=0$.
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  Let us proceed by contradiction and assume $c$ is a local maxima (without loss of
+  generality). Let $I=(s,t)$ containing $c$ s.t. $a<s<c<t<b$. If $x\in I$, then $f(x)\leq
+  f(c)$ and $f'(c)\neq 0$. Either $f'(c)>0$ or $f'(c)<0$. By definition, if $f'(c)>0$, for
+  $\eps=\frac{f'(c)}{2}>0$ there exists $\delta>0$ s.t. for $(c-\delta, c+\delta)\subseteq
+  I$ and $|x-c|<\delta$ we have
+  $\left|\frac{f(x)-f(c)}{x-c}-f'(c)\right|<\frac{f'(c)}{2}$. Notice that for $x\in
+  (c-\delta, c+\delta)$ we have the previous inequality,
+  \[-\frac{f(x)-f(c)}{x-c}+ f'(c) < \frac{f'(c)}{2}\]
+  \[ \iff \frac{f'(c)}{2} < \frac{f(x)-f(c)}{x-c}\]
+  Recall that $f(c)\geq f(x)$ since $c$ is a local maxima by assumption. Choose $x>c$ so
+  that $x-c>0$, and note that $\frac{f(x)-f(c)}{x-c} \leq 0$ but we had $f'(c)>0$ by
+  assumption, a contradiction. For $f'(c)$, the argument is analogous, with
+  $\eps=\frac{-f'(c)}{2}$.
+\end{proof}
+However, note that this statement is one-sided
+\begin{example}
+  Consider $f(x)=x^3$ and note that $f'(0)=0$. However, for any $x<0$, $f(x)<f(0)$ and for
+  any $x>0$, $f(x)>f(0)$ since $f$ is strictly increasing. 
+\end{example}
+
+\begin{theorem}[Rolle's Theorem]
+  Let $a<b$ and let $f:[a,b]\to\RR$ be a continuous s.t. $f$ is differentiable in $(a,b)$
+  and $f(a)=f(b)$. Then $\exists c\in (a,b)$ s.t. $f'(c)=0$.
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  By the Extreme Value Theorem (EVT) there are $u,v\in[a,b]$ s.t. 
+  \[f(u)\leq f'(x) \leq f(v) \quad \forall x\in [a,b]\]
+  Then by the above lemma, $f'(u)=0$. If $u\in (a,b)$ then $c=u$.
+  Similarly, we have $f'(v)=0$. If $v\in (a,b)$ then $c=v$. Otherwise, $u,v\in \left\{
+  a,b \right\}$. For this case, notice that EVT still applies so $f(u)\leq f(x)\leq f(v)$
+  and $f(a)=f(b)$, then $f(u)=f(x)=f(v)$ for all $x\in [a,b]$, i.e. $f$ is a constant
+  function and hence $f'(x)=0$ for all $x\in[a,b]$. 
+\end{proof}
+Note that the codomain of our function above is real, even though the statement itself
+doesn't use orderings at all. There're counterexamples to Rolle's theorem in
+complex-valued functions!
+\begin{example}
+  Take $\gamma:[0,2\pi]\to\CC:t\to \cos(t)+i\sin(t)$. By definition,
+  $|\gamma'(t)|=|i\gamma(t)| =1$ for all $t$ in the domain and $\gamma(0)=\gamma(2\pi)$.
+  Then it will never satisfy Rolle's Theorem.
+\end{example}
+
+\subsection{Mean Value Theorem}
+A generalisation of Rolle's Theorem.
+\begin{theorem}[Mean Value Theorem]
+  Let $a<b$. Let $f:[a,b]\to\RR$ be continuous and differentiable in $(a,b)$. Then there
+  exists $c\in(a,b)$ s.t. 
+  \[f'(c)= \frac{f(b)-f(a)}{b-a}\]
+  \[\left( f(b)=f(a)+f'(c)(b-a) \right)\]
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Let $g:[a,b]\to\RR:t\mapsto f(t)-kt$ for some $k\in\RR$, s.t. $g(a)=g(b)$.
+  \[f(a)-ka = f(b)-kb \iff k= \frac{f(b)-f(a)}{b-a}\]
+  By Rolle's Theorem, there is some $c\in(a,b)$ s.t. $g'(c)=0$. Note
+  \[g'(c)=f'(c)-k=0 \iff f'(c)=k=\frac{f(b)-f(a)}{b-a}\]
+\end{proof}
+
+\begin{example}
+  Let $f:[a,b]\to\RR$ be continuous and $f'(t)=0$ for all $t\in(a,b)$. Then we claim $f$
+  must be a constant function. 
+\end{example}
+\begin{proof}[Solution]
+   Assume $f$ is not constant. Then $\exists s<t$ s.t. $f(s)\neq f(t)$. By the Mean Value
+   Theorem (MVT), $\exists c\in(s,t)$ s.t. 
+   \[f'(c)=\frac{f(s)-f(t)}{s-t}\]
+   Then it follows that $f'(c)\neq 0$, a contradiction.
+\end{proof}
+
+
+\begin{exercise}
+  Let $f:[a,b]\to\RR$ be differentiable and $|f'(x)|\leq M$ for all $x\in[a,b]$. Show that
+  for all $x,y\in[a,b]$ we have 
+  \[|f(x)-f(y)|\leq M|x-y|\]
+  So $f$ is $M$-Lipschitz.
+\end{exercise}
+\begin{proof}[Solution]
+  Suppose there exist $x<y\in[a,b]$ s.t. $|f(x)-f(y)|>M|x-y|$. Then, by MVT there exists
+  $c\in (x,y)$ s.t. $f'(c)=\frac{f(y)-f(x)}{y-x}$, which implies $|f'(c)|>M$, a
+  contradiction.
+\end{proof}
+\subsection{Monotonicity}
+\begin{definition}
+  Say $f:S\to\RR$ is monotonically increasing if for all $x\leq y$ in $S$, we have
+  $f(x)\leq f(y)$.
+  Say $f:S\to\RR$ is monotonically decreasing if for all $x\leq y$ in $S$, we have
+  $f(x)\geq f(y)$.
+  \label{<+label+>}
+\end{definition}
+
+\begin{exercise}
+  Use the MVT to prove the Monotonicity Theorem.
+
+  Take $a<b$ and let $f:[a,b]\to\RR$ be continuous and differentiable in $(a,b)$. The
+  following hold
+  \begin{enumerate}
+    \item If $f'(x)=0$ for all $x\in(a,b)$, then $f$ is constant on $[a,b]$.
+    \item If $f'(x)\geq 0$ for all $x\in(a,b)$, then $f$ is monotonically increasing.
+    \item If $f'(x)\leq 0$ for all $x\in(a,b)$, then $f$ is monotonically decreasing.
+    \item If $f'(x)>0$ for all $x\in(a,b)$, then $f$ is strictly increasing.
+    \item If $f'(x)<0$ for all $x\in(a,b)$, then $f$ is strictly decreasing.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}[Solution]
+  Note that (1) is already done in the previous section. Note that (3) follows from (2) and (5) follows from
+  (4). Hence we prove only (2) and (4). 
+
+  To prove (2), let $f'(x)\geq 0$ for any $x\in (a,b)$ and assume there exists
+  $x<y\in[a,b]$ s.t. $f(x)>f(y)$. Then by MVT we have $f'(c)=\frac{f(y)-f(x)}{y-x}$ for
+  some $c\in(x,y)$. Note that $f'(c)<0$. This is a contradiction 
+
+  To prove (4), let $f'(x)>0$ for any $x\in(a,b)$ and assume there exists
+  $x<y\in[a,b]$ s.t. $f(x)\geq f(y)$. Then there exists $c\in (x,y)$ s.t.
+  $f'(c)=\frac{f(y)-f(x)}{y-x}$. Note that $f'(c)\leq 0$, a contradiction.
+\end{proof}
+
+\begin{exercise}
+  Show $\sin(x)\leq x$ for all $x\in [0,\infty)$.
+\end{exercise}
+\begin{proof}[Solution]
+  Let us define $f:[0,\infty)\to\RR:x\mapsto x-\sin(x)$. We claim $f$ is monotonically
+  increasing. Note $f'(x)=1-\cos(x)$ and since $|\cos(x)|\leq 1$, the result follows. 
+\end{proof}
+
+\begin{exercise}
+  Use induction on $n$ to show 
+  \[\exp x > \sum_{k=0}^{n}\frac{x^k}{k!}\]
+  For all $x>0$. Deduce that, for $e:=\exp 1$ for all $n\geq 1$, we have
+  \[e>\sum_{k=0}^n \frac{1}{k!} \]
+\end{exercise}
+\begin{proof}[Solution]
+  Note that for $n=0$, it follows that $exp(x)>0$, a true statement. Then, assume that
+  $\sum_{k=0}^n \frac{x^k}{k!}<\exp(x)$ for all $x>0$. Let us define the function
+  \[f:(0,\infty)\to\RR:x\mapsto \exp(x) \sum_{k=0}^{n+1} \frac{x^k}{k!}\]
+  We claim that $f$ is strictly increasing. We have 
+  \[f'(x)= \exp x - \sum_{k=0}^{n+1}\frac{x^{k-1}}{(k-1)!} = \exp x -
+  \sum_{k=0}^n\frac{x^k}{k!}\]
+  Hence by induction, for any $n\geq 0$ the claim above holds, and $f(x)>0$ for all $x>0$.
+\end{proof}
+
+
+\begin{exercise}
+  Find all integers $1\leq n < m$ s.t. 
+  \[n^m= m^n\]
+  In the pdf we end up showing that $2.5<e<3$.
+\end{exercise}
+\begin{proof}
+  Consider the function $f:(1,\infty)\to\RR: t\mapsto \frac{t}{\log t}$. First, observe
+  that 
+  \[f'(t)=\frac{1}{\log t}-\frac{1}{\log^2 t}\]
+  Hence $f'(t)>0 \iff t>\exp(1)=e$ and $f'(t)<0 \iff t<e$. Therefore we show that $f$ is,
+  by the monotonicity theorem, strictly decreasing on $(1,e]$ and strictly increasing on
+  $[e,\infty)$. This implies that $f(e)$ is a global minima, i.e. $f(x)>f(e)$ for any
+  $x\in (1,\infty)\setminus \left\{ e \right\}$.  
+
+  Next, we aim to find positive integers s.t. $m\log n = n\log m$. First, note that $n\neq
+  1$, since if that was the case, then $m\log n=0$ while $n\log m\neq 0$. Moreover, we
+  have that this equation implies that $f(n)=f(m)$, and by the previous argument this is
+  true if and only if $n<e<m$. We know $e<4$, so $n=2$ or $n=3$. Note that for $n=2$,
+  $m=4$ is the only solution. Next, assume $3<e$, so there exists a number $x>e$ s.t.
+  $f(x)=f(3)$. Notice that $x<4$ since otherwise $f(x)>f(4)=f(2)$, since $f$ is strictly
+  increasing after $e$, and $f(2)>f(3)$ since $f$ is strictly decreasing before $e$, hence
+  it would follows that $f(x)>f(3)$. Therefore, $3<e<x<4$. Hence $x$ cannot be an integer.
+  Therefore, the only solution is $n=2,m=4$.
+
+  Note that $n^m=m^n \iff n\log m = m\log n$, so the solution to the proposed problem
+  follows from the previous paragraph. 
+
+\end{proof}<++>

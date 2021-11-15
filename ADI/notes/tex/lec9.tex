@@ -1,0 +1,155 @@
+\section{Lecture 9 - 2 Nov 2021}
+\subsection{L'Hopital's Rule - Divergent functions}
+\begin{theorem}[L'Hopital's Rule]
+  Suppose that $f,g:(a,b]\to\RR$ are continuous and differentiable on $(a,b)$ and s.t.
+  $\lim_{x\to a^+} f(x)=\lim_{x\to a^+} g(x)=\infty$. If 
+  \[\lim_{x\to a^+} \frac{f'(x)}{g'(x)} =L\]
+  Then
+  \[\lim_{x\to a^+} \frac{f(x)}{g(x)} =L\]
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Let $\eps>0$. We claim that $|\frac{f(x)}{g(x)}-L|<\eps$ if $x\in (a,\delta)$ for some
+  $\delta>0$.
+
+  Let $\delta_1>0$ be s.t. 
+  \[ x\in (a,\delta_1) \implies \left| \frac{f'(x)}{g'(x)}- L\right| < \eps\]
+  By Cauchy's MVT, we have that there exists $c\in(x,\delta_1)$ s.t. 
+  \[\frac{f'(c)}{g'(c)}= \frac{f(x)-f(\delta_1)}{g(x)-g(\delta_1)}\]
+  Let $x\in (a,\delta_1)$, so 
+  \[\left| \frac{f(x)}{g(x)} -L\right| = \left|
+  \left(\frac{f(x)}{g(x)}-\frac{f(x)-f(\delta_1)}{g(x)-g(\delta_1)}\right) +
+  \left(\frac{f(x)-f(\delta_1)}{g(x)-g(\delta_1)} - L\right)\right| \]
+  By the triangle inequality we get
+  \[\leq \left|\frac{f(x)}{g(x)}-\frac{f(x)-f(\delta_1)}{g(x)-g(\delta_1)}\right| +
+  \left|\frac{f(x)-f(\delta_1)}{g(x)-g(\delta_1)} - L\right| \]
+  \[= \left|\frac{f(x)}{g(x)}-\frac{f(x)-f(\delta_1)}{g(x)-g(\delta_1)}\right| +
+  \left|\frac{f'(c)}{g'(c)} - L\right| \]
+  Since we have $c\in (x,\delta_1)$ it follows that $\left|\frac{f'(c)}{g'(c)} -
+  L\right|<\eps/3$, hence 
+  \[\left|\frac{f(x)}{g(x)}-\frac{f(x)-f(\delta_1)}{g(x)-g(\delta_1)}\right| +
+  \left|\frac{f'(c)}{g'(c)} - L\right|  <
+  \left|\frac{f(x)}{g(x)}-\frac{f(x)-f(\delta_1)}{g(x)-g(\delta_1)}\right| +
+  \frac{\eps}{3}\]
+  Notice that we can put the above subtraction in a common denominator to get
+  \[\left|\frac{f(x)}{g(x)}-\frac{f(x)-f(\delta_1)}{g(x)-g(\delta_1)}\right|= \left|
+    \frac{-f(x)g(\delta_1) + g(x)f(\delta_1)}{g(x)(g(x)-g(\delta_1))}
+  \right| = \left|
+  \frac{f(\delta_1)}{g(x)-g(\delta_1)} -
+  \frac{f(x)}{g(x)}\frac{g(\delta_1)}{g(x)-g(\delta_1)}
+  \right|\]
+  By triangle inequality we get 
+  \[\leq \frac{|f(\delta_1)|}{|g(x)-g(\delta_1)|} +
+  \frac{|f(x)g(\delta_1)|}{|g(x)(g(x)-g(\delta_1))}\]
+  Note that since $\lim_{x\to a^{+}} g(x)=\infty$, we have $\lim_{x\to
+  a^+}\frac{|f(\delta_1)|}{|g(x)-g(\delta_1)|}=0$, since $f(\delta_1), g(\delta_1)$ are
+  constants. Hence, let $0<\delta_2<\delta_1$ s.t. $x\in(a,\delta_2)\implies
+  \frac{|f(\delta_1)|}{|g(x)-g(\delta_1)|}<\eps/3$. So for $x\in(a,\delta_2)$ it follows
+  that 
+  \[\left| \frac{f(x)}{g(x)} -L\right| < \frac{|f(\delta_1)|}{|g(x)-g(\delta_1)|} +
+  \frac{|f(x)g(\delta_1)|}{|g(x)(g(x)-g(\delta_1))|} + \frac{\eps}{3}<
+  \frac{2\eps}{3} + \frac{|f(x)g(\delta_1)|}{|g(x)(g(x)-g(\delta_1))|}\]
+  For the last term, note that we can use Cauchy's MVT result to reduce the term by 
+  \[\frac{|f(x)g(\delta_1)|}{|g(x)(g(x)-g(\delta_1))|} =
+    \frac{|f(x)g(\delta_1)|}{|g(x)(g(x)-g(\delta_1))|}
+    \frac{|f(x)-f(\delta_1)|}{|f(x)-f(\delta_1)|}\]
+  \[= \frac{|f(x)-f(\delta_1)|}{|g(x)-g(\delta_1)|}
+  \frac{|f(x)|}{|f(x)-f(\delta_1)|}\frac{|g(\delta_1)|}{|g(x)|}\]
+  \[= \frac{|f'(c)|}{|g'(c)|}
+  \frac{1}{|1-\frac{f(\delta_1)}{f(x)}|}\frac{|g(\delta_1)|}{|g(x)|}\]
+  For some $c\in (a,\delta_1)$. Note that for the reverse triangle inequality, since we
+  have $|\frac{f'(c)}{f'(c)}| < |L|+\eps/3$, we can further reduce the expression to 
+  \[\leq (|L|+\eps/3)\frac{1}{|1-\frac{f(\delta_1)}{f(x)}|}\frac{|g(\delta_1)|}{|g(x)|}\]
+  Note that $\lim_{x\to a^+}\frac{1}{|1-\frac{f(\delta_1)}{f(x)}|} = 1$. Hence we can
+  choose $0<\delta_3<\delta_2$ s.t. for any $x\in(a,\delta_3)$ we have
+  $\frac{1}{|1-\frac{f(\delta_1)}{f(x)}|} < \frac{1}{|g(\delta_1)|(|L|+\eps/3)}$, which is
+  a valid $\eps$ since it doesn't add any extra degrees of freedom (note all non-epsilon
+  terms are constants).  Then, if $x\in(a,\delta_3)$ we have
+  \[\frac{|f(x)g(\delta_1)|}{|g(x)(g(x)-g(\delta_1))|} < \frac{1}{|g(x)|}\]
+  Hence, for $x\in(a,\delta_3)$, we have 
+  \[\left| \frac{f(x)}{g(x)}-L \right|< \frac{2\eps}{3} + \frac{1}{|g(x)|}\]
+  Since $\lim_{x\to a^+} g(x)=\infty$ it follows that $\lim_{x\to a^+}
+  \frac{1}{g(x)}= 0$, so let $0<\delta_4<\delta_3$ s.t. for $x\in(a,\delta_4)$ we have
+  $|\frac{1}{g(x)}|< \frac{\eps}{3}$. Therefore, for $x\in(a,\delta_4)$ it follows that 
+  \[\left| \frac{f(x)}{g(x)}-L \right| < \frac{2\eps}{3} + \frac{\eps}{3} < \eps\]
+  
+\end{proof}
+\begin{remark}
+  Similar L'Hopital's rule hold for $x\to\infty$ and $x\to a^-$.
+  \label{<+label+>}
+\end{remark}
+
+\begin{exercise}
+  Find limits
+  \[\lim_{x\to 0} x\log x\]
+  \[\lim_{x\to\infty} \frac{1}{x}\log x\]
+\end{exercise}
+\begin{proof}[Solution]
+  Note that $\lim_{x\to 0} x\log x =
+  \lim_{x\to\infty}\frac{1}{x}\log(\frac{1}{x})$ by last week's exercise. Then it follows
+  by the Theorem above that for $f(x)=\log\frac{1}{x}$ and $g(x)=x$,  we have if
+  $\lim_{x\to\infty} \frac{f'(x)}{g'(x)}= \lim_{x\to\infty}\frac{-1}{x} = 0$ then the
+  original limit converges to $0$. 
+
+  Similarly for $\lim_{x\to\infty} \frac{1}{x}\log x$, we find that $f(x)=\log x$ and
+  $g(x)=x$, so $\lim_{x\to \infty} \frac{f'(x)}{g'(x)} = \lim \frac{1}{x}  = 0$, and the
+  result follows by L'Hopital's rule, as required.
+\end{proof}
+\subsection{Taylor's Theorem}
+Recall that for the MVT, we have some function $f:[a,x]\to\RR$ that is continuous and
+differentiable in $(a,x)$, so there is some $c(x)\in(a,x)$ s.t. $f(x)=f(a)+
+f'(c(x))(x-a)$. We just changed the form of the expression but the MVT is essentially
+equivalent to this.
+\begin{theorem}[Taylor's Theorem]
+  Let $n\geq 1$ and let $f:[a,b]\to\RR$ is continuous and $k$-differentiable for all
+  $k<n$ on $[a,b]$ and $f^{(n-1)}$ is continuous on $(a,b)$. There exists $c\in(a,b)$ s.t. 
+  \[f(b) = \frac{f^{(n)}(c)}{n!}(b-a)^n + \sum_{k=0}^{n-1} \frac{f^{(k)}(a)}{k!}(b-a)^k\]
+  \label{thm:taylor}
+\end{theorem}
+\begin{proof}
+  Let $n$ be a natural number. Then, consider the following functions,
+  \[F:[a,b]\to\RR:x\mapsto \sum_{k=0}^n \frac{f^{(k)}}{k!} (b-x)^k\]
+  \[G:[a,b]\to\RR:x\mapsto \sum_{k=0}^n \frac{g^{(k)}}{k!} (b-x)^k\]
+  For $g(x)=(x-a)^{n+1}$. Note that $F'(x)= \sum_{k=0}^n \left[
+  \frac{f^{k+1}(x)}{k!}(b-k)^k - \frac{f^{k}(x)}{k!}k(b-k)^{k-1}\right]$, and note that
+  for each term in the sum, the positive term will cancel out with the negative term in
+  the following summation term, and the first negative term is $0$ (exercise for the
+  reader, it's not too hard), hence the expression reduces to
+  $F'(x)=\frac{f^{(n+1)}(x)}{n!}(b-x)^n$. With a similar proceadure (telescopic sums) we
+  it follows that $G'(X)=\frac{g^{(n+1)}(x)}{n!}(b-x)^n$. 
+
+  Next, we claim that $g^{(k)}(x)=\frac{(n+1)!}{(n+1-k)!}(x-a)^{n+1-k}$. Note that
+  $g^{(1)}(x)=(n+1)(n-a)^{n}$, so it follows the formula. To proceed by induction, assume
+  that $g^{(k)}(x)=\frac{(n+1)!}{(n+1-k)!}(x-a)^{n+1-k}$. Observe that 
+  \[g^{(k+1)}(x)=\frac{(n+1)! (n+1-k)}{(n+1-k)!}(x-a)^{n-k} =
+  \frac{(n+1)!}{(n+k)!}(x-a)^{n-k}\]
+  And observe that by letting $q=k-1$ it follows that
+  $g^{q}=\frac{(n+1)!}{(n+1-q)!}(x-a)^{n-q+1}$, which has the form that we started with. 
+  \todo{Check this. I'm not sure this is valid, since we're interested in what $k$
+  implies, not what other made up number implies.}
+  Hence $G'(x)= (n+1) (b-x)^n$. 
+
+  Note that $G(a)= \sum_{k=0}^n \frac{g^{(k)}(b)}{k!} (b-a)^k = 0$ since we have a term
+  $(a-a)^{n+1-k}=0$ in the expression $g^{(k)}(b)$. Furthermore, $G(b)= \sum_{k=0}^n
+  \frac{g^{(k)}(b)}{k!}(b-b)^{k}= (b-a)^{n+1}$. The reader is encouraged to check the
+  details. (The author has done it, but he cba to put it all). 
+
+  Note that by Cauchy's MVT, there exists $c\in(a,b)$ s.t. $\frac{F'(c)}{G'(c)}=
+  \frac{F(b)-F(a)}{G(b)-G(a)}$. Note that we have $F(b)= f(b)+ \sum_{k=1}^{n}
+  \frac{f^{(k)}(x)}{k!}0^k = f(b)$ and $F(a)=\sum_{k=0}^{n}\frac{f^{(k)}(b)}{k!}(b-a)^k$.
+  Hence by Cauchy's MVT, 
+  \[\frac{f^{(n+1)}(c)}{(n+1)!} = \frac{1}{(b-a)^{n+1} \left( f(b)-\sum_{k=0}^n
+  \frac{f^{(k)}(b)}{k!}(b-a)^k \right)}\]
+  Which shows that 
+  \[f(b) = \frac{(b-a)^{n+1}}{(n+1)!}f^{(n+1)}(c) + \sum_{k=0}^n
+  \frac{f^{(k)}(b)}{k!}(b-a)^k\]
+  As required.
+\end{proof}
+
+Note that for $f(x)=x^n$ for some $n\geq 1$, then applying Taylor's thm is kind of
+trivial. However, applying it to more interesting functions is usually helpful. For
+instance, for the exponential function, we find that $|e-\sum_{k=0}^{n}
+\frac{1}{k!}| < \frac{3}{(n+1)!}$ where $3$ comes from the fact that $e<3$ from last week's
+exercise. This relationship is useful because it let's us approximate $e$ to an arbitrary
+decimal. For $n+1=5$, we find that the sum up to $n=5$ gives us $e$ to two decimal places.
+Moreover, note $e:=\lim_{n\to\infty}\sum_{k=0}^n\frac{1}{k!}$.

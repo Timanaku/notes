@@ -1,0 +1,188 @@
+\section{Lecture 8 - 28 Oct 2021}
+\subsection{Cauchy's Mean Value Theorem, L'Hopital's Rule}
+\begin{theorem}[Cauchy's Mean Value Theorem]
+  Let $f,g:[a,b]\to\RR$ be continuous and differentiable on $(a,b)$. Assume $g'(x)\neq 0$
+  for all $x\in (a,b)$. There exists $c\in (a,b)$ s.t. 
+  \[\frac{f'(c)}{g'(c)}=\frac{f(b)-f(a)}{g(b)-g(a)}\]
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  First, note that by Rolle's theorem, if $g(a)=g(b)$ then $\exists c\in(a,b) :  g'(c)=0$,
+  and this contradicts the hypothesis above.  hence the RHS of the expression above is
+  well defined. Let $h:[a,b]\to\RR: t\mapsto f(t)-kg(t)$ and constrain to $h(a)=h(b)$ so 
+  \[f(a)-kg(a)=f(b)-kg(b) \iff k= \frac{f(b) - f(a)}{g(b)-g(a)}\]
+  By Rolle's Theorem in $h$, we have some $c\in(a,b) : h'(c)=0$, so 
+  \[h'(c)=0 \iff f'(c)=kg'(c) \iff \frac{f'(c)}{g'(c)}=k=\frac{f(b) - f(a)}{g(b)-g(a)}\]
+  As required.
+\end{proof}
+
+An application of the above theorem is L'Hopital's rule.
+\begin{theorem}[L'Hopital's Rule]
+  Let $a\leq c \leq b$. Suppose that $f,g:[a,b]\to\RR$ are continuous and differentiable
+  on $(a,b)\setminus\{c\}$ and s.t. 
+  \[f(c)=g(c)=0 \]
+  \[g'(x)\neq 0 \forall x\in (a,b)\setminus\{c\}\]
+  If there exists $L\in\RR$ s.t. 
+  \[\lim_{x\to c} \frac{f'(x)}{g'(x)}=L\]
+  Then 
+  \[\lim_{x\to c} \frac{f(x)}{g(c)}=L\]
+
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Suppose that $\lim_{x\to c}\frac{f'(x)}{g'(x)}=L$ and that $\lim_{x\to
+  c}\frac{f(x)}{g(x)}\neq L$. Notice that since $g'(x)\neq 0$ for $x\in
+  (a,b)\setminus\{c\}$, by Rolle's Thm on $[x,c]$ or $[c,x]$ for any $x$, if $g(x)= 0$
+  then $\exists y\in (x,c)$ or $(c,x)$ s.t. $g'(y)=0$, a contradiction to the hypothesis.
+  Hence we can know that $g(x)\neq 0$ for any $x\in (a,b)\setminus\{c\}$.
+
+  Hence our supposition yields that there exists $\eps>0$ s.t. for any $\delta>0$ there
+  exists $x(\delta)$ s.t. $|x(\delta)-c|<\delta$ but
+  $\left|\frac{f(x(\delta))}{g(x(\delta))} -L\right| \geq \eps$. Let us define a sequence
+  $x_n:=x(\frac{1}{n})$ and notice that since $|x_n-c|<\frac{1}{n}$ for any $n$, we have
+  $x_n\to c$. Since we don't know if $x_n>0$ or $x_n<0$, let us define the following
+  interval,
+  \[I_n := \begin{cases}
+      (c,x_n) & x_n>c \\
+      (x_n,c) & x_n<c
+    \end{cases}
+  \]
+  By Cauchy's MVT, there exists $c_n\in I_n$ s.t. 
+  \[ \frac{f'(c_n)}{g'(c_n)} = \frac{f(c) - f(x_n)}{g(c)-g(x_n)}\]
+  Since we have $f(c)=g(c)=0$, we have 
+  \[\frac{f'(c_n)}{g'(c_n)} =  \frac{f(x_n)}{g(x_n)}  \]
+  Since we know that $|c_n-c|\leq |x_n-c| <\frac{1}{n}$, it follows that $c_n\to c$.
+  Therefore, 
+  \[\lim_{n\to \infty}\frac{f'(c_n)}{g'(c_n)} =  \lim_{n\to \infty}\frac{f(x_n)}{g(x_n)} =
+  L\]
+  This is a contradiction, because for all $n\geq 1$ we had
+  $\left|\frac{f(x_n)}{g(x_n)}-L\right| \geq \eps$.
+\end{proof}
+
+\subsection{Infinite Limits}
+\begin{definition}
+  Let $f:S\to\RR$ and let $c\in\RR$. Then we say,
+  \begin{enumerate}
+    \item $f$ diverges to $\infty$ as $x$ tends to $c$, written as $\lim_{x\to
+      c}f(x)=\infty$ if, for all $M>0$ there exists $\delta(M)>0$ s.t. if $x\in S\land
+      0<|x-c|<\delta(M)$, then $f(x)>M$.
+
+    \item $f$ diverges to $-\infty$ as $x$ tends to $c$, written as $\lim_{x\to
+      c}f(x)=-\infty$ if, for all $M<0$ there exists $\delta(M)>0$ s.t. if $x\in S\land
+      0<|x-c|<\delta(M)$, then $f(x)<M$.
+  \end{enumerate}
+  \label{<+label+>}
+\end{definition}
+
+\begin{definition}
+  Let $f:(a,\infty)\to\CC$ be a function. Say that  $f$ converges to $L\in\CC$ as $x$
+  tends to $\infty$ as $\lim_{x\to\infty}f(x)=L$ if for any $\eps>0$, there exists
+  $M(\eps)>0$ s.t. if $x>M$ then $|f(x)-L|<\eps$.
+
+
+  Let $f:(-\infty,a)\to\CC$ be a function. Say that  $f$ converges to $L\in\CC$ as $x$
+  tends to $-\infty$ as $\lim_{x\to -\infty}f(x)=L$ if for any $\eps>0$, there exists
+  $M(\eps)<0$ s.t. if $x<M$ then $|f(x)-L|<\eps$.
+  \label{<+label+>}
+\end{definition}
+
+\begin{definition}
+  Let $f:(a,\infty)\to\RR$ be a function. Say that $f$ diverges as $x$ tends to $\infty$
+  if for any $M>0$ there exists $N(M)>0$ s.t. if $x>a\land x>N$ then $f(x)>M$.
+  \label{<+label+>}
+\end{definition}
+
+\begin{example}
+  Show that $\lim_{x\to 0}\log x = -\infty$.
+\end{example}
+\begin{proof}[Solution]
+  Let $M<0$. Let $\delta(M)=\exp M$. If $x\in(0,\delta(M))$ we want to show that $\log x <
+  M$. Note that $\log(x)<M \iff x< \exp M \iff x< \delta$.
+\end{proof}
+
+\begin{example}
+  Show that $\lim_{x\to \infty}\log x = \infty$.
+\end{example}
+\begin{proof}[Solution]
+  Let $M>0$. We want to find $N(M)>0$ s.t. if $x>N$ then $\log x >N$. Because $\exp, \log$
+  are strictly increasing, $\log x >M \iff x>\exp M$. Take $N=\exp M$, and the result
+  follows.
+\end{proof}
+
+\begin{exercise}
+  Let $f:\RR\to\CC$. The following are equivalent,
+  \begin{enumerate}
+    \item $\lim_{x\to \infty} f(x)$ exists 
+    \item $\lim_{x\to 0^+}f(1/x)$ exists
+    \item $\lim_{x\to 0^-} f(-1/x)$ exists
+    \item $\lim_{x\to -\infty} f(-x)$ exists.
+  \end{enumerate}
+  Show that if any of the above converge, then the limits are all equal.
+\end{exercise}
+\begin{proof}
+  We show that 1 implies 2, and so on until 4 implies 4. This will create an equivalence
+  chain, since any of the limits being $L$ will imply that all of the others are $L$ too. 
+
+  (1 $\implies$ 2) Let $L\in\CC$ be s.t. $\lim_{x\to \infty} f(x)=L$. We have that for any
+  $\eps>0$, we have some $M>0$ s.t. $\forall x>M$, $|f(x)-L|<\eps$. Let
+  $\delta=\frac{1}{M}$, so it follows that for any $x\in(0,\delta)$, we have
+  $\frac{1}{x}>M$, and this will imply $|f(\frac{1}{x})-L|<\eps$, as required.
+
+  (2 $\implies$ 3) Let $L\in\CC$ be s.t. $\lim_{x\to 0^{+}}f(1/x)=L$. We have that for any
+  $\eps>0$, we have some $\delta>0$ s.t. for any $x\in(0,\delta)$,
+  $|f(\frac{1}{x})-L|<\eps$. For any $-x\in (-\delta,0)$, since $x\in (0,\delta)$,we have
+  $|f(\frac{1}{-x})-L|<\eps$, as required.
+
+  (3 $\implies$ 4) Let $L\in\CC$ be s.t. $\lim_{x\to0^-}f(-1/x)=L$. We have that for any
+  $\eps>0$ we have some $\delta>0$ s.t. for any $x\in (-\delta, 0)$ we have
+  $|f(-1/x)-L|<\eps$. Consider $M=\frac{1}{-\delta}$, and so for any
+  $\frac{1}{x}<M$, since $x>-\delta$, it follows that
+  $|f(\frac{1}{\frac{1}{-x}})-L|<\delta$ so $|f(-x)-L|<\eps$, as required.
+
+  (4 $\implies$ 1) Let $L\in\CC$ be s.t. $\lim_{x\to -\infty} f(-x)=L$. We have that for
+  any $\eps>0$ we have some $M<0$ s.t. for any $x<M$, $|f(-x)-L|<\eps$. Then, it follows
+  that for any $-x>-M$, $|f(-(-x)-L|<\eps$ so $|f(x)-L|<\eps$, as required.
+\end{proof}
+
+
+\begin{exercise}
+  Prove the following L'Hopital's rule: Let $f,g:[a,\infty)\to\RR$ be continuous and
+  differentiable on $(a,\infty)$. Assume $\lim_{x\to\infty}f(x)=\lim_{x\to\infty}g(x)=0$
+  and $g'(x)\neq 0$ for any $x\in(a,\infty)$. If $L\in\RR$ s.t. 
+  \[\lim_{x\to \infty} \frac{f'(x)}{g'(x)}=L\]
+  Then
+  \[\lim_{x\to \infty} \frac{f(x)}{g(x)}=L\]
+\end{exercise}
+\begin{proof}
+  Consider the functions $F,G:[0,1/a]\to\RR$ s.t. 
+  \[F(x)= \begin{cases}
+      f(\frac{1}{x}) & x\neq 0\\
+      0 & x=0
+  \end{cases}\]
+  \[G(x)= \begin{cases}
+      g(\frac{1}{x}) & x\neq 0\\
+      0 & x=0
+  \end{cases}\]
+
+  Then note that 
+  \[\lim_{x\to\infty} \frac{f'(x)}{g'(x)} = \lim_{x\to\infty} \frac{F'(1/x)}{G'(1/x)} =
+  \lim_{x\to 0} \frac{F'(x)}{G'(x)}\]
+  Which are equivalent by the above exercise. Note that the last limit is well defined and
+  equal to the limit from the right since $F,G$ are not defined below $0$. Then it follow
+  by L'Hopital's that 
+  \[\lim_{x\to 0} \frac{F'(x)}{G'(x)} = \lim_{x\to 0} \frac{F(x)}{G(x)} = \lim_{x\to 0}
+  \frac{f(1/x)}{g(1/x)} = \lim_{x\to\infty} \frac{f(x)}{g(x)}\]
+  By the above exercise. Then we get the desired result.
+\end{proof}
+
+\begin{exercise}
+  For any $n\geq 1$ show that $\lim_{x\to\infty}\frac{x^n}{\exp x}=0$.
+\end{exercise}
+\begin{proof}
+  Note that for any $n=1$, we have that, since $\lim_{x\to \infty} \frac{1}{e^x}=0$ (since
+  $e^x$ is monotonically increasing and unbounded). Then it follows by L'Hopital's that
+  $\lim_{x\to\infty} \frac{x}{e^x}=0$. Let $n\geq 1$ and assume
+  $\lim_{x\to\infty}\frac{x^n}{e^x}=0$. We claim $\lim_{x\to\infty}\frac{x^{n+1}}{e^x}
+  =0$. Note that $\lim_{x\to\infty} \frac{(n+1)x^n}{e^x}= 0$ by assumption, so it follows
+  by L'Hopital's that $\lim_{x\to\infty}\frac{x^{n+1}}{e^x}=0$, as required.
+\end{proof}<++>
