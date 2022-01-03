@@ -1,0 +1,5 @@
+\begin{XTRdefinition}
+  A field $F$ is called algebraically closed if every $f\in F[X]$ with $\deg f>0$ has a
+  root in $F$.
+  \label{<+label+>}
+\end{XTRdefinition}

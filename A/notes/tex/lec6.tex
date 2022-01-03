@@ -16,11 +16,11 @@ defined (i.e. it preserves under addition of different representative of the sam
 
 Let us try to generalise this idea of reconstructing the parent structure from quotients,
 but to any group. Let $G$ be a group and $H$ a subgroup of $G$. We would like the set of
-left cosets of $H$ in $G$ to \emph{inherit} the group structure. We could try to define
-for $x,y\in G$, $xH yH=(xy)H$. We need to check that this is well defined, as above. Let
-$e,h\in H$ denote the identity element and some element of $H$, respectively. Let $y\in G$
-denote some element not in $H$. We want that $(eH)(yH)=yH = (hH)(yH)=(hy)H \iff
-y^{-1}hy\in H$. 
+left cosets of $H$ in $G$ to \emph{inherit} the group structure -- spoiler alert a
+homomorphism!. We could try to define for $x,y\in G$, $xH yH=(xy)H$ (observe the
+homomorphic structure). We need to check that this is well defined, as above. Let $e,h\in
+H$ denote the identity element and some element of $H$, respectively. Let $y\in G$ denote
+some element not in $H$. We want that $(eH)(yH)=yH = (hH)(yH)=(hy)H \iff y^{-1}hy\in H$. 
 
 Hence, a necessary and sufficient condition for multiplication of cosets
 to be well defined is that, for every $g\in G$ and $h\in H$ we get $ghg^{-1}\in H$.
@@ -89,3 +89,17 @@ have a method for creating a group structure out of the quotients of the group.
 \end{definition}
 Note that by the definition of normal subgroups, we have that normal subgroup's left
 cosets equal that subgroup's right cosets, since $gNg^{-1}=N\iff gN=Ng$.
+\begin{remark}
+  Neumann Groups and Geometry book gives a nice and direct view of how normal groups
+  naturally give raise to the \emph{group operation preservation} condition. Since for a
+  normal subgroup $N\trianglelefteq G$ we have for any $a,b$ it follows that $(Na)(Nb)$ is
+  again a coset (recall direct product of groups), since $(Na)(Nb)=N(aN)b=(NN)(ab)=N(ab)$,
+  making $G/N$ a group, the quotient group.
+\end{remark}
+
+\begin{remark}
+  Note that, as previously said, cosets partition the group, making a \emph{smaller set}
+  where the elements of those sets are collections of many group elements. However, the
+  fact that normal subgroups form quotient \emph{groups}, it makes this partion a group
+  itself. That's why it's so useful, it helps understanding the group, in a simpler light.
+\end{remark}
