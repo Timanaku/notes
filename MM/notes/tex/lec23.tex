@@ -1,0 +1,48 @@
+\section{Lecture 23 - 10 Nov 2021}
+\begin{example}
+  Solve the BVP
+  \[ -y''-y = f(x), \quad\quad y(0)=0, y(\pi/2)=1\]
+\end{example}
+\begin{proof}[Solution]
+  We solved this for Green's function in an earlier example. To find $y_p$ subject to the
+  nonhomogeneous ICs, we have that the solution to the homogeneous problem is $y_p=c_1\cos
+  x+ c_2\sin x$ with conditions $y_p(0)=c_1=0$and $y_p(\pi/2)=c_2=1$, hence $y_p=\sin x$.
+  The general solution is 
+  \[y(x)= \sin x + \cos x \int_0^x(\sin \xi)f(\xi) d\xi + \sin x \int_x^{\pi/2}
+  \cos(\xi)f(\xi) d\xi\]
+\end{proof}
+
+\subsection{Application of Green's functions to IVPs}
+\begin{example}
+  Consider the function $y:[\alpha,\infty)\to\RR$ that obeys the equation
+  $L[y]=f(t)$ subject to the ICs $y(\alpha)=y'(\alpha)=0$.
+\end{example}
+\begin{proof}[Solution]
+  We want to find $G$ s.t. $L[G]=\delta(t-\tau)$ so that for each $\tau$ the $G$ solves
+  $L[G]=0$ for all $t\neq \tau$.
+
+  First, we solve for $\alpha\leq t< \tau$. We have $L[G]=0$, with solution
+  $G(t;\tau)=A(\tau)y_1(t)+B(\tau)y_2(t)$, where $y_1,y_2$ are any basis functions to the
+  problem $L[y]=0$. The ICs get us 
+  \[ A(\tau)y_1(\alpha) + B(\tau)y_2(\alpha)=0\]
+  \[ A(\tau)y_1'(\alpha) + B(\tau)y_2'(\alpha)=0\]
+  Or in matrix form, $Mb=0$, where $M=(a_{ij})=(y_j^{(i)}(\alpha))$ and
+  $b=(A(\tau),B(\tau))$. Since $y_1,y_2$ are linearly independent by construction, the
+  Wronskian $W\neq 0$ and so $M$ is invertible, giving the trivial nullspace. Hence we
+  have $A(\tau)=B(\tau)=0$, so $G(t;\tau)=0$ for $t\in [\alpha,\tau)$.
+
+  For $t>\tau$, we also solve $L[G]=0$, with solution
+  $G(t;\tau)=C(\tau)y_1(t)+D(\tau)y_2(t)$. We now require to fulfill the continuity and
+  jump conditions (conditions to make $G$ an actual solution with the given properties),
+  \[C(\tau)y_1(\tau)+D(\tau)y_2(\tau)=0\]
+  \[C(\tau)y_1'(\tau)+D(\tau)y_2'(\tau)=\frac{1}{a(\tau)}\]
+  Where $a(\tau)$ is the coefficient of $y''$ in $L[y]=f$. These equations can be written,
+  as above, in matrix form, but this time we're looking for the target vector
+  $(0,1/a(\tau))$ rather than the nullspace. 
+  
+  With the above solution, we then use $G$ to build a solution to the IVP,
+  $y(t)=\int_{\alpha}^{\infty} G(t;\tau) f(\tau)d\tau = \int_{\alpha}^{\infty}
+  G(t;\tau)f(\tau) d\tau$. This demonstrates that the solution $y(t)$ depends only on the
+  function $g$ at earlier times than $\tau$, and no on the future time than $\tau$.
+
+\end{proof}

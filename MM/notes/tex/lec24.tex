@@ -1,0 +1,59 @@
+\section{Lecture 24 - 12 Nov 2021}
+\subsection{Another example of Green's functions applied to IVPs}
+\begin{example}
+  Solve the IVP $y''+y=f(t)$, with $y(0)=y'(0)=0$.
+\end{example}
+\begin{proof}[Solution]
+  Considering the Green's function$G(t;\tau)$, we have $L[G]=0$ for $0\leq t<\tau$, so
+  $G(t,\tau)=A(\tau)\cos(t)+B(t)\sin(t)$, with ICs $A(\tau)=B(\tau)=0$, hence $G(t)=0$.
+
+  On the other hand, for $\tau<t<\infty$, the same yields
+  $G(t;\tau)=C(\tau)\cos(t)+D(\tau)\sin(t)$, where continuity and jump conditions yield
+  \[C(\tau)\cos(\tau)+D(\tau)\sin(\tau)=0\]
+  \[-C(\tau)\sin(\tau)+D(\tau)\cos(\tau)=1\]
+  Putting it in matrix form we find rather easily that $C(\tau)=-\sin(\tau)$, and
+  $D(\tau)=\cos(\tau)$. Therefore we have 
+  \[ G(t;\tau) = 
+    \begin{cases}
+      0, & 0\leq t< \tau\\
+      -\sin(\tau)\cos(t) + \cos(\tau)\sin(t), & \tau< t< \infty
+    \end{cases}
+  \]
+  \[ G(t;\tau) = 
+    \begin{cases}
+      0, & 0\leq t< \tau\\
+      \sin(t-\tau), & \tau< t< \infty
+    \end{cases}
+  \]
+  So the most general solution is
+  \[y(t)=\int_0^t \sin(t-\tau)f(\tau) d\tau\]
+\end{proof}
+\subsection{First order PDE}
+ODEs contain 1 independent variable, whereas PDEs contain 2 or more independent variables.
+We will consider equations with dependent variable $u$ and independent variables $x,y$
+with partial derivatives $u_x,u_y$. 
+\begin{definition}
+  Let $x,y\in\RR$ be independent variables. Let $u\in\RR$ be a dependent variable on
+  $x,y$. A $n$th order PDE is an expresion of the form 
+  \[F(x,y,u,u_x,u_y, u_{xx},u_{xy},u_{yx}, u_{yy}, \cdots)=0\]
+  Where $u_{s_1s_2s_3\cdots s_n}$ (where $s_i\in \{x,y\}$) is the $n$th partial derivative
+  wrt $s_1,s_2,\cdots,s_n$.
+  \label{def:firstOrdPDE}
+\end{definition}
+In this section we will only care about first-order PDE. That is, expressions of the form
+$F(x,y,u,u_x,u_y)=0$.
+\subsection{Constant coefficient linear PDEs}
+Consider the \emph{constant coefficient PDE} $au_x +bu_y=0$ with $a^2+b^2>0$. Note that
+this is exactly the vector equation $\nabla u.b=0$ where $.$ is the vector product,
+$\nabla u=(u_x,u_y)$, and $b=(a,b)$ with $|b|>0$. This equation is really saying that the
+\emph{directional derivative} of $u$ in the direction $b$ is 0 -- that $u$ is constant in
+the direction of $b$. Lines in the direction of $b$ have the form $bx-ay=c$, for
+$c\in\RR$.
+\begin{definition}[Characteristic Lines]
+  Given a constant coefficients linear PDE of the form $\nabla u\cdot b=0$ for $\nabla
+  u\in\RR^2$ and $b=(a,b)\in\RR^2$, characteristic lines are lines in the direction of
+  $b$, i.e. lines $bx-ay=c$ for any $c\in\RR$. Along these lines, $u$ is constant.
+  \label{def:charLines}
+\end{definition}
+Following the above problem, we have that $u(x,y)=f(c)$ is the solution, since $u$ is
+constant along lines $c=bx-ay$. This can easily be shown.

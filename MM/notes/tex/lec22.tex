@@ -1,0 +1,64 @@
+\section{Lecture 22 - 8 Nov 2021}
+\begin{example}
+  Use Green's function to solve the BVP 
+  \[L[y]=-y''-y=f(x)\]
+  On the interval $[0,\frac{\pi}{2}]$ subject to 
+  \[y(0)=y(\pi/2)=0\]
+\end{example}
+\begin{proof}[Solution]
+  The Green's function satisfies 
+  \[-G''-G=\delta(x-\xi)\]
+  And $G(0,\xi)=G(\pi/2,\xi)=0$. For the case $\in [0,\xi)$ we have
+  $G(x,\xi)=A(\xi)\sin(x)+B(\xi)\cos(x)$, which reduces to $G=A(\xi)\sin(x)$ after
+  applying BC. For $x\in (\xi,\pi/2]$ we have the same solution
+  $G(x,\xi)=C(\xi)\sin(x)+D(\xi)\cos(x)$ with BC $G(\pi/2,\xi)=0$ yielding
+  $G(x,\xi)=D(\xi)\cos(x)$.
+
+  \emph{Continuity of $G$.} Requirement:
+  $\lim_{x\to\xi^-}G(x;\xi)=\lim_{x\to\xi^+}G(x;\xi)$, hence
+  $A(\xi)\sin(\xi)=D(\xi)\cos(\xi)$.
+
+  \emph{Jump condition. } We require 
+  \[\lim_{\eps\to 0^+}\int_{\xi-\eps}^{\xi+\eps} (-G''-G)dx = \lim_{\eps\to
+  0^+}\int_{\xi-\eps}^{\xi+\eps} \delta(x-\xi) dx = 1\]
+  \[\implies - G_x(\xi+\eps) + G_x(\xi-\eps) = 1\]
+  \[\implies D(\xi)\sin(\xi) + A(\xi)\cos(\xi) =1\]
+  \[\implies 
+    \begin{bmatrix}
+      A(\xi) \\
+      B(\xi)
+    \end{bmatrix} = 
+    \begin{bmatrix}
+      \sin(\xi) & \cos(\xi) \\
+      -\cos(\xi) & \sin(\xi) \\
+    \end{bmatrix}
+    \begin{bmatrix}
+      0\\
+      1
+    \end{bmatrix}=
+    \begin{bmatrix}
+      \cos \xi \\ 
+      \sin \xi
+    \end{bmatrix}
+  \]
+  Therefore, the Green's function is
+  \[G(x,\xi)= 
+    \begin{cases}
+      \cos\xi \sin x & 0\le x < \xi \\
+      \sin\xi \cos x & \xi\le x \le \pi/2
+    \end{cases}
+  \]
+
+  Therefore, the solution to the original problem is
+  \[y(x)=\int_{0}^{\pi/2} G(x,\xi)f(\xi) d\xi= \cos x \int_{0}^x \sin\xi f(\xi)d\xi +
+  \sin x \int_x^{\pi/2}\cos\xi f(\xi) d\xi\]
+\end{proof}
+
+\subsection{Inhomogeneous Boundary Conditions}
+To use Green's functions for inhomogeneous BCs we need to find a particular solution $y_p$
+to the homogenenous equation $L[y]=0$ subject to the inhomogeneous BCs. The general
+solution of $L[y]=f$ obeying the inhomogeneous BCs is then 
+\[y(x)=y_p(x) + \int_{\alpha}^{\beta} G(x,\xi) f(\xi) d\xi\]
+The Green's function $G$ satisfies $L[G]=\delta(x-\xi)$ subject to $G(\alpha,
+\xi)=G(\beta, \xi)=0$, which does not disturb the BCs of the original problem.
+

@@ -1,0 +1,100 @@
+\section{Lecture 21 - 5 Nov 2021}
+Consider $L[y]=ay''+by'+cy$. We are interested in solving $L[y]=f(x)$ with boundary
+conditions $y(\alpha)=y(\beta)=0$. The Green function $G(x,\xi)$ is the solution to
+$L[G]=\delta(x-\xi)$ with $G(\alpha,\xi)=G(\beta, \xi)=0$. It turns out that the
+solution to this problem can construct the solution to $L[y]=f$ by
+\[y= \int_{\alpha}^{\beta}G(x,\xi) f(\xi) d\xi\]
+Since we have that 
+\[L[y]=L[\int_{\alpha}^{\beta}G(x,\xi) f(\xi) d\xi]\]
+\[= \int_{\alpha}^{\beta}L[G(x,\xi)] f(\xi) d\xi\]
+\[= \int_{\alpha}^{\beta}\delta(x-\xi) f(\xi) d\xi= f(x)\]
+With boundary conditions $y(\alpha=\int_{\alpha}^{\beta}G(\alpha,\xi)f(\xi)d\xi =
+\int_{\alpha}^{\beta} 0 f(\xi)d\xi =0$ and similarly for $y(\beta)$. 
+\begin{remark}
+  Note that $G$ depends entierly in $L$, and not at all in $f$.
+\end{remark}
+\begin{remark}
+  Solving $L[y]=f$ is asking about the inverse of $L$, i.e. $y=L^{-1}[f]$. In fact, the
+  solution $y=\int_{\alpha}^{\beta} G(x,\xi), f(\xi) d\xi$ is exactly the inverse
+  operator. In other words, the Green function computes thd inverse operator.
+\end{remark}
+
+\subsection{Construction of the Green's function}
+Note that for $x\in [\alpha, \xi)\cup (\xi, \beta]$ we have $L[G]=0$.  Suppose that the
+set of fundamental solutions $\{y_1,y_2\}$ solve $L[G]=0$ for $[\alpha,\xi)$ and $(\xi,
+\beta]$, respectively. Note that we have $y_1(\alpha)=0$ and $y_2(\beta)=0$. Note that on
+$[\alpha,\xi)$, the Green function $G$ obeys $L[G]=0$ and $G(\alpha,\xi)=0$, and since
+$y_1$ is a fundamental solution, we must have $G(x,\xi)=A(\xi)y_1(x)$ for $x\in[\alpha,
+\xi)$ and similarly $G(x,\xi)=B(\xi)y_2(x)$ for $x\in (\xi,\beta]$. By construction the
+solution on $[\alpha,\beta]\setminus\{\xi\}$ will be a family of Green functions in terms
+of $A(\xi), B(\xi)$. We need to \emph{glue} together the solutions at $x=\xi$. We
+require $G$ to be continuous in the whole interval $[\alpha,\beta]$. To find this
+condition, we integrate over a neighbourhood of $\xi$, 
+\[\int_{\xi-\eps}^{\xi+\eps} [aG_{xx} bG_x cG] dx = \int_{\xi-\eps}^{\xi+\eps}
+\delta(x-\xi) dx=1.\]
+As $\eps\to 0$ we have
+\[ \int_{\xi-\eps}^{\xi+\eps} cG \to 0\]
+Since $G$ is continuous.
+\todo{Why tho. Do not continuous function behave otherwise? If the interval of
+integration goes to 0\ldots} 
+Moreover, since $G$ is continuous, $G_x$ is bounded and hence the second term also
+vanishes. Hence we have 
+\[\lim_{\eps\to 0} \int_{\xi-\eps}^{\xi+\eps} aG_{xx} dx =
+a[G_x(\xi-\eps)-G_x(\xi+\eps)] =1\]
+Hence we get a \emph{jump condition}
+\[G_x(\xi-\eps)-G_x(\xi+\eps)=\frac{1}{a(\xi)}\]
+I.e. the derivative must jump, a.k.a. must have a discontinuity of size
+$\frac{1}{a(\xi)}$. But we also require continuity of $G$, giving
+$G(\xi-\eps)=G(\xi+\eps)$. Hence we have conditions
+\[A(\xi)y_1(\xi) = B(\xi) y_2(\xi) \text{ (continuity), }\]
+\[-A(\xi)y'_1(\xi) + B(\xi) y'_2(\xi) = \frac{1}{a(\xi)} \text{ (jump condition). }\]
+Or in matrix form,
+\[
+  \begin{bmatrix}
+    y_1(\xi) & -y_2(\xi) \\
+    -y'_1(\xi) & y'_2(\xi) 
+  \end{bmatrix}
+  \begin{bmatrix}
+    A(\xi) \\
+    B(\xi) 
+  \end{bmatrix}=
+  \begin{bmatrix}
+    0 \\
+    \frac{1}{a(\xi)}
+  \end{bmatrix}
+\]
+Recall that for the solution to exist, we require the matrix to be invertible, i.e.
+$W(y_1,y_2)\neq 0$, which is guaranteed since $y_1$ and $y_2$ are linearly
+independent. Solving the system we get
+\[
+  \begin{bmatrix}
+    A(\xi) \\
+    B(\xi) 
+  \end{bmatrix}=
+  \frac{1}{a(\xi) W(\xi)}
+  \begin{bmatrix}
+    y_2(\xi) \\
+    y_1(\xi)
+  \end{bmatrix}
+\]
+
+Hence the solution $G(x;\xi)$ of $L[G]=\delta(x-\xi)$ obeying
+$G(\alpha,\xi)= G(\beta,\xi)=0$ is 
+\[G(x;\xi)=
+  \begin{cases}
+    \frac{y_1(x)y_2(\xi)}{a(\xi)W(\xi)} & \alpha\le x \le \xi \\ 
+    \frac{y_2(x)y_1(\xi)}{a(\xi)W(\xi)} & \xi\le x \le \beta
+  \end{cases}
+\]
+Hence the solution of $L[y]=f$ is
+\[y(x)=\int_{\alpha}^{\beta} G(x,\xi)f(\xi)d\xi \]
+\[= \int_{\alpha}^{x} \frac{y_2(x) y_1(\xi)}{a(\xi) W(\xi)} f(\xi)d\xi + \int_{x}^{\beta}
+\frac{y_1(x) y_2(\xi)}{a(\xi) W(\xi)} f(\xi)d\xi\]
+Note, I got confused when I first saw the expression: Why are use using $G_2$ for the
+first integral? Shouldn't we use $G_1$? The first set of limits are for $\xi$ to move
+between $\alpha$ and $x$, which is exactly $G_2$. The second set of limits work similarly.
+\begin{remark}
+  In Ex. sheet 6 we showed that when $L$ is self adjoint, then $W(x)=\frac{1}{a(x)}$. This
+  reduces the Green's function form by getting rid of the denominator.
+\end{remark}
+

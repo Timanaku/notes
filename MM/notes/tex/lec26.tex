@@ -1,0 +1,38 @@
+\section{Lecture 26 - 17 Nov 2021}
+\begin{example}
+  Solve $u_x-u_y+u+x-y+2=0$.
+\end{example}
+\begin{proof}[Solution]
+  As seen in the Definition \ref{def:methodOfCharaceristics} we need the specification
+  $a(x,y)\eta_x+b(x,y)\eta_y=0$, giving the characteristic equation $\frac{dy}{dx}=-1$,
+  which gives the characteristic curves $y=-x+C$ for some $C\in \RR$. That is, along these
+  characteristic curves, $\eta$ is constant: $\eta(x,y)=f(c)=f(x+y)$, for some
+  differentiable function $f$. Since we can choose what $f$ suits us best, we choose the
+  simples example, $\eta(x,y)=x+y$. As previously stated, we usually choose $\xi=x$ for
+  simplicity, which leads to the Jacobian $J=1$, and hence our invertible change of
+  variables are
+  \[\eta=x+y \implies y=\eta-\xi\]
+  \[\xi=x \implies x=\xi\]
+  By rewriting the PDE in terms of the new coordinates, we get
+  \[u_{\xi}+u+2\xi-\eta+2 =0\]
+  Which is an ODE in $\xi$. After using integrating factors we arrive to the solution
+  \[u(\xi,\eta)=-2\xi+\eta+A(\eta)e^{-
+  \xi}\]
+  For some function $A(\eta)$. Transforming back to the original coordinates, we get
+  \[u(x,y)=(y-x)+A(x+y)e^{-x}\]
+\end{proof}
+
+\subsection{Particular solutions}
+To find a particular solution with the above method, as in any method, we need to specify
+boundary conditions or initial conditions. These conditions are encapsulated in the term
+\emph{auxiliary conditions}. These auxiliary conditions are specified by a curve $\Gamma$,
+a curve that lies on the solution surface (for a $u(x,y)$, think about $\RR^3$, where the
+  xy-plane are the independent variables, and $u$ is the z-plane, specifying a scalar
+field -- where along the characteristic curves, the field is constant). 
+\begin{example}
+  Find the general solution of $xu_x+yu_y-u=0$ for $x>0$, and find the particular solution
+  subject to the condition $x=\cos\tau$, $y=-\sin\tau$, $u=1$.
+\end{example}
+\begin{proof}[Solution]
+  Again, we need new coordinates where $a\eta_x+b\eta_y=0$, where $a=x,b=y$.
+\end{proof}<++>

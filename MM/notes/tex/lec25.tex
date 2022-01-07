@@ -1,0 +1,71 @@
+\section{Lecture 25 - 15 Nov 2021}
+\begin{example}[Example of constant coefficients - Transport equation]
+  Find $u(t,x)$ given $u_t+cu_x=0$, for $c\in\RR$.
+\end{example}
+\begin{proof}[Solution]
+  We have that $b=(1,c)$. That is, for lines $x=ct+A$ for $A\in\RR$, $u(x,t)$ is constant,
+  or $u(x,t)=f(A)=f(x-ct)$.
+  NOTE: I got a little confused when I kept reading these solutions $u=f(A)$. However, it
+  makes sense when you think of $x,t$ varying s.t. $A$ is constant (moving along the
+  direction $b$): $u$ only changes when $A$ changes (non-parallel to the direction of
+  $b$).
+
+  Next, consider the initial conditions $u(0,x)=x$ for $x\in(0,1)$ and $u(0,x)=0$ for
+  $x\not\in(0,1)$. This gives that $f(x)=x$ for $x\in(0,1)$ and $0$ otherwise. The
+  solution follows
+  \[u(x,t)=
+    \begin{cases}
+      x-ct, & ct<x<ct+1\\
+      0, & x\not\in(ct,ct+1)
+    \end{cases}
+  \]
+  Observe that the solution is a line of gradient $1$ in interval of length $1$, starting
+  at $t$. As time passes, this line shifts to the right up to infinity.
+\end{proof}
+\subsection{Variable coefficient linear PDEs}
+A first order PDE in general may have variable coefficients.
+\begin{definition}
+  Let $x,y$ be independent variables and $u$ be a function of $x,y$. Let $a,b,c,d$ be
+  functions of $x,y$. A first order linear PDE is an expression of the form,
+  \[au_x+bu_y+cu=d\]
+  \label{def:firstOrdPDE}
+\end{definition}
+The following is a nice transition to variable coefficients from the previous section
+\begin{example}
+  Solve $u_x+yu_y =0$.
+\end{example}
+\begin{proof}[Solution]
+  $u$ is constant in the direction of the vector $b=(1,y)$. The curves on the $x-y$ plane
+  along which $u$ is constant have slope $y$: $\frac{dy}{dx}=y\implies y=Ce^x$. The
+  \emph{characteristic curves} have form $C=ye^{-x}$. These curves cover $\RR^2$ without
+  intersecting. Hence the solution $u(x,y)=f(C)=f(ye^{-x})$, for any differentiable
+  function $f$.
+\end{proof}
+\subsection{Methods of characteristics}
+\begin{definition}[Methods of characteristic]
+  Given a first order PDE as in Definition \ref{def:firstOrdPDE}, we solve them by
+  reducing it to a family of ODEs, which can be solved by ordinary methods. More
+  precisely, via an invertible transformation, we transform
+  \[a(x,y)u_x+b(x,y)u_y+c(x,y)u=d(x,y)\]
+  Into 
+  \[A(\xi,\eta)u_{\xi}+ C(\xi,\eta)u=D(\xi,\eta).\]
+  In other words, we need the Jacobian of the transformation, $J\neq 0, J\neq \infty$. By
+  substituting $u_x,u_y$ by $u_{\xi}, u_{\eta}$ using the chain rule, and rearranging, we
+  find
+  \[(a\xi_x+b\xi_y)u_{\xi} + (a\eta_x +b\eta_y)u_{\eta}+cu=d\]
+  To get to the desired form, we chose $(a,b)\nabla\eta =0$. Hence in our new variables,
+  we have characteristic lines (curves really) with gradient.
+  $\frac{dy}{dx}=\frac{b}{a}$.
+  \label{def:methodOfCharaceristics}
+\end{definition}
+\begin{remark}
+  $\eta$ is constant along the characteristic curves coming from the original equation.
+  However, we also need $\eta_y\neq 0$, otherwise $\eta_x=0$ to satisfy the previous
+  condition and so $J=0$. We usually take $\xi=x$, so that $J=\eta_y\neq 0$.
+\end{remark}
+
+Another way of explaining the methods of charactersitics as presented above is that it is
+a method for discovering characteristic curves along which the PDE is transformed into a
+family of ODEs.
+
+
