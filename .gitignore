@@ -5,6 +5,7 @@
 .DS_Store
 problems
 dist
+resources
 
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
