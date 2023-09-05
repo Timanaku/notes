@@ -1,0 +1,139 @@
+\section{Week 7 - 23 Feb 2022 - Intro to topological spaces}
+Note that there're not Week 6 notes because of strikes.
+\begin{definition}
+  Let $X$ be a set. A topology on $X$ is a collection $T$ of subsets of $X$,
+  called \emph{open sets}, satisfying three axioms,
+  \begin{enumerate}
+    \item The whole set and empty set are open, i.e. $X,\emptyset\in T$,
+    \item Arbitrary unions of open sets are open, i.e. for $U_i\in T$ for all
+      $i\in I$ we have $\cup_{i\in I} U_i\in T$ ($I$ is some indexing set,
+      finite or not),
+    \item Finite intersections of open sets are open, i.e. $U_1,\cdots, U_n\in T
+      \implies \cap_{i=1}^n U_i \in T$.
+  \end{enumerate}
+  A topological space $(X,T)$ is a set $X$ with a topology $T$ on $X$.
+  \label{def:topology}
+\end{definition}
+\begin{remark}
+  Like with metric spaces, we often say $X$ is a topological space, if it's
+  clear what topology we're using. On another hand, we usually say $U$ is open
+  in $X$, rather than saying $U\in T$.
+\end{remark}
+\begin{remark}
+  The third axiom for a topology is equivalent to saying that for any $U,V$ open
+  subsets of $X$, then $U\cap V$ is open in $X$. The axiom then follows by
+  induction.
+\end{remark}
+\begin{example}
+  Let $(X,d)$ be a metric space, and let $T_d$ be the collection of subsets of
+  $X$ open wrt $d$. Then $(X,T_d)$ is a topological space. Hence we get a
+  function $f:(X,d)\mapsto (X,T_d)$ from the set of metric spaces to the set of
+  topological spaces. This is 
+  \begin{enumerate}
+    \item Not injective: Topologically equivalent metrics induce the same
+      topology. For example, if $X=\RR^n$ then $T_{d_1}=T_{d_2}=T_{d_{\infty}}$,
+    \item Not surjective: We'll talk more about this later.
+  \end{enumerate}
+\end{example}
+\begin{definition}
+  A topological space $(X,T)$ is metrizable if $T=T_d$ for some metric $d$ on
+  $X$
+  \label{<+label+>}
+\end{definition}
+\begin{definition}
+  Let $X$ be a set. The discrete topology on $X$ is the topology in which every
+  subset of $X$ is open.
+  \label{<+label+>}
+\end{definition}
+\begin{exercise}
+  Show that the discrete topology on $X$ is metrizable.
+\end{exercise}
+\begin{proof}[Solution]
+  TODO. Hint: Show that it is a $T_d$ for $d$ the discrete metric.
+\end{proof}
+\begin{proposition}
+  Let $X$ be afinite set and $d$ any metric on $X$. Then $T_d$ is the discrete
+  topology.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Recall that any finite subset of a metric space is closed. Thus, since $X$ is
+  finite, all its subsets are closed, and so by taking complements, all its
+  subsets are open.
+\end{proof}
+\begin{remark}
+  Warning, a subset being open does not imply that the subset is closed.
+  \label{<+label+>}
+\end{remark}
+
+\begin{corollary}
+  On a finite set, the only metrizable topology is the discrete topology.
+  \label{<+label+>}
+\end{corollary}
+The discrete topology has as many open sets as possible.  At the other extreme,
+we have the following.
+\begin{definition}
+  Let $X$ be any set. The indiscrete topology on $X$ is the topology in which
+  the only open sets are $X$ and $\emptyset$.
+  \label{<+label+>}
+\end{definition}
+\begin{example}
+  Let $X=\{a,b\}$. The subsets of $X$ are $\emptyset, \{a\},\{b\},X$. Hence
+  there are $2^4=16$ possible collections of subsets. Any topology on $X$ must
+  include $\emptyset$ and $X$, leaving four possibilities: 
+  \[I_1=\{\emptyset, X\},\]
+  \[I_2=\{\emptyset, X, \{a\} \},\]
+  \[I_3=\{\emptyset, X, \{b\} \},\]
+  \[I_4=\{\emptyset, X,\{a\}, \{b\} \},\]
+  Where $I_1$ is the indiscrete and $I_4$ is the discrete topology. Observe that
+  $I_1,I_2,I_3$ because $X$ is a finite set and they are not discrete. Note
+  $I_2,I_3$ differ only by swapping $a$ by $b$, an example of a homeomorphism
+  (think of isomorphism) between $(X,T_2)$ and $(X,T_3)$. On the other hand,
+  $I_1,I_4$ are fundamentally different from $I_2,I_3$ and from each other,
+  since they have different cardinality.
+\end{example}
+Our next aim is to generalise the theory we developed for metric spaces to
+general topological spaces. We start with closed sets and then, most
+importantly, will define continuous functions between topological spaces.
+
+\subsection{Closed sets in topological spaces}
+\begin{definition}
+  Let $X$ be a topological space. A subset $V\subseteq X$ is closed if its complement
+  $X\setminus V$ is open (i.e. $X\setminus V\in T$).
+  \label{<+label+>}
+\end{definition}
+We may restate the axioms of a topological space in terms of closed sets using
+de Morgan's laws.
+\begin{proposition}
+  Let $X$ be a set, and let $V$ be a collection of subsets of $X$. Then $V$ is
+  the collection of closed sets for some topology $T$ on $X$ (necessarily
+  $T=\{X\setminus v: v\in V\}$) if and only if
+  \begin{enumerate}
+    \item $X,\emptyset \in V$,
+    \item $v_i\in V$ for all $i\in I \implies \cap v_i\in V$
+    \item $v_1,\dots, v_n\in V \implies \cup_{i=1}^n v_i\in V$.
+  \end{enumerate}
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Exercise. Hint: Use de Morgan's laws.
+\end{proof}
+
+Thus we can specify a topology by saying what its closed sets are, checking that these
+sets satisfy conditions 1-3 of this proposition.
+
+\begin{definition}
+  Let $X$ be a set. The cofinite topology on $X$ is the topology in which the
+  closed sets are $X$ itself and the finite subsets of $X$. 
+  \label{<+label+>}
+\end{definition}
+ Let's check that this is a topology: 
+ \begin{enumerate}
+   \item $X$ is closed by definition, and $\emptyset$ is closed (it is finite),
+   \item Let $v_i,i\in I$ be closed. Then either $v_i =X$ for all $i\in I$, so
+     finite intersections is just $X$, closed, or $v_i$ is finite for some $i\in
+     I$, so finite interesctions is also closed.
+   \item Let $v_1,.., v_n$ be closed. Then either $v_j=X$ for some $1\leq j\leq
+     n$, so union for all $j$ is closed, or $v_i$ is finite for some $1\leq
+     j\leq n$, so unions is also finite.
+ \end{enumerate}

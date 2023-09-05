@@ -1,0 +1,124 @@
+\section{Week 5 - 11 Feb 2022 - Open and Closed Sets - Sequences}
+Consider Proposition \ref{prop:equivalenceAndOpenSets}.
+\begin{definition}
+  We say $d,d'$ are topologically equivalent if for $U\subset X$,
+  \[ U \text{ is open in } (X,d) \iff U \text{ is open in } (X,d').\]
+  \label{<+label+>}
+\end{definition}
+\begin{corollary}
+  If $d,d'$ are strongly equivalent, then they are topologically transitive
+  \label{cor:strongEquivalenceTopologicallyTransitive}
+\end{corollary}
+\begin{exercise}
+  Show that the converse of Corollary
+  \ref{cor:strongEquivalenceTopologicallyTransitive} is false.
+\end{exercise}
+
+\subsection{Closed sets and sequences}
+\begin{definition}
+  Let $(X,d)$ be a matric space, and $U\subset X$. Then the closure
+  $\overline{U}$ of $U$ is defined by
+  \[\overline{U}:= \{ a\in X: x_n\to a \text{for some sequence }(x_n) \in U \}.\]
+  \label{<+label+>}
+\end{definition}
+Note that $U\subset \overline{U}$, since for $x\in U$, $x,x,x,\cdots$ convergees
+to $x$.
+\begin{example}
+  Let $U=(0,1)$ in $\RR$ with the usual metric. Then $\overline{U}=[0,1]$, since
+  $(1/(n+1)$ and $1-1/(n+1)$ are sequences in $U$, converging to $0, 1$,
+    respectively. If $(x_n)$ is any convergent sequence in $U$, then $0<x_n<1$
+    for all $n\in\NN$. Thus $0\leq \lim_{n\to\infty} x_n\leq 1$. For example let
+  $a>1$, and let $\eps=(a-1)/2$. Then $B_{\RR}(a,\eps)\cap U =\emptyset$ and
+  hence $x_n\not\in B_{\RR}(a,\eps)$ for any $n$, and so $x_n\not\to a$. A
+  similar argument can be used for $x_n\not\to b<0$.
+
+  A similar argument shows that $\overline{[0,1]}=[0,1]$.
+\end{example}
+
+\begin{proposition}
+  Let $(X,d)$ be a metric space, and let $U\subset X$. Then $U$ is closed if and
+  only if $U=\overline{U}$. That is, if  any convergent sequence in $U$ has
+  limit in $U$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Suppose that $U$ is closed. Let $(x_n)$ be a sequence in $U$, and let $a\in
+  X\setminus U$. We want to show that $x_n\not\to a$. Since $U$ is closed,
+  $X\setminus U$ is open, so there exists $\eps>0$ s.t. $B_X(a,\eps)\subset
+  X\setminus U$. Thus, if $x\in U$ then $x\not\in B_X(a,\eps)$, i.e. $d(x,a)\geq
+  \eps$ for all $n\in\NN$, hence $x_n\not\to a$. Hence $U=\overline{U}$.
+
+  Conversely, suppose $U$ is not closed. We want to find
+  $a\in\overline{U}\setminus U$, i.e. $a\in X\setminus U$ with a sequence
+  $(x_n)$ in $U$ with $x_n\to a$. Since $U$ is not closed, $X\setminus U$ is not
+  open. Thus, there exists $a\in X\setminus U$ s.t. for all $r>0$,
+  $B_X(a,r)\not\subset X\setminus U$, i.e. $B_X(a,r)\cap U\neq \emptyset$. In
+  particular, for $n\in\NN$ choose $x_n\in B_X(a,1/n)\cap U\neq \emptyset$,
+  then $x_n\in U$ and $d_X(x_n,a)<1/n\to 0$ as $n\to\infty$. Hence $x_n\to a\in
+  X\setminus U$. Therefore, $a\in \overline{U}\setminus U\neq \emptyset$, and so
+  $U\neq \overline{U}$.
+\end{proof}
+
+\begin{proposition}
+  Let $(X,d)$ be a complete metric space, and let $U\subset X$. Then $U$ is
+  closed in $X$ if and only if $(U,d_X)$ is complete. 
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Assume that $U$ is closed, and let $(x_n)$ be a Cauchy sequence in $U$ -- then
+  $(x_n)$ is also Cauchy in $X$, so $x_n\to a\in X$, since $X$ is complete. In
+  particular $a\in\overline{U}$ but $U$ is closed, so $U=\overline{U}$ and $a\in
+  U$. So, $(x_n)$ converges in $U$, and hence $U$ is complete. 
+
+  Conversely assume that $U$ is not closed, then $U\subset\overline{U}$ so there
+  is a sequence $(x_n)$ in $U$ with $x_n\to a\in X\setminus U$. Then $(x_n)$ is
+  convergent, hence Cauchy, in $X$, and so $(x_n)$ is Cauchy in $U$. But $(x_n)$
+  does not converge in $U$ by uniqueness of limits in $X$, so $U$ is not
+  complete.
+\end{proof}
+
+\begin{corollary}
+  For $a,b\in\RR$, the intervals $[a,b],[a,\infty), (-\infty, b]$ are complete
+  in the Euclidean metric.
+  \label{<+label+>}
+\end{corollary}
+
+Finally, we see why we call $\overline{U}$ the clousure of $U$.
+\begin{lemma}
+  Let $(X,d)$ be a metric space, and $U\subset X$. Then for all $a\in X$,
+  \[a\in\overline{U} \iff B_X(a,r)\cap U \neq \emptyset \forall r>0.\]
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  Suppose $a\in\overline{U}$, then $x_n\to a$ (or $d(x_n,a)\to 0$) for some
+  sequence $(x_n)$ in $U$. Thus for any $r>0$ we can find $x_n$ s.t.
+  $d(x_n,a)<r$, so $x_n\in B_X(a,r)\cap U\neq\emptyset$.
+
+  Conversely suppose $B_X(a,r)\cap U\neq \emptyset$ for all $r>0$. Then for
+  every $n\in\NN$ we can choose some $x_n\in B_X(a,1/n)\cap U\neq \emptyset$,
+  and so $(x_n)$ is a sequence in $U$ and $x_n\to a$, as above.
+\end{proof}
+
+\begin{proposition}
+  Let $(X,d)$ be a metric space and $U\subset X$ then
+  \begin{enumerate}
+    \item $\overline{U}$ is closed,
+    \item If $V$ is a closed set with $U\subset V$, then $\overline{U}\subset
+      V$. That is, $\overline{U}$ is the smallest closed set containing $U$.
+  \end{enumerate}
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  (Proof for (2)) If $U\subset V$ then every sequence in $U$ is a sequence in
+  $V$, so $\overline{U}\subset\overline{V}$. But if $V$ is closed,
+  $\overline{U}\subset V$.
+
+  (Proof for (1)) To prove that $\overline{U}$ is closed, we show that
+  $\overline{\overline{U}}=\overline{U}$. Suppose $a\in\overline{\overline{U}}$.
+  For $n\in\NN$ the lemma tells us that there exists a sequence with $x_n\in
+  B_X(a,1/(2n))\cap \overline{U}$. Since $x_n\in\overline{U}$ the lemma tells us
+  that there exists a sequence with $y_n\in B_X(x_n,1/(2n))\cap U$. By the
+  triangle inequality we have $d(y_n,a)\leq d(y_n,x_n)+d(x_n,a)<1/n$, so $y_n\to
+  a$. Since $(y_n)$ is a sequence in $U$, this implies that
+$a\in\overline{U}$.
+\end{proof}

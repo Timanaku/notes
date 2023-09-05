@@ -1,0 +1,115 @@
+\section{Week 10 - 14 Mar 2022 - Hausforff spaces}
+Our motivation is to study sequences in topological spaces. A sequence $(x_n)$
+in a topological space $X$ is a collection of points in $X$ indexed by the
+natural numbers.
+\begin{definition}
+  Let $X$ be a topological space, and $(x_n)$ a sequence in $X$. We say that
+  $a\in X$ is a limit of $(x_n)$ if for all open sets $U\subset X$ with $a\in
+  U$, there exists $N\in\NN$ s.t. $n>N \implies x_n\in U$.
+  \label{def:sequenceConvergesTopoSpace}
+\end{definition}
+
+\begin{lemma}
+  Let $(X,d)$ be a metric space. Then a sequence $(x_n)$ in $X$ converges in
+  $(X,d)$ if and only if it converges in the topological space $(X,T_d)$ (the
+  topological space induced by the metric).
+  \label{lem:convergenceMetricSpaceTopo}
+\end{lemma}
+\begin{proof}
+  TODO.
+\end{proof}
+
+Recall that in metric spaces, a sequence has at most one limit. This is not the
+case in more general sequences in topological spaces.
+
+\begin{example}
+  Let $X=\{0,1\}$ with the indescrete topology $T=\{\emptyset, X\}$. Let $x_n$
+  be $0$ for even $n$ and $1$ for odd $n$. Then both $0,1$ are limits of
+  $(x_n)$. Indeed the only open set containing $0$ is $X$.
+\end{example}
+\begin{proposition}
+  Let $X$ be a topological space, with the indescrete topology, and $(x_n)$ be a
+  sequence in $X$. Then every $a\in X$ is a limit of $x_n$.
+  \label{prop:limitPointsTopoSpace}
+\end{proposition}
+
+Some may say this result is a disaster. To get around this, we make a new
+definition.
+
+\begin{definition}
+  A topological space $X$ is called \emph{Hausdorff} if for any distinct points
+  $x,x'\in X$ there exist disjoint open sets $U, U'$ with $x\in U, x'\in U'$.
+  \label{def:HausdorffSpace}
+\end{definition}
+Examples of Hausdorff spaces include $\RR$.
+\begin{lemma}
+  Let $(X,d)$ be a metric space. Then $(X,T_d)$ is Hausdorff.
+  \label{lem:metricTopologyHausdorff}
+\end{lemma}
+\begin{proof}
+  Let $x,y\in X$ be distinct points. Then $r=d(x,y)>0$. Set $U=B_X(x, r/2)$ and
+  $V=B_X(y, r/2)$. Then $U,V$ are open and $x\in U, y\in V$. We claim the sets
+  are disjoint. If $z\in U\cap V$, then the triangle inequality give,
+  \[d(x,y)\leq d(x,z)+d(z,y) < r = d(x,y),\]
+  A contradiction.
+\end{proof}
+\begin{corollary}
+  Any metrizable topological space is Hausdorff.
+  \label{<+label+>}
+\end{corollary}
+\begin{example}
+  $\RR$ with the cofinite topology is not Hausdorff. If $U,V$ are nonempty open
+  subsets, then $U\cap V$ is infinite, and in particular non-empty.
+\end{example}
+\begin{proposition}
+  Let $X$ be a Hausdorff topological space. Then every sequence in $X$ has at
+  most one limit.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Let $(x_n)$ be a sequence and assume $a\neq b$ are limits of $X$. Since $X$ is
+  Hausdorff, there are disjoint open sets $U,V$ s.t. $a\in U, b\in B$. By
+  definition of limits, there exists $M,N\in\NN$ s.t.
+  \[n>N \implies x_n\in U,\]
+  \[m> M \implies x_m\in V.\]
+  But then $n>\max (M,N)\implies x_n \in U\cap V=\emptyset$, a contradiction.
+\end{proof}
+\begin{corollary}
+  If $|X|\geq 2$, then $X$ with the indiscrete topology is not Hausdorff. 
+  \label{<+label+>}
+\end{corollary}
+\begin{proposition}
+  Being Hausdorff is a topological property. That is, if $X\cong Y$ then $X$ is
+  Hausdorff if and only if $Y$ is Hausdorff.
+  \label{prop:hausdorffTopoProperty}
+\end{proposition}
+\begin{proof}
+  Since $X\cong Y\iff Y\cong X$, it is enough to show that $X$ is Hausdorff,
+  then $Y$ is Hausdorff. Assume $X$ is Hausdorff, and let $y_1\neq y_2$ be
+  points in $Y$.  Let $f:X\tohom Y$ be a homeomorphism. Since $f$ is surjective,
+  there exists $x_1,x_2\in X$ with $f(x_i)=y_i$, and with $x_1\neq x_2$. Since
+  $X$ is Hausdorff, there exist open sets $U,V\subset X$ with $x_1\in U, x_2\in
+  V$ s.t. $U\cap V=\emptyset$. Since $f$ is a homeomorphism $U'=f(U) and
+  V'=f(V)$ are open in $Y$. Moreover, $y_1=f(x_1)\in f(U)=U'$ and similarly
+  $y_2\in V'$. Finally, $U'\cap V'=f(U)\cap f(V)=f(U\cap
+  V)=f(\emptyset)=\emptyset$, so $Y$ is Hausdorff. Note that the equality
+  $f(U)\cap f(V)=f(U\cap V)$ is false in general, but holds here since $f$ is
+  injective.
+\end{proof}
+
+\begin{proposition}
+  Any subspace of a Hausdorff space is Hausdorff.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  TODO.
+\end{proof}
+
+Question: If $X$ is a finite Hausdorff topological space, is $\{x\}$ open for
+all $x\in X$? (i.e. $X$ has the discrete topology). By intuition we say yes.
+Choose $x\in X$ and let $U$ be an open set containing $x$, with the smallest
+possible number of points. If $|U|>1$, choose $y\in U$ with $y\neq x$. Since $X$
+is Hausdorff, there exist open sets $V_1,V_2$ with $x\in V_1, y\in V_2$ and
+$V_1\cap V_2 =\emptyset$. But $U\cap V_1$ is open, $x\in U\cap V_1,
+y\not\in U\cap V_1$. So $U\cap V_1\subset U$ is open, contradicting minimality
+of $U$. Hence $|U|=1$.

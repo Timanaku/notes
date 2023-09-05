@@ -1,0 +1,108 @@
+\section{Week 7 - 04 Mar 2022 - Intro to topological spaces }
+Note there're no lectures in week 8, due to strikes.
+\begin{definition}
+  Let $X,Y$ be topological spaces. A function $f:X\to Y$ is open if whenever
+  $U\subset X$ is open in $X$, $f(U)\subset Y$ is open in $Y$.
+  \label{<+label+>}
+\end{definition}
+\begin{proposition}
+  Let $f:X\to Y$ be a function between topological spaces, and assume $f$ is
+  bijective. Then $f^{-1}$ is continuous if an only if $f$ is open.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  TODO.
+\end{proof}
+We now look at several examples, on which we take the topology on $\RR^n$ to be
+the Euclidean topology.
+\begin{proposition}
+  Any open interval on $\RR$ is homeomorphic to $\RR$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  We claim the map $f:(-\frac{\pi}{2}, \frac{\pi}{2})\to\RR:x\mapsto\tan x$ is a
+  homeomorphism. Since by the previous lecture any open interval is homeomorphic
+  to $(-\frac{\pi}{2}, \frac{\pi}{2})$, the result follows. TODO.
+\end{proof}
+
+\begin{proposition}
+  The open interval $(0,1)$ is homeomorphic to $(0,\infty)$, and $[0,1)$ is
+  homemorphic to $[0,\infty)$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  The homeomorphism in both cases is given by 
+  \[f(s) = \frac{s}{1-s}, \quad f^{-1}(t) =\frac{t}{1+t}.\]
+  TODO.
+\end{proof}
+\begin{exercise}
+  Finish the proofs of the previous 2 propositions, by showing that the given
+  functions are indeed homeomorphisms (bijective, continuous, open).
+\end{exercise}
+\begin{example}
+  The unit square $[-1,1]^2\subset \RR^2$ is homeomorphic to the unit disk
+  $D^2\subset \RR^2$. A particular homeomorphism is given by 
+  \[f(x) = \begin{cases}
+      \frac{d_{\infty}(0,x)}{d_2(0,x)}x, & x\neq 0\\
+      0, & x=0
+    \end{cases}\]
+  With inverse
+  \[f^{-1}(x) = \begin{cases}
+      \frac{d_2(0,x)}{d_{\infty}(0,x)}x, & x\neq 0\\
+      0, & x=0
+    \end{cases}\]
+  TODO: Check these functions are inverses and that they are continuous
+  (Exercise 4, Sheet 5 might be of use).
+\end{example}
+In fact the homeomorphism given above naturally applies to $\RR^n$, i.e. shows
+that any cube in any dimension is homeomorphic to the sphere in that same
+dimension.
+
+\subsection{The subspace topology}
+Recall that for a metric space, any subset of the space inherits the metric. The
+same is true for a topological space.
+\begin{definition}
+  Let $X$ be a topological space, and let $A\subset X$. The subspace topology on
+  $A$ is that on which if $U\subset A$ is open if and only if $U=A\cap V$ for
+  some open subset $V\subset X$. In other words, if $T_X$ is the topology on
+  $X$,  then the subspace topology on $A$ is 
+  \[T_A = \{V\cap A : V\in T_X\}.\]
+  \label{<+label+>}
+\end{definition}
+
+\begin{proposition}
+  The subspace topology is a topology.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{example}
+  Let $\ZZ\subset\RR$ be the subset of integers in the real numbers. The
+  subspace topology on $\ZZ$ coming from the usual Euclidean topology on $\RR$
+  is the discrete topology. TODO: Show this is true by showing that singletons
+  are open, and note how this implies the result.
+\end{example}
+Note that the subspace metric on $\ZZ$ is not the discrete metric (it's just
+euclidean restricted to $\ZZ$) or even strongly equivalent. On the other hand,
+considering the cofinite topology on $\RR$, the subspace topology on $\ZZ$ is
+again the cofinite topology: $U\subset\ZZ$ is open iff $U=\emptyset$ or
+$\ZZ\setminus U$ has finitely many elements.
+
+The following generalises the fact that identity maps are continuous, and it's
+the key property of the subspace topology.
+\begin{lemma}
+  Let $X$ be a topological space, and $A\subset X$ a subspace. The inclusion
+  $i:A\to X$ is continuous (note: it's not the identity function, since the
+  domain and codomain are different when considering a proper subset).
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  Let $U\subset X$ be open. Then $i^{-1}(U)=\left\{ a\in A: i(a)=a\in U \right\}
+  = U\cap A$, which is open by definition. Hence the preimage of open sets are
+  open, and the result follows.
+\end{proof}
+This lets us modify the domain and codomains of our function, without affecting
+the property of continuity (i.e. continuity does not depend on domain or
+codomain, but rather only on the assignation rule).

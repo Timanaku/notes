@@ -1,0 +1,104 @@
+\section{Week 1 - 14 Jan 2022 - Simple pendulum and central forces}
+\begin{example}[Simple pendulum]
+  A pendulum is a point-mass $m$ attatched to an origin $O$ with an inextensible
+  string of length $l$ in a gravitational field $\vec{g}$. The forces acting on
+  $m$ are gravity $\vec{g}$, pointing to $-\vec{e_y}$  and the tension of the
+  string $\vec{T}$, pointing to $-\vec{e_r}$ pointing towards $O$. We have
+  $\vec{e_y}\cdot \vec{e_r}=\cos\theta$.
+\end{example}
+\begin{proof}[Solution]
+  By Newton's second law, $m\ddot{\vec{x}}= m\vec{g} + \vec{T}$, where
+  $\vec{x}=l\vec{e_r}$, $\vec{T}=-T\vec{e_r}$, and $\vec{g}=-g\vec{e_y}$.
+  Therefore we have 
+  \[\dot{\vec{x}} = l\dot{\theta}\vec{e_{\theta}}, \]
+  \[\ddot{\vec{x}} = -l\dot{\theta}\vec{e_r} + l\ddot{\theta}\vec{e_{\theta}}.\]
+  Hence, we have Newton's second law
+  \[m(-l\dot{\theta}\vec{e_r} + l\ddot{\theta}\vec{e_{\theta}}) = -mg\vec{e_y}
+  -T\vec{e_r}\]
+  We can look at the equation wrt components. We start by $\vec{e_r}$ and
+  observe that 
+  \[m(-l\dot{\theta}) =-mg\cos\theta - T,\]
+  The scalar Newton equation in the $r$ component. Similarly,
+  \[m(l\ddot{\theta}) = -mg\cos(\theta+\frac{\pi}{2}) = -mg\sin\theta,\]
+  The scalar Newton equation in the $\theta$ component. We can re-arrange the
+  $\theta$ component as 
+  \[\ddot{\theta} + \omega^2\sin\theta = 0\]
+  Where $\omega=\sqrt{\frac{g}{l}}$ is called \emph{frequency}. This is a second
+  order ODE, needing an initial condition: $\theta(0)=\theta_0,
+  \dot{\theta}(0)=\dot{\theta}_0=\dot{\vec{x}}/l=\frac{v_0}{l}$, as stated in
+  the beginning of the solution. Multiplying our ODE by $\dot{\theta}$ and
+  integrating we observe that 
+  \[\frac{1}{2}\dot{\theta}^2-\omega^2\cos\theta = C\in\RR\]
+  This is an equation of conservation of energy.
+\end{proof}
+
+\subsection{Chapter 2 - Central force fields}
+In this section we consider the motion of a point mass under the influence of a
+central force field.
+\begin{definition}
+  A central force is a force $\vec{F}$ that is directed towards (or away) from a fixed
+  location $\vec{x_0}$, called the center of the force. Such a force has a field
+  expression 
+  \[\vec{F}= f(|\vec{x_0}-\vec{x}|)
+  \frac{\vec{x_0}-\vec{x}}{|\vec{x_0}-\vec{x}|}=f(r)\vec{e_r}\]
+  Where $\vec{x}$ is the position vector of $m$ and $f$ is a scalar function.
+\end{definition}
+As per usual, we assume $\vec{x_0}=\vec{0}$.
+Prototipical examples include gravitational interactions.
+
+\begin{theorem}
+  Angular momentum is conserved in a central force field.
+\end{theorem}
+\begin{proof}
+  By NII we have 
+  \[m\ddot{\vec{x}}= F(x)\frac{\vec{x}}{x}\]
+  Taking the cross product by $\vec{x}$ we have 
+  \[\vec{x}\times (m\ddot{\vec{x}}) = 0\]
+  Recall angular momentum $\vec{L}=\vec{x}\times m\dot{\vec{x}}$.
+  Differentiating we have 
+  \[\dot{\vec{L}}=\dot{\vec{x}}\times (m\dot{\vec{x}}) + \vec{x}\times
+  (m\ddot{\vec{x}})=0\]
+  Hence it follows that $\vec{L}=\vec{L_0}$. Therefore, motion in a central
+  force field conserves angular momentum. In the case where $\vec{L_0}=\vec{0}$,
+  we have that $\vec{x}\times\dot{\vec{x}}=0$, i.e. straight line motion. Hence,
+  the motion is of the form $\vec{x}=X\vec{n}$ for some constant direction
+  vector $\vec{n}$, and so $\ddot{\vec{x}}=\ddot{X}\vec{n}$, and from NII we
+  have 
+  \[m\ddot{X}\vec{n} = F(X)\vec{n} \implies m\ddot{X}=F(X)\sgn(X)\]
+\end{proof}
+
+\begin{theorem}
+  Motion in a central force field is in a plane perpendicular to $\vec{L_0}$,
+  through the origin.
+\end{theorem}
+\begin{proof}
+  We have $\vec{L_0}=m\vec{x}\times\dot{\vec{x}}$, so
+  $\vec{L_0}\cdot\vec{x}=\vec{x}\cdot m\vec{x}\times\dot{\vec{x}}=0$
+\end{proof}
+Due to this fact, we can safely use plane polar coordinates, defined on the
+aforementioned plane. Hence,
+\[\vec{L_0} = m\vec{x}\times \dot{\vec{x}} = m(r\vec{e_r}) \times
+(\dot{r}\vec{e_r} + r\dot{\theta}\vec{e_{\theta}}) = mr^2\dot{\theta}\vec{e_z}\]
+This quantity is constant, hence $r^2\dot{\theta}=h\in\RR$ is constant, and by extension
+the acceleration will be simplified to $\ddot{\vec{x}} =
+(\ddot{r}-r\dot{\theta}^2)\vec{e_r}$. Hence Newton's equation becomes
+$m(\ddot{r}-r\dot{\theta})=F(r)$ in the direction of $\vec{e_r}$, the only
+component needed, and in summary we have the system of equations describing the
+motion of a mass point under a central force by Newton's second law as,
+\[m(\ddot{r}-r\dot{\theta}^2)=F(r)\]
+\[r^2\dot{\theta}=h\in\RR\]
+And by simplification, it follows that 
+\[\ddot{r}- \frac{h^2}{r^3}=\frac{F(r)}{m}\]
+\[r^2\dot{\theta}=h\in\RR\]
+
+
+
+
+
+
+
+
+
+
+
+

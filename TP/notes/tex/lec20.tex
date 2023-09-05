@@ -1,0 +1,91 @@
+\section{Week 9 - 09 Mar 2022 - Connectedness, Hausdorff Spaces }
+Recall that in any topological space $X$, both $X$ and $\emptyset$ are open, and
+also closed. They're open by the first axiom of topological spaces, and hence
+have open complement (the complement of $X$ is $\emptyset$ and viceversa), so
+each one is also closed, by definition of closed sets.
+
+If $X$ is disconnected with $X=U\cup V$ for nonempty, open and disjoint subsets
+$U, V$, then $X\setminus U = V, X\setminus V= U$ are open, so $U$ and $V$ are
+both open and closed. If $U\subset X$ is open and closed, then $X$ is the
+disjoint union of $U$ and $V=X\setminus U$, which is open and closed. We have
+thus proved the following claim.
+\begin{proposition}
+  A topological space $X$ is connected if and only if the only subsets of $X$
+  which are both open and closed are $X$ and $\emptyset$.
+  \label{prop:openClosedSubsetsConnected}
+\end{proposition}
+
+\begin{example}
+  Is $\ZZ$ connected? We first need to define the topology we're working on. 
+  \begin{enumerate}
+    \item Discrete topology (which is the same as the subspace topology from
+      $\RR$): Every subset, e.g. $\{0\}$ is open and closed, so $\ZZ$ is
+      disconnected.
+    \item Cofinite topology (closed sets are finite sets and $\ZZ$). In this
+      topology, $\ZZ$ is connected. Assume $U\subset\ZZ$ is both open and
+      closed. Then if $U\neq \emptyset$, its complement $V=\ZZ\setminus U$ must
+      be closed (since $U$ is open), and by the topology $V$ must be finite.
+      Since $\ZZ=U\cup V$ is infinnite, $U$ must be infinite, hence $U=\ZZ$
+      since this is the only infinite closed set.
+  \end{enumerate}
+\end{example}
+\todo{Ask Matthew why is $U$ infinite? What about $n\ZZ$?}
+\todo{Ask Matthew whether the existence of a single open and closed nontrivial
+subset is enough to show that the set is disconnected? Since it must be the
+union, the existence of one implies the existence of more than one?}
+
+To show that spaces are connected, which is harder, we can use help from other
+toolds.
+\begin{theorem}
+  The open interval $(0,1)$ is connected (by using the usual topology).
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Suppose $X=(0,1)=U\cup V$ for $U,V$ disjoint and nonempty. We will show $U$
+  and $V$ can't be both open. Let $u\in U$ and $v\in V$. Renaming if necessary,
+  we may assume $0<u<v<1$, and consider $S=\{x\in U: x< v\}$. Note $u\in S$, so
+  it's nonempty. Moreover, $S$ is bounded above by $v$. Hence $S$ has a least
+  upper bound, $l=\sup S$. Since $u\leq l \leq v$ we have $l\in (0,1)=U\cup V$.
+  Suppose $l\in U$. If $U$ is open, $\exists r>0$ s.t. $(l-r,l+r)\subset
+  U=X\setminus V$. Then, since $v\not\in U$, it means $l+r<v$, and by extension
+  $l+r\in S$, a contradiction to $l=\sup S$. Hence in this case $U$ is not open. 
+
+  On the other hand, suppose $l\in V$. If $V$ is open, then there exists $r>0$
+  s.t. $(l-r,l+r)\subset V$, then $l-r$ is an upper bound for $S$, contradicting
+  $l=\sup S$. Hence in this case $V$ is not open.
+\end{proof}
+
+We can exploit this fact to prove that many other spaces are connected.
+
+\begin{proposition}
+  Connectedness is preserved by continuous maps. That is, for a connected
+  topological space $X$ and $f:X\to Y$ being continuous, then the image
+  $f(X)\subset Y$ is connected.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  We show the contrapositive, $f(X)$ disconnected implies $X$ is disconnected.
+  Suppose $f(X)$ is disconnected, i.e. $f(X)=U\cup V$ with $U,V$ disjoint,
+  nonempty, open. Let $\tilde{U}=f^{-1}(U)$, $\tilde{V}=f^{-1}(V)$. Then
+  $\tilde{U},\tilde{V}$ are nonempty and sijoint since $U$ and $V$ are. Since
+  $f$ is continuous we have $\tilde{U},\tilde{V}$ are both open. 
+  Finally, $X=f^{-1}(f(X))=f^{-1}(U\cup V)=f^{-1}(U)\cup
+  f^{-1}(V)=\tilde{U}\cup\tilde{V}$. Hence $X$ is also disconnected, as
+  required.
+\end{proof}
+
+\begin{corollary}
+  If $X\cong Y$ then $X$ is connected iff $Y$ is connected. Hence, connectedness
+  is a topological property, meaning it is preserved by homeomorphisms.
+\end{corollary}
+\begin{corollary}
+  Intervals in $\RR$ are connected. This follows from the fact that any interval
+  in $\RR$ is homeomorphic to one of the intervals (open, closed) from $0$ to
+  $1$.
+\end{corollary}
+\begin{corollary}
+  The set $GL_n(\RR)$ is disconnected. This follows from the fact that
+  $\det:GL_n(\RR)\to \RR\setminus\{0\}$  is continuous, and surjective. Since
+  $\RR\setminus\{0\}$ is disconnected, the claim follows.
+  \label{<+label+>}
+\end{corollary}

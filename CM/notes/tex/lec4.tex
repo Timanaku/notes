@@ -1,0 +1,113 @@
+\section{Lecture 4 - 25 Jan 2022 - Examples of complex functions}
+The primal example of important complex function is the function
+\[\exp(z)= \sum_{i=0}^{\infty}\frac{z^n}{n!}.\]
+Which can be easily checked that has infinite radius of convergence with the
+ratio test.
+
+\begin{lemma}[Properties of the exponential function]
+  The following hold,
+  \begin{enumerate}
+    \item $\frac{d}{dz}\exp(z)=\exp(z)$,
+    \item $\exp(z)\exp(w)=\exp(z+w)$, and $\exp(-z)=\frac{1}{\exp(z)}$ for all
+      $z\in\CC$,
+    \item Euler's formula - $\exp(iz)=\cos(z)+i\sin(z)$ for all $z\in\CC$.
+      Recall that $\cos(z)= \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}z^{2n}$ and
+      $\sin(z)= \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}z^{2n+1}$.
+  \end{enumerate}
+  \label{lem:expProperties}
+\end{lemma}
+\begin{proof}
+  \emph{(1)} From the definition of $\exp(z)$,
+  \[\frac{d}{dz}\exp(z)=\frac{d}{dz} \left[ 1 +
+    \sum_{n=1}^{\infty}\frac{z^{n}}{n!}\right]= \sum_{n=1}^{\infty}
+  \frac{z^{n-1}}{(n-1)!} = \sum_{i=0}^{\infty}\frac{z^n}{n!} = \exp(z).\]
+
+  \emph{(2)} Given the above statement, we have
+  $\frac{d}{dz}\exp(z+w)\exp(-z)=\exp(z+w)\exp(-z) - \exp(z+w)\exp(-z)=0$, by
+  using the product rule. Since $w$ is some arbitrary constant, we set
+  $\exp(z+w)\exp(-z)= \exp(w)$, and the result follows. The next result follows
+  by setting $w=-z$.
+
+  \emph{(3)} We have that 
+  \[\exp(iz)= \sum_{n=0}^{\infty} \frac{(iz)^n}{n!} = \sum_{n=0}^{\infty}
+  \frac{(i)^{2n}z^{2n}}{(2n)!} + \sum_{n=0}^{\infty}
+  \frac{(i)^{2n+1}z^{2n+1}}{(2n+1)!},\]
+  By splitting even and odd elements. Note that $(i)^{2n}=(-1)^{n}$, and
+  $(i)^{2n+1}=(-1)^{n}i$, hence the above rearranges,
+  \[\exp(iz) = \sum_{n=0}^{\infty}
+  \frac{(-1)^{n}z^{2n}}{(2n)!} + \sum_{n=0}^{\infty}
+  \frac{(-1)^{n}iz^{2n+1}}{(2n+1)!} = \cos(z)+i\sin(z),\]
+  As required.
+\end{proof}
+
+We can look at hyperbolic trigonometric functions as a case application of the
+exponential function, but while seeing these definitions, we notice something
+odd when trying to look for the respective inverse functions. In particular, we
+observe that for complex variables, the exponential funciton is not injective,
+\[\exp(z)= \exp(z)\exp(2\pi i).\]
+Hence, when using inverse functions, such as complex log or complex roots, we
+must define an open set in which these functions are bijective.
+
+\begin{theorem}[Inverse Function Theorem]
+  Let $\Omega\subset\CC$ be open and $f:\Omega\to\CC$ be holomorphic. Suppose
+  $z\in\Omega$ with $f'(z)\neq 0$. Then there exists $U\subset\Omega$ and
+  $V\subset\CC$ containing $z, w=f(z)$, respectively, such that $f:U\to V$ is
+  bijective and $f^{-1}:V\to U$ is holomorphic with 
+  \[\frac{d}{dz}f^{-1}(w) =\frac{1}{f'(z)}.\]
+  \label{thm:inverseFunction}
+\end{theorem}
+\begin{proof}
+  Omitted, but note that by the chain rule, one finds the formula by
+  differentiating wrt $z$, $f^{-1}(f(z))=z$.
+\end{proof}
+Since $e^{z}=e^x(\cos(y)+ i\sin(y)) \neq 0$ for all $z\in\CC$, the inverse
+function theorem tells us that for some neighbourhood, i.e. for some open set
+containing $z$, the inverse is well defined. Consider the open set
+$U=\{z=x+iy|x,y\in\RR, -\pi<x<\pi\}$, and observe that the function
+$\exp:U\to\CC\setminus\RR^-$ where $\RR^-=\{x\in\RR : x\leq 0\}$, is bijective.
+in particular, observe that $e^{i\pi}=e^{-i\pi}$, hence to have a bijective
+exponential function, the domain $U$ must not include $\pi,-\pi$. The inverse
+function $\log:\CC\setminus\RR^-\to U$ is called the \emph{principal branch of
+the complex logarithm}. Other branches of the complex logarithm exist (in fact,
+there're infinitely many!), and one can define a bijective exponential function
+with proper open domains (e.g. where $y\in (0,2\pi)$). In general, one refers to
+all solutions $w$ of the equation $e^w=z$ as the complex logarithm of $z$.
+\begin{example}
+  Find all the complex logarithms of $z=-1+i\sqrt{3}$.
+\end{example}
+\begin{proof}[Solution]
+  We have $\log z=\log re^{i\theta} = \log r + i\theta$. Note that, since
+  $z=x+iy=re^{i\theta}$,
+  \[\arg z=\theta = 
+    \begin{cases}
+      \tan^{-1}(y/x)+2k\pi, & x>0,\\
+      \tan^{-1}(y/x) + (2k+1)\pi & x<0,
+    \end{cases}
+  \]
+  Where $k\in \ZZ$. Note that we need to take into account the two cases where
+  $x>0,x<0$ because the tangent function is only defined on $(-\pi/2,\pi/2)$. In
+  our case, $r=2$ and $\theta=-\frac{1}{3}\pi + (2k+1)\pi$.  Hence,
+  \[\log z = \log r + i\theta = \log 2 + i(-\frac{1}{3}\pi + (2k+1)\pi).\]
+\end{proof}
+
+\begin{definition}
+  Let $z,w\in\CC$, then we define $z^w:= e^{w\log z}$, where $\log z$ is the
+  complex logarithm of $z$
+\end{definition}
+\begin{lemma}
+  Choose the principal branch of the complex logarithm. Then the function
+  $f:\CC\setminus\RR^- \to \CC:z\to z^w$ is a well-defined holomorphic
+  function for all $w\in\CC$. Moreover, $z^uz^v=z^{u+v}$ for all $u,v\in\CC$ and
+  $z\in\CC\setminus\RR^-$.
+\end{lemma}
+
+\begin{exercise}
+  Find $\arctan z$.
+\end{exercise}
+\begin{proof}
+  Note that we're trying to find $w$ s.t. $\tan w =z=\frac{\sin w}{\cos w} =
+  \frac{e^{iw}-e^{-iw}}{i(e^{iw}+e^{-iw})}$. Hence it follows that 
+  \[iz(e^{2iw}+1)=e^{2iw}-1 \iff e^{2iw}(zi-1)+(zi+1)=0\]
+  \[\iff e^{2wi} = -\frac{zi+1}{zi-1}= -\frac{-z+i}{-z-i}=\frac{i-z}{i+z}\]
+  \[\therefore w= \frac{1}{2i}\log\left( \frac{i-z}{i+z} \right)\]
+\end{proof}

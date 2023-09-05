@@ -1,0 +1,31 @@
+\section{Lecture 2 - 20 Jan 2022 - Intro to differential systems}
+\begin{definition}
+  Let $\vec{x}=\vec{x}(t)=(x_1(t),\dots, x_n(t))\in\RR^n$, $t\in I\subseteq
+  \RR$ and $U\subseteq\RR^n$ be an open set. Define a function $f:U\to\RR^n$. An
+  $n$-dimensional system is an expression of the form
+  \[\frac{d\vec{x}}{dt} = \vec{f}(\vec{x}), \quad \vec{x}(0)=\vec{x_0}\]
+  \label{def:differentialSystem}
+\end{definition}
+\begin{theorem}
+  Let $\vec{f}:U\to\RR^n$ be a $C^1$ map, and define $\vec{x_0}\in U$. Then the
+  system in Definition \ref{def:differentialSystem} has a unique solution for
+  all $t\in I$, an open interval containing $0$.
+\end{theorem}
+Recall from 2D that a point $\vec{X}$ is said to be fixed if
+$\vec{f}(\vec{X})=0$. There's a particular example that will be of use.
+\begin{definition}
+  A fixed point $\vec{X}$ is said to be \emph{stable} or attracting if $\forall
+  \eps>0 \exists \delta>0$ s.t. 
+  \[|\vec{x_0}-\vec{X}|< \delta \implies |\vec{x}(t)-\vec{X}| < \eps, \quad
+  \forall t\]
+  That is, if $\vec{X}$ starts close to $\vec{x_0}$, then it stays close.
+\end{definition}
+The following theorem implements the above definition with a more practical
+approach.
+\begin{theorem}
+  Let $X$ be a fixed point in a $1$-dimensional system. We have that 
+  \[f'(X) >0 \implies \text{$X$ is unstable}\]
+  \[f'(X) <0 \implies \text{$X$ is stable}\]
+  If $f'(X)=0$, further analysis is required.
+  \label{thm:stability1D}
+\end{theorem}

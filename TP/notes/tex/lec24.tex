@@ -1,0 +1,169 @@
+\section{Week 10 - 18 Mar 2022 - Compactness for metric spaces, EVT, and
+Sequences}
+\begin{proposition}
+  Let $X$ be a Hausdorff space, and let $A\subset X$ be a compact subspace. Then
+  $A$ is closed in $X$.
+  \label{prop:compactSubspaceClosed}
+\end{proposition}
+\begin{proof}
+  If $A=X$, then $A$ is closed by definition. Otherwise, let $y\in A\setminus
+  X$. For each $x\in A$ there exist disjoint open sets $U_{xy}, V_{xy}$ such
+  that $x\in U_{xy}$ and $y\in V_{xy}$.
+  Then $\{U_{xy}\cap A\}_{x\in A}$ is an open cover of $A$, and since $A$ is
+  compact, there exists a finite subcover $\{U_{xy}\cap A\}_{x\in J_y}$ for
+  $J_y\subset A$ finite. Observe then $V_y:= \bigcap_{x\in J_y} V_{xy}$ is open
+  and contains $y$ (note that $J_y$ being finite is crucial). 
+
+  If $a\in A$, then $a\in U_{x_a y}$ for some $x_a\in J_y$, so $a\not\in
+  V_{x_a y}$, hence $a\not\in V_y$. It then follows that $V_y\subset X\setminus
+  A$. We then see that
+  \[X\setminus A = \bigcup_{y\in X\setminus A} V_y\]
+  is open, so $A$ must be closed.
+\end{proof}
+\begin{corollary}
+  If $X$ is a metric space, and $A\subset X$ is compact, then $A$ is closed.
+  \label{<+label+>}
+\end{corollary}
+\begin{proof}
+  It follows from Proposition \ref{prop:compactSubspaceClosed}, since every
+  metric space is Hausdorff.
+\end{proof}
+Combining the last few results, we see that any compact subspace of a metric
+space is closed and bounded.
+\begin{theorem}[Heine-Borel Theorem]
+  Consider $\RR^n$ with the Euclidean metric, and let $A\subset \RR^n$. Then $A$
+  is compact in the subspace topology if and only if $A$ is closed and bounded.
+  \label{thm:heineBorel}
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+\begin{remark}
+  Switching the Euclidean metric $d_2$ with any other strongly equivalent, like
+  $d_1$ or $d_{\infty}$ does not change whether a subset $A\subset\RR^n$ is
+  closed, bounded, or compact. Hence in the proof we may change the metrics as
+  it's convinient.
+  \label{<+label+>}
+\end{remark}
+
+\begin{example}
+  Compact subsets of $\RR^n$, for various $N$, include $[0,1]\subset\RR$, the
+  circle $S^1\subset\RR^2$ and closed balls (in $\RR^n$ for any $n$).
+\end{example}
+
+\subsection{Proof of Heine-Borel Theorem}
+We have proved already one direction (for all metric spaces). We prove the
+converse in four steps.
+\begin{theorem}
+  The closed interval $[0,1]$ is compact. 
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Let $\{U_i\}_{i\in I}$ be an open cover of $[0,1]$. We show that it has a
+  finite subcover. 
+
+  For each $x\in [0,1]$ we have $[0,x]\subset[0,1] =\bigcup_{i\in I}U_i$. Let
+  $B=\{ x\in[0,1] : [0,x]\subset  \bigcup_{i\in J}U_i \text{ for some finite }
+  J\subset I\}.$
+  Note that $0\in B$, since there must exist a single $j\in I$ s.t. $0\in U_j$
+  (recall that, e.g. $[0,1/5)$ is open in $[0,1]$!). Since $U_j\subset X$ is
+  open, there exists $\eps>0$ s.t. $[0,\eps)\subset U_j$, hence $[0,\eps)\subset
+  B$. Since $B$ is bounded above by $1$, there must exist $l=\sup B$ s.t.
+  $\eps\leq l\leq 1$. To prove the claim, we show that $l\in B$ and that $l=1$.
+
+  First we show $l\in B$. If we have $x\in [0,1]\setminus B$, that $x$ is an
+  upper bound for $B$. To see this, note that for $y\geq x$, then a finite union
+  of $U_i$s contain $[0,y]$, and by extension contains $[0,x]\subset[0,y]$. This
+  means that $B$ is some kind of initial segment, i.e. it does not not have any
+  holes inside of it. In other words, $[0,l)\subset B$. Since $l\in [0,1]$, here
+  exists $k\in I$ s.t. $l\in U_k$. Since $U_k$ is open and $l>0$, there exists
+  $r>0$ s.t. $(l-r, l]\subset U_k$. Note $l-r<l=\sup B$, so $l-r\in B$. Hence
+  $[0,l-r]\subset \bigcup_{i\in J}U_i$ for finite $J$, so 
+  \[ [0,l] = [0,l-r] \cup (l-r, l ) = (\bigcup_{i\in J}U_i)\cup U_k.\]
+  This is a finite union. So $l\in B$.
+
+  To prove $l=1$, suppose, for the sake of contradiction, that $l<1$. Since
+  $U_k$ is open, there exists $s>0$ such that $(l-s, l+s)\subset U_k$. Hence,
+  there exists a finite open cover with index $J'$ (covering $[0,l-s]$) with 
+  \[ [0,l+\frac{s}{2}] \subset (\bigcup_{i\in J'}U_i)\cup U_k,\]
+  Which implies that $l+\frac{s}{2}\in B$, a contradiction to $l$ being the
+  supremum. Hence $1\geq l\geq 1$, so $l=1$.
+\end{proof}
+
+\begin{proposition}
+  The closed unit square $X=[0,1]\times [0,1] \subset \RR^2$ is compact.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  We use the metric $d_{\infty}$, with open ball,
+  \[B_{\RR^2}( (x,y), \xi) = B_{\RR}(x,\xi)\times B_{\RR}(y,\xi).\]
+  So by the induced topology, we have $B_X( (x,y),\xi)=B_{[0,1]}(x,\xi)\times
+  B_{[0,1]}(y,\xi)$.
+
+  Suppose $\{U_i\}_{i\in I}$ is an open cover of $X$. Choose $x\in X$ and
+  consider $I_x= \{x\} \times [0,1]$, imagine a vertical segment in the
+  xy-plane. Note that $I_x$ is homeomorphic to $[0,1]$, so it's compact. For
+  every $y\in [0,1]$, there exists $i\in I$ s.t. $(x,y)\in U_i$, hence some
+  $\xi_{xy}>0$ s.t.
+  \[B_{xy}= B_{X}( (x,y), \xi_{xy}) \subset U_i,\]
+  since $U_i$ is open. So $I_{x} \subset \bigcup_{y\in [0,1)} B_{xy}$. Note
+  $I_x$ is compact, so it's contained in a finite union of these open squares,
+  and each of these squares is contained in some $U_i$. Note that $I_x$ is then
+  written as a finite union of open balls $B_{xy}$, each with its own radius
+  $\xi_{xy}$. Let $\xi_x$ be the minimum radius among this finite union. Then
+  $B_{[0,1]}(x,\xi_x)\times [0,1]\subset\bigcup_{i\in J_x} U_i$, for $J_x\subset
+  I$ finite.
+
+  Let $V_x=B_{[0,1]}(x,\xi_x)$. Then, $[0,1]=\bigcup_{x\in[0,1]}V_x$, and since
+  $[0,1]$ is compact, it follows that there exists a finite subcover
+  $\{V_{x_1}, \cdots, V_{x_m}\}$. For each $1\leq j\leq m$ we have
+  $V_{x_j}\times [0,1] \subset \bigcup_{i\in J_{x_j}}U_i$ for $J_{x_j}\subset I$
+  finite. Hence,
+  \[ [0,1]\times [0,1] \subset \bigcup_{j=1}^m \bigcup_{i\in J_{x_j}}U_i,\]
+  Which is a finite subcover, since each  $J_{x_j}$ is finite. Hence $X$ is
+  compact.
+\end{proof}
+
+\begin{proposition}
+  The closed unit hypercube $[0,1]^n\subset \RR^n$ is compact. This generalises
+  to, for any $R>0$, the hypercube $[-R,R]^n\subset \RR^n$ is compact.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  TODO. Sketch:
+  Use induction on $n$. The induction step is similar to the previous proof:
+  make a \emph{tube} on $n$ along which the $n-1$ (which we know to be compact)
+  slides. For the general hypercube, use the homeomorphism
+  $[-R,R]^n\tohom[0,1]^n:(x_1,\cdots, x_n)\to (\frac{x_1+R}{2R}, \cdots,
+  \frac{x_n+R}{2R})$
+\end{proof}
+
+\begin{lemma}
+  Let $X$ be a compact topological space. Then, any closed subset $A\subset X$
+  is compact.
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  Let $A\subset X$ be closed, and let $\{U_i\}_{i\in I}$ be an open cover of
+  $A$. For each $i\in I$ there exists $V_i\subset X$ s.t. $U_i=V_i\cap A$ (by
+  definition of open set in subspace). Since $U_i$ cover $A$, $V_i$ must also
+  cover $A$. Hence, we can write
+  \[X=(\bigcup_{i\in I} V_i)\cup (X\setminus A).\]
+  Since $X$ is compact, there must exist a finite subcover $\{X\setminus A,
+  V_i\}_{i\in J}$ for finite $J\subset I$. Hence, $\{U_i\}_{i\in J}$ must cover
+  $A$, a finite subcover. Hence $A$ is compact.
+\end{proof}
+
+\begin{corollary}
+  If $A\subset\RR^n$ is closed and bounded, it is compact.
+  \label{<+label+>}
+\end{corollary}
+\begin{proof}
+  Since $A$ is bounded, there exists $x=(x_1,\cdots, x_n)\in\RR^n$ and $r>0$
+  s.t. $A\subset \overline{B_{\RR^n}}(x,r)$. Let $R=\max_{1\leq i\leq n}
+  |x_i|+r$. Then we have
+  \[A\subset \overline{B_{\RR^n}}(x,r)\subset [-R,R]^n.\]
+  Since $A$ is closed in $\RR^n$, it is also closed in $[-R,R]^n$, which is
+  compact. By the previous lemma, $A$ is also compact.
+\end{proof}
+This completes the proof of the Heine-Borel theorem.

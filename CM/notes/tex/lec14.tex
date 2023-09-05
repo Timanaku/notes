@@ -1,0 +1,94 @@
+\section{Lecture 14 - 3 Mar 2022 - Isolated Singularities}
+Let $f$ be an analytic function on $\Omega\setminus\{c\}$ where $\omega$ is an
+open sent containing $c\in\CC$. One says that $f$ has an isolated singularity at
+$c$. By the previous lecture we know there exists a Laurent series,
+\[f(z)= \sum_{n=0}^{\infty} a_n(z-c)^n + \sum_{n=1}^{\infty}
+a_{-n}(z-c)^{-n},\]
+For all $z$ sufficiently close to $c$. There are three mutually exclusive
+categories of such a singularities.
+\begin{definition}
+  Let $f:\Omega\setminus\{c\}\to\CC$ be holomorphic. Then we call the isolated
+  singularity $c$ of $f$ either,
+  \begin{enumerate}
+    \item \emph{Removable singularity}: Iff $a_n=0$ for all $n<0$ in the Laurent
+      expansion. This means that the Laurent series is an ordinary power series
+      s.t. $z$ is mapped to $a_0$ when $z=c$, hence the function is holomorphic
+      on $\Omega$.
+    \item \emph{A finite pole of order $N$}: Iff $a_n=0$ for all $n<-N$ in the
+      Laurent expansion of $f$. That is, $f(z)= \sum_{n=-N}^{\infty} a_n(z-c)^n
+      = g(z)/(z-c)^N$ for a holomorphic function $g:\Omega\to\CC$.
+    \item \emph{ An essential singularity}: If none of the above applies. That
+      is, $a_n\neq 0$ for infinitely many integers $n<0$.
+  \end{enumerate}
+  \label{def:isolatedSingularitiesClass}
+\end{definition}
+\begin{example}
+  The function $f(z)=\sin(z)/z = 1-\frac{z^2}{3!} + \frac{z^4}{5!}-\cdots$ has a
+  removable singularity at $z=0$, and can be made analytic at $0$ by defining
+  $f(0)=1$. We have $f(z)\to 1$ as $z\to 0$, hence $|f(z)|$ is bounded on some
+  neighbourhood of $0$.
+\end{example}
+\begin{example}
+  The function $g(z)= \frac{(z+2)}{(z-3) (z+5)^2}$ has a pole of order $1$
+  (simple pole) at $z=3$ and a pole of order $2$ (double pole) at $z=-5$.
+  Obviously $|g(z)|\to\infty$ as $z\to 3, -5$.
+\end{example}
+\begin{example}
+  The function $h(z)=e^{1/z}= 1+ z^{-1}+\frac{z^{-2}}{2!}+\cdots$ has an
+  isolated essential singularity at $z=0$. For $z\to 0$ through the positive
+  real line, $|h(z)|\to \infty$. For $z\to 0$ through the negative real line,
+  $|h(z)|\to 0$. For $z$ tending to $0$ through arbitrary complex numbers,
+  $|h(z)|$ is not bounded but does not tend to infinity either.
+\end{example}
+
+\begin{proposition}
+  Let $\Omega\subset\CC$ be open, $c\in\Omega$ and
+  $f:\Omega\setminus\{c\}\to\CC$ be holomorphic. Then
+  \begin{enumerate}
+    \item $f$ has a removable singularity $c$ iff $f$ is bounded on some disk
+      $D\subset \Omega$ centered at $c$.
+    \item $f$ has a pole of finite order at $c$ iff $|f(z)|\to\infty$ as $z\to
+      c$.
+    \item $f$ has an essential singularity at $c$ iff $f$ is unbounded on any
+      neighbourhood of $c$ and $|f(z)|$ does not tend to $\infty$ as $z\to c$.
+  \end{enumerate}
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  If $c$ is a removable singularity, then $f$ must be bounded on a disk centered
+  at $c$. Conversely assume $f$ is bounded on a disk $D$ centered at $c$,
+  $|f(z)|\leq M$ for all $z\in D$, then for $\gamma\subset D$ a small circle
+  centered at $c$ we have,
+  \[|a_n|\leq \frac{1}{2=\pi} \oint |\frac{f(\zeta)}{(\zeta-c)^{n+1}}|d\zeta
+  \leq \frac{M}{r^n} \to 0 : n<0.\]
+  Where $r\to 0$. Hence $c$ is a removable singularity.
+
+  On the other hand, if $c$ is a pole then we must have $|f(z)|\to\infty$ as
+  $z\to c$ by definition. Conversely, assume that $|f(z)|\to\infty$ as $z\to c$.
+  Then there must exist a disk $D$ centered at $c$ with $|f(z)|>1$ for all $z\in
+  D$. Thus $\frac{1}{f}:D\setminus\{c\}\to \CC$ is bounded on $D\setminus\{c\}$
+  and by the above argument, we must have a removable singularity at $c$.
+  Moreover, $\frac{1}{f(z)}\to 0$ as $z\to c$ and $\frac{1}{f(z)}\neq 0$ for all
+  $z\in D\setminus\{c\}$. Thus the Taylor series of $\frac{1}{f}$ must be of the
+  form 
+  \[\frac{1}{f(z)}=(z-c)^N (a_N+ a_{N+1}(z-c) + \cdots) : a_N\neq 0, N>0.\]
+  Thus, $\frac{1}{f(z)} = (z-c)^N g(z)$ with $g:D\to\CC$ holomorphic and
+  $g(c)\neq 0$. Hence there must be another disk $D'$ around $c$ on which
+  $g(z)\neq 0$ for $z\in D'\setminus\{c\}$, hence 
+  \[f(z)=(z-c)^{-N} 1/g(z)\]
+  Where $1/g$ is holomorphic on $D'$. Hence $f$ has a pole at $c$.
+
+  The third case follows by the two arguments above, as the only possibility
+  left.
+\end{proof}
+There's a different characterisation for the essential singularity case, which
+is quite instructive and intuitive to think about. 
+\begin{theorem}[Casaroti-Weirstrass Thm]
+  If $f:\Omega\setminus\{c\}\to\CC$ is a holomorphic function with an essential
+  singularity at $c$ then the image of any punctured (at $c$) disk $D_c$ is
+  \emph{dense in $\CC$}. In other words, considering the $w$-plane given by
+  $w=f(z)$, the intesection $f(D_c)\cap D'$ for any disk $D'$ in the $w$-plane
+  is nonempty.
+  \label{def:CasarotiWeirstrass}
+\end{theorem}
+

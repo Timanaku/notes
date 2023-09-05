@@ -1,0 +1,89 @@
+\section{Week 4 - 02 Feb 2022 - Contraction Mapping Theorem}
+\begin{definition}[Fixed point]
+  Let $(X,d)$ be a metric space, and $T:X\to X$ be a map. A point $x\in X$ is a
+  \emph{fixed point} of $T$ if $T(x)=x$.
+  \label{def:fixedPoint}
+\end{definition}
+\begin{definition}
+  Let $(X,d)$ be a metric space, and $T:X\to X$ be a map. The map $T$ is said to
+  be a \emph{contraction} if there exists a constant $C\in[0,1)$ such that for
+  any $x,y\in X$ we have,
+  \[d(T(x), T(y))\leq C d(x,y),\]
+  Where equality holds iff $x=y$.
+  \label{def:contractionMa}
+\end{definition}
+\begin{remark}
+  Any contraction map is continuous since they are Lipschitz. We will prove this
+  in Exercise Sheet 4.
+\end{remark}
+
+\begin{theorem}[Contraction Mapping Theorem]
+  Let $T:X\to X$ be a contraction map of a complete non-empty metric space
+  $(X,d)$. Then $T$ has a unique fixed point.
+  \label{thm:ContractionMapping}
+\end{theorem}
+\begin{proof}
+  \todo{Initial intuition: For existence, consider the composition mapping, and
+  create a sequence $x_n$ on that. By the requirement of contraction, observe it
+  must converge to something.}
+  \todo{For uniqueness: Assume there're two fixed points, and observe that
+  somewhere there must be an anti-contraction.}
+  Let $x_0\in X$, and define $x_n=T(x_{n-1})=T^n(x_0)$.
+  Since $T$ is a contraction, there exists $C\in[0,1)$ s.t. $d(T(x),T(y))\leq
+  Cd(x,y)$ for any $x,y\in X$. We claim that for all $n\in\NN,
+  d(x_{n+1},x_n)\leq C^n d(x_1,x_0)$. Note that $d(x_2,x_1)\leq C d(x_1,x_0)$ by
+  definition of contraction map. Proceeding by induction, let $k\in\NN$ and
+  assume that $d(x_{k+1},x_k)\leq c^k d(x_1,x_0)$. Note that,
+  \[d(x_{k+2},x_{k+1}) =d(T(x_{k+1}), T(x_{k})) \leq cd(x_{k+1},x_k) \leq
+  c^{k+1} d(x_1,x_0).\]
+  Hence by induction we have $d(x_{n+1},x_n)\leq C^nd(x_1,x_0)$.
+
+  Next, note that the sequence $x_n$ defined above is a Cauchy sequence. Let
+  $\eps>0$. Let $m,n\in\NN$ and wlog assume $m>n$. By the triangle inequality,
+  we have 
+  \[d(x_m,x_n) \leq d(x_{m},x_{m-1}) + d(x_{m-1},x_n).\]
+  And note that recursively applying this inequality we get
+  \[d(x_m,x_n) \leq d(x_m,x_{m-1})+d(x_{m-1},x_{m-2})+\dots
+  +d(x_{n+2},x_{n+1}) + d(x_{n+1}, x_n).\]
+  By the previous claim we have that 
+  \[d(x_m,x_{m-1})+d(x_{m-1},x_{m-2})+\dots
+  +d(x_{n+2},x_{n+1}) + d(x_{n+1}, x_n) \]
+  \[\leq c^{m-1}d(x_1,x_0) +
+  c^{m-2}d(x_1,x_0) + \dots c^n d(x_1,x_0).\]
+  \[= c^nd(x_1,x_0) \left( c^{m-n-1}+c^{m-n-2}+\dots +c+1 \right).\]
+  Note that the RHS is a finite geometric series, where the $c$ is non-negative,
+  hence the infinite geometric series is going to be (at least) larger,
+  \[c^nd(x_1,x_0) \left( c^{m-n-1}+c^{m-n-2}+\dots +c+1 \right) \leq
+  c^nd(x_1,x_0) \left( 1+c+c^2+\dots \right)\]
+  \[=c^n d(x_1,x_0) \frac{1}{1-c},\]
+  \[\therefore d(x_m,x_n) \leq c^n d(x_1,x_0) \frac{1}{1-c},\]
+  where $c<1$. Henceforth, $c^nd(x_1,x_0)\to 0$, and by extension there must
+  exists $N\in\NN$ such that $d^Nd(x_1,x_0)< (1-c) \eps$. Therefore, for $m,n>N$
+  with $m>n$, then 
+  \[d(x_m,x_n) \leq \frac{c^nd(x_1,x_0)}{1-c} < \eps.\]
+  Hence the sequence $x_n$ is Cauchy, and since $X$ is complete, it must
+  converge to some $a\in X$.
+
+  Next, we claim that $a\in X$ is a fixed of point of $T$. Observe that
+  $x_{n+1}=T(x_n)$ by definition, hence we can define a sequence $(T(x_n))$
+  which also converges as $T(x_n)\to a$. Since $T$ is continuous, it follows by
+  Sequential characterisation of continuity that $\lim_{n\to\infty}T(x_n)=T(a)$.
+  Moreover, note that by convergence we also have $\lim_{n\to\infty}T(x_n)=a$.
+  Hence we have $T(a)=a$, as fixed point.
+
+  Finally, we claim the fixed point $a$ is unique. Assume there exists $a'\in X$
+  s.t. $T(a')=a'$. Then, note that $d(T(a),T(a'))=d(a,a')$ since $a,a'$ are
+  fixed points, and we also have $d(T(a),T(a'))\leq cd(a,a')$ for $c\in[0,1)$,
+  since $T$ is a contraction. Hence it follows that 
+  \[d(a,a')\leq cd(a,a') \iff d(a,a')(1-c) \leq \implies d(a,a')=0.\]
+  Hence the fixed point $a$ is unique.
+\end{proof}
+
+\begin{exercise}
+  Consider $X=[3/2,\infty)\subset\RR$, a complete metric space under the
+  submetric. Let $T:X\to X$ be $T(x)=\frac{1}{2}(x+\frac{3}{x})$. Show that $T$
+  is a contraction map, and that it has fixed point $\sqrt{3}$.
+\end{exercise}
+\begin{proof}[Solution]
+  TODO.
+\end{proof}

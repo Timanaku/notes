@@ -1,0 +1,123 @@
+\section{Week 5 - 07 Feb 2022 - Open and Closed Sets}
+This next result is of particular importance for the introduction of topological
+spaces.
+\begin{proposition}
+  In any metric space $(X,d)$, arbitrary unions of open sets are open, and
+  finite intersections of open sets are open. That is,
+  \begin{enumerate}
+    \item Let $I$ be any indexing set, and let $\{U_i\}_{i\in I}$ be a
+      collection of open sets in $X$ indexed by $I$ (i.e. there is one open set
+    $U_i$ for each $i\in I$). Then the union $\bigcup_{i\in I} U_i$ of these
+    sets is open in $X$.
+  \item Let $U_1,\cdots, U_n$ be a finite collection of open sets in $X$. Then
+    $\bigcap_{i=1}^n U_i$ is open in $X$.
+  \end{enumerate}
+
+  \label{prop:openSetsUnionIntersections}
+\end{proposition}
+\begin{proof}
+  Let $x\in \bigcup_{i\in I} U_i$. Then there exists $i\in I$ s.t. $x\in U_i$.
+  Since $U_i$ is open, there exists $r>0$ with $B_X(x,r)\subset U_i$, and hence 
+  \[B_X(x,r)\subset U_i \subset \bigcup_{i\in I} U_i,\]
+  So this union is open.
+
+  For the second statement, let $x\in \bigcup_{i=1}^n U_i$. Then $x\in U_i$ for
+  all $1\leq i\leq n$. Since $U_i$ is open, there exists $r_i>0$ s.t.
+  $B_X(x,r_i)\subset U_i$ for each $i$. Let $r=\min(r_1,\cdots, r_n)>0$. Then 
+  \[B_X(x,r)\subset B_X(x,r_i)\subset U_i \forall 1\leq i\leq n,\]
+  Hence $B_X(x,r)\subset \bigcap_{i=1}^n U_i$ so the intersection is open, as
+  required.
+\end{proof}
+\begin{remark}
+  Note that for $n\in\NN$ the set $U_n=(-1/n,1/n)$ is open in $\RR$ with the
+  usual metric, however, the intersection $\bigcap_{n\in\NN} U_n =\{0\}$
+  (infinite intersection) is not open (and it's closed). Hence the requirement
+  for the collection above to be finite is crucial. The principal problem here
+  is that the infinimum of a strictly positive infinite set may be 0, unlike the
+  minimum of a finite strictly positive set, which needs to be strictly positive
+  itself.
+\end{remark}
+
+\subsection{Open sets in subspaces}
+Recall that for a metric space $(X,d)$ we can define a metric subspace $A\subset
+X$ with $(A,d_A)$ where $d_A(a,b)=d(a,b)$ for all $a,b\in A$, i.e. the space
+metric restricted to the subset $A$. We want to understand open sets in $A$
+(with the subspace matric) in terms of open sets in $X$. To start off, consider
+the following example
+\begin{example}
+  Consider the metric space $(X,d)$ to be the standard Euclidean space $\RR^2$.
+  Consider the subset $U=(a,b)\subset X$, which is not a open in $X$. However,
+  consider the subspace $A=\{(x,0): x\in\RR\}$, the x-axis. Then $U$ is open in
+  $A$. Recall that for $x\in A$ and $r>0$, we have $B_A(x,r)=B_X(x,r)\cap A$,
+  which is a standard $(a',b')$ open set in $\RR$.
+\end{example}
+
+\begin{proposition}
+  A set $U\subset A$ is open in a subspace $A$ of $X$ if and only if $U=V\cap
+  A$, for some open set $V\subset X$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Suppose that $V\subset X$ is open, and let $U=V\cap A$. Let $x\in U$, so that
+  $x\in V$. Since $V$ is open, there exists $r>0$ s.t. $B_X(x,r)\subset V$, and
+  observe that 
+  \[B_A(x,r)=B_X(x,r)\cap A \subset V\cap A = U,\]
+  Hence, $U$ is open. 
+  
+  Conversely, assume $U\subset A$ is open in the subspace metric. Hence, for all
+  $x\in U$ there exists $r_x>0$ s.t.
+  \[B_A(x,r_x)=B_X(x,r_x)\cap A \subset U.\]
+  Let $V=\cup_{x\in U} B_X(x,r_x)$, which is open in $X$ since it's the union of
+  open sets in $X$ (these open sets being the open balls). We claim $U=V\cap A$.
+  Observe that $U\subset V\cap A$ since if $x\in U$, then $x\in B_X(x,r_x)\cap
+  A\subset V\cap A$. Moreover, we have $V\cap A\subset U$, since if $x\in V\cap
+  A$ then $x\in B_X(y,y_r)\cap A \subset U$ for some $y\in U$.
+\end{proof}
+\begin{remark}
+  The set $V$ in the previous example is the open ball $B_A(x,r)$, which is open
+  in $X$.
+\end{remark}
+
+
+\subsection{Continuity and open set}
+Recall that for $(X,d_x),(Y,d_Y)$ metric spaces, $f:X\to Y$ is continuous if and
+only if for all $a\in X$ and $\eps>0$ there exists $\delta>0$ s.t.
+\[f(B_X(a,\delta))\subset B_Y(f(a),\eps).\]
+\begin{proposition}[Continuity and preimage of open sets]
+  Let $(X,d_X),(Y,d_Y)$ be metric spaces. Then a function $f:X\to Y$ is
+  $(d_X,d_Y)$-continuous if and only if for each open set $U\subset Y$, the
+  preimage $f^{-1}(U)=\{x\in X: f(x)\in U\}$ is open in $X$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  First, suppose that preimages of open sets are open. Let $a\in X$ and
+  $\eps>0$, so that $U=B_Y(f(a),\eps)$ is open in $Y$, so $f^{-1}(U)$ is open in
+  $X$ by assumption. Since $f(a)\in U$ we have that $a\in f^{-1}(U)$, so there
+  exists $\delta>0$ with 
+  \[B_X(a,\delta)\subset f^{-1}(U),\]
+  Since $f^{-1}(U)$ is open. Thus,
+  \[f(B_X(a,\delta)) \subset U=B_Y(f(a),\eps)\]
+  Which is a formulation of continuity, as required.
+
+  Conversely, suppose $f$ is continuous, and let $U\subset Y$. We want to show
+  that $f^{-1}(U)$ is open in $X$. Observe that for $a\in f^{-1}(U)$ we have
+  $f(a)\in U$, which is open, hence there exists $\eps>0$ s.t.
+  $B_Y(f(a),\eps)\subset U$. Since $f$ is continuous, there exists $\delta>0$
+  s.t. 
+  \[f(B_X(a,\delta))\subset B_Y(f(a), \eps)\subset U,\]
+  Hence $B_X(a,\delta)\subset f^{-1}(U)$. Thus, $f^{-1}(U)$ is open.
+\end{proof}
+\begin{remark}
+  Note that in the second part of the proof, we may well have that $f^{-1}(U)$
+  is empty, in which case the proof follows vacuously (the empty set is an open
+  set).
+\end{remark}
+The above propositions has two main applications for us
+\begin{enumerate}
+  \item It motivates the definition of topological spaces (dropping notions of
+    metrics, only using open sets!),
+  \item It gives us a method for identifying open and closed sets (Find the
+    preimage of a continuous function's open set, and then you get whether it is
+  open.)
+\end{enumerate}
+

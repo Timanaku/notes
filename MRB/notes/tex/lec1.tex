@@ -1,0 +1,113 @@
+\section{Week 1 - 10 Jan 2022}
+For the first part of the course, we will focus on particle mechanics: the
+way discrete dimensionless mass points move and interact with each other. The
+next part of the course, will be on the mechanics of rigid bodies: continuous,
+dimension-ful mass distributions, with the characteristic that the distance
+between any two points in the body do not change under any force -- the way it
+moves, wrt the center of mass, is similar to the particle mechanics, with the
+added flavour of the rotation about this center of mass. Finally, we will look
+at deformable bodies (a solid body for which the aforementioned distance can
+change), like beams.
+
+\subsection{Review}
+\begin{definition}[Point mass]
+  Let $P$ represent some point in space with position vector $x\in\RR^3$ given a
+  reference frame $O$. Such a point with a mass $m>0$ is called a \emph{point
+  mass}.
+  \label{def:pointMass}
+\end{definition}
+
+If such a point mass moves during a time interval $[0,T]$, we call it a
+trajectory or path. Such a path is described by a time-parametric function,
+$x:[0,T]\to\RR^n$. 
+
+\begin{definition}
+  The velocity of a point mass $P$ is
+  $\vec{v}=\dot{\vec{x}}=\frac{d \vec{x}}{dt}$.
+  \label{def:velocity}
+\end{definition}
+\begin{remark}
+  If $|\vec{v}|\neq 0$, we have that $\vec{v}$ is tanger to the point mass path.
+\end{remark}
+\begin{definition}
+  THe speed of $P$ is $v=|\vec{v}|=|\dot{\vec{x}}$.
+\end{definition}
+\begin{definition}
+  The acceleration of $P$ is $\vec{a}=\dot{\vec{v}}=\ddot{\vec{x}}$.
+\end{definition}
+\begin{remark}
+  Note that the rate of change of speed $\dot{v} \neq |\dot{\vec{v}}|$. In other
+  words, the magnitude operator and the time-derivative operator do not commute.
+  However, $v\cdot v= |\vec{v}|^2 =\vec{v}\cdot\vec{v}  \implies v\dot{v}
+  =\vec{v}\dot{\vec{v}}$. That is $\dot{v}= \left( \frac{\vec{v}}{v} \right)
+  \cdot \vec{a}$, hence the rate of change of speed really is the component of
+  acceleration in the direction tangent to the particle's trajectory.
+  \label{rem:speedAndVel}
+\end{remark}
+\begin{definition}
+  The linear momentum of $P$ is $\vec{p}=m\vec{v}$, its velocity weighted by its
+  mass.
+\end{definition}
+\begin{definition}
+  The \emph{angular momentum} of $P$ about a point $\vec{x_0}$ is 
+  \[\vec{L}=(\vec{x}-\vec{x_0}) \times \vec{p}\]
+  Where the cross product by position generally means \emph{moment}, and in this
+  case this is \emph{the moment of linear momentum}. The moment of some
+  physical quantity (in our case linear momentum) accounts for how that quantity
+  is located in space.
+\end{definition}
+\begin{definition}[Inertial frame of reference]
+  Reference frame with no acceleration.
+\end{definition}
+
+\subsubsection{Newton's law}
+Next, we look into a review of actual mechanics.
+\begin{definition}[Newton's 1st law]
+  A point mass (aka particle) with a constant velocity wrt an intertial frame of
+  reference, unless it is acted upon by a force.
+  \label{def:newton1}
+\end{definition}
+\begin{definition}[Newton's 2nd law]
+  The rate of change of linear momentum is proportional to the force applied,
+  \[\vec{F} = \frac{d\vec{p}}{dt}\]
+  For a point mass with time-constant mass, i.e. $m(t)=m_0\in\RR$,
+  \[\vec{F}=m\vec{a}\]
+\end{definition}
+\begin{definition}[Newton's 3rd law]
+  If an object $A$ applies a force $\vec{F}$ to an object $B$, then $B$ applies
+  a force $-\vec{F}$ to $A$. In other words, action and reaction are equal in
+  magnitude and opposite in direction.
+\end{definition}
+It's worth posing on the consequences of Newton's laws,
+\begin{enumerate}
+  \item $\vec{F}=\vec{0} \implies \vec{p}=p_0\in\RR^n$, i.e. $\vec{p}$ is
+    constant. Moreover, if $m$ is constant, then $\vec{v}=v_0\in\RR$, i.e.
+    velocity would be constant.
+
+  \item Consider the angular momentum $\vec{L}=\vec{x}\times\vec{p}$, about an
+    origin $\vec{x_0}=\vec{0}$. We have 
+    \[\frac{d\vec{L}}{dt}=\dot{\vec{x}}\times\vec{p}
+    +\vec{x}\times\dot{\vec{p}} = m(\vec{v}\times \vec{v}) +
+  \vec{x}\times\vec{F} = \vec{x}\times\vec{F}\]
+  As can be seen in the LHS, this is exactly the definition of a moment, in
+  particular this is a \emph{moment of force}, or \emph{torque}. Hence the rate
+  of change of angular momentum is exactly the torque.
+
+\item Recall that that kinetic energy is defined as $K=\frac{1}{2} mv^2$
+  (recall: the integral of force times velocity wrt $t$). Using Newton's second
+  law for a constant mass partcile, $m\vec{a}=\vec{F}$, we have
+  \[m\dot{\vec{v}}\cdot \vec{v}= \vec{F}\cdot\vec{v}\]
+  \[\implies m\frac{d}{dt}\left( \frac{1}{2} \vec{v}\cdot\vec{v} \right) =
+  \vec{F}\cdot\vec{v}\]
+  By Remark \ref{rem:speedAndVel} we have,
+  \[\implies \frac{d}{dt}\left( \frac{1}{2}mv^2 \right) = \vec{F}\cdot\vec{v} \]
+  Integrating from $t_0$ to $t_1$, we have
+  \[\int_{t_0}^{t_1} \frac{d}{dt}\left( \frac{1}{2} mv^2 \right) dt =
+  \int_{t_0}^{t_1} \vec{F}\cdot\vec{v} dt\]
+  \[\implies \left[ \frac{1}{2} mv^2 \right]^{t_1}_{t_0} = \Delta K
+  \int_{t_0}^{t_1}\vec{F}\cdot\vec{v} dt = \int_C \vec{F}\cdot d\vec{x}\]
+  This is the definition of kinetic energy, the force in the direction of
+  velocity (and weighed by speed) is the rate of change of this quantity we call
+  kinetic energy. The RHS is the work done by $\vec{F}$, which in general
+  depends on $C$, but in some cases (conservative fields) it does not.
+\end{enumerate}

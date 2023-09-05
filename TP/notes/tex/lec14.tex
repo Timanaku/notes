@@ -1,0 +1,99 @@
+\section{Week 5 - 09 Feb 2022 - Open and Closed Sets}
+Following from the theorem on preimages of open sets for continuous functions,
+we have the following corollary,
+\begin{corollary}
+  Let $(X,d_X), (Y,d_Y)$ be metric spaces. Then $f:X\to Y$ is
+  $(d_X,d_Y)$-continuous if and only if for each closed subset $V\subset Y$, the
+  preimage $f^{-1}(V)$ is closed in $X$.
+\end{corollary}
+\begin{proof}
+  TODO. Exercise. Just check complements, which must be open, and use the
+  previous theorem.
+\end{proof}
+Before we can use these results to show sets are open or closed, we need a nice
+set of continuous functions.
+\begin{definition}
+  A polynomial function $p:\RR^n\to\RR$ is a function of the form
+  \[f(x_1,\cdots, x_n) = \sum_{i_1,\cdots, i_n =0}^m a_{i_1,\cdots, i_n}
+  x_1^{i_1}x_2^{i_2}\cdots x_n^{i_n},\]
+  For $m\in\NN$ and $a_{i_1, \cdots, i_n}\in \RR$.
+  \label{<+label+>}
+\end{definition}
+So for example, for $n=1$, we just get the familiar 1-variable polynomial
+$h(x)=x^2+\sqrt{2}x-1$, and for $n=2$ we just get polynomials like
+$f(x,y)=x^2+y^2, j(x,y)=x^2y-4x^2 -xy + y^2$.
+
+\begin{lemma}
+  For each $1\leq i\leq n$, the function $f_i:\RR^n\to\RR:(x_1,\cdots,
+  x_n)\mapsto x_i$ is $(d_2,d)$-continuous.
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  Let $\vec{a}\in\RR^2$ and $\eps>0$. Observe that for $1\leq i \leq n$, 
+  \[|x_i-a_i| \leq \sqrt{(x_1-a_1)^2 + \cdots + (x_n-a_n)^2},\]
+  Hence we have $d_2(\vec{x},\vec{a})< \eps \implies
+  d(f_i(\vec{x}),f_i(\vec{a}))=d(x_i,a_i)<\eps$. Hence $f_1$ is continuous with
+  $\delta=\eps$.
+\end{proof}
+
+\begin{proposition}
+  All polynomial functions $p:\RR^n\to\RR$ are continuous (in Euclidean metric,
+  and by strong equivalence also in taxicab and chessboard metrics).
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Linear combinations and products of continuous real-valued functions are
+  continuous, so the result follows from the above lemma,
+\end{proof}
+
+\begin{example}
+  Consider the set open square $(a,b)\times(c,d)$ in $\RR^2$ with the euclidean
+  metric. We show this set is indeed open.  By the above lemma, the functions
+  $f(x,y)=x, g(x,y)=y$ are continuous. We showed that $(a,b),(c,d)$ are open in
+  $\RR$, hence it follows that $U_1=f^{-1}( (a,b))=(a,b)\times\RR$, and similarly
+  $U_2=g^{-1}( (c,d))=\RR\times (c,d)$, are open sets in $\RR^2$. Observe that
+  $(a,b)\times(c,d)=U_1\cap U_2$, an intersection of two open sets, is open by
+  Proposition \ref{prop:openSetsUnionIntersections}.
+\end{example}
+\begin{example}
+  The set $A=\{(x,y)\in\RR^2 : 1<x^2+y^2<4\}$ is open in $(\RR^2, d_2)$ since
+  $A= f^{-1}( (1,4))$ for $f(x,y)=x^2+y^2$, and $(1,4)$ is open and $f$ is a
+  continuous function.
+
+  The set $D=\{(x,y)\in\RR^2 : x=y+2\}$ is closed in $\RR^2$ since
+  $D=g^{-1}(\{2\})$ for $g(x,y)=x-y$, and $\{2\}$ is closed and $g$ is
+  continuous.
+\end{example}
+
+\begin{remark}
+  Why do we use preimages and not images? We show this doesn't work with a
+  couple of examples. Consider the continuous function
+  $f:\RR^2\to\RR:(x,y)\mapsto 0$, but for any nonempty open set $U\subset\RR^2$
+  we have $f(U)=\{0\}$, which is not open. Similarly, for the continuous
+  function $g:\RR\to\RR^2:x\mapsto(x,0)$, the image $g( (a,b))$ is not open.
+  However, considering the images, gives another object, called \emph{open
+  functions} (whenever the image of an open set is open). Similarly, we have
+  \emph{closed functions} whenever images of closed sets are closed. However,
+  continuous functions need not to be open or closed, and open or closed
+  functions don't need to be continuous.
+  \label{<+label+>}
+\end{remark}
+
+
+\subsection{Open sets and distinct metrics}
+Consider the metric spaces $(X,d),(X,d')$, where only the metrics are different.
+Then open sets are different in each metric space. Consider the case in $\RR^2$,
+where the set $U=B_{(\RR,d)}(a,r)=(a-r,a+r)$ is open in $\RR$, but $U$ is not
+open in $(\RR^2,d_2)$, and it is open in $(\RR^2, D)$, where $D$ is the railway
+metric.
+\begin{proposition}
+  Let $d,d'$ be metrics on $X$, and assume $\exists c>0$ s.t. 
+  \[d(x,y)\leq cd'(x,y) \forall x,y\in X.\]
+  Then if $U$ is open in $(X,d)$ is is also open in $(X,d')$.
+  \label{prop:equivalenceAndOpenSets}
+\end{proposition}
+\begin{proof}
+  TODO. Exercise. Show that any open ball in $(X,d)$ contains an open ball in
+  $(X,d')$.
+\end{proof}
+Note that for strongly equivalent metrics, the open sets are the same.

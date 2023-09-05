@@ -1,0 +1,95 @@
+\section{Week 3 - 24 Jan 2022 - Conservative forces, energy, and work}
+With what we know, we can look back at the definition of work,
+\[W=\int_{C_{A\to B}} \vec{F}\cdot d\vec{x}\]
+And consdier $\vec{x}(s)$ to be a parametrisation s.t. $\vec{x}(0)=A,
+\vec{x}(1)=B$. Hence,
+\[W= \int_0^1 \vec{F}\cdot \frac{d\vec{x}}{ds}ds\]
+\[W= -\int_0^1 \nabla \phi\cdot \frac{d\vec{x}}{ds}ds\]
+By Theorem \ref{thm:conservativeFieldsEquivalence}, and by using the chain rule
+we get,
+\[W= -\int_0^1 \frac{d\phi(\vec{x})}{ds}ds= - (\phi(\vec{x}(0))-\phi(\vec{x}(1)))\]
+\[W= \phi(B)-\phi(A),\]
+Which does not depend on $C$ but only on $A,B$. Hence $\Delta\phi=-W$, that is
+if we increase the potential, we're doing negative work -- i.e. working against
+force.
+
+\begin{example}
+  If $\vec{F}$ is constant, then $\nabla \times \vec{F}=0$. What is the
+  potential funciton $V$ s.t. $\vec{F}=-\nabla V$?
+\end{example}
+\begin{proof}[Solution]
+  It's quite easy, so I'll leave it blank. But the solution is obviously
+  $V=-\vec{F}\cdot\vec{x}+C$. For example, for gravity we know
+  $\vec{F}=m\vec{g}$. Then $V=-m\vec{g}\cdot\vec{x}$, without loss of generality
+  setting $C=0$.
+\end{proof}
+
+\begin{proposition}[Superposition of conservative forces]
+  Consider conservatives forces $\vec{F_i}$ with potentials $V_i$ acting on the
+  same space. The resulting forces is the sum of the forces, $\vec{F}=\sum_i
+  \vec{F_i}$ and the resulting potential is $V=\sum_i V_i$.
+\end{proposition}
+
+\begin{proposition}[Conservation of Energy]
+  A body affected only by conservative forces has its total energy conservated.
+  That is, for a body in a conservative force field we have
+  \[\frac{1}{2}mv^2+ V = E\in\RR\]
+  Where $V$ is the potential energy of the body.
+  \label{prop:conservationEnergyConservativeField}
+\end{proposition}
+\begin{proof}
+  Consdier Newton's second law $\vec{F}=m\ddot{\vec{x}}$ and take the
+  dot-product both sides by $\dot{\vec{x}}$. Recall that $\ddot{\vec{x}}\cdot
+  \dot{\vec{x}}=v\dot{v}=\frac{d}{dt}\left( \frac{1}{2}v^2 \right)$. Hence we
+  have 
+  \[m\ddot{\vec{x}}\cdot\dot{\vec{x}} = \frac{d}{dt}\left( \frac{1}{2}mv^2
+  \right)= \vec{F}\cdot\dot{\vec{x}}.\]
+  Next, note that $\vec{F}\cdot\vec{x}=-\vec{x}\cdot\nabla
+  V=-\frac{d}{dt}\left( V(\vec{x}(t)) \right)$. Hence we have 
+  \[\frac{d}{dt}\left( \frac{1}{2}mv^2 \right)= \vec{F}\cdot\dot{\vec{x}}\]
+  \[= -\frac{d}{dt}\left( V(\vec{x}(t)) \right)\]
+  \[\therefore \frac{d}{dt}\left( \frac{1}{2}mv^2+V(\vec{x}(t)) \right)=0\]
+  In other words, 
+  \[\frac{1}{2}mv^2+V(\vec{x}(t))= E,\]
+  For some constant $E\in\RR$, as required.
+\end{proof}
+\begin{remark}
+  If $\vec{F}$ is applied always perpendicular to the speed, then the system
+  does no work, since in this case $\vec{F}\cdot\dot{\vec{x}}=0$. If this is the
+  only force acting on the object, then it follows that speed must be constant.
+\end{remark}
+
+I've jumped the most trivial examples, and put the effort only for the more
+instructing ones.
+\begin{example}[Energy equation]
+  Suppose a mass $m$ moves under gravity and air resistance
+  $\vec{F_a}=-k\dot{\vec{x}}$. Show that the total energy only decreases.
+\end{example}
+\begin{proof}[Solution]
+  By Newton's second law, we have that the equation of motion is 
+  \[m\ddot{\vec{x}} = m\vec{g} - k\vec{x}\]
+  and so by taking the dot product by $\dot{\vec{x}}$, it follows that 
+  \[\frac{d}{dt}\left( \frac{1}{2}mv^2 + m\vec{g}\cdot\vec{x} \right) =
+  -k\vec{x}\]
+  \[\implies \frac{d}{dt}(K+V)\leq 0.\]
+\end{proof}
+
+\begin{theorem}
+  All central forces $\vec{F}=F(|\vec{x}|)\frac{\vec{x}}{|\vec{x}|}$ are
+  conservative.
+  \label{thm:centralForcesConserv}
+\end{theorem}
+\begin{proof}
+  We only need to check $\nabla\times\vec{F}=0$. Note that by the product rule,
+  \[\nabla\times F(x)\frac{\vec{x}}{x} = \frac{F(x)}{x}(\nabla\times\vec{x}) +
+  \nabla \frac{F(x)}{x} \times \vec{x} = \nabla \frac{F(x)}{x} \times \vec{x}.\]
+  Let us write $G(x)=\frac{F(x)}{x}$ and note that $\nabla G(x)= G'(x)\nabla x$.
+  Then recall that $x^2=|\vec{x}|^2 = \vec{x}\cdot\vec{x}$ and observe that,
+  \[2x \nabla x = \nabla x^2 = 2\vec{x}\]
+  \[\implies \nabla x = \frac{\vec{x}}{x}\]
+  \[\implies \nabla G(x)= G'(x)\frac{\vec{x}}{x}.\]
+  Hence it follows that $\vec{x}\times \nabla G(x)=0$, since $\nabla
+  G(x)=k\vec{x}$, and so $\vec{x}\times k\vec{x}=0$. Therefore, $\nabla \times
+  \vec{F}=0$, as required.
+\end{proof}
+

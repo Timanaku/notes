@@ -1,0 +1,137 @@
+\section{Week 10 - 16 Mar 2022 - Compactness }
+Compactness is another topological property, giving a notion of \emph{smallness}
+to topological spaces. One of the motivations for it is the generalisation of
+the extreme value theorem in more general topological spaces,
+\begin{theorem}
+  Let $X=[a,b]\subset\RR$. Then any continuous function $f:X\to\RR$ attains a
+  maximum and minimum. That is, there exist $p,q\in X$ s.t. 
+  \[f(p)\leq f(x) \leq f(q) \forall x\in X.\]
+  \label{thm:evtReals}
+\end{theorem}
+This can be generalised into
+\begin{theorem}
+  Let $X$ be a compact topological space. Then any continuous function
+  $f:X\to\RR$ attains a maximum and minimum. That is, there exist $p,q\in X$
+  s.t. 
+  \[f(p)\leq f(x) \leq f(q) \forall x\in X.\]
+  \label{thm:evtTopo}
+\end{theorem}
+\subsection{Definition}
+In order to rigurously defind compactness, we need to some preliminaries. We
+start by open covers.
+\begin{definition}[Cover]
+  A cover of a topological space $X$ is a collection $\{U_i\}_{i\in I}$ of
+  subsets of $X$ with 
+  \[X=\bigcup_{i\in I} U_i.\]
+  An open cover is a cover such that each $U_i$ is open in $X$.
+  A cover is called finite if $I$ is a finite set.
+  \label{def:cover}
+\end{definition}
+\begin{example}
+  \begin{enumerate}
+    \item An open cover of $\RR$ is $\{(-n,n)\}_{n\in\NN}$. This is not a finite cover.
+    \item Another example is, for any topological space $X$, $\{X\}$ is a finite
+      open cover of $X$.
+    \item For any metric space $X$ and any $a\in X$, $\{B_X(a,r)\}_{r>0}$ is an
+      infinite (and uncountable actually) open cover of $X$.
+    \item For any metric space $X$ and any $r>0$, $\{B_X(a,r)\}_{a\in X}$ is an
+      open cover of $X$, and it's finite if and only if $X$ is finite.
+    \item The collection $\{(2^{-n},1)\}_{n\in\NN}$ is an open cover of $(0,1)$.
+    \item Finally, let $U_1= [0,\frac{1}{2})$ and $U_n = (\frac{1}{n},1)$ for
+      $n\geq 2$, so $\{U_n\}_{n\in\NN}$ is an open cover of $[0,1)$ (note $U_1$
+      is open in $[0,1)$).
+  \end{enumerate}
+\end{example}
+\begin{definition}
+  If $\{U_i\}_{i\in I}$ is a cover of $X$ and $J\subset I$ then
+  $\{U_i\}_{i\in J}$ is a subcover if $\{U_i\}_{i\in J}$ is still a cover. It is
+  called a finite subcover if $J$ is a finite set.
+  \label{def:subcover}
+\end{definition}
+\begin{example}
+  Among the previous examples, we dcecide which ones have finite subcovers. 
+  \begin{enumerate}
+    \item For this example, for $J\subset \NN$ finite, we can find $N=\max J$,
+      so $\bigcup_{n\in J} (-n, n)= (-N,N)$, so there is no finite subcover.
+    \item $\{X\}$ covering $X$ is already finite.
+    \item $\{B_x(a,r)\}_{r>0}$ covering a metric space $X$ has a finite subcover
+      if and only if $X$ is \emph{bounded}. Note that this covering is nested, so for
+      the cover to be finite, it's the same to say that there's a finite $r>0$
+      s.t. its open ball around $a$ covers $X$ (gives intuition on boundedness
+      of $X$).
+    \item $\{B_X(a,r)\}_{a\in X}$ covering $X$ has finite subcover if it's
+      \emph{totally bounded}. 
+    \item $\{(2^{-n},1)\}_{n\in\NN}$ covering $(0,1)$ doesn't have a finite
+      subcover. For finite $J\subset\NN$ finite with $N=\max J$, 
+      \[\bigcup_{n\in J} (2^{-n},1) = (2^{-N}, 1) \neq (0,1)\]
+    \item $\{U_n\}_{n\in\NN}$ with $U_1=[0,\frac{1}{2})$,
+      $U_n=(\frac{1}{n},1)$ for $n\geq 2$ covering $[0,1)$. It has many finite
+      subcovers, e.g. $\{U_1,U_3\}$.
+  \end{enumerate}
+\end{example}
+We are now prepared for the definition of compactness.
+\begin{definition}[Compact topological space]
+  A topological space $X$ is compact if every open cover of $X$ has a finite
+  subcover.
+  \label{def:compactness}
+\end{definition}
+From the above examples, we saw $\RR, (0,1)$ are not compact. We don't know that
+$[0,1)$, since we saw that there exists a finite subcover, but this must hold
+for every open cover. We will eventually see that in fact it is not compact.
+
+\begin{proposition}
+  Let $f:X\to Y$ be a continuous map of topological spaces. If $X$ is compact,
+  then so is $f(X)$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Let $\{U_i\}_{i\in I}$ be an open cover of $f(X)$. Then
+  $\{f^{-1}(U_i)\}_{i\in I}$ is an open cover of $X$, since $f:X\to f(X)$ is
+  continuous and $f^{-1}(f(X))=X$. Since $X$ is compact, there is a finite
+  subcover $\{f^{-1}(U_i)\}_{i\in J}$ for some finite $J\subset I$. Now
+  $f(X)=f(\bigcup_{i\in J}f^{-1}(U_i))= \bigcup_{i\in
+  J}f(f^{-1}(U_i))=\bigcup_{i\in J}U_i$, where we use $U_i\subset f(X)$ to see
+  that $f(f^{-1}(U_i))=U_i\cap f(X) = U_i$. Hence $\{U_i\}_{i\in J}$ is a finite
+  subcover of $\{U_i\}_{i\in I}$.
+
+  Note that $f(\bigcup_{i\in J}f^{-1}(U_i))= \bigcup_{i\in
+  J}f(f^{-1}(U_i))$ since,
+  \[f(\bigcup_{i\in J}f^{-1}(U_i))= \{f(x) : x\in \bigcup_{i\in J} f^{-1}(U_i)\}\]
+  \[= \{f(x): x\in f^{-1}(U_i) \exists i\in J\}\]
+  \[=\bigcup_{i\in J} \{f(x): x\in f^{-1}(U_i)\}= \bigcup_{i\in
+  J}f(f^{-1}(U_i)).\]
+  And note that this proves the fact since the open cover $\{U_i\}_{i\in I}$ was
+  taken to be arbitrary.
+\end{proof}
+\subsection{Compactness for metric spaces}
+\begin{definition}[Boundedness]
+  A metric space $X$ is bounded if $X\subset B_X(a,r)$ (hence $X=B_X(a,r)$) for
+  some $a\in X$ and some $r>0$.
+  \label{def:boundednessMetricSpace}
+\end{definition}
+\begin{definition}
+  A metric space $X$ is totally bounded if for every $\eps>0$ the open cover
+  $\{B_X(a,\eps)\}_{a\in X}$ has a finite subcover.
+  \label{def:totallyBoundedMetricSpace}
+\end{definition}
+\begin{lemma}
+  Let $(X,d)$ be a metric space.
+  \begin{enumerate}
+    \item If $X$ is compact (with the topology induced by metric), then $X$ is
+      totally bounded.
+    \item If $X$ is totally bounded, then $X$ is bounded.
+  \end{enumerate}
+  \label{lem:boundednessMetricSpaces}
+\end{lemma}
+\begin{proof}
+  (1) is immediate from the defintion.
+
+  For (2), suppose that $X$ is totally bounded, and let $\eps>0$. Then
+  $\{B_X(a,\eps)\}_{a\in X}$ has a finite subcover $\{B_X(a_i,
+  \eps)_{i=1,\cdots, n}\}$. For some $a_i\in X$. Let $D= \max_{1\leq i,j\leq n}
+  (a_i, a_j)$. Then for any $x\in X$ there exists $i\in\{1,2,\cdots, n\}$ s.t.
+  $x\in B_X(a_i,\eps)$, and by the triangle inequality,
+  \[d(a_1, x) \leq d(a_1, a_i) +d(a_i, x) \leq D+\eps.\]
+  Thus, since we have that the distance betwen two arbitrary points is bounded
+  above, it follows that $X\subset \overline{B}_X(a_1, D+\eps)$ is bounded.
+\end{proof}

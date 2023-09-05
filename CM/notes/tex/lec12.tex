@@ -1,0 +1,44 @@
+\section{Lecture 12 - 1 Mar 2022 - Liouville's Theorem, FT Algebra}
+The case when the domain of $f$ is defined on $\CC$, something special happens.
+\begin{theorem}[Liouville's Theorem]
+  Let $f:\CC\to\CC$ be a holomorphic function and not constant. Then $f$ is
+  unbounded.
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Suppose $f$ is holomorphic and bounded. That is, there exists $M>0$ such that
+  $|f(z)|\leq M$ for all $z\in\CC$. We now show that $f'(z)=0$ for all $z$,
+  hence $f$ must be constant. By Cauchy's integral formula, we have, for some
+  circle path $\gamma$ with center $z$ and radius $r>0$,
+  \[f'(z)=\frac{1}{2\pi i} \oint_{\gamma}\frac{f(\zeta)}{\zeta-z}d\zeta.\]
+  According to the bounds for integrals, we have 
+  \[|f'(z)|\leq \frac{1}{2\pi} \frac{M}{r^2} 2\pi r = \frac{M}{r} \forall r>0. \]
+  Hence $f$ must have $f'=0$, as required.
+\end{proof}
+
+\begin{theorem}[Fundamental Theorem of Algebra]
+  Let $p(z)$ be a polynomial of degree $d>0$. Then $p(z)$  has at least one
+  root.
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Suppose that $p(z)=0$ has no solutions. Then we can define
+  $f:\CC\to\CC:z\mapsto \frac{1}{p(z)}$, a holomorphic function (since $p$ is
+  certainly holomorphic, and by assumption non-zero, and $1/z$ is a holomorphic
+  function for the given domain, and compositions of holomorphic functions are
+  holomorphic). Moreover, note that $f(z)\to 0$ as $z\to\infty$ since $d>0$, by
+  definition of polynomials. This implies that there exists $K,L>0$ constants
+  s.t. $|f(z)|\leq K$ for $|z|>L$. Let $\gamma$ be a circle with center $z$ and
+  radius $R\geq |z|+L$. Then by Cauchy's integral formula,
+  \[|f'(z)|= \frac{1}{2\pi} \left|
+  \oint_{\gamma}\frac{f(\zeta)}{\zeta-z}d\zeta\right| \frac{1}{2\pi}
+  \frac{K}{R^2} 2\pi R = \frac{K}{R} \forall R\geq |z|+L,\]
+  Hence it follows $f'(z)=0$, a contraditiction, since $d>0$. Hence $f$ can't be
+  holomorphic, i.e. $p(z)=0$ must have a solution.
+\end{proof}
+The proof for $p$ having $d$ roots follows immediately, since, given that we
+have surely one root, we can factor out the root, and we're left with a new
+polynomial of degree $d-1$, which will again surely have one root, and again can
+be factorised to get a new polynomial of degree $d-2$. We carry on inductively
+and it must follow that $p$ can be factorised into $d$ factors, i.e. have $d$
+roots.

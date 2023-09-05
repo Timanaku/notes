@@ -1,0 +1,103 @@
+\section{Lecture 10 - 24 Feb 2022 - Cauchy's integral formulae}
+We will now see some of the benefits and most astonishing results that come from
+Cauchy's Theorem. The first result, called Cauchy's Integral Formula, will show
+that the values of a holomorphic function $f$ inside some closed path $\gamma$
+which is null-homotopic are fixed by the values of $f$ on $\gamma$: The value at
+one point is entirely determined by what's going in its surroundings.
+\begin{theorem}[Cauchy's Integral Formula]
+  Let $\Omega\subset\CC$ be open and $f:\Omega\to\CC$ be holomorphic. Suppose
+  $\gamma:[0,1]\to\Omega$ is a simple closed path traced anticlockwise. Then for
+  any $z\in\Omega$ which lies inside $\gamma$ we have
+  \[f(z)=\frac{1}{2\pi i} \oint_{\gamma} \frac{f(\zeta)}{\zeta-z} d\zeta.\]
+  \label{thm:CauchyIntegral}
+\end{theorem}
+\begin{proof}
+  Let $I=\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}d\zeta$. We claim $I=2\pi i
+  f(z)$. To do this, let us define $\delta$, a circle with center $z$ and small
+  radius $r>0$, traced anticlockwise. For $r$ sufficiently small, $\gamma$ is
+  homotopic to $\delta$ in $\Omega\setminus\{z\}$. Note that the integrand of
+  $I$ is differentiable on $\Omega\setminus\{z\}$, hence 
+  \[I=\oint_{\gamma}\frac{f(\zeta)}{\zeta-z}d\zeta=\oint_{\delta}\frac{f(\zeta)}{\zeta-z}d\zeta,\]
+  By Theorem \ref{thm:homotopyInvariance}. Consider the following integral, by
+  parametrising $\delta$ as $\gamma=z+re^{it}$ with $t\in[0,2\pi]$,
+  \[\oint_{\delta}\frac{f(z)}{\zeta - z} d\zeta =
+  f(z)\int_0^{2\pi}\frac{1}{re^{it}}ire^{it}dt=2\pi i f(z).\]
+  Hence observe that 
+  \[|I-2\pi i f(z)| = |\oint_{\delta}\frac{f(\zeta)-f(z)}{\zeta-z} d\zeta| \leq
+  2\pi r |f'(z)+1|, \]
+  By using the method of upper-bound for integrals in Proposition
+  \ref{prop:upperBoundIntegral}. Hence since $r$ can be arbitrarily small, it
+  follows that $I=2\pi i f(z)$, as required.
+\end{proof}
+\begin{remark}
+  Note that in this theorem we don't require any constraints on $\gamma$. It
+  just needs to be closed, simple, and enclose the point $z\in\CC$.
+\end{remark}
+\begin{theorem}[Cauchy's integral formula for derivatives]
+  Let $\gamma$ be a simple closed path in $\CC$ traced anticlockwise, let
+  $\Omega$ be open and containing $\gamma$ and all points inside, and let
+  $f:\Omega\to\CC$ be differentiable. Then $f$ can be differentiated infinitely
+  often at any point $z$ inside $\gamma$ and the derivatives for $n\geq 0$ are
+  given by
+  \[f^{(n)}(z) = \frac{n!}{2\pi i} \oint_{\gamma}
+  \frac{f(\zeta)}{(\zeta-z)^{n+1}}d\zeta.\]
+  \label{<+label+>}
+\end{theorem}
+
+Note that for every point $z$ in an open set $\Omega$, there exists a disk in
+$\Omega$ centered at $z$, by defintion of open set. By considering a circle in
+this disk with center $z$, we can prove the above result simply by
+differentiating the integrand wrt $z$ inductively. Moreover, one also gets the
+following result,
+\begin{theorem}
+  Let $\Omega$ be open and $f:\Omega\to\CC$ be differentiable. Then $f$ be
+  differentiated infinitely often.
+  \label{thm:complexDiffInfinity}
+\end{theorem}
+
+\subsection{Applications}
+Recall that a function is \emph{analytic} if it can be locally (on open sets) be
+represented as a power series. We already saw earlier that power series are
+holomorphic. The converse, that every holomorphic function is analytic, is also
+true to an extent by the following theorem,
+\begin{theorem}
+  Let $\Omega\subset\CC$ be open and $f:\Omega\to\CC$ holomorphic. Then for each
+  $c\in\Omega$ there exists an open disk $D_c\subset\Omega$ s.t. 
+  \[f(z)=\sum_{n=0}^{\infty} \frac{f^{(n)}(c)}{n!}(z-c)^n,\]
+  for all $z\in D_c$. That is, $f$ can locally be represented by its Taylor
+  series.
+  \label{thm:analyticHolomorphic}
+\end{theorem}
+\begin{proof}
+  Since $\Omega$ is open we can find a disk $D_C\subset\Omega$ centered at $c$
+  for every $c\in\CC$. Let $\gamma$ be a closed circle with center $c$
+  containing $z\in D_c$. Then by Cauchy's integral formula we have
+  \[f^{(n)}(c) = \frac{n!}{2\pi i} \oint_{\gamma} \frac{f(\zeta)}{\zeta-c}
+  d\zeta\]
+  \[\implies \sum_{n=0}^{\infty} \frac{f^{(n)}(c)}{n!}(z-c)^n=
+  \sum_{n=0}^{\infty} \frac{1}{n!} \frac{n!}{2\pi i} \oint_{\gamma}
+  \frac{f(\zeta)}{\zeta-c} d\zeta  (z-c)^n.\] 
+  \[\implies \cdots = \frac{1}{2\pi i} \oint_{\gamma} \sum_{n=0}^{\infty}
+  \frac{f(\zeta) (z-c)^n}{(\zeta-c)^{n+1}}d\zeta.\]
+  Next, since we required $z$ to be inside $\gamma$, it follows that 
+  \[\left| \frac{z-c}{\zeta -c }\right| < 1\]
+  for every $\zeta$ \emph{on} $\gamma$, so the integrand is just a convergent
+  geometric series. We can find the sum by treating it as a standard geometric
+  series, with sum $S_{\infty} =  a/(1-r)$, 
+  \[\sum_{n=0}^{\infty} \frac{f(\zeta) (z-c)^n}{(\zeta-c)^{n+1}} =
+  \frac{\left[ \frac{f(\zeta)}{\zeta-c}\right]}{\left[ 1-\frac{z-c}{\zeta-c}
+  \right]} = \frac{f(\zeta) }{\zeta-z}. \]
+  Hence the integral we're interested in reduces to 
+  \[\sum_{n=0}^{\infty} \frac{f^{(n)}(c)}{n!}(z-c)^n = \cdots = \frac{1}{2\pi i}
+  \oint_{\gamma} \frac{f(\zeta)}{\zeta-z}dz, \]
+  Which is precisely $f(z)$ by Cauchy's integral formula.
+
+\end{proof}
+\begin{remark}
+  This is really special about holomorphic functions. We saw in real analysis
+  that there exists functions whose taylor series exist and converge, but do not
+  converge against the original function. However, in holomorphic functions, we
+  have that its holomorphic function will not only converge, but also converge
+  against the original function.
+  \label{<+label+>}
+\end{remark}

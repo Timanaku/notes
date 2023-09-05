@@ -1,0 +1,27 @@
+\section{Lecture 10 - 24 Feb 2022 - Cauchy's theorem}
+\begin{definition}
+  A simple closed path on an interval $[a,b]$ is a closed path $\gamma$ s.t.
+  $\gamma(t_1)\neq \gamma(t_2)$ for $a\leq t_1<t_2< b$.
+  \label{def:simpleClosedPath}
+\end{definition}
+Hence a simply closed path is a closed path which is injective everywhere except
+at the point where the path closes. Now consider a simple closed path $\gamma$
+in $\CC$. One can show that the complement of $\gamma$ (i.e. the complement of
+the image of $\gamma$, the path itself) is the union of two disjoint non-empty
+connected open sets. The inside is a bounded set (bounded by the path itself),
+and the outside set is the unbounded set. If $\Omega$ is an open set containing
+$\gamma$ and all the points inside $\gamma$, then then one can show that
+$\gamma$ (observe that it is an arbitrary simple closed path in $\Omega$) is
+homotopic to a constant path in $\Omega$. Hence, a special case of Theorem
+\ref{thm:CauchyNullHomotopic} is the following,
+\begin{theorem}[Cauchy's Theorem]
+  Let $\gamma$ be a simple closed path of finite length in $\CC$ and let
+  $\Omega$ be an open set containing $\gamma$ and all the points inside of it.
+  Let $f:\Omega\to\CC$ be differentiable. Then,
+  \[\int_{\gamma} f(z)dz = 0.\]
+  \label{thm:CauchyTheorem}
+\end{theorem}
+Note that the difference between Theorem \ref{thm:CauchyNullHomotopic} and
+Theorem \ref{thm:CauchyTheorem} is that in the latter we do not require
+explicitly showing that the path is null-homotopic, but rather just simply
+closed.

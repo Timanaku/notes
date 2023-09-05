@@ -1,0 +1,53 @@
+\section{Week 4 - 31 Jan 2022 - Motion in smooth axisymmetric surface}
+In the last lecture we looked at an example of motion on a track, and found
+useful defining a $(\xi,\eta)$-space where it was easy to analyse the system. We
+now look into a more general 3D motion, in an axisymmetric surface, a.k.a.
+surface of revolution. We analyse this system with cylindrical coordinates. In
+this kind of system, position is given by
+\[\vec{x}= r\vec{e_r} + z\vec{e_z}.\]
+Where $r,\vec{e_r}, z$ are functions of time. Hence the velocity and
+acceleration vectors will be rather similar to the polar coordinates case,
+\[\dot{\vec{x}}= \dot{r}\vec{e_r} + r\dot{\theta}\vec{e_{\theta}} +
+\dot{z}\vec{e_z}.\]
+\[\ddot{\vec{x}}= (\ddot{r}- r\dot{\theta}^2)\vec{e_r} +
+(2\dot{r}\dot{\theta}+ r\ddot{\theta})\vec{e_{\theta}} + \ddot{z}\vec{e_z}.\]
+Since it is a surface of revolution, we have $r=f(z)$ and by the chain rule
+$\dot{r}=f'(z)\dot{z}$. Using this above give
+\[\dot{\vec{x}}=\dot{z}\left[ f'(z)\vec{e_r}+\vec{e_{\theta}} \right]
++r\dot{\theta}\vec{e_{\theta}}.\]
+Note that a parametric description of the surface is 
+\[\vec{X}(Z,\Theta) = f(Z) \vec{e_r}(\Theta) + Z\vec{e_z}.\]
+Recall that $\vec{X}_Z$ and $\vec{X}_{\Theta}$ are tangent directions (from
+vector calculus, I'm using subscript for partial differentiation),
+\[\vec{X}_Z = f'(Z)\vec{e_r}(\Theta) + \vec{e_z},\]
+\[\vec{X}_{\Theta} = f(Z)\vec{e_{\Theta}}.\]
+Now, recall that velocity of the particle is only in the tangent direction (from
+multivariable calculus), and so the normal to the surface is perpendicular to
+velocity of the particle. For a smooth surface, the reaction force $R$ is in the
+direction of the normal to the surface, and so the velocity is perpendicular to
+the reaction force. Hence the reaction force does no work. Therefore, we can
+ignore reaciton force in conservation of energy, and we have 
+\[\frac{1}{2}mv^2 + \phi = E.\]
+Plugging in the values for $v$ and $\phi$ we have 
+
+\begin{equation}
+  \frac{1}{2}m\left[ \dot{z}^2 (1+f'(z)^2) + f(z)^2\dot{\theta}^2 \right] -mgz =
+  E
+  \label{eqn:lec10_axisym_example_conservation}
+\end{equation}
+
+Where we used $r=f(x)$ and the fact that $m\vec{g}\cdot\vec{x}=mgz$. Next, we
+consider angular momentum, where 
+\[\frac{d\vec{L}}{dt} = \frac{d}{dt}(m\vec{x}\times\dot{\vec{x}}) =
+\vec{x}\times\vec{F} = (r\vec{e_r} + z\vec{e_z})\times (\vec{R} - mg\vec{e_z}).\]
+And consider the $\vec{e_z}$ component (details skipped, but they're not hard),
+\[\frac{d}{dt}(\vec{L}\cdot
+\vec{e_z})=\vec{e_z}\cdot(f(z)\vec{e_r}\times\vec{R}).\]
+Hence we have that $\vec{e_z},\vec{e_r},\vec{R}$ are coplanar, since $\vec{R}$
+is proportional to the normal of the surface, which depends only on
+$\vec{e_z},\vec{e_r}$ ($\vec{X}_Z, \vec{X}_{\Theta}$), and so it follows that
+$d/dt (\vec{L}\cdot \vec{e_z})=0$, or that the angular momentum in the
+$z$-component is constant. Considering the angular momentum on its own then, we
+can easily find $\vec{L}\cdot\vec{e_z}=mf^2\dot{\theta}$, and so we find
+$h=f^2\dot{\theta}$. We can use this to solve the equation of conservation of
+energy in Equation \ref{eqn:lec10_axisym_example_conservation}.

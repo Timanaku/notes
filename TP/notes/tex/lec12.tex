@@ -1,0 +1,93 @@
+\section{Week 4 - 04 Feb 2022 - Open and Closed Sets}
+This section deals with one of the most important concepts in this course: the
+concept of an open and closed set. This notion will allow us to reformulate
+continuity in such a way that we don't need metrics.
+\begin{definition}
+  Let $(X,d)$ be a metric space. We say $U\subset X$ is an \emph{open} subset if
+  for all $x\in U$ there exists $r>0$ s.t.
+  \[B_{X}(x,r)\subset U\]
+  \label{<+label+>}
+\end{definition}
+
+\begin{proposition}
+  In any metric space $X$, the subsets $X, \emptyset$ are both open subsets of
+  $X$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  For $\emptyset$, the proof is trivial (there are no points). For $x\in X$, any
+  $r>0$ gives $B_X(x,r)\subset X$ by definition of open ball in $X$.
+\end{proof}
+
+\begin{proposition}
+  Let $X=\RR$ be a metric space with the usual metric. Then the open interval
+  $(a,b)$ is an open subset of $X$. Moreover, any union of open intervals is
+  also an open subset of $X$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{proposition}
+  For any $x\in X$ and any $r>0$, the subset $U=B_X(x,r)\subset X$ is an open
+  subset.
+\end{proposition}
+\begin{proof}
+  Follows by definition of open ball. Let $y\in U$, and let $\rho = r-d(x,y)$.
+  Then, we claim $B_X(y,\rho)\subset U$.
+  \[z\in B_X(y,\rho) \implies d(y,z) < \rho = r-d(x,y)\]
+  \[\implies d(x,z) < d(y,z)+d(y,x) < r\]
+  \[\therefore z\in U,\]
+  so $B_X(y,\rho)\subset U $, as required.
+\end{proof}
+
+\begin{example}
+  We show that the square $U=(-1,1)\times(-1,1)$ is open in $X=\RR^2$ with the
+  usual metric. Let $x\in U$, and take $r=\min\left\{ 1-|x_1|,1-|x_2|
+  \right\}>0$. For $y\in B_X(x,r)$, we have 
+  \[d_2(x,y) <r \implies |x_i+y_i|< d_2(x,y)<1-|x_i| ; i=1,2\]
+  \[\implies |y_i|\leq |y_i-x_i| + |x_i|<1 ; i=1,2\]
+  \[\therefore y\in U,\]
+  As required.
+\end{example}
+
+\begin{proposition}
+  For any metric space $(X,d)$, any $x\in X$, and any $r>0$, the set 
+  \[U=\{y\in X : d(x,y)>r\}\]
+  Is a closed set.
+\end{proposition}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{definition}
+  Let $(X,d)$ be a metric space. A subset $V\subset X$ is closed if its
+  complement $W=X\setminus V$ is open.
+\end{definition}
+\begin{remark}
+  Note that for any metric space $X$, both $X$ and $\emptyset$ are closed.
+  \label{<+label+>}
+\end{remark}
+
+\begin{proposition}
+  Let $(X,d)$ be a metric space, let $x\in X$ and $r>0$. The closed ball of
+  radius $r$ about $x$,
+  \[\bar{B}_X(x,r)= \{y\in X : d(x,y)\leq r\}\]
+  Is closed in $X$.
+\end{proposition}
+\begin{proof}
+  Follows from the previous proposition, since the closed ball is the complement
+  of the open set of the previous proposition.
+\end{proof}
+
+\begin{proposition}
+  Let $(X,d)$ be a metric space. Any finite subset $V=\{x_1,x_2,\dots,
+  x_n\}\subset X$ is closed in $X$.
+\end{proposition}
+\begin{proof}
+  Let $x\in X\setminus V$, and let $r=\min_{1\leq i\leq n} d(x,x_i)>0$. By
+  construction, $x_i\not\in B_X(x,r) \forall 1\leq i \leq n$, hence
+  $B_X(x,r)\subset X\setminus V$. Hence $X\setminus V$ is open, and hence $V$ is
+  closed.
+\end{proof}

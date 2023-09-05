@@ -1,0 +1,133 @@
+\section{Week 7 - 25 Feb 2022 - Continuous functions between topological spaces }
+Recall that we have several characterisations of continuity of a function
+$f:X\to Y$,
+\begin{enumerate}
+  \item For every $a\in X$ and $\eps>0$, there exists $\delta>0$ s.t. 
+    \[d_X(a,x)<\delta \implies d_Y(f(a),f(x))<\eps.\]
+  \item For every $a\in X$ and $\eps>0$ there exists $\delta>0$ s.t.
+    \[f(B_X(a,\delta))\subset B_Y(f(a),\eps).\]
+  \item For a convergent sequence $x_n\to a$ in $X$ we have $f(x_n)\to f(a)$ in
+    $Y$.
+  \item If $U$ is open $Y$ then $f^{-1}(U)$ is open in $X$.
+\end{enumerate}
+Note that $1,2$ depend explicitly on the metric, so they're not suitable for the
+generalisation in topological spaces. $4$ is the natural choice, since it works
+without explicit metric.
+\begin{definition}
+  Let $X$ and $Y$ be topological spaces. Then $f:X\to Y$ is continuous if for
+  every open subset $U\subset Y$ we have the preimage $f^{-1}(U)\subset X$ is
+  open in $X$.
+  \label{def:topologicalContinuity}
+\end{definition}
+\begin{exercise}
+  $f:X\to Y$ is continuous iff $V\subset Y$ closed implies $f^{-1}(V)\subset X$
+  is closed.
+\end{exercise}
+By using Definition \ref{def:topologicalContinuity}, although different form
+what we're used to, some familiar properties survive.
+
+\begin{lemma}
+  For any topological space $X$, the identity function $f:X\to X:x\mapsto x$ is
+  continuous
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  TODO.
+\end{proof}
+\begin{lemma}
+  If $X,Y,Z$ are topoological spaces and $f:X\to Y$ and $g:Y\to Z$ are
+  continuous, then the composition $g\circ f:X\to Z$ is also continuous.
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{example}
+  Let $X,Y$ be topological spaces, and $Y$ be the indescrete topology (where
+  only $\emptyset$ and $Y$ are open subsets). Then every function $f:X\to Y$ is
+  continuous. This is because $f^{-1}(\emptyset)=\emptyset$ (by definition of a
+    function, every point in the domain must be mapped, hence no element is
+  mapped to the emptyset), and $f^{-1}(Y)=X$, where $\emptyset, X$ are open in
+  $X$ by the axioms of topological space. 
+\end{example}
+
+\subsection{Homeomorphisms}
+\begin{definition}
+  Let $(X,T_X)$ and $(Y,T_Y)$ be topological spaces. A function $f:X\to Y$ is
+  called a \emph{homeomorphism} if $f$ is a bijection and $U\in T_X \iff
+  f(U)\in T_Y$. We say $X,Y$ are \emph{homeomorphic} if there exists a
+  homeomorphism $f:X\to Y$. We write $f:X\tohom Y$ to indicate a
+  homeomorphism, and $X\cong Y$ to mean that $X,Y$ are homeomorphic.
+  \label{def:homeomorphism}
+\end{definition}
+Two spaces $X,Y$ being homeomorphic by $f$ are considered to be the same since
+the bijection gives a dictionary between elements of $X$ and elements of $Y$,
+hence it translates naturally the topologies line up precisely.
+
+\begin{proposition}
+  The homoemorphism gives an equivalence relation between topological spaces.
+  I.e. if $X,Y,Z$ are topological spaces, 
+  \begin{enumerate}
+    \item $X\cong X$,
+    \item $X\cong Y \iff Y\cong X$,
+    \item $X\cong Y \land Y\cong Z \implies X\cong Z$.
+  \end{enumerate}
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  TODO. For (1) prove that the identity map is a homeomorphism, for (2) prove
+  that a homeomorphism's inverse is also a homeomorphism, and (3) the
+  composition of homeomorphisms is a homeomorphism.
+\end{proof}
+
+\begin{proposition}
+  Let $X,Y$ be topological spaces. A function $f:X\to Y$ is a homeomorphism iff
+  \begin{enumerate}
+    \item $f$ is bijective
+    \item $f$ is continuous,
+    \item $f^{-1}$ is continuous.
+  \end{enumerate}
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Since a homeomorphism is bijective, we're only left to check 2,3 being
+  equivalent to $U\in T_X \iff f(U)\in T_Y$ for a bijection $f$. Note that when
+  $f$ is bijective, for every $U\subset X, V\subset Y$, we have 
+  \[ U=f^{-1}f(U), V=f(f^{-1}(V)), f(U)= (f^{-1})^{-1}(U),\]
+  By using injectivity, surjectivity, and inverse existence, respectively. 
+  Then by continuity, note that $f(U)$ is open in $Y$ (so $f(U)\in T_Y$) implies
+  $f^{-1}(f(U))=U$ is open in $X$ (so $X\in T_X$). Moreover, by continuity of the
+  inverse $f^{-1}$ we have $U$ is open in $X$ (so $U\in T_X$) implies
+  $f(U)=(f^{-1})^{-1}(U)$ is open in $Y$ (so $f(U)\in T_Y$). Hence (2,3) implies
+  Definition \ref{def:homeomorphism}.
+
+  Conversely, by the defintion of homeomorphism, we have 
+  \[V=f(f^{-1}(V)) \text{ open in } Y \implies f^{-1}(V) \text{ open in } X,\]
+  Hence $f$ is continuous. Moreover,
+  \[U \text{ open in } X \implies (f^{-1})^{-1}(U)=f(U) \text{ open in } Y\]
+\end{proof}
+\begin{remark}
+  We will eventually see examples of functions whose inverse exist but are not
+  continuous, hence that function is not a homemorphism. Recall from group
+  theory that any bijective group homomorphism is an isomorphism of groups.
+  However, in topological spaces, a bijective map is not enough: it needs to be
+  continuous and its inverse too.
+  \label{<+label+>}
+\end{remark}
+
+\begin{proposition}
+  Any two bounded open intervals in $\RR$ with the Euclidean topology are
+  homeomorphic.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Note that for any $a<b$ the map $f:(0,1)\to (a,b):x\mapsto a+x(b-a)$ is a
+  homeomorphism (TODO). Thus any open interval in $\RR$ is homeomorphic to
+  $(0,1)$, and between themselves by transitivity.
+\end{proof}
+\begin{remark}
+  The Euclidean topology is the topology induced by the Euclidean metric (hence
+  open subsets in this topology are open under the Euclidean metric).
+  \label{<+label+>}
+\end{remark}

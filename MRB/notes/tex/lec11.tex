@@ -1,0 +1,101 @@
+\section{Week 4 - 04 Feb 2022 - Another example axisymmetric surface - Intro to
+rotating reference frame}
+\begin{example}[Particle in sphere]
+  Derive the equations of motion for a particle moving inside the surface of a
+  sphere of radius $a$ about the origin.
+\end{example}
+\begin{proof}[Solution]
+  The sphere can be describe in cylindrical coordinates by
+  \[r^2 + z^2 = a^2 \implies r=f(z)= \sqrt{a^2-z^2}\]
+  \[f'(z)= \frac{-z}{\sqrt{a^2-z^2}}.\]
+  Suppose that the particle starts its motion with height $z=-d$, in the souther
+  hemisphere of the sphere where the geometry is convex -- like a bowl.
+  Furthermore, suppose the partcile starts moving with speed $v_0$, parallel to
+  the plane $z=0$ along the surface. Hence,
+  \[\dot{\vec{x}} = \dot{z}(\vec{e_z} + f'(z)\vec{e_r}) +
+  r\dot{\theta}\vec{e_{\theta}},\]
+  Since $\dot{r}=\dot{r}f'(z)$ by the chain rule. By the ICs, $\dot{z}=0$,
+  hence at $t=0$,
+  \[\dot{\vec{x}}=r\dot{\theta} \vec{e_{\theta}}.\]
+  Moreover, $v_0=|r\dot{\theta}|$. This implies that $h=r^2\theta=r(t=0) v_0$,
+  where $r(t=0)=f(z(t=0))=f(-d)$ by initial conditions, so $h=f(-d)v_0$.
+  Therefore, since we're in a conservative force field, 
+  \[E=-mgd + \frac{1}{2}mv_0^2 = -mgd + \frac{1}{2}m\frac{h^2}{f(-d)^2}.\]
+  Note that this is yet another example of an axisymmetric smooth surface, so we
+  can equate with Equation \ref{eqn:lec10_axisym_example_conservation}, to get 
+  \[
+    \frac{1}{2}m\left[ \dot{z}^2 (1+f'(z)^2) + \frac{h^2}{f^2}\right] +mgz =
+  -mgd + \frac{1}{2}m\frac{h^2}{f(-d)^2}
+  \]
+  This differential equation in $z$ will gives us the behaviour of $r$ since
+  $r=f(z)$, and at the same time we get the behaviour of $\theta$ since
+  $\dot{\theta}=\frac{h}{r^2}$.
+\end{proof}
+
+A question we may ask with the above results is the following
+\begin{example}
+  In the above system, what are the maximum and minimum heights achieved by the
+  ball, with the given ICs.
+\end{example}
+\begin{proof}[Solution]
+  Note that the requirement implies $\dot{z}=0$. In order to find the position
+  at which these occur, we solve the differential equation in the previous
+  example, and get
+  \[
+    \frac{1}{2}m\left[ 0 (1+f'(z)^2) + \frac{h^2}{f(z)^2}\right] +mgz =
+  -mgd + \frac{1}{2}m\frac{h^2}{f(-d)^2}
+  \]
+  \[\implies \frac{v_0^2f(-d)^2}{f(z)^2}  +2gz = -2gd + v_0^2\]
+  By plugging in the values of $f$,
+  \[\implies v_0^2\left( \frac{f(-d)^2}{f(z)^2}-1 \right)+2g(z+d) =0\]
+  \[\implies \frac{v_0^2}{2g}\left( \frac{a^2-d^2}{a^2-z^2}-1 \right)+z+d=0\]
+  \[\implies \frac{v_0^2}{2g}\left( \frac{z^2-d^2}{a^2-z^2} \right)+z+d=0\]
+  \[\implies \frac{v_0^2}{2g}(z^2-d^2)+ (z+d)(a^2-z^2)=0\]
+  \[\therefore (z+d)\left( \frac{v_0^2}{2g}(z-d) + a^2-z^2  \right)=0.\]
+  Which gives a solution $z=-d$, which is precisely the initial conditions. We
+  can then solve the quadratic to get the other two roots. Then it's obvious
+  that the maxima will be the positive discriminant, and the minima will be the
+  negative discriminant.
+\end{proof}
+
+\subsection{Motion in rotating reference frames}
+Consider an inertial reference frame $S$ with basis vectors
+$\vec{e_1},\vec{e_2},\vec{e_3}$ , and another reference frame $S'$ with basis
+vectors $\vec{e_1}',\vec{e_2}',\vec{e_3}'$ which is obtained by rotating $S$
+under time-dependent transformation $R(t)$. Consider a vector $\vec{e}$ fixed in
+$S'$, so that $\vec{r}\cdot\vec{e_i}=k_i$ for all $i=1,2,3$. What is
+$\frac{d\vec{r}}{dt}$? We know
+\[\vec{r}= \sum (\vec{r}\cdot\vec{e_i}') \vec{e_i}'\]
+Hence it follows that 
+\[\dot{\vec{r}}= \sum (\vec{r}\cdot\vec{e_i}') \dot{\vec{e_i}}'.\]
+Note that since $\vec{r}\cdot\vec{e_i}'=k_i$, then $\dot{\vec{r}}\cdot\vec{e_i}' +
+\vec{r}\cdot \dot{\vec{e_i}}'=0$ by applying the product rule. Hence (careful,
+  this may not look like it makes much sense, but it does: you have to recall
+that $\vec{r}$ is constant in time only wrt $S'$),
+\[\dot{\vec{r}}=\sum (\dot{\vec{r}}\cdot \vec{e_i}')\vec{e_i}' = \sum
+(-\vec{r}\cdot\dot{\vec{e_i}}')\vec{e_i}'. \]
+Hence we can add both expressions for $\dot{\vec{r}}$ to get 
+\[2\dot{\vec{r}} = \sum (\vec{r}\cdot\vec{e_i}') \dot{\vec{e_i}}' -
+(\vec{r}\cdot\dot{\vec{e_i}}')\vec{e_i}'.\]
+Recall that $\vec{a}\times(\vec{b}\times\vec{c})= (\vec{a}\cdot\vec{c})\vec{b} -
+(\vec{a}\cdot\vec{b})\vec{c}$, hence we observe that 
+\[2\dot{\vec{r}}= \sum \vec{r}\times(\dot{\vec{e_i}}'\times\vec{e_i}')\]
+\[\therefore \dot{\vec{r}}=\left[\vec{r}\times  \frac{1}{2}\sum
+(\dot{\vec{e_i}}'\times\vec{e_i}')\right]\]
+\[= \left[  \frac{1}{2}\sum
+(\vec{e_i}'\times\dot{\vec{e_i}}' )\right] \times \vec{r}.\]
+Where we define $\vec{\omega}=\frac{1}{2}\sum (\vec{e_i}'\times\dot{\vec{e_i}}'
+)$.
+\begin{theorem}[Rotating axes theorem]
+  Let $S$ be a rotating reference frame with angular velocity $\vec{\omega}$,
+  and let $\vec{r}$ be a vector that is constant in $S$. Then 
+  \[\dot{\vec{r}} = \omega\times\vec{r}.\]
+  \label{thm:rotatingAxes}
+\end{theorem}
+
+For a vector $\vec{R}=\vec{R}(t)$ that is not constant in $S$, a rotating
+reference frame, we can apply Theorem \ref{thm:rotatingAxes} to its basis, and
+use the product rule (the derivation is not hard) to get
+\[\dot{\vec{R}} = \dot{\vec{R}}' + \omega\times\vec{R}.\]
+Where $\dot{\vec{R}}'$ is the derivative in the rotating reference frame, and
+$\dot{\vec{R}}$ is the derivative in the inertial reference frame.

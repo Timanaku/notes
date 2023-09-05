@@ -1,0 +1,134 @@
+\section{Week 2 - 21 Jan 2022 - Linear theory of stability of orbits}
+In the previous lecture we saw how stability of orbits varies according to a
+perturbative ODE. Next, we will look into applications of our theory of
+stability
+\begin{example}
+  Consider the central force $F(r)=\frac{GmM}{r^2}$. Do there always exist
+  circular orbits?
+\end{example}
+\begin{proof}[Solution]
+  Observe that our condition for circular orbits requires
+  $F(r)=\frac{-mh^2}{a^3}$, so we would need 
+  \[\frac{-mh^2}{a^3} = \frac{Gm M}{r^2}\]
+  \[\iff a= \frac{h^2}{GM}\]
+  Henceforth, a circular orbit always exists, for any $h$. To find out if these
+  orbits are stable we calculate the term that defined this in our previous
+  example,
+  \[3F(a)+aF'(a) = -\frac{3GMm}{a^3} + \frac{2GMm}{a^2} = -\frac{GMm}{a^2}<0\]
+  Hence these orbits are stable.
+\end{proof}
+
+\begin{example}
+  What happens when $F(r)=-\gamma r^{-\alpha}$, for $\alpha$ a constant. What is
+  the stability of these orbits?
+\end{example}
+\begin{proof}[Solution]
+  We have that $F(r)=\frac{mh^2}{a^3}=\gamma a^{-\alpha}$, hence we must have 
+  \[a=\left( \frac{mh^2}{\gamma} \right)^{\frac{1}{3-\alpha}} ; \alpha\neq 3\]
+  Hence ciruclar orbits exist. We check stability by simply using the stability
+  equation, and see outcomes,
+  \[3F(a)+ aF'(a)=-3\gamma a^{-\alpha} + \gamma\alpha a^{-\alpha}\]
+  \[= \gamma a^{-\alpha} (-3+\alpha)\]
+  Hence we see that for $\alpha>3$, we have $3F(a)+ aF'(a)>0$ giving an unstable
+  orbit. Whereas for $\alpha<3$, we have $3F(a)+ aF'(a)<0$ giving a stable
+  orbit.
+\end{proof}
+
+\begin{example}
+  Suppose that a point mass moves under a central force
+  $F(r)=-mb(\frac{1}{r^2}+\frac{a}{2r^3})$. Assume that the particle starts at
+  $r=a$ with initial speed $v=\frac{b}{a}$ in the direction perpendicular to the
+  force (i.e. $\vec{e_{\theta}}$ ). Calculate the equation of the path and
+  determine the minimum and maximum distance from the origin.
+\end{example}
+\begin{proof}[Solution]
+  We first find
+  $h=r^2\dot{\theta}=a(a\dot{\theta})=a\sqrt{\frac{b}{a}}=\sqrt{ab}$, since
+  $a\dot{\theta}$ is exactly the $\theta$-component of velocity, which is
+  precisely $v$ as stated in the problem. Next, we apply the equation of motion,
+  \[u_{\theta\theta} +u =\frac{-F(\frac{1}{u})}{mh^2u^2} =
+  \frac{mb}{mh^2u^2}\left( u^2 + \frac{a}{2}u^3 \right)\]
+  \[\implies u_{\theta\theta}+u = \frac{1}{a}+\frac{u}{2}\]
+  \[\implies u_{\theta\theta}+\frac{1}{2}u = 1/a\]
+  Since we have our equation of motion, we proceed to find ICs. Note that we
+  have $\dot{r}=0$ by the initial condition that the initial velocity is in the
+  direction $\vec{e_{\theta}}$. Hence $-hu_{\theta}=0$ and it follows that
+  $u_{\theta\theta}=0$, so $u(0)=\frac{2}{a}$. The solution to the IVP is then,
+  \[u=\frac{2}{a} + A\cos\frac{\theta}{\sqrt{2}} +
+  B\sin\frac{\theta}{\sqrt{2}}\]
+  With the initial condition we find the solution $u
+  =\frac{2}{a}-\frac{1}{a}\cos\frac{\theta}{\sqrt{2}}$.
+  It's seen then that $u_{\max}=\frac{3}{a}$ and $u_{\min}=\frac{1}{a}$, which
+  corresponds to $r_{\max}=a$ and $r_{\min}=a/3$.
+\end{proof}
+
+\subsection{Energy}
+Recall that $\frac{d}{dt}\left( \frac{1}{2}mv^2 \right) = \vec{F}\cdot
+\dot{\vec{x}}$ is defined as the power delivered by a force. Recall that we
+define work done by $\vec{F}$ in the particle moving along the path from $A$ to
+$B$, $C_{A\to B}$, as
+\[W = \int_{C_{A\to B}}\vec{F} d\vec{x} = \int_{t_A}^{t_B} \left[
+\vec{F}(\vec{x}(t)) \cdot \dot{\vec{x}} \right] dt\]
+From the integral above, it can easily be seen that in general the work done
+depends on the path taken, but there's a particular class of force fields in
+which this is not true -- conservative fields. A clear example is that of a
+uniform, constant force field. We generalise this in the following theorem.
+\begin{theorem}[Conservative fields]
+  Suppose that $\vec{F}$ is a vector field over $\RR^2$ or $\RR^3$. The
+  following are equivalent.
+  \begin{enumerate}
+    \item $\oint_C \vec{F}\cdot d\vec{x} =0$ for all closed curves $C$.
+    \item $\int_{C_{A\to B}} \vec{F}\cdot d\vec{x}$ is independent of the path
+      taken, only depends on endpoints $A,B$.
+    \item There exists a scalar field $\phi$ s.t. $\vec{F}=-\nabla \phi$.
+    \item $\nabla \times \vec{F}=\vec{0}$.
+  \end{enumerate}
+  \label{thm:conservativeFieldsEquivalence}
+\end{theorem}
+\begin{proof}
+  \emph{$(1)\implies (2)$} Consider curves $C_1\neq C_2$  joining the endpoint
+  $A,B$. Now construct a path $C$ that traverses $C_1$ and then $-C_2$, so that
+  the curve $C$ is closed. Then we have 
+  \[\oint_C \vec{F}\cdot d\vec{x} =0,\]
+  By assumption. Hence
+  \[\implies \int_{C_1}\vec{F}\cdot d\vec{x} + \int_{-C_2}\vec{F}\cdot d\vec{x}
+  =0\]
+  \[\implies \int_{C_1}\vec{F}\cdot d\vec{x} - \int_{C_2}\vec{F}\cdot d\vec{x}
+  =0 \]
+  And the result then follows.
+  
+  \emph{$(2)\implies (3)$} By construction, define
+  $\phi(\vec{x})=-\int_{C_{0\to x}} \vec{F}(\vec{y}) d\vec{y}$, where the curve
+  $C_{0\to x}$ is arbitrary joining $0$ and $\vec{x}$. Consider the directional
+  derivative $\vec{u}\cdot\nabla \phi$,
+  \[\vec{u}\cdot\nabla \phi= \lim_{h\to 0}\left[ \frac{\phi(\vec{x}+h\vec{u}) -
+  \phi(\vec{x})}{h} \right]\]
+  \[= \lim_{h\to 0} \left[ \frac{-1}{h}\int_{C_{x\to x+hu}}\vec{F}(\vec{y})
+  d\vec{y} \right]\]
+  Using a straight line as the curve, we find
+  \[\vec{u}\cdot\nabla \phi = \lim_{h\to
+  0}\int_0^1\vec{F}(\vec{x}+hs\vec{u})\cdot h\vec{u}
+  ds=-\vec{F}(\vec{x})\cdot\vec{u}\]
+  Since $\vec{u}$ was arbitrary, it follows that $\vec{F}=-\nabla\phi$.
+
+  \emph{$(3)\implies (4)$} This follows easily since $\vec{F}=\nabla \phi$, so
+  that $\nabla \times \vec{F} = \nabla \times \nabla \phi =0$ (basic nabla
+  identities). Recall that the meaning of curl is the infinitesimal integral in
+  a closed loop, and this being non-zero means that there's a change in the
+  gradient. However, in a scalar field this is not possible.
+
+  \emph{$(4)\implies (1)$} Consider a closed curve $C$, enclosing a surface $S$.
+  By Stoke's theorem,
+  \[\oint_C \vec{F}\cdot d\vec{x} = \int\int_S (\nabla \times \vec{F})\cdot
+  \vec{n} dS\]
+  Where $\vec{n}$ denotes the normal to the surface $S$. By assumption we have
+  $\nabla \times \vec{F}=0$, hence it follows that $\oint_C\vec{F}\cdot
+  d\vec{x}=0$.
+\end{proof}
+\begin{remark}
+  The above theorem applies only to simply connected domains. E.g.
+  $\RR^2\setminus \{0\}$ would not work. Moreover, it also provides a simple way
+  of figuring out whether $\vec{F}$ is conservative: just check $\nabla\times
+  \vec{F}=0$.
+\end{remark}
+

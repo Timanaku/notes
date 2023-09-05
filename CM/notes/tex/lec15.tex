@@ -1,0 +1,98 @@
+\section{Lecture 15 - 8 Mar 2022 - Residue Theorem}
+This is a method for dealing with poles of finite order. After generalising the
+notion of power series to Laurent series for function with isolated
+singularities, now we will try to generalise Cauchy's theorem for the the path
+encloses a pole.
+\begin{definition}
+  Let $f:\Omega\setminus\{c\}\to\CC$ be holomorphic and have an isolated
+  singularity at $c\in\Omega$. Then, the coefficient $a_{-1}$ in the Laurent
+  expansion of $f$ at $c$, with the form
+  \[a_{-1}=\frac{1}{2\pi i} \oint_{\gamma} f(z)z,\]
+  Is called the residue of $f$ at $c$, denoted $\res(f, c)$. Here $\gamma$ is a
+  small circle centered at $c$, traced anticlockwise.
+  \label{def:residue}
+\end{definition}
+\begin{theorem}[Cauchy's Residue Theorem]
+  Let $\Omega\subset\CC$ be open and let $f:\Omega\to\CC$ be analytic, and let
+  $\gamma$ be a simple closed path in $\Omega$ such that there are finitely many
+  points $\{c_1,\cdots, c_k\}$ inside $\gamma$ not belonging to $\Omega$. Then,
+  \[\oint_{\gamma} f(z)dz = 2\pi i \left( \res(f,c_1)+\cdots+\res(f,c_k)
+  \right).\]
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Let $D_1,\cdots, D_k$ be disjoints open disks inside $\gamma$, centered at
+  $c_1,\cdots, c_k$ respectively. It's easy to show that $\gamma$ is homotopic
+  to the path made from arcs making up the boundaries of each disk,
+  $\gamma(1),\cdots, \gamma(k)$ traced anticlockwise, plus connecting paths
+  traced twice in opposite directions (connecting every boundary with the next).
+  Think of the homotopy as just squishing $\gamma$ down and as close as possible
+  to include only $c_1,\cdots, c_k$. The integrals along the connecting paths
+  cancel out, so the result follows by Cauchy's integral formula, applied to
+  each singularity,
+  
+  \[\oint_{\gamma} f(z)dz = \oint_{\gamma(1)}f(z)dz + \oint_{\gamma(2)} f(z)dz
+  +\cdots+ \oint_{\gamma(k)}f(z)dz = 2\pi i \left(
+  \res(f,c_1)+\cdots+\res(f,c_k) \right).\]
+\end{proof}
+This generalises Cauchy's theorem (no singularities, so the residue is $0$), and
+Cauchy's integral formula (case of $1$ singularity). To compute residues, one
+can directly compute Laurent series, or take advantage of some techniques. The
+following is a useful result for poles of finite order.
+
+\begin{proposition}
+  If $f$ has a pole of degree at most $m$ at $c$, we have 
+  \[\res(f,c)= \frac{1}{(m-1)!} \lim_{z\to c} \frac{d^{m-1}}{dz^{m-1}}\left[
+  (z-c)^m f(z) \right].\]
+  In particular, observe that for a simple pole, 
+  \[\res(f,c) = \lim_{z\to c}[(z-c)^mf(z)].\]
+  \label{prop:residuePole}
+\end{proposition}
+\begin{proof}
+  Let $g(z)=(z-c)^mf(z)$, so $f$ is analytic at $c$, and so we can write the
+  Taylor series at $c$ as $g(z)= a_0 + a_1 (z-c)+\cdots$. Hence, the Laurent
+  series of $f$ at $c$ is written as 
+  \[f(z)= \frac{1}{(z-m)^m} (a_0 + a_1 (z-c)+\cdots)=
+  \frac{a_0}{(z-m)^{m}}+\cdots \frac{a_{m-1}}{(z-m)}+ \cdots\]
+  Where we observe that the coeffieicnt of $(z-m)^{-1}$ is precisely the
+  residue, i.e. $a_{m-1}=\res(f,c)$. Hence observe that
+  $g^{(m-1)}(c)=(m-1)!a_{m-1}$, therefore (since $g$ is analytic)
+  \[\res(f,c) = \frac{g^{(m-1)}(c)}{(m-1)!}= \frac{1}{(m-1)!}\lim_{z\to c}
+  \frac{d^{m-1}}{dz^{m-1}}\left[ (z-c)^m f(z) \right],\]
+  As required.
+\end{proof}
+In many occassions we en up with a limit quotient, and we can therefore use
+L'Hopital's rule to solve it.
+\begin{example}
+  We can compute the residue of $f(z)=\frac{1}{z^3-1}$. First we identify simple
+  poles in $z=1,e^{2\pi i/3}, e^{4\pi i /3}$ by roots of unity. Hence, by the
+  above result we find, for each pole $c$,
+  \[\res(f,c)= \lim_{z\to c} \frac{(z-c)}{z^3-1}=\lim_{z\to c}
+  \frac{1}{3z^2} =\frac{1}{3c^2}. \]
+\end{example}
+\begin{example}
+  Evaluate $\oint_{\gamma} k(z)dz$, where 
+  \[k(z)=\frac{1}{z-1}+ \frac{3z+1}{(z-2)^2} + \frac{2}{z-4},\]
+  where $\gamma$ is the square with vertices at $\pm 3, \pm 3i$ traced
+  anticlockwise. Since there're only 2 singularities inside $\gamma$, naming
+  $1,2$, of order $1$ and $2$ respectively, we find (we omit the computation of
+  the residues, but it's easily done with the previous result).
+  \[\oint_{\gamma}k(z)dz = 2\pi i [\res(f,1)+\res(f,2)] = 2\pi i (4) = 8\pi i.\]
+\end{example}
+
+There's a generalisation of the Residue theorem, to any closed path (not only
+simple), with essentially the same proof. If $\gamma$ is any closed path in
+$\Omega$ and $c$ is not inside the image of $\gamma$, then there's an integer
+quantity $w(\gamma, c)$ called the \emph{winding number} defined as 
+\[w(\gamma,c)=\frac{1}{2\pi i}\oint_{\gamma} \frac{1}{z-c} dz\]
+Representing the number of times $\gamma$ goes around $c$ in an anticlockwise
+direction.
+\begin{theorem}[Generalised Residue Theorem]
+  Let $\Omega\subset\CC$ be open and let $f:\Omega\to\CC$ be holomorphic. Let
+  $\gamma$ be a closed path (not necessarily simple). If there are finitely many
+  points $c_1,\cdots, c_k$ not in $\Omega$ and enclosed by $\gamma$, then with
+  non-zero winding numbers, then
+  \[\oint_{\gamma}f(z)dz = 2\pi i [w(\gamma, c_1)\res(f, c_1)+\cdots+ w(\gamma,
+  c_k)\res(f, c_k)].\]
+  \label{thm:generalResidueThm}
+\end{theorem}

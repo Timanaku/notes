@@ -1,0 +1,69 @@
+\section{Lecture 17 - 15 Mar 2022 - Conformal Mappings}
+In this section we explore the geometric aspects of holomorphic function theory.
+We already saw that $f$ being holomorphic is equivalent to $f$ satisfying the
+Cauchy-Riemann equatinos, which implies that $f$ preserves $90$ degree angles in
+the mapping form the $z$-plane to the $w$-plane.
+
+Let $f$ be holomorphic. We will show that if $f'\neq 0$ on its domain, then $f$
+preserves the angle between two curves $\gamma_1, \gamma_2$ (the angle beteween
+the tangents of each curve at the intersection). Such maps are called conformal. 
+\begin{definition}
+  Let $\Omega\in\CC$ be open and $\gamma_1,\gamma_2:[0,1]\to\Omega$ two paths
+  which intersect at some point $z=\gamma_1(t_1)=\gamma_2(t_2)$ with $0\leq
+  t_1,t_2\leq 1$. If $\gamma_1'(t_1), \gamma_2(t_2)\neq 0$, then $\theta=
+  \arctan \left( \frac{\gamma_1'(t_1)}{\gamma_2'(t_2)} \right)$ is the angle
+  between both tangent vectors and we say that a holomorphic function
+  $f:\Omega\to\CC$ is comformal at $z$ if the tangent vectors of $f\circ
+  \gamma_1, f\circ \gamma_2$ at $w=f(z)$ also have the angle $\theta$ between
+  them.
+  \label{<+label+>}
+\end{definition}
+
+\begin{lemma}
+  If $f:\gamma\to\CC$ is differentiable at a point $z\in\Omega$ and $f'(z)\neq
+  0$ then $f$ is conformal at $z$.
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  By using the above definition for the angle,
+  \[\frac{(f\circ \gamma_1)'(t_1)}{(f\circ \gamma_2)'(t_2)} =
+  \frac{f'(\gamma_1(t_1))\gamma_1'(t_1)}{f'(\gamma_2(t_2))\gamma_2'(t_2)}=
+  \frac{\gamma_1(t_1)}{\gamma_2(t_2)},\]
+  Which is the definition of the angle between the two tangent vectors in the
+  $z-plane$. Hence the map is conformal (preserves angle).
+\end{proof}
+We now focus on open sets $U\subset\CC$ which are path connected.
+\begin{definition}
+  Let $U,V\subset\CC$ be open sets, which are path connected. A holomorphic
+  function $f:U\to V$ that is also bijective is called biholomorphic, if its
+  inverse $f^{-1}:V\to U$ is also holomorphic.
+  \label{def:biholomorphicFun}
+\end{definition}
+\begin{proposition}
+  Every biholomorphic map $f:U\to V$ is conformal.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  By the chain rule,
+  \[\frac{d}{dz}f^{-1}\circ f (z) = (f^{-1}(f(z)))' f'(z),\]
+  And by the definition we have $f^{-1}\circ f(z) = z \forall z\in U$ (since
+  we're taking $f$ to be bijective), hence
+  \[\frac{d}{dz}f^{-1}\circ f (z) = \frac{d}{dz} z =1.\]
+  Hence we see that if $f'(z)=0$, we get a contradictino. Hence we must have
+  that $f'(z)\neq 0 \forall z\in U$. 
+\end{proof}
+\begin{definition}
+  We call two, open path connected sets $U,V\subset\CC$ conformally equivalent
+  if there exists a biholomorphic map $f:U\to V$.
+  \label{def:conformalEquivalence}
+\end{definition}
+\begin{proposition}
+  Conformal equivalence defines an equivalence relation on the set of open
+  subset of $\CC$.
+  \label{prop:conformalEqRel}
+\end{proposition}
+\begin{proof}
+  Reflection is given by the identity map (which is biholomorphic). Symmetry is
+  given by the fact that a biholomorphic map's inverse is also biholomorphic.
+  And transitivity comes from composition of biholomorphicity.
+\end{proof}

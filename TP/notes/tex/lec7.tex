@@ -1,0 +1,72 @@
+\section{Week 3 - 24 Jan 2022 - Continuity}
+One of the most important reasons for studying metric spaces. Generalises the
+notion we saw for real functions. First we recall the definition for the case of
+real functions.
+
+\begin{definition}
+  Let $f:D\subset\RR\to\RR$ be a function. We say $f$ is continuous at $a\in D$ if 
+  \[\forall\eps>0\exists\delta>0 : |x-a|<\delta\implies |f(x)-f(a)|<\eps.\]
+  We say $f$ is a continuous function if it is continuous for all $a\in D$.
+  
+  Notice that we can rewrite the above definition as $|x-a|<\delta \implies
+  d_2(x,a)<\delta$, for the standard $\RR$ metric.
+  \label{def:realContinuous}
+\end{definition}
+
+\begin{definition}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. A funciton $f:X\to Y$ is
+  $(d_X,d_Y)$-continuous at $a\in X$ if 
+  \[\forall \eps>0 \exists \delta>0 : d_X(x,a)<\delta \implies
+  d_Y(f(x),f(a))<\eps.\]
+  We say $f$ is $(d_X,d_Y)$-continuous if it is $(d_X,d_Y)$-continuous at all
+  $a\in\ X$.
+  \label{def:metricContinuous}
+\end{definition}
+
+\begin{proposition}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Let $f:X\to Y$ be a function
+  continuous at $a\in X$ iff 
+  \[\forall \eps>0\exists \delta>0 : f(B_X(a,\delta))\subset B_Y(f(a),\eps).\]
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{proposition}
+  Let $(X,d_X)$ be a discrete metric space and $(Y,d_Y)$ is any metric space.
+  Then any function $f:X\to Y$ is $(d_X,d_Y)$-continuous.
+  \label{prop:discreteFuncsContinuous}
+\end{proposition}
+\begin{proof}
+  Let $a\in X, \eps>0$. If we take $\delta=1$, by the defintion of continuity we
+  have 
+  \[d_X(x,a)<1 \implies d_Y(f(x),f(a))<\eps\]
+  Note that $d_Y(f(x),f(a))=0$ since the discrete metric will be less than $1$
+  iff it is $0$, i.e. $x=a$.
+\end{proof}
+
+\begin{proposition}
+  Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces. Then any constant function
+  $f:X\to Y$ is $(d_X,d_Y)$-continuous.
+  \label{prop:constContinuity}
+\end{proposition}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{example}
+  Let $f:\RR^2\to\RR: (x,y)\mapsto x+y$ is continuous wrt the euclidean metric.
+\end{example}
+\begin{proof}[Solution]
+  TODO. Find bounds for $|x+y-(a+b)|$ -- by triangl inequality -- and find
+  $\delta$ from there.
+\end{proof}
+\begin{exercise}
+  Show that the function $m:\RR^2\to\RR:(x,y)\to xy$ is continuous wrt the
+  Euclidean metric.
+  \label{ex:W3L1LastExercise}
+\end{exercise}
+\begin{proof}[Solution]
+  TODO.
+\end{proof}

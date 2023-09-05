@@ -1,0 +1,111 @@
+\section{Week 1 - 10 Jan 2022 - Metric Spaces}
+The first part of the course will be entirely about metric spaces.
+\subsection{Definitions and examples}
+\begin{definition}
+  Let $X$ be a set. A \emph{metric} (or distance function) on $X$ is a function
+  $d:X\times X \to \RR$ satisfying the three axioms
+  \begin{enumerate}
+    \item $d(x,y)\geq 0$ for all $x,y\in X$, with $d(x,y)=0$ iff $x=y$,
+    \item $d(x,y)=d(y,x)$ for all $x,y\in X$,
+    \item and it satisfies the triangle inequality: $d(x,z)\leq d(x,y)+d(y,z)$
+      for all $x,y,z\in X$.
+  \end{enumerate}
+  \label{def:metric}
+\end{definition}
+\begin{definition}
+  A \emph{metric space} is a pair $(X,d)$ where $X$ is a set and $d:X\times
+  X\to\RR$ is a metric.
+  \label{def:metricSpace}
+\end{definition}
+\begin{remark}
+  Note that $X$ does not need to be non-empty.
+\end{remark}
+Note that $X$ is just some set, it does not need to be continuous or even
+infinite. An non-trivial illustrating example is $X$ being the set of $8$
+integers $0-9$, and the distance is the number of positions in which they
+differ.
+\begin{example}
+  Let $X=\RR$ and $d(x,y)=|x-y|$. Then $|x-y|\geq 0$, $d(x,y)=0 \iff |x-y|=0
+  \iff x=u$. Also, $d(x,y)=|x-y|=|-(y-x)|=|y-x|=d(y,x)$. Finally, recall
+    $|a+b|\leq |a|+|b|$ for all $a,b\in\RR$, so take $a=x-y$, $b=y-z$, hence
+    $d(x,z)=|x-z|=|(x-y)+(y-z)|\leq |x-y|+|y-z|=d(x,y)+d(y,z)$.
+\end{example}
+\begin{exercise}
+  Take $X=\CC$ and $d(x,y)=|x-y|$, with $|a+bi|=\sqrt{a^2 + b^2}$, or
+  $|re^{i\theta}|=|r|$. Check this is a metric space.
+\end{exercise}
+\begin{proof}[Solution]
+  \emph{(1)} Let $a,b\in\CC$ and note that $d(a,b)\geq 0$. Assume that
+  $|a-b|=0$, or $|(a-c)+(b-d)i|=0$, so $\sqrt{(a-c)^2+(b-d)^2}=0\implies
+  (a-c)^2=-(b-d)^2$. Hence it follows that $a-c=b-d=0$, or $a=b$.
+
+  \emph{(2)} This one is trivial by commutativity of addition in $\RR$.
+
+  \emph{(3)} Let $a,b,c\in\CC$. We claim $d(a,c)\leq d(a,b)+d(b,c)$. Recall
+  $|a+b|\leq |a|+|b|$, and note that $d(a,c)=|a-c|=|(a-b)+(b-c)| \leq
+  |a-b|+|b-c|=d(a,b)+d(b,c)$.
+\end{proof}
+A natural question to ask is, what sets can become metric spaces?
+\begin{exercise}
+  Let $X$ be any set, and define $d:X\times X\to\RR: (x,y)\mapsto 0$ if $x=y$
+  and $(x,y)\mapsto 1$ if $x\neq y$ (called the discrete metric). Check this is
+  a metric space.
+\end{exercise}
+\begin{proof}[Solution]
+  \emph{(1)} Let $a,b\in X$ and note that $d(a,b)\geq 0$ by definition, and
+  $d(a,b)=0$ iff $a=b$ also by definition.
+
+  \emph{(2)} This step is trivial by symmetry of equality (an equivalence
+  relation).
+
+  \emph{(3)} Let $a,b,c\in X$, and note that we have three cases (wlog):
+  $a=b=c$, $a=c\neq b$, and $a\neq b\neq c$. For the first case, it is obvious
+  $d(a,c)=d(a,b)+d(b,c)$. For the second case $d(a,c)=0 < d(a,b)+d(b,c)=2$. For
+  the third case $d(a,c)=1< 2$.
+\end{proof}
+This shows that a given set $X$ can have very different metrics, or that the
+cihoice of metric really is a choice.
+\begin{exercise}
+  Let $a_n=\frac{1}{n}$. What is $\lim_{n\to\infty}d(a_n,0)$ for $d(x,y)=|x-y|$?
+  What if $d$ is the discrete metric?
+\end{exercise}
+\begin{proof}[Solution]
+  For the first case, $\lim_{n\to\infty} |\frac{1}{n}=0$, which was done in
+  analysis in last semester. For the second case $\lim_{n\to\infty}d(a_n,0)=1$,
+  since $a_n\neq 0$ for all $n$.
+\end{proof}
+We will often refer to $X$ as the metric space, implicitly with a choice of
+metric, even though this is a real choice.
+\begin{example}
+  $(\RR^n,d_2)$ is a metric space, with
+  $d_2(x,y)=|x-y|=\sqrt{(x_1-y_1)^2+\cdots+ (x_n-y_n)^2}$. Note $d_2$ is
+  non-negative by definition of square root. Assume $d_2(x,y)=0$, so
+  $(x_1-y_1)^2+\cdots+ (x_n-y_n)^2=0 \iff (x_i-y_i)^2=0\forall i$, that is
+  $x=y$. Moreover, note $d_2(x,y)=d_2(y,x)$ by commutativity of $\RR^n$.
+  Finally, take $x,y,z\in\RR^n$, and write $r=x-y, s=y-z$. Note $d_2(x,z)\leq
+  d_2(x,y)+d_2(y,z) \iff |r+s|\leq |r|+|s| \iff (r+s)\cdot (r+s)\leq r\cdot r +
+  s\cdot s + 2\sqrt{r\cdot r}\sqrt{s\cdot s} \iff r\cdot r+s\cdot s+ 2r\cdot s
+  \leq r\cdot r+s\cdot s+ 2\sqrt{r\cdot r}\sqrt{s\cdot s} \iff r\cdot s \leq
+  \sqrt{r\cdot r}\sqrt{s\cdot s}$. Since $r\cdot s\leq |r\cdot s|$, the result
+  follows by Cauchy's inequality. This metric is called \emph{the Euclidean
+  metric}.
+\end{example}
+
+\begin{exercise}
+  Let $X=\RR^{2}$ and $d(x,y)=|x_1-y_1|+|x_2-y_2|$. Check this is a valid
+  metric.
+\end{exercise}
+THe above is called the \emph{Manhattan metric}.
+
+\begin{exercise}
+  Let $X=\RR^2$ with metric $d_{\infty}(x,y)=\max{(|x_1-y_1|,|x_2-y_2|)}$.
+\end{exercise}
+\begin{proof}[Solution]
+  1 is trivial because $\max (|x_1-y_1|,|x_2-y_2|)=0 \iff x_i=y_i \forall i$. 2
+  is trivial.  The triangle inequality follows since $|x_i-z_i|\leq
+  |x_i-y_i|+|y_i-z_i| \leq \max(|x_1-y_1|,|x_2-y_2|)+\max(|y_1-z_1|,|y_2-z_2|)$.
+\end{proof}
+\begin{remark}
+  The metric $d_{\infty}$ is also called the chessboard metric or
+  \emph{Chebyshev} metric.
+\end{remark}

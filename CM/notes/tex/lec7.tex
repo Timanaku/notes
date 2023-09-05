@@ -1,0 +1,84 @@
+\section{Lecture 7 - 08 Feb 2022 - Complex integration}
+Integration in the complex plane, like in the case for $\RR^2$, will be carried
+out along a path.
+\begin{definition}
+  A $C^1$-curve in an open subset $\Omega\subset\CC$, defined by
+  $\gamma:[a,b]\to\CC$, is called a \emph{path} in $\Omega$. Here
+  $[a,b]\subset\RR$.
+\end{definition}
+The basic notion for complex integration is simple: Given a path $\gamma$, the
+so-called contour integral of $f:\Omega\to\CC$ with $\gamma([a,b])\subset\Omega$
+is given by
+\[\int_{\gamma} f(z)dz = \int_{\gamma} (u(x,y)+iv(x,y)) (dx+i dy) =
+\int_{\gamma}(u(x,y)dx - v(x,y)dy) + i\int_{\gamma}(v(x,y)dx + u(x,y) dy).\]
+Hence we see that the complex contour integral is the complex sum of two real
+line integrals. With a more rigorous definition, we can look at the integration
+as the limit of the Riemann sum along the path $\gamma$. In particular, we
+consider some partition $[a,b]$ as $[a,a_1],[a_1,a_2],\cdots,[a_{n-1},a_n]$,
+where $a_n=b$, and then observe that the Riemann sum is 
+\[\sum_{r=1}^n f(\gamma(t_r)) (\gamma(a_r) - \gamma(a_{r-1})), a_{r-1}< t_r<
+a_r.\]
+Note that the Riemann sum only depends on the point $\gamma(a_i)\in\CC$, and on
+$f(\gamma(t_i))$, but in particular it does not depend on the parametrisation of
+$\gamma$. For this reason we will often just use parametrisation
+$\gamma:[0,1]\to\Omega$ without loss of generality, and describe a path in terms
+of its image $\gamma([0,1])$ and its orientation (in which order we run through
+the points $\gamma(a_0),\cdots, \gamma(a_n)$).
+\begin{definition}
+  Let $f:\Omega\to\CC$ be continuous and $\gamma:[0,1]\to\Omega$ a path in
+  $\Omega$. Then the contour integral of $f$ along $\gamma$ is the limit 
+  \[\int_{\gamma} f(z)dz = \lim_{n\to\infty} \sum_{r=1}^{n} f(\gamma(t_r))
+  (\gamma(\frac{r}{n}) - \gamma(\frac{r-1}{n})), \frac{r-1}{n}<t_r
+  <\frac{r}{n}.\]
+  Since $f$ is continuous, the limit does not depend on the choice of $t_r$.
+  \label{<+label+>}
+\end{definition}
+
+\begin{proposition}
+  Consider a path $\gamma:[0,1]\to\Omega$, and a path
+  $\overline{\gamma}:[0,1]\to\Omega$ s.t. $\overline{\gamma}(t)=\gamma(1-t)$.
+  Then
+  \[\int_{\overline{\gamma}}f(z)dz = -\gamma_{\gamma}f(z)dz.\]
+  \label{<+label+>}
+\end{proposition}
+\begin{proposition}
+  Let $\gamma:[0,1]\to\Omega$ be a path of finite length -- $\int_0^1
+  |\gamma'(t)|dt \leq L <\infty$ (note that $\gamma'(t)$ can be seen as the
+  vector tangent to $\gamma$). Consider a function $f:\Omega\to\CC$ bounded on
+  $\gamma([0,1])\subset\Omega$ -- $|f(z)|\leq M $ for every
+  $z\in\gamma([0,1])$. Then $|\int_{\gamma} f(z) dz|\leq ML$.
+  \label{prop:upperBoundIntegral}
+\end{proposition}
+The above proposition is just saying that the value of the integral will be at
+most the area of a rectangle of area $ML$, where $L$ is the length of the base,
+and $M$ is the height of the rectangle, where the height is taken to be the
+highest value of the function in the path. The proof can be done with riemann
+sums.
+
+In applications we usually deal with piecewise smooth curves.
+\begin{definition}
+  A curve $\gamma:[0,1]\to\Omega$ is called piecewise smooth (piecewise $C^1$)
+  if it is differentiable except for finitely many points. We shall refer to
+  such a $\gamma$ as path.
+\end{definition}
+
+\begin{proposition}
+  Let $\gamma:[0,1]\to\CC$ be piecewise $C^1$ and of finite length. Then for any
+  continuous $f:\Omega\to\CC$ we have
+  \[\int_{\gamma}f(z)dz = \int_{0}^1 f(\gamma(t))\gamma'(t) dt.\]
+  \label{<+label+>}
+\end{proposition}
+
+\begin{example}
+  Let $\gamma:[\alpha,\beta]\to\CC$ be the path 
+  \[\gamma(\theta)=c+re^{i\theta},\]
+  For some constants $c\in\CC$ and $r>0$. Compute the length of $\gamma$.
+\end{example}
+\begin{proof}[Solution]
+  We have that the lenght of $\gamma$, let us call it $L$, is
+  \[L= \int_{\gamma(\alpha)}^{\gamma(\beta)} d\gamma =  \int_{\alpha}^{\beta}
+  |\frac{d\gamma}{d\theta}d\theta = \int_{\alpha}^{\beta} rd\theta =
+  r(\beta-\alpha).\]
+  Note that this path is a circle/segment with center $c$ and radius $r$. Hence
+  the length of the curve given above is the formula for length of segment.
+\end{proof}

@@ -1,0 +1,83 @@
+\section{Lecture 5 - 01 Feb 2022 - Cauchy-Riemann Equations, Harmonic functions}
+We will explore more the fundamental difference between complex
+differentiability and real differentiability in $\RR^2$. This difference is
+embedded in the Cauchy-Riemann equations.
+
+First, identify each complex number $z=x+iy\in\CC$  with its corresponding point
+in the complex plan, $z\equiv(x,y)\in\RR^2$. A holomorphic function
+$f:\Omega\to\CC$ with $\Omega\subset\CC$ open, is interpreted as a function
+$f:\tilde{\Omega}\to\RR^2$, by the aforementioned bijections. We interpret the
+domain of $f$ as the $z$-plane, and its codomain as the $w$-plane, where
+$w=f(z)=u+vi$. In particular, we interpret $f:(x,y)\mapsto (u(x,y),v(x,y))=(\Re
+f(z), \Im f(z))$. 
+
+Recall that for any $z\in\Omega$, the function is differentiable, and by this
+definition (as for the real counterpart) we have that the limit
+\[\lim_{h\to 0}\frac{f(z+h)-f(z)}{h} =f'(z),\]
+must exist for $h\in\CC$, and this must be independent of the argument of $h$.
+\todo{I understand this, but why do we put the restriction that $f'$ cannot be a
+function of $\arg h$? Why do we require $f'$ to be a function only of $z$? Does
+anything weird happen if this restriction is dropped?}
+We can specialise to $h=\eps$ and $h=i\eps$, for $\eps\in\RR$ as usual. We find
+that 
+\[\lim_{\eps\to 0} \frac{f(z+\eps)-f(z)}{\eps} = \lim_{\eps\to 0}\left[ 
+    \frac{u(x+\eps, y) - u(x,y)}{\eps} + i \frac{v(x+\eps,y)-v(x,y)}{\eps}
+\right]\]
+\[=\frac{\partial u}{\partial x} + i\frac{\partial v}{\partial x} =
+\frac{\partial f}{\partial x} \]
+\[\lim_{\eps\to 0} \frac{f(z+i\eps)-f(z)}{i\eps} = \lim_{\eps\to 0}\left[ 
+    \frac{-i(u(x, y+\eps) - u(x,y))}{\eps} +  \frac{v(x,y+\eps)-v(x,y)}{\eps}
+\right]\]
+\[=-i\frac{\partial u}{\partial y} + \frac{\partial v}{\partial y} =
+-i\frac{\partial f}{\partial y}.\]
+Henceforth, since we need independence of argument, we have that
+\[f'(z)=\frac{\partial u}{\partial x} + i\frac{\partial v}{\partial x} = -i\frac{\partial u}{\partial y} + \frac{\partial v}{\partial y}\]
+\[\implies \frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}\land
+\frac{\partial v}{\partial x} = -\frac{\partial u}{\partial y}.\]
+Note that for differentiablity in $\RR^2$, we don't require this (we can have
+  partial differentiation wrt $x$ and wrt $y$, and still works, you get
+gradients and other stuff). But since we required the quotient limit to be
+independent of the complex number $h$ chosen, these equations follow. In
+particular, they state that the image of the square spanned by $\eps, i\eps$ at
+$z\in\Omega$ is the square (in the $w$-plane) spanned by $\eps \partial_x f,
+\eps \partial_y f$, where $\partial_x f=-i \partial_y f$ which indicates that
+$\partial_y f$ is rotated by $\frac{\pi}{2}$ in the $w$-plane.
+\begin{remark}
+  Note that what the Riemann-Cauchy equations really are saying is that for a
+  function to be holomorphic, the aforementioned squares must preserve the shape
+  (they may be rotated, translated, but not squished or elongated: the
+  perpendicular lines are still perpendicular -- this is a conformal mapping!)
+\end{remark}
+
+Hence one can say that holomorphicity is a more demanding criteria than $\RR^2$
+differentiablity: we require small squares to be preserved, up to translation
+and rotation. However, find find yet another striking result,
+\begin{theorem}[The Cauchy-Riemann Equations]
+  Let $\Omega\subset\CC$ be open and $f:\Omega\to\CC$ be holomorphic. Define
+  $u(x,y)=\Re f(x+iy), v(x,y)=\Im f(x+iy)$. Then, the partial derivatives
+  $\partial_x u, \partial_y u, \partial_x v, \partial_y v$ exist on $\Omega\sim
+  U\times V$, and satisfy the \emph{Cauchy-Riemann equations}
+  \[\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}\land
+  \frac{\partial v}{\partial x} = -\frac{\partial u}{\partial y}.\]
+
+  Conversely, let us define a pair of functions $(u(x,y),v(x,y))$ with
+  $u,v:\Omega'\subset\RR^2\to\RR$ whose partial derivatives exist, are
+  \emph{continuous}, and obey the Cauchy-Riemann equations. Then, these function
+  define a holomorphic function $f:\Omega\to\CC$ as
+  \[z\mapsto f(z)=u(\Re z, \Im z) + iv(\Re z, \Im z),\]
+  \label{thm:cauchyRiemannEquations}
+\end{theorem}
+\begin{proof}
+  TODO. We can find the lecture notes the converse proof. The first half is in
+  fact proven by the introduction to this lecture section.
+\end{proof}<++>
+\begin{exercise}
+  Consider the functions $u=e^x\cos y, v=e^x\sin y$.
+\end{exercise}
+\begin{proof}[Solution]
+  TODO. It's quite fun and rather short. The fun stuff is that, after verifying
+  they satisfy Cauchy-Riemann, and that they are $C^1$, it gives that the
+  function $f$ they give rise by Theorem \ref{thm:cauchyRiemannEquations} is
+  infact just $f(z)=e^z$, and that the requirement $f'(z)=\partial_x
+  f(x+iy)=f(z)$ is satisfied.
+\end{proof}<++>

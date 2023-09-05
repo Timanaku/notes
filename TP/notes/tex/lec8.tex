@@ -1,0 +1,102 @@
+\section{Week 3 - 26 Jan 2022 - Continuity}
+\begin{proposition}
+  Let $f:\RR\to\RR^2:x\mapsto (g(x),h(x))$ for functions $g,h:\RR\to\RR$. Then
+  $f$ is $(d,d_{\infty})$ continuous iff $g,h$ are continuous.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  ($\implies$) Assume $f$ is continuous. Choose $a\in\RR$ and $\eps>0$. Since
+  $f$ is continuous, $\exists\delta>0$ s.t.
+  \[|x-a|<\delta \implies d_{\infty}(f(x),f(a))<\eps \]
+  \[\iff\max(|g(x)-g(a)|,|h(x)-h(a)|)<\eps \]
+  \[\iff |h(x)-h(a)|<\eps \land |g(x)-g(a)|<\eps.\] 
+  Hence $g,h$ are continuous.
+  ($\Leftarrow$) Let $a\in\RR$ and $\eps>0$. By continuity of $g,h$, there
+  exists $\delta_1,\delta_2>0$ s.t.
+  \[|x-a|<\delta_1 \implies |g(x)-g(a)|<\eps,\]
+  \[|x-a|<\delta_2 \implies |h(x)-h(a)|<\eps.\]
+  Choose $\delta=\min(\delta_1,\delta_2)>0$ and observe that 
+  \[|x-a|<\delta \implies |h(x)-h(a)|<\eps \land |g(x)-g(a)|<\eps\]
+  \[\implies\max(|g(x)-g(a)|,|h(x)-h(a)|)<\eps \]
+  \[\implies d_{\infty}(f(x),f(a))<\eps.\]
+  Thus $f$ is continuous.
+\end{proof}
+\begin{remark}
+  The above still holds for $d_1,d_2$ in place of $d_{\infty}$ above. Recall
+  that $d_1,d_2,d_{\infty}$ are all strongly equivalent on $\RR^2$.
+  \label{<+label+>}
+\end{remark}
+\begin{proposition}
+  Let $d,d'$ be metrics on a set $X$, and $c>0$. Assume $d(x,y)\leq cd'(x,y)$ for
+  all $x,y\in X$. Let $(Y,d_y$ be a metric space. Then 
+    \begin{enumerate}
+      \item If $f:X\to Y$ is $(d,d_y)$ continuous, then it is
+        $(d',d_y)$-continuous,
+      \item If $g:Y\to X$ is $(d_y,d')$-continuous then it is
+        $(d_y,d)$-continuous.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+  First, let $a\in\RR, \eps>0$. Since $f$ is $(d,d_y)$-continuous, there exists
+  $\delta>0$ s.t. 
+  \[d(x,a)<\delta \implies d_y(f(x),f(a))<\eps.\]
+  Then if $d'(x,a)<\delta/c$, then $d(x,a)\leq cd'(x,a)<\delta \implies
+  d_y(f(x),f(a))<\eps$. Hence he result follows.
+
+  For the second statement, let $b\in Y, \eps>0$. Since $g$ is
+  $(d_y,d')$-continuous, there exists $\delta>0$ s.t. 
+  \[d_y(y,b)<\delta \implies d'(g(y), g(b))<\eps/c,\]
+  Since the definition of continuity allows for any arbitrary $\eps$. Therefore
+  it follows that $d(g(y),g(b))\leq cd'(g(y),g(b)) < \eps$, hence showing that
+  the function is $(d_y,d)$-continuous.
+\end{proof}
+
+\begin{corollary}
+  Suppose $d,d'$ are strongly equivalent on $X$, and $(Y,d_y)$ is some other
+  metric space. Then
+  \begin{enumerate}
+    \item $f:X\to Y$ is $(d,d_Y)$-continuous $\iff f$ is $(d',d_Y)$-continuous,
+    \item $g:Y\to X$ is $(d_Y,d)$-continuous $\iff g$  is $(d_Y,d')$-continuous.
+  \end{enumerate}
+  That is, continuity wrt $d$ is equivalent to continuity equivalent to $d'$.
+  \label{<+label+>}
+\end{corollary}
+\begin{corollary}
+  Let $f:\RR\to\RR^2$ be given by $f(x)=(g(x),h(x))$ for $g,h:\RR\to\RR$. Then
+  \[f \text{ is $(d,d_1)$-continuous }\iff f \text{ is $(d,d_2)$-continuous} \]
+  \[\iff f \text{ is $(d,d_{\infty})$-continuous }\iff g,h \text{ are $(d,d)$-continuous} \]
+  \label{<+label+>}
+\end{corollary}
+
+\begin{proposition}
+  Let $X,Y,Z$ be metric spaces with metrics $d_X,d_Y,d_Z$, respectively. If
+  $f:X\to Y$ is continuous at $a\in X$ and $g:Y\to Z$ is continuous at $f(a)\in
+  Y$, then $g\circ f:X\to Z$ is continuous at $a\in X$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Let $\eps>0$. We claim $\exists \delta>0$ s.t. 
+  \[d_X(x,a)<\delta |implies d_Z(g\circ f (x), g\circ f (a)) <\eps.\]
+  Since $g$ is continuous at $f(a)$, it follows that there exists $\alpha$ s.t.
+  \[d_Y(y,f(a))<\alpha \implies d_Z(g(y), g(f(a))) < \eps,\]
+  And in particular $d_Y(f(x),f(a))<\alpha \implies d_Z(g(f(x)),g(f(a)))<\eps$.
+  Moveover, if $f$ is continuous at $a$, $\exists \beta>0$ s.t. 
+  \[d_X(x,a)<\beta \implies d_Y(f(x),f(y))<\alpha\]
+  Which implies that $d_Z(g(f(x)),g(f(a)))<\eps$. So $g\circ f$ is continuous at
+  $a$.
+\end{proof}
+
+\begin{example}
+  The function $f:\RR\to\RR:x\mapsto x^2$ is continuous. Notice that
+  $f=m\circ\Delta$ where $\Delta:\RR\to\RR^2:x\to (x,x)$ and $m:\RR^2\to
+  \RR:(t,s)\mapsto ts$ are continuous functions, by Exercise
+  \ref{ex:W3L1LastExercise} and the fact that ifentity functions are continuous.
+  Hence it follows that $f$ is continuous.
+\end{example}
+\begin{exercise}
+  Similarly, show that if $g,h:\RR\to\RR$ are continuous, then $f:\RR\to\RR$
+  given by $f(x)=g(x)h(x)$ is continuous.
+\end{exercise}
+\begin{proof}[Solution]
+  
+\end{proof}

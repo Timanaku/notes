@@ -1,0 +1,136 @@
+\section{Week 9 - 11 Mar 2022 - Path connectedness }
+\begin{definition}
+  Let $X$ be a topological space. Two points $x,y\in X$ are connected by a path
+  if there exists a continuous function $\gamma:[0,1]\to X$ s.t. $g(0)=x,
+  g(1)=y$. Such a function $\gamma$ is called a path. We say $X$ is
+  path-connected if every pair of points in $X$ is connected by a path.
+  \label{def:pathConnect}
+\end{definition}
+\begin{example}
+  The spaces $\RR^n$, $S^1, S^1\setminus\{a\}$ for some $a\in S^1$, are all
+  path-connected in their usual topologies. For the first example, let
+  $x,y\in\RR^n$ so that $\gamma(t)=x+t(y-x)$ is a path from $x$ to $y$. For the
+  second example, let $x=(\cos\theta, \sin\theta)$ and $y=(\cos\phi, \sin\phi)$.
+  Then $\gamma(t)=(\cos(\theta+t(\phi-\theta)), \sin(\theta+t(\phi-\theta)))$ is
+  a path from $x$ to $y$. For the last case, the same path works, but being
+  careful of the codomain (removing one point $a=(\cos\phi, \sin\psi)$).
+\end{example}
+
+\begin{proposition}
+  Let $X$ be a topological space. If $X$ is path-connected, then $X$ is
+  connected.
+  \label{prop:pathConnectConnect}
+\end{proposition}
+\begin{proof}
+  We proceed by contrapositive. Suppose $X$ is disconnected, so $X=U\cup V$ for
+  $U,V$ disjoint, open, and nonempty. Choose $u\in U, v\in V$. If $X$ is
+  path-connected, we may choose a path $\gamma:[0,1]\to X$ s.t. $g(0)=u,
+  g(1)=v$. Then $[0,1]=\gamma^{-1}(X)=\gamma^{-1}(U\cup V)=\gamma^{-1}(U)\cup
+  \gamma(V)$, a disjoint union of nonempty set (since $0\in \gamma^{-1}(U),
+  1\in\gamma^{-1}(V)$), and are open since $U, V$ are open and $\gamma$ is
+  continuous. So $[0,1]$ is disconnected, a contradiction. So $X$ is not
+  path-connected.
+\end{proof}
+\begin{remark}
+  The converse of the above proposition is false! There exists connected
+  topological curves which are not path-connected. An example of this is the
+  topologist's $\sin$ curve.
+  \label{rem:connectedNotPathConn}
+\end{remark}
+
+\begin{example}[The topologist's sine curve]
+  Let $X_1=\{(0,y): y\in\RR\}$, and $X_2=\{(x,\sin(1/x)): x>0\}\subset\RR^2$,
+  and $X=X_1\cup X_2$.  We claim $X$ is connected but not path-connected.
+\end{example}
+\begin{proof}
+  We first show $X$ is connected. Each $X_1, X_2$ is clearly path-connected,
+  hence connected by the above proposition. If $X=U_1\cup U_2$ with $U_i$
+  nonempty, disjoint, and open, then $X_1$ is the disjoint union of the open
+  sets $X_1\cap U_1, X_1\cap U_2$. Since $X_1$ is connected, it follows that
+  $X_1$ is contained in one of the $U_i$. A similar argument applies to $X_2$
+  which must be contained in on $U_i$. Hence the only way to disconnectect $X$
+  would be as the union of $X_1, X_2$. However, $X_1$ is not open in $X$, since
+  for any $r>0$, the ball around the origin of radius $r$ intersects $X_2$.
+
+  Next, we show that $X$ is not path-connected. Let $t_k=\frac{2}{(2k+1)\pi}$
+  and let $x_k=(t_k, (-1)^k)\in X_2$. Assume $\gamma$ is a path in $X$ from
+  $(0,0)$ to $x_1$. Since $\gamma$ is a path, it is continuous, and so the image
+  of every convergent sequence must converge. To show contradiction, we claim
+  there exists a decreasing sequence $(s_k)$ in $[0,1]$ s.t. $\gamma(s_k)=x_k$,
+  where $s_1=1$ (then $\gamma(s_1)=\gamma(1)=x_1$ hence note how this sequence
+  existing would contradict continuity of $\gamma$), and then define the terms
+  of $s_k$ inductively. Assume for some $k\geq 1$ that we have $s_k\in [0,1]$
+  with $\gamma(s_k)=x_k$. Assume there are no $s_{k+1}\in (0,1)$ with
+  $\gamma(s_{k+1})=x_{k+1}$. Then writing $S=\gamma([0,s_k])$, we have 
+  \[S= \{(x,y)\in S: x<t_{k+1}\}\cup \{(x,y)\in S: x> t_{k+1}\}.\]
+  (to see this, take when $k=1$, and observe that $\gamma([0,1])$ can infact be
+  written as such a partition, and it follows inductively -- just let $k$ grow).
+  Note this is writting $S$ as the disjoint union of nonempty open subsets. This
+  is a contradiction since $[0,s_k]$ is connected and $\gamma$ is continuous,
+  hence $S$ can't be disconnected. Therefore there must in fact exist some
+  $s_{k+1}\in (0, s_k)$ s.t. $\gamma(s_{k+1})=x_{k+1}$, as desired. 
+  The sequence $(s_k)$ is a decreasing sequence of real numebrs bounded below by
+  $0$, so it converges to a limit $s$. Since $[0,1]$ is closed, $s\in [0,1]$.
+  However, note that $\gamma(s_k)\not\to\gamma(s)$, since $\gamma(s_k)$ does not
+  converge at all, as previously noted. This is a contradiction of the
+  continuity of $\gamma$, by our sequence argument. Hence no path from
+  $(0,0)$ to $x_1$ can exist.
+  \todo{I can't understand how writing S as that image give this partition of
+  $S$. It may be that $\gamma(s_{k+1})\neq x_{k+1}$ but I can't see how that
+  implies that then $S$ has elements with $x$-coord larger than $t_{k+1}$.}
+  \todo{Also the notes say that there is at most one point in $X$ with a given
+  $y$-coordinate, but I really can't make sense of that -- the sine function is
+  not injective.}
+\end{proof}
+
+Next we're ready to show that $S^{1}$ in $\RR^2$ is not homeomorphic to an
+interval in $\RR$. We use connectedness to do this. With more sophisticated
+techniques, this is show using the fact that $S^1$ \emph{contains a loop}, but
+we will use the technique we know so far. First recall the following.
+\begin{lemma}
+  If $f:X\to Y$ is continuous and $X$ is path-connected, then so is the image
+  $f(X)$. 
+\end{lemma}
+\begin{proof}
+  Let $a,b\in f(X)$. Then there are points $x$ and $y$ in $X$ s.t. $f(x)=a$ and
+  $f(y)=b$. Since $X$ is path-connected, there is a path $\gamma$ from $x$ to
+  $y$. Then the composition $\gamma'=f\circ \gamma$ is a path from $a$ to $b$ in
+  $f(X)$, where $\gamma'$ is continuous since $f,\gamma$  are both continuous.
+\end{proof}
+\begin{corollary}
+  Path-connectedness is a topological property. I.e. for $X\cong Y$, then $X$ is
+  path-connected iff $Y$ is too.
+  \label{<+label+>}
+\end{corollary}
+
+\begin{lemma}
+  Let $X, Y$ be topological spaces, and let $f:X\to Y$ be a homeomorphism. Let
+  $A$ be a subspace of $X$. Then, $g:A\to f(A):a\mapsto f(a)$ is a homeomorphism
+  from $A$ to $f(A)\subset Y$.
+  \label{lem:homeoSubspaces}
+\end{lemma}
+\begin{proof}
+  Exercise in Sheet 7.
+\end{proof}
+
+\begin{example}
+   The unit circle $S^1$ in $\RR^2$ is not homeomorphic to any interval in
+   $\RR$. We show $S^1$ is not homeomorphic to $X=[0,1]$, the proof for the
+   other 3 intervals are similar. Observe that $X\setminus\{1/2\}$ is not
+   path-connected (for such a path to exist, it would contradict the
+   intermediate value theorem). On the other hand, $S^{1}\setminus\{a\}$ is path
+   connected for any $a\in S^1$. Hence, if $f:X\to S^1$ were a homeomorphism, we
+   would get a homeomorphism $X\setminus\{1/2\}\to S^{1}\setminus\{f(1/2)\}$.
+   But these spaces are not homeomorphis, since only one of them is
+   path-connected.
+\end{example}
+
+\begin{example}
+  The space $\RR$ is not homeomorphic to $\RR^2$, since if $f:\RR\to\RR^2$ were
+  a homeomorphism, then by Lemma \ref{lem:homeoSubspaces} so would be
+  $g:\RR\setminus\{0\}\to\RR^2\setminus\{f(0)\}:x\mapsto f(x)$. But this is a
+  contradiction, since $\RR\setminus\{0\}$ is not path connected, but
+  $\RR^2\setminus\{f(0)\}$ is, so it is also connected. 
+\end{example}
+
+

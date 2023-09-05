@@ -1,0 +1,153 @@
+\section{Lecture 9 - 22 Feb 2022 - Cauchy's theorem}
+Cauchy's Theorem will show us that $\oint_{\gamma} f(z)dz=0$ for any closed path
+$\gamma$ in $\Omega$, provided $f:\Omega\to\CC$ is holomorphic.
+\begin{definition}
+  A path $\gamma:[a,b]\to\Omega\subset\CC$ is simple if and only if it doesn't
+  cross with itself, with the possible exception of the endpoints (a closed
+  path).
+  \label{def:simplePath}
+\end{definition}
+\begin{theorem}
+  Let $f:\omega\to\CC$ be holomorphic and $\gamma:[a,b]\to\Omega$ be a simple
+  closed path such that all point inside of $\gamma$ are in $\Omega$ (i.e. no
+  holes). Then,
+  \[\oint_{\gamma}f(z)dz =0.\]
+  \label{thm:CauchyIntegration}
+\end{theorem}
+To prove this theorem, we will prove smaller claims and then connect them to
+give the final proof. First we consider contours which are images of rectangles.
+\todo{Why do we need $\Gamma$? Isn't $\gamma$ (the image of the boundary
+under a continuous deformation) enough?}
+\begin{theorem}
+  Let $\Omega\subset\CC$ be open and let $f:\Omega\to\CC$ be holomorphic. Let
+  $R=[0,1]\times[a,b]$ be a rectangle in $\RR^2$ with boundary $\partial R$ and
+  $\gamma: \partial R\to\Omega$ be a path s.t. $\gamma=\Gamma|\partial R$
+  (restriction of domain to $\partial R$) for some continuous function $\Gamma:
+  R\to\Omega$. Then $\oint_{\gamma}f(z)dz=0$.
+  \label{thm:CauchyIntegrationRectangles}
+\end{theorem}
+\begin{proof}
+  Let us define the function $I(R)=\int_{\gamma(R)}f(z)dz$ as the integral along
+  the path $\gamma(R)=\Gamma|\partial R$, i.e. the integral along the boundary
+  of the image (by $\Gamma$) of the rectangle. We then can bisect (horizontally
+  and verically) the rectangle $R$ into four smaller, equally large rectangles:
+  $S,T,U,V$, so that $I(R)=I(S)+I(T)+I(U)+I(V)$ (since the integrals along edges
+  inside $R$ cancel out). We can then choose a small rectangle, say $R_1=S$,
+  such that 
+  \[|I(R)|\leq 4|I(R_1)|.\]
+  Following this proceadure we can construct a sequence of rectangles $R\supset
+  R_1 \supset R_2 \cdots$, where each rectangle is the quarter of its
+  predecessor, hence 
+  \[|I(R)| \leq 4^n |I(R_n)|.\]
+  Let $(s_n,t_n)$ be the lower left corner of the rectangle $R_n$. The sequence
+  $s_1,s_2,\cdots$ is increasing and bounded above, so it converges to a limit
+  $s$, and similarly $t_n$ converges to $t$. Let $w=\Gamma(s,t)$, the image of
+  this limit point $(s,t)$ under the continuous function $\Gamma$. Then $w\in
+  \Gamma(R_n)$ for every $n$ (without the image this is hard to see, but imagine
+    bisecting the rectangle in four sides recursively, and observe how the limit
+  point must be in every bisection in the sequence $R_1,R_2,\cdots$ ).
+
+  We now use the fact that $f$ is differentiable. For $z\in \Omega\setminus \{w\}$,
+  let 
+  \[q(z) = \frac{f(z)-f(w)}{z-w} - f'(w),\]
+  And define $q(w)=0$. Then $q$ is continuous (by definition of derivative of
+  $f$) on $\Omega$, and 
+  \[f(z)=f(w)+f'(w)(z-w) + q(z)(z-w)\]
+  For all $z\in\Omega$. Since the integral of a polynomial along a closed curve
+  is $0$ (we showed $\oint z^n dz=0$ when $n\neq -1$), we have 
+  \[I(R_n)= \oint_{\Gamma|\partial R_n} q(z)(z-w) dz.\]
+  What we now want to do is to show how this integral vanishes as $n$ tends to
+  infinity. Note that the side lengths of $R_n$ are related to those of $R$ by
+  $2^{-n}$ (since bisecting at every iteration, we're halving the sides every
+  iteration). Moreover, we can choose $\Gamma:R\to\Omega$ s.t. lengths in $R$
+  get scaled by a finite amount when mappend to $\Omega$ under $\Gamma$. I.e.
+  there exists constants $K,L>0$ s.t. 
+  \begin{enumerate}
+    \item The length of $\gamma(R_n)=\Gamma|\partial R_n \leq 2^{-n}K$,
+    \item $|z-w|\leq 2^{-n}L$ for every $z\in \Gamma|\partial R_n$,
+    \item Since $q(z)\to 0$ as $z\to w$ (by definition), the function $q$ must
+      be bounded, i.e. $|q(z)|\leq M_n \forall z\in \Gamma|\partial R_n$ with
+      $M_n\to 0$ as $n\to\infty$.
+  \end{enumerate}
+  Therefore,
+  \[|I(R)|\leq |4^n I(R_n)| = |4^n \oint_{\Gamma|\partial R_n} q(z)(z-w) dz|\]
+  Recall that if $\gamma$ is of finite length $L$ and $|f(z)|\leq M$ for all
+  $z$, then $|\int_{\gamma} f(z)dz| \leq ML$. Hence the above reduces to 
+  \[|I(R)|\leq 4^n M_n 2^{-n}L 2^{-n}K = M_nLK \to 0,\]
+  As required.
+\end{proof}
+
+Next, we use this result to show how, in some circumstances, the integrals of a
+function along different paths are equal (i.e. how the above result implies
+homotopy).
+\begin{definition}
+  Let $\gamma,\delta:[a,b]\to X$ be two closed paths with the same domain
+  $[a,b]$ and the same codomain $X$. Then $\gamma,\delta$ are homotopic as
+  closed paths in $X$ if there exists a continuous functions
+  $\Gamma:[0,1]\times [a,b]\to X$ such that
+  \[\Gamma(0,t)= \gamma(t), (t\in[a,b])\]
+  \[\Gamma(1,t)= \delta(t), (t\in[a,b])\]
+  \[\Gamma(s,a)= \Gamma(s,b), (s\in[0,1])\]
+  The function $\Gamma$ is called a \emph{homotopy} from $\gamma$ to $\delta$.
+  \label{def:homotopy}
+\end{definition}
+Under this definition, the function $\Gamma$ can be seen as a continuous family
+of  closed paths, each one for each point $s$ in $[0,1]$, starting with $\gamma$
+and finishing with $\delta$. With this definition, we're ready to show the
+circumstances in which the integrals of functions along different paths are
+equal.
+
+\begin{theorem}[Homotopy invariance]
+   Let $f:\Omega\to\CC$ be a differentiable function on an open set $\Omega$ in $\CC$ and
+   let $\gamma$ and $\delta$ be closed paths in $\Omega$ of finite length which
+   are homotopic as closed paths in $X$. Then we have
+   \[\oint_{\gamma} f(z)dz = \oint_{\delta} f(z)dz.\]
+  \label{thm:homotopyInvariance}
+\end{theorem}
+\begin{proof}
+  We can find a homotopy $\Gamma: [0,1]\times [a,b]\to\Omega$ whose restriction
+  to the boundary $\partial X$ of its domain is of finite length. The integral of f along
+  this boundary (in the appropriate direction) is then
+  \[\oint_{\Gamma|\partial X}f(z)dz = \oint_{\gamma}f(z)dz -
+  \oint_{\delta}f(z)dz.\]
+  By Theorem \ref{thm:CauchyIntegrationRectangles}, the integral along the image
+  of the boundary of a rectangle of a continuous function is $0$ (where $f$ is
+  continuous inside the image of that rectangle), hence we have
+  \[\oint_{\gamma}f(z)dz - \oint_{\delta}f(z)dz = 0,\]
+  As required.
+\end{proof}
+We can then use this to generalise Theorem
+\ref{thm:CauchyIntegrationRectangles}. 
+\begin{theorem}[Cauchy's theorem for null-homotopic paths]
+  Let $f:\Omega\to\CC$ be a differentiable function on an open set $\Omega$ in $\CC$ and
+  let $\gamma$ be a closed path in $\Omega$ of finite length which is homotopic to a
+  constant path (as a closed path) in $\Omega$. That is, $\gamma$ is
+  null-homotopic in $\Omega$. Then,
+  \[\int_{\gamma} f(z)dz =0.\]
+  \label{thm:CauchyNullHomotopic}
+\end{theorem}
+\begin{proof}
+  This follows from Theorem \ref{thm:homotopyInvariance} about homotopy
+  invariance, since the integral in a constant path (essentially, a point in
+  $\CC$) is obviously $0$.
+\end{proof}
+As a special case, we can apply this result to paths that do not cross
+themselves, called simple closed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

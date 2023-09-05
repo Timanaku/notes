@@ -1,0 +1,58 @@
+\section{Lecture 8 - 10 Feb 2022 - Complex integration}
+\begin{example}
+  Let $\gamma:[\alpha,\beta]\to\CC$ be the path given by 
+  \[\gamma(t)= e^{it}\]
+  And let $n$ be an integer. Compute
+  \[\int_{\gamma} z^n dz.\]
+\end{example}
+\begin{proof}[Solution]
+  We have 
+  \[\int_{\gamma}z^n dz = \int_{\alpha}^{\beta} e^{itn} ie^{it} dt=\int
+  ie^{it(n+1)}dt\]
+  When $n\neq -1$ we have 
+  \[\int_{\gamma}z^n dz = \left[ \frac{e^{it(n+1)}}{n+1}
+  \right]_{\alpha}^{\beta}.\]
+  When $n=-1$, we have
+  \[\int_{\gamma}z^{-1}dz = \int_{\alpha}^{\beta}i dt = i(\beta-\alpha).\]
+  Observe that for the case $n\neq -1$, and where $\gamma$ represents a full unit
+  circle around the origin, the integral gives $0$ value. However, in the case
+  where $n=-1$, we find that the integral gives $2\pi i$.
+\end{proof}
+
+\begin{theorem}
+  Let $\Omega\subset\CC$ be open and $f:\Omega\to\CC$ be continuous. If there
+  exists $F:\Omega\to\CC$ holomorphic with $F'=f$, then for any path
+  $\gamma:[0,1]\to\CC$ we have 
+  \[\int_{\gamma} f(z)dz = F(\gamma(1))-F(\gamma(0)).\]
+  \label{thm:integralHolomorphicFunc}
+\end{theorem}
+\begin{proof}
+  The proof is simple: use the fundamental theorem of calculus with the
+  chainrule.
+\end{proof}
+
+\begin{corollary}
+  Let $\gamma:[0,1]\to\Omega$ be a closed path (i.e. $\gamma(0)=\gamma(1)$).
+  Then with the same restrictions as in Theorem
+  \ref{thm:integralHolomorphicFunc} give
+  \[\int_{\gamma}f(z)dz =0\]
+  \label{<+label+>}
+\end{corollary}
+\todo{But we saw before that the function $1/z$ give integral $2\pi i$ when
+integrated around the origin.}
+As an example to the above corollary, the lecturer gives a complex polynomial.
+
+\begin{example}
+  Show that the holomorphic function
+  $f:\CC\setminus\{0\}\to\CC:z\to\frac{1}{z}$ does not possess an
+  antiderivatives in $\CC^{\times}=\CC\setminus\{0\}$. Hence show that it does
+  not contradict the above corollary
+\end{example}
+\begin{proof}[Solution]
+  Consider $\gamma(t)=e^{2\pi i t}$ for $t\in[0,1]$ -- the unit circle around
+  1. However, observe that 
+  \[\int_0^1 f(\gamma(t))\gamma'(t)dt = \int_0^1 e^{-2\pi i t} (2\pi i
+  e^{2\pi i t})dt = 2\pi i.\]
+  Hence $f$ can't have an anti-derivative on $\CC^{\times}$.
+\end{proof}
+

@@ -1,0 +1,124 @@
+\section{Lecture 1 - 18 Jan 2021 - Limits and convergence}
+In order to differentiate and integrate, we need the notion of limit.
+\begin{definition}
+  Given asequence $(z_n)_n\in\CC$ we say $(z_n)$ converges against $z\in\CC$ iff
+  $\forall \eps>0, \exists n_{\eps}\in\NN$ s.t. $|z_n-z|<\eps$ for all
+  $n>n_{\eps}$. In this case, we shall write $\lim_{n\to\infty} z_n=z$. If no
+  such $z\in\CC$ exists, we say that $(z_n)$ is divergent.
+  \label{def:sequenceCC}
+\end{definition}
+\begin{proposition}
+  Let $(z_n)_n\in\CC$ be a sequence. Then $\lim_{n\to\infty} z_n=z$ iff
+  $\lim_{n\to\infty} \Re(z_n)=\Re(z)$ and $\lim_{n\to\infty} \Im(z_n)=\Im(z)$.
+\end{proposition}
+\begin{proof}
+  Note that by properties of limits we have 
+  \[\lim_{n\to\infty}(x_n + iy_n) = x+iy\]
+  \[\iff \lim_{n\to\infty}(x_n) + i\lim_{n\to\infty}(y_n) = x+iy\]
+  Hence the result follows.
+\end{proof}
+
+\begin{definition}
+  A complex sequence $(z_n)_n$ is called \emph{Cauchy sequence} iff
+  \[\forall \eps>0 \exists n_{\eps}\in\NN : m,n>n_{\eps} \implies |z_m-z_n| <
+  \eps\]
+  \label{def:complexCauchySeq}
+\end{definition}
+\begin{proposition}
+  Every Cauchy sequence in $\CC$ converges and viceversa, every convergent
+  sequence must be a Cauchy sequence.
+  \label{prop:cauchyConvergence}
+\end{proposition}
+\begin{proof}
+  In the exercise sheet. Howerver, we make use of the fact that real Cauchy
+  sequences necessarily converge, and viceversa. We prove that next for refresh.
+\end{proof}
+\begin{proposition}
+  Let $(x_n)_n\in\RR$ be a real sequence. We have that $(x_n)$ converges to some
+  $a\in\RR$ if and only if $(x_n)$ is Cauchy.
+  \label{prop:cauchyRealsConverge}
+\end{proposition}
+\begin{proof}
+  First, assume that the sequence converges, so$\forall\eps>0\exists N\in\NN :
+  n\geq N \implies |x_n-a|<\eps$. Let $\eps>0$ and pick $M\in\NN$ s.t. $m,n\geq
+  M$ with $n\neq m$, we have $|x_m-a|,|x_m-a|<\frac{\eps}{2}$. It then follows
+  that 
+  \[|x_n-a|<\eps/2 \land |x_m-a|<\eps/2 \implies |x_n-a|+|a-x_m|\leq \eps\]
+  By the triangle inequality, it follows that 
+  \[|x_n-x_m|< \eps\]
+  Which means precisely that the sequence is Cauchy.
+
+  On the other hand, assume the sequence is Cauchy, so that
+  $\forall\eps>0\exists N\in\NN : m,n\geq N \implies |x_m-x_n|<\eps$. Assume that
+  this sequence does not converge to any $a\in\RR$. Hence it follows that
+  $\exists \eps'>0 :\forall a\in\RR, N\in\NN,  n\geq N \land |x_n-a|\geq \eps'$.
+
+  TODO: Finish Cauchy implies convergence.
+
+
+\end{proof}
+
+
+\begin{definition}
+  We say the complex series $\sum_{n=0}^{\infty} z_n$ converges (absolutely) iff
+  the sequence of partial sums $s_i:=\sum_{n=0}^i z_n$ converges (absolutely).
+  \label{def:convergenceSeries}
+\end{definition}
+
+\begin{remark}
+  Note that this implies that $\sum_{n=0}^{\infty}z_n$ converges iff
+  $\sum_{n=0}^{\infty}\Re(z_n)$ and $\sum_{n=0}^{\infty}\Im(z_n)$ both converge.
+\end{remark}
+
+\begin{exercise}
+  Show that absolute convergence implies convergence.
+\end{exercise}
+\begin{proof}[Solution]
+  TODO.
+\end{proof}
+
+\subsubsection{The geometric series}
+Recall that for a sequence $(z_n)_n$ with $z_n:= z^n$ for some $z\in\CC$, we can
+define a series of the form $\sum_{n=0}^{\infty}z^n$, called a geometric series.
+We can find for a partial sum $s_n=\sum_{k=0}^{n}z^k$, that the sum is 
+\[(1-z) (1+z+z^2+\dots +z^n) = 1-z^{n+1}\]
+\[\implies s_n = \frac{1-z^{n+1}}{1-z}; \quad z\neq 1\]
+Moreover, note that for $|z|<1$, then $\lim_{n\to\infty} |z|^{n+1} = 0$ and so 
+\[|s_n| = \frac{|1-z^{n+1}|}{|1-z|} \leq \frac{1+|z|^{n+1}}{|1-z|}\]
+By the triangle inequality, and note that $|1-z|\geq 1-|z|$, hence 
+\[ \implies |s_n| \leq \frac{1+|z|^{n+1}}{|1-z|} \leq \frac{1+|z|^{n+1}}{1-|z|}\]
+And by the sandwich theorem, it follows that $|s_n|$ converges absolutely for
+$|z|<1$. Note that for $|z|\geq 1$, the limit in fact diverges since we require
+$|z_n|\to 0$ as $n\to \infty$ for the series to converge.
+
+\begin{corollary}
+  Suppose that $\sum_{n=0}^{\infty} z_n$ converges. Then
+  \begin{enumerate}
+    \item $z_n\to 0$ as $n\to \infty$,
+    \item $\exists M>0$ as.t. $|z_n|\leq M \forall n\in\NN$.
+  \end{enumerate}
+  \label{cor: convergentSeqBounded}
+\end{corollary}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{corollary}[Comparison Test]
+  If $\sum_{n=0}^{\infty} r_n\in\RR$ is a convergent series with $r_n\geq 0$ and
+  $|z_n|\leq k r_n$ for some $k>0$ and for all $n\in\NN$, then
+  $\sum_{n=0}^{\infty}z_n$ converges absolutely.
+  \label{cor:comparisonTest}
+\end{corollary}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{corollary}[Ratio test]
+  Suppose that $\lim_{n\to\infty}\left|\frac{z_{n+1}}{z_n}\right| = C$ exists
+  and $C<1$. Then $\sum_{n=0}^{\infty}z_n$ converges absolutely. If $C>1$, then
+  $\sum_{n=0}^{\infty}z_n$ diverges. And for $C=1$, the test is inconclusive.
+  \label{cor:comparisonTest}
+\end{corollary}
+\begin{proof}
+  TODO.
+\end{proof}

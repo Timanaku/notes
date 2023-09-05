@@ -1,0 +1,75 @@
+\section{Lecture 6 - 03 Feb 2022 - Harmonic functions}
+\begin{definition}
+  Let $\Omega\subset\RR^2\cong \CC$ be open. A function $u:\Omega\to\RR$ is
+  called harmonic if it satisfies the Laplace's equation, $\frac{\partial^2 u
+  }{\partial x^2} + \frac{\partial^2 u}{\partial y^2} =0$ on $\Omega$. More
+  generally, in $\RR^n$, the Laplace equation can be written in terms of the
+  Laplace operator,
+  \[\Delta u = \nabla^2 u = \sum_{i=1}^n \frac{\partial^2 u}{\partial x_i^2}.\]
+  \label{def:harmonicFunction}
+\end{definition}
+
+\begin{theorem}
+  Suppose $u,v:\Omega\to\RR$ with $\Omega\subset\RR^2\cong\CC$ open obey the
+  Cauchy-Riemann equations, and that $u,v$ have continuous 2nd order partial
+  derivatives. Then $u,v$ are harmonic functions.
+\end{theorem}
+\begin{proof}
+  Since $u,v$ are $C^2$, the partial derivatives is commutative:
+  \[\partial_x^2 u+ \partial_y^2 u = \partial_x(\partial_y v) -
+  \partial_y(\partial_x v) =0,\]
+  By using the Cauchy-Riemann equations. We can do the same with $v$.
+\end{proof}
+
+\begin{definition}
+  Given a harmonic function $u:\Omega\to\RR$, one call another harmonic function
+  $v:\Omega\to\RR$ the \emph{harmonic conjugate} of $u$ if $u,v$ satisfy the
+  Cauchy-Riemann equations.
+  \label{def:harmonicConj}
+\end{definition}
+\begin{remark}
+  The problem is usually to compute the harmonic conjugate only from the
+  original harmonic function. In general, a solution to Laplace's equation (a
+  harmonic function) does not need to satisfy Cauchy-Riemann's equations. We
+  need an extra restriction.
+\end{remark}
+\begin{definition}
+  A domain $\Omega\subset\CC$ is called path-connected if for any two points
+  $x,y\in\Omega$ we can always find a path from $x$ to $y$ in $\Omega$.
+\end{definition}
+
+\begin{proposition}
+  Let $u:\Omega\to\RR$ be harmonic and $u\in C^2(\Omega)$. If $\Omega\subset\CC$
+  is open and path-connected, then $u$ has a harmonic conjugate.
+  \label{<+label+>}
+\end{proposition}
+To find the harmonic conjugate, one solves the Cauchy-Riemann equations, by
+path-integration. Hence the need for path-connected domain.
+\begin{example}
+  Show the the function $u=x^3-3xy^2$ is harmonic, and find its harmonic
+  conjugate.
+\end{example}
+\begin{proof}[Solution]
+  Observe,
+  \[\partial_x^2 u = 6x, \partial_y^2 = -6x\]
+  \[\therefore \partial_x^2 u + \partial_y^2 u= 0.\]
+  For $v$ to be a harmonic conjugate, we require,
+  \[\partial_x v = -\partial_y u, \partial_y v = \partial_x u\]
+  \[\implies \partial_x v =  6xy, \partial_y v = 3x^2 - 3y^2.\]
+  The first ODE give $v=3x^2y + \phi(y)$ for some function $\phi(y)$. Hence the
+  second equation would give
+  \[3x^2+\phi'(y) = 3x^2 - 3y^2 \implies \phi'(y)=-3y^2 \implies \phi(y)= -y^3
+  +C\]
+  For some constant $C$. Hence harmonic conjugates of $u$ are of the form
+  \[v=3x^{2}y - y^3 +C.\]
+\end{proof}
+\begin{remark}
+  Note that integration for partial differentiation give not constant terms but
+  arbitrary functions of the constant variable. Moreover, it follow that there
+  exists a holomorphic function
+  \[f(z)=f(x+iy)=w=u+iv = (x^3-3xy^2) + i(3x^2y-y^3+C)= z^3+ik.\]
+  Heuristically, one can usually find a formula in terms of $z$, by replacing
+  $x=z, y=0$ since 
+  \[\frac{dw}{dz}= \frac{\partial w}{\partial x}.\]
+  \label{<+label+>}
+\end{remark}

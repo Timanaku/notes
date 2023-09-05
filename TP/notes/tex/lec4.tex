@@ -1,0 +1,84 @@
+\section{Week 2 - 17 Jan 2022 - Function spaces}
+All the examples of metric spaces so far have been in finite-dimensional vector
+spaces. But this is just a concrete case, and in fact is not required to have
+this form.
+\begin{example}
+  Write $C[0,1]$ for the set of continuous functions $f:[0,1]\to\RR$. Define
+  $d_1:C[0,1]\times C[0,1]\to\RR$ by 
+  \[d_1(f,g)= \int_0^1 |f(x)-g(x)| dx.\]
+  (Recall continuous functions are Riemann-integrable). Then $d_1$ is a metric
+  on $C[0,1]$. Intnuitively, this metric computes the unsigned area between two
+  functions in the range $[0,1]$.
+\end{example}
+\begin{proof}
+  Note that $d_1(f,g)\geq 0$ is trivial by the use of the absolute value function.
+  Moreover, we have $d_1(f,g)=0$ if an only if $f(x)=g(x)\forall x\in[0,1]$. To
+  show this, assume that $f\neq g$, so that $\exists x_0\in [0,1]$ s.t.
+  $f(x_0)\neq g(x_0)$, hence
+  \[|f(x_0)-g(x_0)|=c > 0\]
+  Given that $f,g$ are continuous, we have that the LHS of the above is
+  continuous, and so there exists $a<b$ s.t. $x_0\in[a,b]\subseteq [0,1]$ and 
+  \[x\in[a,b] \implies |f(x)-g(x)|\geq \frac{1}{2}c\]
+  Note that $\int_0^1 |f(x)-g(x)|dx \geq \int_a^b |f(x)-g(x)|dx$, so
+  $d_1(f,g)\geq\frac{1}{2}c (b-a)>0$. Hence, Axiom 1 is satisfied.
+
+  To show Axiom 2, note that it follows from
+  $|f(x)-g(x)|=|-(g(x)-f(x))|=|g(x)-f(x)|$.
+
+  Finally, for Axiom 3 let $f,g,h\in C[0,1]$ note that
+  \[d_1(f,h)=\int_0^1|f(x)-h(x)|dx = \int_0^1|f(x)+g(x)-g(x) -h(x)| dx \leq
+  \int_0^1 |f(x)-g(x)|+|g(x)-h(x)| dx = d_1(f,g)+d_1(g,h).\]
+  By the triangle inequality of the absolute value. Hence 
+\end{proof}
+This is only an example of a metric on $C[0,1]$, but not the only one. The
+following is a more general example.
+\begin{definition}
+  Let $X$ be a nonempty set. Recall a function $f:X\to\RR$ is bounded if there
+  exists $M\geq 0$ s..t $|f(x)|\leq M$ for all $x\in X$. Write $B(X)$ to be the
+  set of bounded functions from $X$ to $\RR$. The supremum metric (sup metric)
+  on $B(X)$ is $d_{\infty} B(X)\times B(X)\to\RR$ given by
+  \[d_{\infty}(f,g)=\sup_{x\in X} |f(x)-g(x)|\]
+\end{definition}
+\begin{proposition}
+  The function $d_{\infty}$ defined above is a metric.
+\end{proposition}
+\begin{proof}
+  First we need to show that $d_{\infty}$ is well-defined. For
+  $d_{\infty}(f,g)$, since $f,g$ are bounded, then $\exists L,M>0$ s.t.
+  $|f(x)|\leq L$ and $|g(x)|\leq M$ for all $x\in X$, hence
+  \[|f(x)-g(x)| \leq |f(x)|+|g(x)| \leq L+M \forall x\in X\]
+  Therefore, by the completeness axiom, a supremum exists and $d_{\infty}$ is
+  well defined.
+
+  To check Axiom 1, note that the use of the absolute value gives non-negative
+  values for the metric. Moreover, if $f=g$, then $D_{fg}=\{|f(x)-g(x)|:x\in
+  X\}=\{0\}$ , and so $d_{\infty}(f,g)=\sup D_{fg} = 0$. Conversely, if $f\neq
+  g$ then there exists $x_0\in X$ s.t. $|f(x_0)-g(x_0)|=c\in D_{fg}$ for some
+  $c>0$, so $d_{\infty}(f,g)>0$. Therefore $d_{\infty}(f,g)=0 \iff f=g$.
+
+  To check Axiom 2, note that $|f(x)-g(x)|=|g(x)-f(x)|$, hence
+  $D_{fg}=D_{gf}$, hence the supremum does not change.
+
+  Finally for Axiom 3, let $f,g,h\in B(X)$, and note that $d_{\infty}(f,h)$ is
+  the least upper bound for $D_{fh}=\{|f(x)-h(x)| : x\in X\}$. For all $x\in X$
+  we have 
+  \[|f(x)-h(x)| = |f(x)-g(x)+g(x)-h(x)| \leq |f(x)-g(x)|+|g(x)-h(x)| \]
+  By the triangle inequality of the absolute value. Observe that
+  $|f(x)-g(x)|+|g(x)-h(x)| \leq d_{\infty}(f,g)+d_{\infty}(h,g)$
+  Hence $d_{\infty}(f,g)+d_{\infty}(h,g)$ is an upper bound for $D_{fh}$ and by
+  completeness its supremum must exist, and it follows that 
+  \[d_{\infty}(f,h) \leq d_{\infty}(f,g)+ d_{\infty}(g,h) \]
+  Where equality holds in the case where $d_{\infty}(f,g)+d_{\infty}(h,g)$ is
+  the supremum.
+\end{proof}
+We want to use $d_{\infty}$ as a metric on $C[0,1]$, and we do this by showing
+$C[0,1]\subseteq B[0,1]$, which follows from the Extreme Value Theorem: A
+continuous function on a closed interval is bounded
+\begin{theorem}[Extreme Value Theorem]
+  Let $f:[a,b]\to\RR$ be a continuous real function. There exists $u,v\in [a,b]$
+  s.t. 
+  \[ f(u)\leq f(t)\leq f(v) \forall t\in [a,b]\]
+  \label{thm:evt}
+\end{theorem}
+The above theorem implies that $C[0,1]\subseteq B[0,1]$. Therefore, $C[0,1]$ is
+a metric subspace of $B[0,1]$.

@@ -1,0 +1,118 @@
+\section{Week 2 - 17 Jan 2022 - Central force field change of coordinates }
+We will simplify previous conservation of energy equations, so that they are
+easier to solve.
+\begin{exercise}
+  Simplify the equations of motion for a point mass in a central force field in
+  polar coordinates, as defined by 
+  \[\ddot{r} - \frac{h^2}{r^3} = \frac{F(r)}{m}\]
+  \[r^2\dot{\theta} = h\in\RR\]
+  \label{exc:transformationCentralForceField}
+\end{exercise}
+\begin{proof}[Solution]
+  We will define a transformation of the variables $r,\theta$. First, observe
+  that $\dot{\theta}$ has the same sign as $h$. If $\dot{\theta}>0$, then
+  $\theta$ is increasing, and by extension $\theta(t)$ is invertible: we can
+  define $t=t(\theta)$, so that we can have $\theta$ to be the independent
+  variable. Let us define the transformation $u=\frac{1}{r(t(\theta))}$. From
+  the second equation we have $\dot{\theta}= \frac{h}{r^2}= hu^2$, and by the
+  inverse function theorem we get
+  \[\frac{dt}{d\theta} = \frac{1}{\dot{\theta}}= \frac{1}{hu^2}\]
+  Next, we aim to get $\ddot{r}$ in terms of $u$, so we differentiate $r$ wrt
+  $\theta$,
+  \[\frac{dr}{d\theta} = \frac{dr}{dt} \frac{dt}{d\theta} =
+  \frac{1}{hu^2}\dot{r}\]
+  Next, we use our substitution to get 
+  \[\frac{d}{d\theta}(\frac{1}{u}) = \frac{-1}{u^2}\frac{du}{d\theta}\]
+  Hence,
+  \[\frac{du}{d\theta} = -\frac{1}{h}\dot{r}\]
+  \[\implies \dot{r}= -h\frac{du}{d\theta}\]
+  This expression is useful for ICs in our new variables. We then get $\ddot{r}$
+  by differentiating again wrt $\theta$,
+  \[\frac{d\dot{r}}{dt}\frac{dt}{d\theta} = -h\frac{d^2u}{d\theta^2}\]
+  \[\implies \ddot{r} = -h^2u^2 \frac{d^2u}{d\theta^2}.\]
+  We then use this result to get the original equation of motion into our new
+  variables,
+  \[-h^2u^2 \frac{d^2u}{d\theta^2}- h^2u^3 =
+  \frac{F(\frac{1}{u})}{m}\]
+  \[\therefore \frac{d^2u}{d\theta^2} + u = \frac{-1}{mh^2u^2}
+  F(\frac{1}{u}).\]
+  This is called the equation of path, where the LHS has the form of an
+  oscillating system. We get the second equation to be $\frac{dt}{d\theta}=
+  \frac{1}{hu^2}$. The ICs at $t=0$ corresponds specifying $u,u_{\theta}$ at
+  some $\theta_0$.
+\end{proof}
+We will apply this result to some physical problems involving gravity. Before
+that, we will introduce Newton's law of gravitation and its generalisation to
+bodies with some distribution of density.
+\begin{theorem}[Newton's Law of Gravitation]
+  Suppose we have a point mass $m_1$ at position $\vec{x_1}$, and another point
+  mass $m_2$ at position $\vec{x_2}$. Let $\vec{F_{12}}$ be the force exterted
+  on $m_1$ by $m_2$. Let $\vec{F_{21}}$ be the force exterted on $m_2$ by $m_1$.
+  By N3, we have $\vec{F_{21}}=-\vec{F_{12}}$. Then we have,
+  \[\vec{F_{12}} = -Gm_1m_2\frac{\vec{x_1}-\vec{x_2}}{|\vec{x_1}-\vec{x_2}|^3}\]
+  \label{thm:newtonGrav}
+\end{theorem}
+In order to generalise to density bodies, assume that $m_1$ is a point mass and
+$m_2$ is a density distribution $\rho(\vec{x})$, a body $B$ of some volume
+$V$,so that in the above framework, a point mass of the second body would be
+$\rho(\vec{x})dV_x$. Hence the force on $m_1$ by a point mass of $m_2$ at
+position $\vec{x_3}$ is 
+\[F_{1m_2\vec{x_3}} = -Gm_1
+\frac{\rho(\vec{x_3})dV_{x_3}(\vec{x_1}-\vec{x_3})}{|\vec{x_1}-\vec{x_3}|^3}\]
+And by extension, the force exerted by $B$ will be the integration over all
+point-masses of $B$, 
+\[F_{12} = -Gm_1\int\int\int_{V}
+\frac{\rho(\vec{x})(\vec{x_1}-\vec{x})}{|\vec{x_1}-\vec{x}|^3} dV_{x} \]
+Which is a volume integration.
+
+\begin{theorem}[Newton's Shell Theorem]
+  Let $B$ be a spherically symmetric volume mass distribution, i.e. the mass of
+  the $B$ depends only on the distance form the center. Then we have
+  \[\vec{F_{1B}} = -Gm_1 M \frac{\vec{x_1}-\vec{x}}{|\vec{x_1}-\vec{x}|^3}\]
+  Where $M$ is the total mass of $B$, $\vec{x}$ is the position of its center of
+  mass, i.e. center of the sphere (since it's spherically symmetric).
+  \label{thm:newtonShellThm}
+\end{theorem}
+This is a useful result since we can effectively replace a solid body (in the
+special case of a symmetric sphere) by a point-mass placed at the center.
+\begin{example}
+  Consider two masses moving under gravity,
+  \[m_1\ddot{\vec{x_1}} = \vec{F_{12}}, \quad m_2\ddot{\vec{x_2}} =
+  \vec{F_{21}}.\]
+  By Newton's third law, we have $\vec{F_{12}} = -\vec{F_{21}}$, so this implies
+  $m_1\ddot{\vec{x_1}} + m_2\ddot{\vec{x_2}}=0$. We define the center of mass to
+  be the positon vector,
+  \[\vec{x}= \frac{m_1\vec{x_1} + m_2\vec{x_2}}{m_1+m_2}\]
+  This definition implies that $(m_1+m_2)\ddot{\vec{x}} = 0$, i.e. the center of mass
+  moves without acceleration -- experiences no force. WLOG assume
+  $\vec{x}=\vec{0}$. We now aim to find the equation of motion. Take
+  $\ddot{\vec{x_1}}= \frac{\vec{F_{12}}}{m_1}, \ddot{\vec{x_2}}=
+  \frac{-\vec{F_{12}}}{m_2}$ (by N3), and so we have 
+  \[\ddot{\vec{x_1}}-\ddot{\vec{x_2}} = \vec{F_{12}} (\frac{1}{m_1}+\frac{1}{m_2})\]
+  Define $\vec{R}= \vec{x_1}-\vec{x_2}$, the relative position of $x_1$ wrt
+  $x_2$. Moreover, define $M=\frac{m_1m_2}{m_1+m_2}$ (called \emph{reduced
+  mass}), and note that we have simplified the equation to ( RHS in the form of
+  central force).
+  \[M\ddot{\vec{R}} = \vec{F_{12}} = F_{12}(|\vec{R}|) \frac{\vec{R}}{|\vec{R}|}\] 
+  Which is a new problem. Note that $F_{12}(|\vec{R}|)=
+  \frac{-Gm_1m_2}{|\vec{R}|^2}$. Suppose that $m_2>>m_1$, so that $M\approx
+  m_1$. The equation of motion in this case reduces to 
+  \[m_1\ddot{\vec{R}} = \frac{-Gm_1m_2}{|\vec{R}|^2} \frac{\vec{R}}{|\vec{R}|}.\]
+  Using the equations of motion in terms of $u$ and $\theta$ (which we can do
+  because we already proved motion is in a plane since angular momentum is
+  conserved), we get
+  \[u_{\theta\theta}+u = \frac{-1}{mh^2u^2} F(\frac{1}{u}) =
+  \frac{Gm_2}{h^2}\]
+  And the RHS here is a constant. This can be solved using familiar methods, to
+  get 
+  \[u=\frac{Gm_2}{h^2} + A\cos\theta + B\sin\theta\]
+  \[u = \frac{Gm_2}{h^2} + C\cos(\theta-\theta_0)\]
+  \[u= \frac{Gm_2}{h^2}\left( 1+e\cos(\theta-\theta_0) \right)\]
+  Where $e$ is called \emph{eccentricity}. Different value of $e$ give different
+  shapes, generally categorised by $e=0, e=1, e\in(0,1), e>1$ to give orbits of
+  shape circle, parabola, ellipse, and hyperbola, respectively.
+\end{example}
+Questions I had at the end of the lecture:
+- How do we transition from $\vec{R}$ to $u,\theta$? The equations in $\vec{R}$
+do not have the same form as in Exercise
+\ref{exc:transformationCentralForceField}.

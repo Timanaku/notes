@@ -1,0 +1,59 @@
+\section{Lecture 13 - 3 Mar 2022 - Laurent Series}
+Let $\Omega\subset$ be open and $f:\Omega\to\CC$ be holomorphic. Pick
+$c\in\Omega$ then we can find a disk $D\subset\Omega$ at $c$ such that for any
+$z\in D_c$ we have
+\[f(z)=\sum_{n=0}^{\infty} a_n (z-c)^n\]
+With coefficients given by
+\[a_n=\frac{1}{2\pi i} \oint_{\gamma}\frac{f(\zeta)}{(\zeta-z)^{n+1}}d\zeta.\]
+ Where $\gamma$ is a circle centered at $c$ and oriented anticlockwise. This is
+ the case for a holomorphic function with simply connected domain. However, what
+ happens when the domain is not simply connected (e.g. when there's a
+ singularity). The following generalises the above statement (which is really
+ just Taylor's series with Cauchy's integral formula) to cases where the domain is punctured.
+ \begin{theorem}
+   Let $f:\Omega\setminus\{c\}\to\CC$ be holomorphic with $\Omega\subset\CC$
+   open and $c\in \Omega$. Then there exists an open disk $D$ with center at $c$
+   and a circle $\gamma$ traced anticlockwise s.t.
+   \[f(z)=\sum_{n=0}^{\infty} a_n(z-c)^n + \sum_{n=1}^{\infty} a_{-n}
+   (z-c)^{-n}\]
+   With 
+   \[a_n=\frac{1}{2\pi i} \oint_{\gamma}\frac{f(\zeta)}{(\zeta-z)^{n+1}}d\zeta.\]
+  For all $z\in\Omega\setminus\{z\}$. The latter expansion of $f$ is called its
+  Laurent series at $c$.
+   \label{thm:laurentSeries}
+ \end{theorem}
+ \begin{proof}
+   Decompose the Laurent series into two parts, 
+   \[S^+=\sum_{n=0}^{\infty} a_n(z-c)^n, \quad S^-= \sum_{n=1}^{\infty} a_{-n}
+   (z-c)^{-n}\]
+   We claim $S^{+}+S^{-}=f(z)$. To evaluate $S^{+}$, we pick a circle $\gamma^+$
+   with center $c$ s.t. $z$ lies inside $\gamma^+$. As a consquence, as we saw
+   before, the series $\sum_{n=0}^{\infty}
+   f(\zeta)\frac{(z-c)^n}{(\zeta-c)^{n+1}}$ converges absolutely. Hence, 
+   \[\frac{1}{2\pi i} \oint_{\gamma^+} \sum_{n=0}^{\infty} f(\zeta)
+   \frac{(z-c)^{n}}{(\zeta -c)^{n+1}} d\zeta = \sum_{n=0}^{\infty}
+   \frac{1}{2\pi i} \oint_{\gamma^+}
+   f(\zeta)\frac{(z-c)^{n}}{(\zeta-c)^{n+1}}\zeta = S^+.\]
+
+   To evaluate $S^{-}$ we choose a circle $\gamma^-$, with center at $c$,
+   with $z$ outside $\gamma^-$, and with clockwise direction. In this case we
+   clearly have $|\frac{\zeta-c}{z-c}|<1$, hence the following equality is
+   permitted since the geometric series converges absolutely,
+   \[\frac{1}{2\pi i}\oint_{\gamma^-}\sum_{n=0}^{\infty} f(\zeta)
+     \frac{(\zeta-c)^{n}}{(z-c)^{n+1}}d\zeta = \sum_{n=0}^{\infty}
+   \frac{1}{2\pi i} \oint_{\gamma^-}
+   f(\zeta)\frac{(\zeta-c)^n}{(z-c)^{n+1}}d\zeta = S^-.\]
+   With these equalities we obtain the following values (simply by computing the
+   limit of each geometric series),
+   \[S^{+} = \frac{1}{2\pi i} \oint_{\gamma^+} \frac{f(\zeta)}{\zeta-z}d\zeta,\]
+   \[S^{-} = \frac{-1}{2\pi i} \oint_{\gamma^-} \frac{f(\zeta)}{\zeta-z}d\zeta,\]
+   Recall that changing the sign of a contour integral is equivalent to changing
+   the direction of travel. Let $\sigma$ be a closed path in $\Omega$ consisting
+   of the circle $\gamma^+$ traced anticlockwise, a path $\lambda$ from a point
+   on $\gamma^+$ to a point on $\gamma^-$, the circle $\gamma^-$ traced
+   clockwise, and the path $\lambda$ traced in reverse. Hence we observe that 
+   \[S^+ + S^- = \frac{1}{2\pi i} \oint_{\sigma}\frac{f(\zeta)}{\zeta-z} d\zeta.\]
+   This path is homotopic to a simple closed path $\tau$ that surrounds $z$  but
+   not $c$. Hence by using this path, we use Cauchy and it follows that
+   $f(z)=S^+ + S^-$, as required.
+ \end{proof}

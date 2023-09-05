@@ -1,0 +1,108 @@
+\section{Week 3 - 26 Jan 2022 - Energy and work}
+\begin{proposition}
+  Consider motion under the only influence of a central force. Then there's no
+  work being done along $\vec{e_{\theta}}$.
+  \label{prop:eThetaWorkInCentralField}
+\end{proposition}
+\begin{proof}
+  Consider motion described by a curve $C_1$ s.t. it has only component
+  $\vec{e_{\theta}}$, under the influence of a central force (so
+  $\vec{F}=F(r)\vec{e_r}$). Since $\vec{\dot{x}}$ has only component
+  $\vec{e_{\theta}}$, it follows that $\vec{F}\cdot
+  \vec{\dot{x}}=F(r)\vec{e_r}\cdot v\vec{e_{\theta}}=0$.
+\end{proof}
+
+\begin{example}
+  Find the potential by considering some path from $\vec{x_0}$ to $\vec{x}$,
+  under the influence of a central force.
+\end{example}
+\begin{proof}[Solution]
+  Consider some path $C_{x_0\to x}$ s.t. it consists of two paths $C_1, C_2$
+  s.t. $C_1$ has only component $\vec{e_{\theta}}$ and $C_2$ has only component
+  $\vec{e_r}$. Then note that
+  \[\phi =-\int_{C_{x_0\to x}} \vec{F}(\vec{y})\cdot\vec{y},\]
+  \[ = -\int_{C_1}\vec{F}(\vec{y})\cdot\vec{y} -
+  \int_{C_2}\vec{F}(\vec{y})\cdot\vec{y}\]
+  \[= 0-\int_{C_2}\vec{F}(\vec{y})\cdot\vec{y}\]
+  \[\therefore \phi = -\int_{C_2}\vec{F}(\vec{y})\cdot\vec{y},\]
+  Since $d\vec{y}$ is perpendicular to $\vec{F}=F(r)\vec{e_r}$ along $C_1$. Then
+  note that we can parametrise $C_2$ easily (only has component $\vec{e_r}$).
+  Consider $\vec{y}=s\vec{e_r}$ where $\vec{e_r}=\frac{\vec{x}}{|\vec{x}|}$, for
+  $s\in [|\vec{x_0}|,|\vec{x}|]$. Note that we can set these bound because along
+  $C_1$, the quantity $|\vec{y}|$ has stayed constant, hence at the point where
+  $C_2$ starts, $|\vec{y}|=|\vec{x_0}|$. Hence note that we can write 
+  \[\phi = -\int_{|\vec{x_0}|}^{|\vec{x}|} F(s)\vec{e_r}\cdot\vec{e_r}ds\]
+  \[\therefore \phi= -\int_{|\vec{x_0}|}^{|\vec{x}|} F(s)ds.\]
+\end{proof}
+\begin{remark}
+  Note that when we define the potential, the $0$-energy point is really
+  arbitrary, so we can set $\vec{x_0}$ wherever we want. What is important is
+  the gradient.
+\end{remark}
+
+\begin{example}
+  Find the potential for the inverse square law
+  \[\vec{F} = -\frac{GMm}{|\vec{x}|^2} \frac{\vec{x}}{|\vec{x}|}.\]
+\end{example}
+\begin{proof}[Solution]
+  Note that $F(r)=-\frac{GMm}{r^2}$ and let us define $\vec{x_0}$ s.t.
+  $|\vec{x_0}|=\infty$. Hence from the above example, we have
+  \[ \phi=- \int_{-\infty}^{|\vec{x}|}-\frac{GMm}{s^2}ds =
+  -\frac{GMm}{|\vec{x}|} = -\frac{GMm}{r}.\]
+\end{proof}
+
+\begin{example}[Escape velocity]
+  Find the minimal velocity required to project an object from Earth to space,
+  so that it escapes Earth's gravitational field (i.e. does not fall back down).
+  Assume that Earth is spherical, that the only force acting is gravity, and
+  neglect Coriolis force.
+\end{example}
+\begin{proof}[Solution]
+  Since gravity is a central force, we already know that it is conservative.
+  Hence conservation of energy applies. Consider energy at the moment of launch,
+  \[E=\frac{1}{2}mv_0^2 - \frac{GMm}{R},\]
+  Where $R$ is the radius of Earth. As $r\to \infty$, since we're assuming that
+  it gets out of the gravitational field, we have
+  $E=\frac{1}{2}mv_{\infty}^2-0\geq 0$, so
+  \[0\leq \frac{1}{2}mv_0^2 - \frac{GMm}{R} \implies v_0\geq
+  \sqrt{\frac{2GM}{R}}= \sqrt{2gR}\approx 11 km/s.\]
+\end{proof}
+
+\begin{example}
+  Consider a body approaching Earth from outer space. What is the distance of
+  closest approach to the Earth's surface?
+\end{example}
+\begin{proof}
+  By conservation of energy, the energy at the point of closest approach will be
+  equal to the initial energy the body has when approaching Earth,
+  \[\frac{1}{2}mv^2 - \frac{GMm}{r} = \frac{1}{2}mv_0^2\]
+  \[\implies v^2 - \frac{2GM}{r} = v_0^2.\]
+  Recall that in polar coordinates, $v^2 = \dot{r}^2 + r^2 \dot{\theta}^2$, and
+  since the field is conservative, it follows that angular momentum is conserved
+  and so $h=r^2\dot{\theta}$ is a constant, hence
+  $\dot{\theta}=\frac{h}{r^2}$. Therefore the equation of energy reduces to 
+  \[\dot{r}^2 + \frac{h^2}{r^2} - \frac{2GM}{r} = v_0^2.\]
+  At the closest approach, $r=r_{min}$, so $\dot{r}=0$, which reduces the above
+  equation into
+  \[\frac{h^2}{r_{min}^2} - \frac{2GM}{r_{min}}=v_0^2.\]
+  To find out $h$, we use initial conditions. Recall that angular momentum is
+  conserved in this framework, so that
+  $\vec{L}=m\vec{x}\times\dot{\vec{x}}=m(r\vec{e_r})\times
+  (\dot{r}\vec{e_r}+r\dot{\theta}\vec{e_{\theta}})=mr^2\dot{\theta}\vec{e_z}$,
+  and hence recall that $h=\frac{|L|}{m}$, but also note that
+  $|L|=m|\vec{x}||\dot{\vec{x}}|\sin \theta=mrv\sin\theta$, where $\theta$ is
+  the angle between the initial velocity vector and the initial position vector,
+  and so $r\sin\theta=d$ is the distance between Earth and the line which has
+  $\dot{\vec{x}}$ as director vector (i.e. the closest distance between Earth
+    and the body if there was no gravity, that is, if the body kept travelling
+  in a straight line). Hence $h=v_0 d$. Pluggin in the equation in terms of
+  $r_{min}$ and solving the quadratic gives
+  \[r_{min}=\frac{-GM}{v_0^2} \pm \sqrt{d^2 + (\frac{GM}{v_0^2})^2}.\]
+  The only physically relevant is the positive root (otherwise we just have a
+  negative distance -- \emph{What does this mean? It doesn't reach the
+  planet? Hyperbolic orbit? Has something to do with the curvature experienced by
+  the body, s.t. it doesn't get attracted to Earth but diverges?}).
+  \todo{Ask this in the tutorial or office hour}.
+  Note that to avoid hitting Earth we require $r_min> R$ where $R$ is Earth's
+  radius.
+\end{proof}

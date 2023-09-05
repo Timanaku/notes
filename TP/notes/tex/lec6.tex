@@ -1,0 +1,90 @@
+\section{Week 2 - 21 Jan 2022 - Sequences}
+\begin{proposition}
+  In a metric space $(X,d)$ we have $x_n\to a$ as $n\to\infty$ (for a sequence
+  $(x_n)$ in $X$ and $a\in X$) iff 
+  \[d(x_n,a) \to 0 : n\to\infty.\]
+  \label{prop:convergenceMetric}
+\end{proposition}
+\begin{proof}
+  TODO. (Unpack the definition of convergence)
+\end{proof}
+
+Next, we look into special cases and examples. 
+\begin{proposition}
+  Let $(x_n)$ be a sequence in a metric space $(X,d)$, and take $a\in X$. If $X$
+  is either discrete -- i.e. $d$ is the discrete metric -- or finite -- i.e. $X$
+  is a finite set --, then $x_n\to a$ iff $\exists N\in\NN : x_n=a \forall n>N$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  If $\exists N : x_n=a \forall n>N$, then $\forall \eps>0$, 
+  \[n>N \implies d(x_n,a)=0<\eps.\]
+  For the converse, assume $X$ is discrete (not used before). Since $x_n\to a$
+  as $n\to\infty$, then $\exists N$ s.t. $d(x_n,a)< 1$ for all $n>N$. But $d$ is
+  the discrete metric so $d(x_n,a)=1$ iff $x_n\neq a$. Hence, $n>N$ implies
+  $x_n=a$.
+
+  If $X$ is finite, let $X=\{x_1,\cdots, x_n\}$ and let $r=\min_{i\neq j}
+  d(x_i,x_j)>0$. The argument is then similar to the discrete case, replacing
+  $1$ by $r$.
+\end{proof}
+
+We can look into concrete examples of less-intuitive sequences given our
+generalisation.
+\begin{proposition}
+  Let $(x_1,y_1),(x_2,y_2)\cdots$ be a sequence in $\RR^2$ with metric
+  $d_{\infty}$. Then  $(x_n,y_n)\to(a,b)\in\RR^2$ iff $x_n\to a$ and $y_n\to b$
+  as $n\to\infty$.
+  \label{prop:convergenceR2}
+\end{proposition}
+\begin{proof}
+  Suppose $(x_n,y_n)\to(a,b)$. That is 
+  \[d_{\infty}\left( (x_n,y_n),(a,b) \right)\to 0.\]
+  Note $d_{\infty}\left( (x_n,y_n),(a,b) \right) = \max (|x_n-a|,|y_n-b|)\geq
+  |x_n-a|\geq 0$. Hence by the Sandwich theorem it follows that $x_n\to a$,
+  and similarly for $y_n\to b$. 
+
+  Conversely, suppose $x_n\to a$ and $y_n\to b$, i.e. $|x_n-a|\to 0$ and
+  $|y_n-b|\to 0$. Then $0\geq d_{\infty} \left( (x_n,y_n),(a,b)
+  \right)=\max(|x_n-a|,|y_n-b|) \geq |x_n-a|+|y_n-b|\to 0$. Hence again by the
+  Sandwich theorem, it follows that $(x_n,y_n)\to(a,b)$.
+\end{proof}
+\begin{lemma}
+  If $d,d'$ are two metrics on $X$, and suppose $\exists c>0$ s.t. $d(x,y)\leq
+  Cd'(x,y)$ for all $x,y\in X$. Then for a sequence $(x_n)$ in $X$ and $a\in X$,
+  we have that 
+  \[x_n\to a \text{ in $(X,d')$}\implies x_n\to a \text{ in $(X,d)$}\]
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  Suppose $x_n\to a$ in $(X,d)$. Then 
+  \[0\geq d(x_n,a)\leq Cd'(x_n,a)\to 0\]
+  And by Sandwich theorem, the result follows. 
+\end{proof}
+
+\begin{corollary}
+  If $d,d'$ are strongly equivalent metrics on $X$, then 
+  \[x_n\to a \text{ in $(X,d)$}\iff x_n\to a \text{ in $(X,d')$}\]
+  \label{<+label+>}
+\end{corollary}
+\begin{proof}
+  TODO. Apply the lemma twice.
+\end{proof}
+
+\begin{corollary}
+  Let $(x_n,y_n)$ be a sequence in $\RR^2$. Then 
+  \[(x_n,y_n)\to (a,b) \text{ in $(\RR^2,d_1)$} \iff (x_n,y_n)\to (a,b) \text{ in $(\RR^2,d_2)$}\]
+  \[\iff (x_n,y_n)\to (a,b) \text{ in $(\RR^2,d_{\infty})$}\]
+  \label{<+label+>}
+\end{corollary}
+We then look into an example in $\RR^2$ where a sequence converges with $d_2$
+but not with the railway metric $D$ (a sequence of points that is not colinear
+with the origin and the converging point). Moreover, we see that the given
+sequence does not converge at all with $D$.
+
+\begin{example}
+  Recall the metrics $d_1, d_{\infty}$ on $C[0,1]$. We saw that $d_1(f,g)\leq
+  d_{\infty}(f,g)$ for all $f,g\in C[0,1]$, hence $f_n\to y$ with $d_{\infty}$
+  implies $f_n\to y$ in $d_1$. However, note that for $f_n(t)=t^n$ and $y=0$, we
+  have that $d_1(f,g)\to 0$ while $d_{\infty}(f_n,y)=1$ for all $n$.
+\end{example}

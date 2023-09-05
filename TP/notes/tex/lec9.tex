@@ -1,0 +1,72 @@
+\section{Week 3 - 28 Jan 2022 - Continuity and sequences}
+Recall that we have for a real function $f$, it is continuous at $a\in\RR$ iff
+$\lim_{x\to a}f(x)=f(a)$. We will establish similar results for functions in
+more general metric spaces.
+\begin{theorem}
+  Let $(X,d_X)$,$(Y,d_Y)$ be metric spaces. Then $f:X\to Y$ is continuous at
+  $a\in X$ iff for every sequences $(x_n)$ in $X$ converging to $a$, the
+  sequence $(f(x_n))$ in $Y$ converges to $f(a)$.
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Suppose $f$ is continuous at $a\in\RR$ and let $(x_n)$ be a sequence in $X$
+  converging to $a$. We claim that $f(x_n)\to f(a)$,
+  \[\forall \eps>0 \exists N\in\NN : n>N\implies d_Y(f(x_n),f(a))<\eps\]
+  Sincce $f$ is continuous at $a$, there exists $\delta>0$ s.t. 
+  \[d_X(x,a)<\delta\implies d_Y(f(x),f(a))<\eps.\]
+  In particular, $d_X(x_n,a)<\delta \implies d_Y(f(x_n),f(a))<\eps$. But $x_n\to
+  a$, hence $\exists N\in\NN$ s.t. $n>N \implies d_X(x_n,a)<\delta$, and the
+  result follows.
+
+  Conversely, suppose $f$ is not continuous at $a\in\RR$. We claim there exists
+  a sequence $(x_n)$ in $X$ s.t. $x_n\to a$ we have $f(x_n)$ doesn't converge to
+  $f(a)$. Since $f$ is not continuous at $a$ there exists $\eps>0$ s.t. for any
+  $\delta>0$ we have some $x$ in $X$ with $d_X(x,a)<\delta \land
+  d_Y(f(x),f(a))\geq \eps$. Let $\delta=1/n$ and choose $x_n\in X$ s.t.
+  $d_X(x_n,a)<1/n$, but $d_Y(f(x_n),f(a))\geq \eps$. Then observe that
+  $d(x_n,a)\to 0$ since $0\geq d(x_n,a)<1/n$. However, we have $0<\eps\leq
+  d(f(x_n),f(a))$, so $f(x_n)$ doesn't converge to $f(a)$.
+\end{proof}
+\begin{remark}
+  Note that this is useful to prove a function is not continuous, find a single
+  sequence that doesn't converge as above.
+  \label{<+label+>}
+\end{remark}
+\begin{example}
+  Let $f:\RR\to\RR^2:x\to (x,1)$. Note that $f$ is $(d,d_2)$-continuous, since
+  $x\mapsto x$, $x\mapsto 1$ are continuous. However, $f$ is not
+  $(d,D)$-continuous. To show this, let $a=0, \eps=2$. For any $\delta>0$ take
+  $x=\delta/2$. Then $d(x,0)=\delta/2 < \delta$, but $D(f(x),f(a))=D(
+  (\delta,1),(0,1))= \sqrt{\delta^2/4 + 1} +1 > 2 =\eps$. Moreover, recall that
+  $(1/n,1)$ does not converge to $(0,1)$ in $(\RR^2, D)$ -- in fact it has no
+  limit at all. However, $x_n=1/n\to 0 $ in $(\RR,d)$so $x_n\to 0$ in $\RR$ but
+  $f(x_n)= (1/n,1)\not\to (0,1)$.
+\end{example}
+\begin{example}
+  Let $e:C[0,1]\to \RR$ be the function given by $e(f)=f(1) \forall f\in
+  C[0,1]$. Then $e$ is not continuous wrt the metric $d_1$ on $C[0,1]$ and the
+  usual metric on $\RR$. Recall 
+  \[d_1(f,g)= \int_0^1 |f(t)-g(t)|dt.\]
+  Note that it's enough to find a single $g\in C[0,1]$ and a sequence $f_n$
+  converging to $g$ wrt $d_1$ s.t. $f_n(1)\not\to g(1)$. Let $f_n(t)=t^n$ and
+  $g(t)=0$. Then $d_1(f_n,g)=\frac{1}{n+1}\to 0$, hence $f_n\to g$ wrt $d_1$ but
+  $e(f_n)=1$ for all $n$, while $e(g)=0$. Therefore $e(f_n)\not\to e(g)$.
+\end{example}
+
+\begin{exercise}
+  Show that $e$ above is continuous with respect to $d_{\infty}$ on $C[0,1]$ and
+  the standard metric on $\RR$.
+\end{exercise}
+\begin{proof}[Solution]
+  TODO
+\end{proof}
+
+\begin{exercise}
+  Let $g:\RR^2\to\RR$ with $g(x_1,x_2)=x_1$ for $x_2\neq 0$ and
+  $g(x_1,x_2)=4x_1$ for $x_2=0$. Show then that $g$ is not
+  $(d_2,d)$-continuous. Moreover, show that it is $(D,d)$-continuous.
+\end{exercise}
+\begin{proof}[Solution]
+  TODO. Consider collinear and not collinear cases separately, and look at
+  bounds for $x_1$ wrt $(x_1,x_2)$. 
+\end{proof}

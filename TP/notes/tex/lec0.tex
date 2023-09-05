@@ -1,0 +1,88 @@
+\section{Week 0 - 7 Jan 2022 - Introduction}
+\subsection{Intro}
+Topology: Study of properties of spaces (or geometric objects) that do not
+change under continuous defomations. These ideas are of importance to many
+fields such as analysis, topology, and branches of geometry.
+
+First we will learn about metric spaces: Sets with a distance function. We will
+also consider functions between metric spaces. After this, we will pass to the
+(more general) concept of topological space (metric spaces are an example of).
+
+\subsection{Lecture 1 - Background}
+\subsubsection{Sets and function}
+\begin{definition}
+  A \emph{set} is a collection of objects, or elements. We say two sets are
+  equal if and only if they have precisely the same elements. We say $a\in
+  A$ to mean $a$ is an element of $A$. If $A,B$ are sets, we say $A\subseteq B$ to
+  mean that $A$ is strictly contained in $B$, and $A\subset B$ to mean that $A$
+  is merely contained in $B$ (but may be equal). 
+  \label{def:set}
+\end{definition}
+An example worth remarking is the rational numbers $\QQ$, which can be defined
+as the equivalence classes of $\{a/b : a,b\in\ZZ, b\neq 0\}$, with equivalence
+$a/b\sim c/d \iff ad=bc$.
+\begin{definition}
+  Let $A,B$ be sets. The Cartesian product of $A,B$ is the set 
+  \[A\times B = \{(a,b) : a\in A, b\in B\}\]
+  \label{def:cartesianProduct}
+\end{definition}
+\begin{definition}
+  Let $X,Y$ be sets. A function $f:X\to Y$ is a rule that assigns elements of
+  $X$ to elements of $Y$, by $f(x)\in Y$. The \emph{domain} of $f$ is a subset
+  of $X$, the \emph{codomain} of $f$ is $Y$, and the \emph{image} of $f$ is
+  $\Img(f)=f(\dom f)$. For any subset $B\subset Y$, the \emph{pre-image} (or
+  \emph{inverse image}) of $B$ under $f$ is $f^{-1}(B)=\{x\in X:f(x)\in B\}$,
+  which does not require invertibility of $f$.
+  \label{def:function}
+\end{definition}
+\subsubsection{Real numbers}
+While being the most important set for this course, the real numbers are quite
+tricky to define. We may do so by using many approaches, like using the
+equivalence classes of all cauchy sequences from $\QQ$, or by using the
+infinite/finite decimal expansions and then quotiening by equivalence relation
+of the ambiguity that for periodic $9$s from the $n$th decimal, it's equivalent
+to $1$ followed by $0$s periodic in the $(n-1)$th decimal. This set satisfies
+the axioms of an ordered field. Moreover, it also satisfies the completeness
+axiom.
+\begin{definition}[Least upper bound axiom]
+  Every nonempty subset of $\RR$ which is bounded above has a least upper
+  bound (or supremum). That is, consider $A\subset\RR$ such that there exists
+  $v\in\RR$ with $a\in A \implies a\leq v$. Then, by this axiom, $\exists
+  u\in\RR$ s.t. if $v\in\RR$ is an upper bound for $A$, then $u\leq v$.
+  \todo{what happens if we dropped this axiom? Does there any interesting
+  happen?}
+  \label{axiom:leastUpperBound}
+\end{definition}
+This axiom follows from the intuition that there exists no gaps in the real
+numbers.
+\begin{lemma}
+  There exists a number $x\in\RR$ s.t. $x^2=2$.
+  \label{lem:sqrt2}
+\end{lemma}
+\begin{proof}
+  Consider the set $A=\{x\in\RR : x^2\leq 2\}$, and note its upper-boundedness.
+  Try to find its least upper bound. (hint: contradiction).
+\end{proof}§
+\begin{theorem}[Intermediate value theorem]
+  Let $f:[a,b]\to\RR$ be continuous. Suppose $f(a)=c$ and $f(b)=d$ and $c<d$.
+  For any real number $q\in(c,d)$, there exists some $p\in(a,b)$ s.t. $f(p)=q$.
+  \label{thm:ivt}
+\end{theorem}
+\begin{proof}
+  TODO.
+\end{proof}
+\subsubsection{Cauchy's inequality}
+\begin{lemma}[Cauchy's inequality]
+  Let $v=(v_1,\dots,v_n)$ and $w=(w_1,\dots,w_n)$ be vectors in $\RR^n$. We have 
+  \[|v\cdot w|=|v||w| \]
+  Where $|v|=\sqrt{v\cdot v}$, the length of $v$.
+  \label{lem:cauchyIneq}
+\end{lemma}
+\begin{proof}
+  Consider the quadratic function $f(\lambda)=|(v+\lambda w)|^2=w\cdot w\lambda^2
+  + 2v\cdot w \lambda + v\cdot v$, which is positive for all $\lambda\in\RR$
+  (it's just the square of the lenght of $(v+\lambda w)$), and so it must have
+  at most one root. Hence the discriminant $b^{2}-4ac$ is non-positive, so 
+\[(2v\cdot w)^2 - 4 w\cdot w v\cdot v \leq 0\]
+\[\implies |v\cdot w| \leq \sqrt{w\cdot w} \sqrt{v\cdot v}\]
+\end{proof}

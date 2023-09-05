@@ -1,0 +1,46 @@
+\section{Week 1 - 14 Jan 2022 - Subspace metric}
+So far we've seen the defintion of a metric space, examples, and shown some
+strong equivalence of $d_1,d_2,d_{\infty}$, and $D$.
+\begin{definition}[Subspace metric]
+  Let $(X,d)$ be a metric space, and $A\subseteq X$ a subset. Define a function
+  $d_A:A\times A\to\RR: (x,y)\mapsto d(x,y)$. So $d_A$ is a restriction of $d$
+  to $A\times A$. Then $(A,d_A)$ is a metric space, the \emph{subspace metric}.
+\end{definition}
+\begin{example}
+  Take $X=\RR$ with the metric $d(x,y)=|x-y|$, then $A=[-1,1]$ with
+  $d_A(x,y)=|x-y|$ is a metric space.
+\end{example}
+\begin{example}
+  Take $X=\RR^2$ be a metric space with $d_2$. Take $A=\left\{ a_1,a_2,a_3,a_4
+  \right\}$, so $(A,d_A)$ is a metric space $d_A(a_1,a_2)=1, d_A(a_1,a_3)=2,
+  d_A(a_1,a_4)=\sqrt{5}, d_A(a_2,a_3)=\sqrt{5}, d_A(a_2,a_4)=2, d_A(a_3,a_4)=1$.
+  All other values follow from axioms 1,2 of metric spaces. Since it is a
+  subspace of $\RR^2$, the triangle inequality is automatic.
+\end{example}
+\begin{exercise}
+  Consider $X=\RR, d(x,y)=|x-y|$, and $A=[-1,1]$. What is $B_A(1,1)$ (ball at
+  $1$ of radius $1$)?
+\end{exercise}
+\begin{proof}[Solution]
+  By the defintion we have $B_A(1,1)=\left\{ x\in A : d(1,x)<1 \right\} =
+  (0,1]$.
+\end{proof}
+
+
+\begin{proposition}
+  For all $a\in A$, $r>0$, we have $B_A(a,r)=B_X(a,r)\cap A$ -- for $(A,d_A)$ a
+  subspace of $(X,d)$.
+\end{proposition}
+\begin{proof}
+  $B_A(a,r)= \left\{ b\in A : d_A(a,b)<r \right\} = \left\{ b\in A: d(a,b)<r
+  \right\} =  \left\{ x\in X : d(a,x)<r \right\} \cap A = B_{X}(a,r)\cap A$.
+\end{proof}
+
+\begin{exercise}
+  Let $G=(V,E)$ be a graph, where $V$ is the set of vertices, and $E$ the set of
+  edges. Assume $G$ is connected. Make $V$ into a metric space, with metric
+  $d(v,w)=$ length of shortest path between $v,w$.
+
+  We say $G$ is simple if there exists at most one edge between two vertices,
+  and no loops. In this case, how do you recover $E$ from $(V,d)$?
+\end{exercise}

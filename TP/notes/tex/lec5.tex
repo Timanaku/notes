@@ -1,0 +1,105 @@
+\section{Week 2 - 19 Jan 2022 - Function spaces (an example of homeomorphism)
+and Sequences}
+\begin{proposition}
+  We have that $d_1(g,f)\leq d_{\infty}(g,f)$ for any $f,g\in C[0,1]$, but these
+  metrics are not strongly equivalent.
+  \label{prop:C01metricsNotEq}
+\end{proposition}
+\begin{proof}
+  Let $f,g\in C[0,1]$. By definition $|f(t)-g(t)|\leq d_{\infty}(f,g)$, for any
+  $t\in [0,1]$. Moreover, we have that 
+  \[d_{1}(f,g)=\int_{0}^1 |f(t)-g(t)|dt \leq \int_0^1d_{\infty}(f,g)dt =
+  d_{\infty}(f,g).\]
+
+  In order to show the not equivalence, we claim there exists function
+  $y,f_1,f_2,\dots\in C[0,1]$ s.t. $y(t)\neq f_n(t)$ for all $t\in [0,1]$ and
+  all $n\in\NN$, with 
+  \[\frac{d_{1}(f_n,y)}{f_{\infty}(f_n,y)}\to 0, n\to\infty.\]
+  The fact that this implies non-strong-equivalence is an exercise in Exercise
+  Sheet 2. We take this as true, in order to proceed. We find the function
+  $f_n(t)=t^n$ and $y(t)=0$. Hence, observe that $d_{\infty}(f_n,g)=1$ for all
+  $n\in\NN$, whereas we have 
+  \[d_1(f,g)= \int_0^1 |f(t)-g(t)|dt = \int_0^1t^n dt = \frac{1^{n+1}}{n+1}\]
+  Which clearly tends to $0$. Hence the metrics $d_1, d_{\infty}$ are not
+  strongly equivalent.
+\end{proof}
+
+What do $d_1,d_{\infty}$ on $C[0,1]$ have to do with the metrics with same
+notation on $\RR^n$? We will answer this question with the next proposition.
+Recall that $B(X)$ is the set of bounded function $X\to\RR$ for an non-empty set
+$X$.
+\begin{proposition}
+  If $X=\{1,\dots, n\}$, the map $\phi:B(X)\to\RR^n$ given by
+  $\phi(f)=(f(1),\dots,f(n))\in\RR^n$ is a bijection. Moreover,
+  $d_{\infty}(\phi(f),\phi(g))= d_{\infty}(f,g)$ for any $f,g\in B(X)$.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  Note that $\phi(f)=\phi(g)\implies \phi(f)_i=\phi(g)_i$ for all
+  $i\in\{1,\dots,n\}$. Hence it follows that $f(i)=g(i)\forall i$, and this is
+  precisely $f=g$. Hence $\phi$ is an injection.
+  
+  On the other hand, let $x=(x_1,\dots,x_n)\in\RR^n$, and define $f$ by
+  $f(i)=x_i$ for $i\in X$. Note taht since $X$ is a finite set, $f(i)$ is well
+  defined for all $i$ -- i.e. the minimum and the maximums exist, or in other
+  words, $f$ is bounded below and above. It then follows that $f\in B(X)$. By
+  construction, $\phi(f)=(f(1),\dots, f(n)) = (x_1,\dots, x_n)=x$. Since $x$ was
+  not constained, it follows that $\phi$ is a surjection. Therefore it follows
+  that $phi$ is a bijection (in fact, a linear bijection of vector spaces).
+
+  Following, for $f,g\in B(X)$ we have
+  \[d_{\infty}(\phi(f),\phi(g))= \sup_{1\leq i\leq n} |\phi(f)_i-\phi(g)_i|=
+  \sup_{1\leq i \leq n} |f(i)-g(i)| = d_{\infty}(f,g)\]
+\end{proof}
+\begin{remark}
+  The above is an example of a homeomorphism (think of isomorphisms of vector
+  spaces that preserve distances). Later on we will look into detail the general
+  notion. In fact we will see that these homeomorphisms in general are just
+  isomorphisms of \emph{topological spaces}, and thus must preserve topological
+  properties (of which the metric is just a special case). The particular case
+  where the distance is preserved is called \emph{isometry}.
+\end{remark}
+
+For functions in $C[0,1]$ (a special case of the general $B(X)$, where in this
+case $X$ is infinite -- in fact compact closed -- and with the added property
+that the functions are continuous), this space has metrics $d_k$ defined as
+follows
+\[d_k(f,g)= \int_0^1\left( |f(t)^k - g(t)^k| \right)^{1/k} dt,\]
+For $k\in\NN$, and they are related to the metrics $d_k$ in $\RR^n$ in a
+similar way.
+
+\subsection{Sequences}
+One of the goals with metric spaces is to generalise real analysis to analysis
+on any metric space. Recall that a sequence $(x_n)_n$ in a non-empty set $X$ is
+a list of elements $x_1,x_2,\dots$ of $X$ indexed by $\NN$. Recall the following
+defintion in $\RR$,
+\begin{definition}
+  If $(x_n)$ is a sequence on $\RR$, we say $x_n$ converges to $a\in\RR$ if the
+  following is satisfied,
+  \[\forall\eps>0 \exists N\in\NN : n>N \implies |x_n-a|<\eps.\]
+  In which case we write $\lim_{n\to\infty}x_n=a$.
+\end{definition}
+Notice that $|x_n-a|=d(x_n,a)$ where $d$ is the usual $\RR$ metric. We see the
+next more general definition of a convergent sequence.
+\begin{definition}
+  Let $(X,d)$ be a metric space, and let $(x_n)$ be a sequence in $X$. We say
+  $x_n$ converges to $a\in X$ if $\forall \eps>0\exists N\in\NN$ s.t. 
+  \[n>N \implies |x_n-a|<\eps.\]
+  In this case we call $a$ the limit of the sequence $(x_n)$.
+  \label{def:metricSequence}
+\end{definition}
+\begin{proposition}
+  A sequence in a metric space has at most one limit point.
+  \label{prop:uniqueLimitMetricSpace}
+\end{proposition}
+\begin{proof}
+  Let $(X,d)$ be a metric space and $(x_n)$ a sequence in $X$. Assume $a,b\in X$
+  are both limit points of $x_n$. We claim $a=b$. It is enough to show that
+  $d(a,b)<\eps$ for any $\eps>0$.
+
+  Pick $\eps>0$. Then $\exists N\in\NN : d(x_n,a)<\eps/2$ for any $n\geq N$.
+  Similarly, $\exists N'\in\NN : d(x_n,b)<\eps/2$ for any $n\geq N'$. Let $n\geq
+  \max (N,N')$, and observe then 
+  \[d(a,b)\leq d(a,x_n)+d(x_n,b) < \eps\]
+  As required.
+\end{proof}<++>

@@ -1,0 +1,58 @@
+\section{Lecture 0 - 17 Jan 2021 - Revision}
+\subsection{The field of complex numbers}
+\begin{enumerate}
+  \item $\CC$ as a set is in bijection with $\RR\times\RR$,
+  \item however $\CC$ is a \emph{field} of characteristic zero, i.e. you can
+    keep adding $1$ and it will never get back to $1$ (being in essence
+    different from $\ZZ/p\ZZ$ fields for some prime $p$).
+  \item Moreover, $\CC$ is complete -- i.e. given a sequence $(z_n)_n\in\CC$
+    that is Cauchy, that sequence converges in $\CC$. We used the same in $\RR$. 
+  \item  Finally, we say $\CC$ is algebraically closed: any polynomial has
+    solutions in $\CC$.
+\end{enumerate}
+
+\begin{theorem}[Fundamental Theorem of Algebra]
+  Let $f(z)$ be a monic polynomial of degree $n$ with complex coefficients. THe
+  equation $f(z)=0$ has precisely $n$ solutions $\{\xi_1,\cdots,
+  \xi_n\}\subset\CC$ called roots.
+  \label{thm:fta}
+\end{theorem}
+We will prove this theorem in this course.
+
+\subsection{Complex functions}
+From real analysis, we found that given some functions defined in some interval
+$[a,b]\to\RR$, the defintions of integration and differentiation involve limits, 
+\[f'(x_0)= \lim_{x\to x_0} \frac{f(x)-f(x_0)}{x-x_0}, x_o\in (a,b)\]
+\[\int_a^b f(x) dx = \lim_{n\to\infty}\sum_{k=1}^n f(x_k) \frac{b-a}{n}, \quad
+x_k \in (a+(k-1)\frac{b-a}{n}, a+k\frac{b-a}{n})\]
+
+In complex numbers, for a function $f:D\to\CC$ defined on an open subset
+$D\subset\CC$, we have
+\[f'(z_0)= \lim_{z\to z_0} \frac{f(z)-f(z_0)}{z-z_0}, z_o\in D\]
+However, in $\RR^2$ we could not take the limit of the quotient of an element of
+$\RR^2$, but in $\CC$ this limits does exist, and this requirement is way more
+restrictive than for $\RR^2$.
+
+\subsection{Miracles of complex analysis}
+What are the distinctive features of complex analysis? There're many things that
+are true in complex analysis but not true in real analysis.
+\begin{enumerate}
+  \item Let $f:D\to\CC$ be differentiable on a small disc $D\subset\CC$, then
+    $f$ is analytic on $D$. That is, it can be represented as a Taylor series on
+    $D$. In real analysis, a functino being differentiable did not automatically
+    guaranteed infinitely-times differentiability.
+  \item Complex integration is defined along contours in $\CC$. \emph{Cauchy's
+    Theorem}: If $f:D\to\CC$ is analytic on $D$, then the contour integral
+    doesn't depend on the choice of contour, but only in the endpoints.
+  \item \emph{The residue theorem}: Let $\gamma:[0,1]\to D\subset\CC$ be a closed
+    contour. The contour integral of a function $f:D\to\CC$ along $\gamma$
+    depends only on the nature of the singularities of $f$ which are enclosed by
+    that contour.
+  \item \emph{Analytic functions} $f:\CC\to\CC$ are conformal transformations of
+    the complex plane -- they preserve angles.
+\end{enumerate}
+\subsection{Revision of complex numbers}
+We revise Level 1 material. Recommended reading is Pristley - Intro to Complex
+Analysis, Chapter 1. We cover addition, multiplication, conjugation, Euler's
+fomular, de Moivre's theorem, and inverse function. We also cover addition of
+complex numbers as translations, and multiplication as scaling plus rotation.

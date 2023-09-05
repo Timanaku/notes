@@ -1,0 +1,81 @@
+\section{Week 9 - 07 Mar 2022 - Connectedness, Hausdorff Spaces }
+The last result we showed was that the inclusion map is continuous, and this
+gives us a way of modifying the domain or codomain of any continuous function,
+while preserving continuity.
+\begin{lemma}
+  Let $f:X\to Y$ be a continuous function between topological spaces. Then the
+  restriction of $f$ to any subspace $A\subset X$ is continuous.
+  \label{lem:restrictFunContinuous}
+\end{lemma}
+\begin{proof}
+  The proof follows by the previous result. Since $i:A\to X$ the inclusion map
+  is continuous, the restriction is a composition map $f\circ i:A\to Y$ of
+  continuous functions. Hence the composition is also continuous.
+\end{proof}
+\begin{lemma}
+  Let $f:X\to A$ be a function between topological spaces, and suppose $A$ is a
+  subspace of $Y$. Let $g=i\circ f: X\to Y$ for $i:A\to Y$ the inclusion. Then
+  $g$ is continuous if and only if $f$ is continuous.
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  If $f$ is continuous, $g$ is a composition of continuous functions, hence
+  continuous. Conversely assume $g$ is continuous, and let $U\subset A$ be open.
+  Then $U=V\cap A$ for some open set $V\subset Y$. By continuity of $g$, then
+  $g^{-1}(V)$ is open in $X$. That is,
+  \[g^{-1}(V)= (i\circ f)^{-1}(V) = f^{-1}(i^{-1}(V))= f^{-1}(V\cap
+  A)=f^{-1}(U),\]
+  is open in $X$, hence $f$ is continuous.
+\end{proof}
+\begin{remark}
+  For $f:X\to Y$, let $A\subset X$ and assume $f(a)\in B\subset Y$ for all $a\in
+  A$. Then if $f$ is continuous, so is $f^*:A\to B: a\mapsto f(a)$.
+  \label{<+label+>}
+\end{remark}
+
+\subsection{Examples from Euclidean space}
+There are many important examples of topological spaces arise as subspaces of
+the Euclidean topological space. These include,
+\begin{enumerate}
+  \item Unit circle $S^1$,
+  \item Unit sphere $S^2$,
+  \item Unit $n$-sphere, $S^n=\{x\in\RR^{n+1}: x\cdot x=1\}$,
+  \item The torus $T^2\subset \RR^3$ is the surface of revolution obtained by
+    revolving $S^1$ with center $(2,0,0)$ in the $xz$-plane around the $z$-axis,
+  \item More generally, $\Sigma_g\subset\RR^2$ is the surface of a doughnut with
+    $g$ holes. In particular, $\Sigma_1=T^2$.
+  \item Other examples include matrix groups. Consider $\RR^{2\times 2}$ via the
+    bijection $\RR^{2\times 2}\to \RR^4$, obtaining a metric and topology on
+    $\RR^{2\times 2}$ from the Euclidean topology on $\RR^4$. This extends
+    naturally to $\RR^{n\times n}$. Important subspaces include $GL_n(\RR)$,
+    $SO_n(\RR)$, which are examples of \emph{topological groups}: topological
+    spaces (nautrally inheriting from the euclidean topology), and groups
+    (where there exists closure, inverses, identity, and associativity), and
+    these structures are compatible. E.g. the function $g\mapsto g^{-1}$ is a
+    continuous function in the topology.
+\end{enumerate}
+The $S^{n-1}$ is the boundary of the closed $n$-dimensional disc.
+These surfaces in $\RR^2$ are examples of $2$-dimensional manifolds.
+
+\subsection{Connectedness}
+The intuition behind a connected topological space is the fact that you can
+alway get a path between any two points in the space, without ever leaving the
+space.
+\begin{definition}
+  A topological space $X$ is disconnected if $X$ can be written as a disjoint
+  union two nonempty open subsets. I.e. $X=U\cup V$ with $U,V$ nonempty and
+  $U\cap V=\emptyset$. We say $X$ is connected if it s is not disconnected. In
+  particular, $X$ is connected if $X$ cannot be written as a disjoint union of
+  two nonempty open subsets -- i.e. if $X=U\cup V$ for disjoint open subsets $U$
+  and $V$, then $U=\emptyset$ or $V=\emptyset$.
+  \label{def:connectedTopoSpace}
+\end{definition}
+in the following examples, we use the subspace topology from the standard
+topology on $\RR$.
+\begin{example}
+  Let $x\in\RR$. Then $\RR\setminus\{x\}$ is disconnected. Another instructive
+  example is the space $\QQ$, disconnected in $\RR$. Let $S=(-\infty, \pi)\cap
+  \QQ$ and $T=(\pi, \infty)\cap\QQ$. Then $S$ and $T$ are open subsets of $\QQ$,
+  since $(-\infty,\pi),(\pi,\infty)$ are open in $\RR$.  Then $S\cup T=\QQ$ and
+  $S\cap T=\emptyset$.
+\end{example}

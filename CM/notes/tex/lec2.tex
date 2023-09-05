@@ -1,0 +1,100 @@
+\section{Lecture 2 - 18 Jan 2021 - Intro to Complex Differentiation}
+In order to define the derivative of a complex function, we need the notion of
+open intervals on $\CC$.
+
+\begin{definition}
+  Let $\Omega\subseteq\CC$ be a set. We say $\Omega$ is open iff for any
+  $z_0\in\Omega$ there exists $\eps>0$ s.t. 
+  \[\{z\in\CC : |z-z_0| < \eps\} \subset \Omega\]
+  That is, for any point $z_0\in\Omega$ there exists a small disc
+  of radius $\eps$ centered at $z_0$ that is contained in $\Omega$.
+  \label{def:openSet}
+\end{definition}
+Next, we investigate the notion of limits of complex funcitons. 
+
+\begin{definition}
+  We write $\lim_{z\to z_0} f(z)= \omega$ iff
+  \[\forall\eps>0 \exists \delta_{\eps}>0 : |z-z_0|<\delta_{\eps}\implies
+  |f(z)-\omega| < \eps\]
+  \label{def:limitComplexFun}
+\end{definition}
+Note that then, for a limit $\lim_{z\to z_0} f(z)=\omega$, we have that for any
+sequence $(z_n)_n$ with $\lim_{n\to\infty} z_n = z_0$, then
+$\lim_{n\to\infty}f(z_n)=\omega$.
+
+\begin{definition}
+  Let $\Omega\subset\CC$ be an open set, and $f:\Omega\to\CC$ a function. Then
+  we say that $f$ is differentiable at $a\in\Omega$ iff 
+  \[\lim_{z\to a} \frac{f(z)-f(a)}{z-a} = \omega \in\CC.\]
+  Then $\omega$ is called the derivative of $f$ at $a\in\Omega$ and denoted
+  $f'(a)$ or $\frac{df}{dz}(a)$.
+  \label{def:derivativeComplex}
+\end{definition}
+The important difference wrt the real analogoous operation is that, in this
+case, the limit can take many different direction. However, a requirement here
+is that regardless of the direction taken, the limit is the same.
+QUESTION: Why would not this hold in $\RR^2$. ANSWER: I think it is because it
+is needed for the difference quotient limit to be defined. Without it, we
+wouldn't be able to define it. The next examples may clear the doubts.
+
+\begin{example}
+  We now look at an example to show the difference betwene a well-behaved
+  function in, say, $\RR^2$ and how $\CC$-differentiation needs something more
+  than just the normal Cartesian notion of well-behavedness. Take the function
+  $f:\CC\to\CC:z\mapsto|z|^2$, which viewing it in the real plane, it would be
+  $f_R:\RR^2\to\RR:x\to |x|^2$, describing a parabola. This function $f_R$ is
+  nice and differentiable. However, consider the differentiability of $f$, and
+  fix $z\in\CC$. Let $\eps>0$ and $\theta\in[0,2\pi)$. The complex difference
+  quotient yields
+  \[\frac{f(z+\eps e^{i\theta}) - f(x)}{\eps e^{i\theta}} =
+  \frac{z\eps e^{-i\theta} + \overline{z}\eps e^{i\theta }+ \eps^2}{\eps
+  e^{i\theta}} = ze^{-2i\theta} + \overline{z} + \eps e^{-i\theta}\]
+  And by taking the limit $\eps\to 0$ it yields $\omega =
+  ze^{-2i\theta}+\overline{z}\in\CC$, which depends on $\theta$, hence it does
+  not fulfill the differentiability -- since the limit will not be the same
+  regardless of $\theta$. The only point where it is independent is when $z=0$.
+  Hence $f$ is only differentiably at $f$.
+\end{example}
+QUESITON: Is there anything interesting happening if we drop the requirement of
+direction-independence?
+\begin{exercise}
+  Consider the function $f:\CC\to\CC: z\mapsto\overline{z}$. Show that $f$ is
+  not differentiable anywhere.
+\end{exercise}
+\begin{proof}[Solution]
+  TODO
+\end{proof}
+
+\begin{lemma}[Holomorphic function]
+  Consider the function $f:\Omega\to\CC$ for some open set $\Omega\subset\CC$.
+  If $f$ is differentiable at every point $\omega\in\Omega$, we say that it is
+  \emph{holomorphic}.
+  \label{def:holomorphicFun}
+\end{lemma}
+\begin{proof}
+  TODO
+\end{proof}
+
+\begin{lemma}[Rules of differentiation]
+  Consider the function $f,g:\Omega\to\CC$ to be differentiable at
+  $\omega\in\Omega$ with $\Omega\subset\CC$ being open. We have 
+  \[(f+g)'(\omega) = f'(\omega)+g'(\omega)\]
+  \[(fg)'(\omega) = f'(\omega)g(\omega) + g'(\omega)f(\omega)\]
+  And for $\Gamma=\{\omega\in\Omega : f(\omega)\neq 0\}$, we have that for $s\in
+  \Gamma$,
+  \[\left( \frac{1}{f} \right)'(s) = \frac{-f'(s)}{f(s)^2}\]
+  \label{lem:diffRules}
+\end{lemma}
+\begin{proof}
+  TODO
+\end{proof}
+
+\begin{lemma}[Chain Rule]
+  Let $\Omega_1,\Omega_2\subset\CC$ be open and let $f:\Omega_1\to\CC,
+  g:\Omega_2\to\CC$ be holomorphic. Then $g\circ f:\Omega_1\to\CC$ is also
+  holomorphic. Moreover, $(g(f(z))'= g'(f(z))f'(z)$ for all $z\in\Omega_1$.
+  \label{lem:chainrule}
+\end{lemma}
+\begin{proof}
+  TODO
+\end{proof}

@@ -1,0 +1,109 @@
+\section{Week 4 - 31 Jan 2022 - Cauchy Sequences and Completeness}
+Recall
+\begin{definition} [Convergence of sequence in a metric space]
+  Let $(X,d)$ be a metric space, and let $(x_n)$ be a sequence in $X$, and let
+  $a\in X$. We say the sequence $(x_n)$ converges to $a$ if for any $\eps>0$
+  there exists $N\in\NN$ s.t. for any $n\geq N$, we have $d(x_n,a)<\eps$. In
+  other words, $n>N\implies x_n\in B_{X}(a,\eps)$.
+  \label{<+label+>}
+\end{definition}
+We would like to have a way of testing whether a given sequence converges
+without having to come up with the limit itself. We start, as per usual, with an
+example in the real numbers.
+
+\begin{definition}[Real Cauchy sequence]
+  A sequence $(x_n)$ in $\RR$ is a Cauchy sequence if 
+  \[\forall\eps>0 \exists N\in\NN : n,m>N \implies d(x_m,x_n)<\eps.\]
+  \label{def:cauchyRR}
+\end{definition}
+
+\begin{lemma}[Bolzano-Weirstrass Theorem]
+  Let $(x_n)$ be a real sequence, and suppose there exists $L\in\RR$ s.t.
+  $|x_n|\leq L$ for all $n\in\NN$. Then there exists a subsequence $(x_k)$ of
+  $(x_n)$ that converges to some $a\in\RR$.
+  \label{<+label+>}
+\end{lemma}
+\begin{proof}
+  TODO.
+\end{proof}<++>
+
+\begin{theorem}
+  A sequence in $\RR$ is Cauchy iff it is convergent.
+\end{theorem}
+\begin{proof}
+  Done it in Week 1 for Complex Methods. Recall that right to left direction was
+  easy (triangle inequality), but the tricky one was the forward direction
+  (cauchy implies convergence). This was done by using the Bolzano-Weierstrass
+  theorem and the boundedness of a Cauchy sequence.
+
+  Let $(x_n)$ be a Cauchy sequence in $\RR$. Let $\eps=1$. Then $\exists
+  N\in\NN$ s.t. $m,n>N \implies |x_m-x_n|<1$. For $m>N$,
+  $|x_m|=|x_{N+1}-x_{N+1}+x_M| \leq |x_N+1| + |x_m-x_{N+1}| < |x_N+1|+1$.
+  Let $R=\max (|x_1|,\cdots, |x_N|, |x_{N+1}|+1)$. Hence $|x_n|\leq R$ for any
+  $n\in NN$. Hence $(x_n)$ is a bounded sequence. Bolzano-Weirstass theorem
+  gives us a subsequence $(x_{n_k})$ that converges to some $c\in\RR$. Finally,
+  since we have, for any $\eps>0$,
+  \[\exists N\in\NN : j>N \implies |x_{n_j} - c| < \eps/2, \]
+  \[\exists M\in\NN : m,n>M \implies |x_n-x_m|< \eps/2\]
+  Choose $L=\max (N,M)$, so that for $m,n>L$ we have $|x_m-c|<\eps/2$ and
+  $|x_m-x_n|<\eps/2$, it follows that $|x_n-c|=|x_m-c|+|x_m-x_n| < \eps$, by the
+  triangle inequality. Hence the sequence $(x_n)$ converges.
+
+\end{proof}
+
+\begin{definition}
+  A sequence $(x_n)$ in a metric space $(X,d)$ is Cauchy if for all $\eps>0$
+  there exists $N\in\NN$ s.t. 
+  \[m,n>N \implies d(x_m,x_n)<\eps.\]
+  \label{<+label+>}
+\end{definition}
+
+\begin{proposition}
+  Suppose $x_n\to a$ in a metric space $(X,d)$. Then $(x_n)$ is Cauchy.
+  \label{<+label+>}
+\end{proposition}
+\begin{proof}
+  TODO. Triangle inequality.
+\end{proof}
+\begin{remark}
+  Note how the converse, in more general metric spaces, is not true!
+\end{remark}
+\begin{example}
+  In $\RR$, $1/n\to 0$, hence $(1/n)$ is convergent, and by extension Cauchy.
+  Now, consider $X=(0,1]\subseteq\RR$ with the subspace metric. Note that the
+  sequence is in $X$ and is still Cauchy,
+  \[\forall \eps>0 \exists N\in\NN : n,m>N \implies
+  d_{\RR}(x_m,x_n)=d_X(x_m,x_n)<\eps\]
+  However, observe that the sequence does not converge in $X$ (if it did, then
+  $1/n\to a$ for $a>0$, and the same should be true when considering $X=\RR$,
+  and this would contradict the uniqueness of limits).
+\end{example}
+Heuristically we observe that the problem of Cauchy sequences not converging in
+more general metric spaces is that these allow for metric spaces that have
+\emph{gaps} in the embedding space -- think of $\QQ\subset\RR$.
+\begin{definition}[Complete metric space]
+  A metric space $(X,d)$ is complete if every Cauchy sequence in $X$ is
+  convergent in $X$.
+  \label{def:completnessMetricSpace}
+\end{definition}
+One may ask if there's anything we can say about the relationship between
+general metric spaces and complete ones.
+\begin{theorem} [Non-examinable theorem]
+  Let $(X,d)$ be any metric space. Then there exists a metric space
+  $(\hat{X},\hat{d})$ s.t. 
+  \begin{enumerate}
+    \item $(\hat{X}, \hat{d})$ is complete,
+    \item There exists an injective map $\phi:X\to\hat{X}$ s.t.
+      \[\hat{d}(\phi(x),\phi(y))=d(x,y),\]
+    \item For all $\hat{x}\in \hat{X}$ and any $\eps>0$, $B_{\hat{X}}
+      (\hat{x},\eps)\cap \phi(X) \neq \emptyset$.
+  \end{enumerate}
+  \label{<+label+>}
+\end{theorem}
+\begin{proof}
+  Let $X(C)$ be the set of Cauchy sequences in $X$. Define $\bar{d}:C(X)\times
+  C(X) \to \RR$ by $\bar{d}( (x_n),(y_n)) = \lim_{n\to\infty} d(x_n,y_n)$. It's
+  worth mentioning that this is not a metric, since we may get $0$ for different
+  Cauchy sequences. Define $\hat{X} = C(X)/\sim$ for some equivalence relation
+  $\sim$. TODO: Finish.
+\end{proof}

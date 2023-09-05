@@ -1,0 +1,128 @@
+\section{Week 4 - 04 Feb 2022 - Rotating reference frame}
+Note that in the previous lecture, since $\vec{e_i}'$ is a rotation of
+$\vec{e_i}$, there exists an orthogonal matrix $Q$ s.t. $\vec{e_i}'=Q\vec{e_i}$.
+In particular, the entries are 
+\[Q_{ij} = \vec{e_i}\cdot\vec{e_j}'.\]
+A change of basis matrix $S\to S'$, so the entries are wrt $S$ --
+$\{e_1,e_2,e_3\}$. (To see why, think of $\vec{e_1}=(1,0,0)$, so that the
+columns of $Q$ are just the basis vectors for $S'$). More precisely, note that
+the $i$th component of the matrix $Q$ in basis of $S$ is given by
+\[(Q\vec{e_k})_i = \sum_{j=1}^3 Q_{ij} (\vec{e_k})_j\]
+For $\vec{e_k}$ being $0$ but for one element $1$ (think of the standard $i,j,k$
+vectors in $\RR^3$). We also made use of the matrix-vector multiplication as
+linear combination of each entry of $\vec{e_k}$. Then, by making use of the
+definition of $Q_{ij}$ we have 
+\[\sum_{j=1}^3 Q_{ij} (\vec{e_k})_j = \sum_{j=1}^3 (\vec{e_j}'\cdot\vec{e_i}) \vec{e_i}\]
+\[= \sum_{j=1}^3 (\vec{e_j}'\cdot\vec{e_i})\delta_{kj}\]
+Where $\delta_{kj}=1$ if $k=j$ oor $\delta_{kj}=0$ if $k\neq j$ (since we said
+$\vec{e_k}$ is zero everywhere but one element). Hence,
+\[\sum_{j=1}^3 (\vec{e_j}'\cdot\vec{e_i})\delta_{kj}= (\vec{e_k}'\cdot
+\vec{e_i})=(\vec{e_k}')_i \forall i.\]
+Hence $\vec{e_k}'=Q\vec{e_k}$, as required.
+
+Recall that since $Q$ is orthogonal, $QQ^T=I$, hence $\det Q=1,-1$. For $-1$
+determinant, $Q$ involves a reflection (on top of a rotation). In our case, we
+have $\det Q=1$. Note that since $\vec{e_i}$ are fixed, we have that
+$\dot{\vec{e_i}}' = \dot{Q}\vec{e_i}$, and given that $\vec{e_i}=Q^T\vec{e_i}'$,
+it follows that $\dot{\vec{e_i}}'=\dot{Q}Q^T \vec{e_i}'$. To figure this new
+matrix, note that \[QQ^T=I \implies \dot{Q}Q^T + Q\dot{Q}^T =0 \implies
+\dot{Q}Q^T = -Q\dot{Q}^T.\] Hence, note that the matrix $P=\dot{Q}Q^T$, and by
+extension (following the rules of transpose matrix: $(AB)^T=B^T A^T$) that $P^T
+= Q\dot{Q}^T$. Hence, note that $P=-P^T$.  That is, $P$ is skew-symmetric. The
+most general form is
+\[P=\dot{Q} Q^T = 
+  \begin{bmatrix}
+    0 & -\omega_3 &\omega_2 \\
+    \omega_3 & 0 &-\omega_1 \\
+    -\omega_2 & \omega_1 & 0 \\
+  \end{bmatrix}.
+\]
+Or in components,
+\[(\dot{Q}Q^T)_{ij} = -\eps_{ijk}\omega_k,\]
+Where $e_{ijk}$ is $1$ if $(ijk)$ is an even permutation of $(1,2,3)$, $-1$ if
+$(ijk)$ is an odd permutation of $(1,2,3)$, or $0$ otherwise -- This is known as
+Levi-Civita symbol (Non-examinable).
+
+Let use define the \emph{axial vector} of $\dot{Q}Q^T$ as
+$\vec{\omega}=\sum_{i=1}^3 \omega_i \vec{e_i}$. If we take a vector $\vec{a}$,
+then 
+\[\dot{Q}Q^T \vec{a}=\vec{\omega}\times\vec{a}.\]
+This can be shown by using the Levi-Civita symbol (non-examinable),
+\[(\dot{Q}Q^T\vec{a})_i = \sum_{j=1}^3 (\dot{Q}Q^T)_{ij}a_j =
+\sum_{j=1}^3-\eps_{ijk}\omega_k a_j = \sum_{j=1}^3\eps_{ikj}\omega_k a_j =
+(\vec{\omega}\times\vec{a})_i.\]
+Where the last equality comes from the definition of cross product in tensor
+form. Therefore, we have that the definition of  Therefore, we have that
+$\dot{\vec{e_i}}'=\dot{Q}Q^T \vec{e_i}'= \vec{\omega}\times\vec{e_i}',$
+\[\dot{\vec{e_i}}' =\omega\times\vec{e_i}',\]
+Where $\omega$ is the angular velocity. This is the same result from the
+previous lecture, but we can immediately see a relationship between $\omega$ and
+the rotation matrix $Q$. We can make some observations,
+\begin{enumerate}
+  \item The angular velocity is unique (by the argument of the cross product),
+  \item The angular velocity is additive: For a second frame with basis
+    $\vec{e_i}''$ rotating with $\vec{\omega}'$ wrt $S'$, then the angular
+    velocity of $S''$ wrt $S$ is just $\vec{\omega}+\vec{\omega}'$.
+\end{enumerate}
+
+\subsection{Application to Newton's Second Law}
+Suppose we have both, rotation and translation of a reference frame $S'$ wrt an
+inertial reference frame $S$. The translation is characterised by vector
+$\vec{R}$. Consider a particle with position vector $\vec{x}$ wrt $S'$. Hence
+the position of this particle wrt $S$ is $\vec{R}+\vec{x}$. Hence, the velocity
+of the particle wrt $S$ is given by
+\[\frac{d}{dt}(\vec{R}+\vec{x}) = \frac{d\vec{R}}{dt} + \frac{d\vec{x}}{dt},\]
+Which can be solved using the generalised Rotating Axes Theorem,
+\[=\frac{d\vec{R}}{dt} + (\frac{d\vec{x}}{dt})' +
+\vec{\omega}\times\vec{x}.\]
+Where the first term is the motion of $S'$ wrt $S$, the second term is the rate
+of change of the particle in $S'$, and the third is extra rotation wrt $S$ due
+to $S'$ rotating with axial vector $\vec{\omega}$. Moverover, let us define
+$\vec{u}=(\frac{d\vec{x}}{dt})' + \vec{\omega}\times\vec{x}$, 
+hence we can compute acceleration by applying the rotating axis theorem to the
+vector $\vec{u}$, yielding
+\[\frac{d^2}{dt^2}(\vec{R}+\vec{x})= \frac{d^2\vec{R}}{dt^2} +
+\frac{d}{dt}\vec{u}\]
+\[ = \frac{d^2\vec{R}}{dt^2}+ \left( \frac{d}{dt}
+\right)'\left( \left( \frac{d\vec{x}}{dt} \right)'+\omega\times\vec{x} \right) +
+\vec{\omega}\times\left( \left( \frac{d\vec{x}}{dt}
+\right)'+\vec{\omega}\times\vec{x} \right).\]
+By applying the product rule and rearranging we get
+\[\frac{d^2}{dt^2}(\vec{R}+\vec{x}) = \frac{d^2\vec{R}}{dt^2}+ \left(
+\frac{d^2\vec{x}}{dt^2} \right)' + 2\vec{\omega}\times\left(
+\frac{d\vec{x}}{dt} \right)' + \left( \frac{d\vec{\omega}}{dt}
+\right)'\times\vec{x} + \vec{\omega}\times(\vec{\omega}\times\vec{x}).\]
+Hence, Newton's second law give
+\[m\left( \frac{d^2\vec{x}}{dt^2} \right)' = \vec{F} - m\left(
+    \frac{d^2\vec{R}}{dt^2}+ 2\vec{\omega}\times\left( \frac{d\vec{x}}{dt}
+    \right)' + \left( \frac{d\vec{\omega}}{dt}
+\right)'\times\vec{x} + \vec{\omega}\times(\vec{\omega}\times\vec{x}) \right).\]
+Where the LHS is the force relative to the rotating reference frame (e.g. a
+person on Earth's surface). The other RHS subtracting forces are the
+translational force, the Coriolis force, the Euler force, and the centrifugal
+force, respectively. 
+
+\begin{exercise}
+  Consider a rotation in cylindrical coordinates, so that
+  $\vec{e_1},\vec{e_2},\vec{e_3}$ are given by $\vec{e_x},\vec{e_y},\vec{e_z}$,
+  and the rotating frame  $\vec{e_1}',\vec{e_2}',\vec{e_3}'$ is given by
+  $\vec{e_r},\vec{e_{\theta}},\vec{e_z}$. Calculate the rotation matrix $Q$, and
+  hence find the velocity and acceleration of a vector $\vec{x}$ in terms of
+  $\vec{e_x},\vec{e_y},\vec{e_z}$ from its description in
+  $\vec{e_r},\vec{e_{\theta}},\vec{e_z}$.
+\end{exercise}
+\begin{proof}[Solution]
+  Compute $Q$, and hence $\dot{Q}$. Moreover, find
+  $\omega=\dot{\theta}\vec{e_r}$  since in the matrix expression $\dot{Q}Q^T$ we
+  find $\omega_1=\omega_2=0$ and $\omega_3=\dot{\theta}$.
+\end{proof}
+
+\begin{exercise}
+  Following the above exercise, think of a point on the surface of Earth with
+  basis $S'$ with $\{\vec{e_1}',\vec{e_2}',\vec{e_3}'\}$, indicating the East,
+  the North, and the Upwards directions, respectively. Express $\omega$ in terms
+  of $\vec{e_2}'$ and $\vec{e_3}'$.
+\end{exercise}
+\todo{I don't understand if the lecturer means that we should take a fixed point
+on the surface of the Earth as our $S$-frame, or whether we should take $O$ (the
+center of the Earth) instead.}

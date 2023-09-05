@@ -1,0 +1,35 @@
+\section{Lecture 16 - 10 Mar 2022 - Residue Theorem: Applications}
+The residue theorem is one of the most important results that are applicable to
+problems outside of pure maths. Consider the computaiton of improper real
+integrals, e.g. in transforms. The following two integrals (Fourier and Mellin
+transforms) are hard to evaluate by guessing,
+\[\int_{-\infty}^{\infty} \frac{e^{ikx}}{1+x^2} dx = \pi e^{-|k|}, k\in\RR\]
+\[\int_{0}^{\infty} \frac{x^{\alpha-1}}{1+x}dx =\frac{\pi}{\sin \pi\alpha},
+\Re\alpha\in (0,1).\]
+In order to approach this problem we can interpret the integral as a section of
+a complex closed integral (the path of which has a section going over the real
+line interval). We then can apply the residue theorem, and by showing that the
+section of the path that is not on the real line vanishes as the length of
+the real interval goes to infinity, we obtain the value of the desired integral.
+The vanishing of the non-real part integral is non-trivial, and in fact is
+simply a condition on the integrand. 
+
+Let $f$ be a function such that $z^2 f(z)$ is bounded for large values of $|z|$
+(for large values condition is important, since that give us room to play with
+functions that may not be bounded for small values of $|z|$). The integral
+\[\int_{-\infty}^{\infty} f(z) dz\]
+Is then convergent. By comparison, consider the integral, 
+\[\int_{-\infty}^{\infty} \frac{1}{1+x^2}dx =
+\lim_{R\to\infty}[\tan^{-1}x]_{-R}^{R} = \pi.\]
+In fact, 
+\[\int_{-\infty}^{\infty} f(z)dz =\lim_{R\to\infty}\int_{-R}^{R} f(z)dz\]
+And this limit can be computed (with the proper constraints on $f$) by
+considering complex closed line integrals around boundaries of half disks, 
+\[D=\{z\in\CC : |z|\leq R, \Im z \geq 0\}.\]
+The boundedness condition of $f$ implies that $zf(z)\to 0$ as $|z|\to \infty$.
+From this follows that integrals along semicircular parts of the boundary of $D$
+defined above will vanish. Hence it follows that in the limit of large radius of
+disk $D$, the improper integral will equal the closed contour integral, which
+can be computed simply by using the residue theorem. Look at the examples on the
+course notes, they're quite instructive. 
+

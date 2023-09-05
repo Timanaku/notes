@@ -1,0 +1,72 @@
+\section{Lecture 3 - 19 Jan 2021 - Complex power series}
+The first example of a holomorphic function is the power series.
+\begin{definition}[Power series]
+  A complex power series is an infinite sum of the form
+  \[S(z) = \sum_{n=0}^{\infty}a_n(z-c)^n\]
+  With $a_i,c\in\CC$, where we say that the power series is centered at $c$.
+  Given a power series $S(z)$ we say it converges at $z_0\in\CC$ if the limit
+  $\lim m\to\infty S_m(z_0)=\sum_{n=0}^{m} a_n(z_0-c)^n$ exists. Otherwise we
+  say that $S(z)$ diverges at $z_0\in\CC$.
+  \label{def:powerSeries}
+\end{definition}
+A simple example of a power series is a geometric series.
+\begin{definition}
+  Consider the power series $S(z)=\sum_{n=0}^{\infty}a_n(z-c)^n$ and the $m$th
+  partial sum $S_m(z)$ that converges to $S(z)$. We say that $S(z)$ is
+  \emph{absolutely convergent} at $z=z_0$ if $\sum_{n=0}^{\infty}|a_n||z-c|^n$.
+  converges.
+
+  We say that $S(z)$ is \emph{uniformly convergent} in an open disk $|z-c|<r$
+  centered at $c$ if 
+  \[\forall \eps>0 \exists n\in\NN : m>n \implies |S_m(z)-S(z)|<\eps \forall
+  z\in(c-r,c+r)\]
+\end{definition}
+\begin{remark}
+  How is uniform convergence different from normal convergence? Observe that $n$
+  here depends solely on $\eps$, and not on $z$. This is analogous as for
+  functions that are uniformly continuous.
+\end{remark}
+
+\begin{theorem}[Radius of convergence]
+  Consider a power series $S(z)$ centered at $c$. There exists a positive real
+  number $R$, called the \emph{radius of convergence}, s.t. 
+  \begin{enumerate}
+    \item $S(z)$ is divergent for all $z\not\in (c-R,c+R)$,
+    \item For every $r\in[0,R)$, the series $S(z)$ is absolutely and uniformly
+      convergent for all $z\in(c-r,c+r)$,
+    \item $R=\sup\{r: |a_n|r^n \text{ is a bounded sequence}\}$
+  \end{enumerate}
+  In the case where $S(z)$ converges for all $z\in\CC$, we say $R=\infty$.
+  \label{def:radiusOfConvergence}
+\end{theorem}
+
+\begin{proposition}[Ratio Test]
+  A complex power series $S(z)=\sum_{n=0}^{\infty} a_n(z-c)^n$ with 
+  \[\lim_{n\to\infty} \left|\frac{a_{n+1}}{a_n}\right| = \frac{1}{R}\]
+  Has a radius of convergence $R>0$.
+  \label{prop:ratioTest}
+\end{proposition}
+
+A surprising application is considering the derivative and antiderivative of a
+complex power series, $S'(z)$ and $F(z)$, which turns out both still satisfy the
+ratio test, with the same ratio of convergence.
+
+\begin{proposition}
+  Let $S(z)=\sum_{n=0}^{\infty} a_n(z-c)^n$ be a power series with radius of
+  convergence $R>0$. Then $S:D\to\CC:z\mapsto S(z)$ is holomorphic, where
+  $D=\{z\in\CC : |z-c|<R\}$ and $S'(z) = \sum_{n=0}^{\infty} a_n
+  n(z-c)^{n-1}$.
+  \label{prop:powerSeriesIsHolom}
+\end{proposition}
+\begin{remark}
+  One of the main results from complex analysis, which we will see eventually in
+  the course, is the fact that every holomorphic series can be written as a
+  power series.
+\end{remark}
+\begin{corollary}
+  Every power series $S(z)$ equals its own Taylor series,
+  \[S(z) = \sum_{n=0}^{\infty} \frac{S^{(n)}(c)}{n!} (z-c)^n\]
+  And posseses antiderviative $F(z)=w+\sum_{n=0}^{\infty}
+  \frac{a_n}{n+1}(z-c)^{n+1}$ with radius of convergence $R$ and some constant
+  $w\in\CC$.
+\end{corollary}

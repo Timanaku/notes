@@ -1,0 +1,119 @@
+\section{Week 2 - 19 Jan 2022 - Orbits and stability}
+In the last lecture we looked at the 2-body problem by looking at the center of
+mass of the system and making appropriate change of variables. We found a
+solution that could take only conic-sections curves, depending on a parameter.
+We will look further into this example.
+\begin{example}[Geostationary Orbit]
+  Calculate the height at which a satellite moves at the same angular velocity
+  as the earth. 
+  \begin{enumerate}
+    \item Radius of the Earth: $R_E$,
+    \item Find radius of ciruclar orbit: $a$,
+    \item Find height above surface of Earth: $H=a-R_E$.
+  \end{enumerate}
+\end{example}
+\begin{proof}[Solution]
+  First we calculate the angular momentum per unit mass,
+  $h=r^2\dot{\theta}=a^2\dot{\theta}$. Note that for geostationary orbit we
+  require $\dot{\theta}=\omega_E = 2\pi$ per day. Hence $h=a^2\omega_E$. From
+  the previous example we have the equation of motion is
+  \[\frac{d^2u}{d\theta^2} + u = \frac{G(m+M)}{h^2}.\]
+  Note that $u_{\theta\theta}=0$ since $u=1/a$ is fixed. Hence we have 
+  \[ u = \frac{G(m+M)}{h^2}.\]
+  Where we can approximate $m+M\approx M$, and replacing $h$ it gives 
+  \[a^3=\frac{G M}{h^2}.\]
+  Next we try to get rid of $G$ in place of $g$, which we know to be (at the
+  surface of the earth),
+  \[g=\frac{GM}{R_E^2}.\]
+  Hence it follows that 
+  \[a^3 = \frac{R_E^2 g}{\omega_E^2}\]
+  \[\implies H = \frac{R_E^2 g}{\omega_E^2} - R_E \approx 36000 km.\]
+  By approximating $R_E, g, \omega_E$.
+\end{proof}
+
+\begin{example}
+  Consider a satellite moving around a mass $M$ (say, a planet), with speed
+  \[v_0 =\sqrt{\frac{\gamma}{a}}, \gamma=GM,\]
+  At an angle $\alpha=\frac{\pi}{2}$ to the radius (this problem is in $\RR^2$).
+  Assume $m<<M$, where $m$ is the mass of the satellite itself. Find the path of
+  the orbit and determine if it is bounded. In the case it is bounded, determine
+  the period of the orbit.  Initially the satellite is at a distance $a$ from
+  the origin, the cm of $M$.
+\end{example}
+\begin{proof}[Solution]
+  First we aim to find $h=r^2\dot{\theta}$. Note that $r\dot{\theta}$ is the
+  $\theta$-compontent of the velocity:
+  $\dot{\vec{x}}=\dot{r}\vec{e_r}+r\dot{\theta}\vec{e_{\theta}}$. Note we have
+  (at $t=0$),
+  \[\dot{r}= |\vec{v}\cdot\vec{e_r}|= v_o\cos\frac{\pi}{4}=
+  \sqrt{\frac{\gamma}{2a}}.\]
+  Similarly, 
+  \[r\dot{\theta} = |\vec{v}\cdot\vec{e_{\theta}}| = v_o
+  \cos\frac{\pi}{4} = \sqrt{\frac{\gamma}{2a}}.\]
+  Hence, at $t=0$, we have $h=\sqrt{\frac{a\gamma}{2}}$. We can then use the
+  equation of motion (approximating $m+M\approx M$), and get 
+  \[\frac{d^2u}{d\theta^2} + u = \frac{GM}{h^2} = \frac{2}{a}.\]
+  For intial conditions of position, take $u=\frac{1}{a}$ and
+  $\theta=\theta_0=0$ (WLOG). From the results in Exercise
+  \ref{exc:transformationCentralForceField}, we can use
+  $\dot{r}=-h\frac{du}{d\theta}$. Hence substituting we have 
+  \[\frac{du}{d\theta} = \frac{-1}{a}\]
+  Which is another initial condition. Solving the ODE above, we get
+  $u=\frac{2}{a} + A\cos\theta + B\sin\theta$, with ICs at $\theta=0$ of $u=1/a$
+  and $u_{\theta}=-1/a$. Plugging in ICs, we get $A=-1/a$ and $B=-1/a$. Hence
+  the equation of path is 
+  \[u=\frac{1}{a}\left( 2-\cos\theta - \sin\theta \right)=\frac{2}{a}\left(
+  1+e\cos\left( \theta-\theta_0 \right) \right)\]
+  For $e=\frac{1}{\sqrt{2}}$ and $\theta_0=\frac{3\pi}{4}$. Since the
+  eccentricity is between $0$ and $1$, it follows that the path is an ellipse,
+  hence bounded. The next question to answer is the period of this orbit. Recall
+  that $T=\int_0^T dt$ which by using the appropriate change of variables we
+  find
+  \[T=\int_{0}^{2\pi}\frac{dt}{d\theta}d\theta =
+  \int_0^{2\pi}\frac{1}{\dot{\theta}} d\theta = \int \frac{1}{hu^2}d\theta.\]
+  In order to proceed we can simply substitute by the solution $u$ to find
+  (recall that $2h^2/\gamma = a$),
+  \[T= \frac{h^3}{\gamma^2} \int_0^{2\pi}
+  \frac{1}{(1+e\cos(\theta-\theta_0))^2}d\theta\]
+  The solution to this integral is left as an exercise to the reader. The final
+  answer is 
+  \[T= \frac{h^3}{\gamma^2} \frac{2\pi}{(1-e^2)^{3/2}}\]
+  Note that this diverges as $e\to 1$, since parabolas do not have a period.
+\end{proof}
+\begin{remark}
+  Recall that for $A\cos\theta+B\sin\theta=e\cos(\theta-\theta_0)$.
+\end{remark}
+
+
+\subsection{Stability of circular orbits}
+Under what conditions can a ciruclar orbit exist? note that this requires $r$ to
+be a constant, so $\dot{r}=0$. Hence the equation of motion would reduce to 
+\[\ddot{r}-\frac{h^2}{r^3}= \frac{F(r)}{m} \]
+\[\implies r^3 = - \frac{mh^2}{F(r)}\]
+So circular orbits exist only when this relation is satisfied. Moreover, note
+that no circular orbits can exist if $F(r)>0$, a repulsive central force.
+However, if we assume $F(r)<0$, and the solution gives $r=a$, some constant. How
+do we know if the solution is stable? Write a small perturbation, and see what
+happens,
+\[r(t) = a + \eps(t)\]
+For some $\eps<<1$ initially. If $\eps$ grows, we say the orbit is unstable. If
+it decays, we say it's stable. Substituting this into the equation of motion
+gives an ODE in terms of $\eps$,
+\[\ddot{\eps} - \frac{h^2}{(a+\eps)^3} = \frac{1}{m}F(a+\eps)\]
+Note that we can simplify the negative term in the LHS, as follows
+\[\frac{-h^2}{(a+\eps)^3} = \frac{-h^2/a^3}{(1+\eps/a)^3}\]
+We can expand the binomial (with negative exponent) and get,
+\[\frac{-h^2/a^3}{(1+\eps/a)^3}\approx
+\frac{-h^2}{a^3}+\frac{3h^2}{a^4}+O(\eps^2).\]
+And we can do similarly for $F(a+\eps)$,
+\[F(a+\eps) = F(a) +\eps F'(a)+ O(\eps^2)\]
+And so after equating and simplifying, we get an ODE for $\eps$, 
+\[\ddot{\eps} -\frac{1}{ma}(3F(a)+aF'(a))\eps=0\]
+Solving for this equation, we can set $p^2=\frac{1}{ma}(3F(a)+aF'(a))$, in which
+case we get an equation $\ddot{\eps}-p^2\eps =0$, which gives an exponential
+growth.However, if we set $\omega^2=-\frac{1}{ma}(3F(a)+aF'(a))$, we get
+$\ddot{\eps}+\omega^2\eps=0$, which gives solution $y=A\cos\omega t +
+B\sin\omega t$. For $3F(a)+aF'(a)>0$ we get an unstable solution (spiriling
+outwards), but for $3F(a)+aF'(a)<0$, we get an stable solution (oscillating
+around the original orbit). When $3F(a)+aF'(a)=0$, the linear theory is not
+enough to answer the question.

@@ -1,0 +1,72 @@
+\section{Lecture 18 - 17 Mar 2022 - Applications of Conformal mappings}
+\begin{proposition}
+  Let $\Omega, O\subset\CC$ be open and path connected. If $f:\Omega\to O$ is
+  biholomorphic, then $u:O\to \RR$ is harmonic ($\Delta u=0$) if and only if $u\circ
+  f:\Omega\to\RR$ is harmonic.
+  \label{prop:}
+\end{proposition}
+\begin{proof}
+  If $u:O\to\RR$ is harmonic on $O$, then one can solve the Cauchy-Riemann
+  equations on $O$ to find a harmonic conjugate $v$ of $u$ (since $O$ is path
+  connected). Hence there exists a holomorphic function $g:O\to\CC$ such that
+  $g=u+iv$. According to the chain rule $g\circ f: \Omega\to\CC$ must also be
+  holomorphic, hence $\Re(g\circ f) = u\circ f$ be harmonic. The converse
+  follows by a similar argument, by using functions $\tilde{u}=u\circ f:
+  \Omega\to\CC$ and $f^{-1}:O\to\Omega$.
+\end{proof}
+This above result tells us that for two open sets being conformally equivalent,
+if we get a solution to Laplace's equation in one set, there's automatically a
+solution in the other set.
+\begin{example}
+  In order to model the airflow around an airplane wing, one uses the so called
+  Joukowsky Transform ($z=\zeta+ \frac{1}{\zeta}$), which maps a potential flows
+  around a simple cylinder (in $\zeta$-plane) to a Joukowski airfoil (in
+  $z$-plane). In such applications, one is usually interested in solutions of
+  Laplace's equation, subject to some boundary conditions, (let $\partial O$ be
+  the boundary of the simple cylinder in the $\zeta$-plane),
+  \begin{enumerate}
+    \item $u(x,y)= \beta$ for all $(x,y)\in\partial O$ is a boundary condition of
+      Dirichlet type,
+    \item $\frac{\partial}{\partial \vec{n}} u(x,y) = \vec{0}$ for all
+      $(x,y)\in\partial O$ is a boundary condition of von Neumann type, where
+      $\vec{n}$ is the outward pointing normal vector of $\partial O$. Conformal
+      equivalence ensures that $\vec{n}$ is mapped to the normal of $\partial
+      \Omega$.
+  \end{enumerate} 
+\end{example}
+\begin{example}
+  Let $H=\{z: \Im z> 0\}, D=\{z: |z|<1\}, W_{\alpha}=\{z: 0<\arg z< \alpha\},
+  S=\{z: 0< \Im z < 2\pi\}$. There exists a conformal transformation $H\to D$ by 
+  \[z\mapsto \frac{z-i}{z+i},\]
+  With inverse
+  \[w\mapsto \frac{i(1+w)}{1-w}.\]
+  There's a conformal transformation from $H\to W_{\alpha}$ given by
+  \[re^{i\theta}\mapsto r^{\alpha/\pi} e^{i\alpha\theta/\pi}, \quad (r>0,
+  0<\theta<\pi)\]
+  (a choice of the map $z\mapsto z^{\alpha/\pi}$). There is a conformal
+  transformation from $S$ to $W_{2\pi}$ given by $z\to e^{z}$.
+\end{example}
+
+\begin{example}
+  Find a conformal transformation from $A$ to $B$, where 
+  \[A=\{z: 0 < \Re z < 1\}\]
+  \[B=\{z: \Im z>0\}.\]
+  To find this, we first note that $z\in B$ iff $\arg z \in (0, \pi)$. The
+  exponential function converts bounds in imaginary parts into bounds in
+  arguments. We hence find that $z\mapsto e^{iz}$ converts bounds of real parts
+  into bounds in arguments. Note $w\in A$ if $\Re w \in(0,1)$, so $\arg e^{iw}
+  \in (0,1)$. Hence, we observe the map $z\mapsto e^{i\pi z}$ maps $A$ to $B$,
+  and is evidently holomorphic, and its derivative is non-zero everywhere
+  (exponential function). We also find that the function is bijective:
+  injectivity,
+  \[e^{i\pi a} = e^{i\pi b}, \quad (\Re a,b \in (0,1) ),\]
+  \[\implies e^{-\pi \Im a}e^{i\pi \Re a} = e^{-\pi \Im b}e^{i\pi \Re b}\]
+  \[\implies \Re a = \Re b, \Im a= \Im b.\]
+  (The $\Im a=\Im b$ condition is trivial, bu $\Re a=\Re b$ comes from bounds).
+  Surjectivity is shown as follows: let $b\in B$, so $\arg b \in (0,\pi)$. We
+  write $b= re^{i\theta}$ with $\theta\in (0,\pi)$. We claim there exists $a\in
+  A$ s.t. $b=r e^{i\theta}=e^{i\pi a}=e^{-\pi \Im a}e^{i\pi \Re a}$. Indeed,
+  since $\Im a$ is non-bounded, we let $\Im a= \frac{-1}{\pi}\ln r$ (well
+  defined since $r>0$), and $\Re a = \theta/pi\in (0,1)$, as required.
+\end{example}
+

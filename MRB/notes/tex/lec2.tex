@@ -1,0 +1,125 @@
+\section{Week 1 - 12 Jan 2022 - Examples of forces}
+\begin{example}[Examples of forces]
+  \begin{enumerate}
+    \item Gravity: given a gravitational field $\vec{g}$, we have that the force
+      on a particle on that field is $\vec{F}=m\vec{g}$.
+    \item Friction $F_f$: Acts on the opposite directino of motion, hence $F_f=
+      -\lambda\vec{v}$. This $\lambda$ can depend on speed, or shape, or other
+      things. The simplest case is when it is a constant: $\lambda\in\RR$.
+      Another scenario is where it depends on speed, $\lambda=\lambda(v)$, like
+      $\lambda(v)=\beta v$ for some $\beta\in\RR$ -- in which case $F_f=\beta v^2$.
+  \end{enumerate}
+  
+\end{example}
+
+\begin{example}
+  Derive an ODE for the speed of a particle in a force field $F_{a}
+  =-\lambda\dot{\vec{x}}$, with $\lambda=\lambda(v)$.
+\end{example}
+\begin{proof}[Solution]
+  We have $m\vec{a}=F_a \implies m\ddot{\vec{x}}\cdot\dot{\vec{x}} =
+  \vec{F_a}\cdot\dot{\vec{x}}$, or 
+  \[m\dot{v}v = -\lambda(v)v^2\]
+  \[\implies \dot{v}= -\frac{\lambda(v)}{m} v\]
+\end{proof}
+\begin{example}
+  Solve the above ODE for the case $\lambda(v)=k$.
+\end{example}
+\begin{proof}[Solution]
+  We have $\dot{v}= \frac{-k}{m} v$, which is solved by separation of variables.
+  The solution: $v(t)=v_0\exp\left( -\frac{kt}{m} \right)$, an exponential decay
+  with mean lifetime $\frac{m}{k}$. This particle never comes to rest.
+\end{proof}
+
+\begin{example}
+  Now try with $\lambda(v)=\beta v$.
+\end{example}
+\begin{proof}
+  We have $\frac{dv}{dt} = -\frac{\beta v}{m}v = -\frac{\beta}{m}v^2$. This
+  yields the following, by separation of variables
+  \[\frac{1}{v^2} dv = \frac{-\beta}{m}dt\]
+  Which by integration from $t_0=0$ to $t_1$ it follows 
+  \[\frac{-1}{v} + \frac{1}{v_0} = \frac{-\beta t_1}{m}\]
+  \[\implies v = \left( \frac{\beta t_1}{m} +\frac{1}{v_0}
+  \right)^{-1}\]
+  \[\implies v= \frac{v_0}{\gamma v_0 t + 1}\]
+  Where $\gamma = \frac{\beta}{m}$.
+\end{proof}
+
+\subsubsection{Hooke's Law (for vibrating springs)}
+\begin{definition}[Hooke's Law]
+  The force exerted on an object attatched to a spring (elastic body) inversely
+  depends on the deformation of the spring. I.e.
+  \[F = -k\Delta x \]
+  Where $F$ is the force of the spring on the object, $\Delta x$ is the
+  deformation of the spring, and $k$ is some constant.
+  \label{def:hookeLaw}
+\end{definition}
+
+\subsubsection{2D polar coordinates}
+Recall that for cartesian coordinate system, we use an orthonormal set of basis
+vectors, $(\vec{e_x}, \vec{e_y}, \vec{e_z})$ or $(\vec{i}, \vec{j}, \vec{k})$.
+In canonical form we have
+\[\vec{e_x} \times \vec{e_y} = \vec{e_z}\]
+\[\vec{e_y} \times \vec{e_z} = \vec{e_x}\]
+\[\vec{e_z} \times \vec{e_x} = \vec{e_y}\]
+Which is encoded in the right-hand rule. In 2D polars we have the set of
+orthonormal basis vectors $(\vec{e_r}, \vec{e_{\theta}})$ with $\vec{e_r}\times
+\vec{e_{\theta}} = 1$.
+
+\subsubsection{Cylindrical polars}
+We use the set of orthonormal basis vectors $(\vec{e_r},\vec{e_{\theta}},
+\vec{e_z})$ with the following properties,
+\[\vec{e_r} \times \vec{e_{\theta}} = \vec{e_z}\]
+\[\vec{e_{\theta}} \times \vec{e_z} = \vec{e_r}\]
+\[\vec{e_z} \times \vec{e_{r}} = \vec{e_{\theta}}\]
+We now list some properties of cylindrical polars,
+\[\vec{e_r} = \cos\theta \vec{e_x} + \sin\theta \vec{e_y}\]
+\[\vec{e_{\theta}} = -\sin\theta \vec{e_x} + \cos\theta \vec{e_y}\]
+\[\vec{e_z} = \vec{e_z}\]
+Another set of useful properties is that the partial derivatives of each basis
+of the cylindrical polar with respect to $r$ and $z$ is $0$. Moreover, 
+\[\frac{\partial \vec{e_r}}{\partial t} = \dot{\theta}(-\sin\theta \vec{e_{x}} +
+\cos\theta\vec{e_y}) = \dot{\theta} e_{\theta}\]
+\[\frac{\partial\vec{e_{\theta}}}{\partial t} =
+\dot{\theta}(-\cos{\theta}\vec{e_x}-\sin\theta\vec{e_y}) = -\dot{\theta}\vec{e_r}\]
+
+\begin{example}
+  Consider the position vector $\vec{x}=r\vec{e_r}$. We have that 
+  \[\dot{\vec{x}}= \dot{r} \vec{e_r} + r\dot{\vec{e_r}} = \dot{r}\vec{e_r} +
+  r\dot{\theta} \vec{e_{\theta}}\]
+  Hence $\dot{\vec{x}}$ has two components, a radial component (perpendicular to
+  the direction of motion) and an azimuthal component (tangential to the
+  direction of motion). We call $\dot{\theta}$ the \emph{angular speed}, and the
+  linear speed of $x$ is $v = \sqrt{\dot{r}^2 + r^2 \dot{\theta}^2}$.
+  Additionally, the acceleration can be computed using derivative rules and get
+  $\ddot{\vec{x}}= (\ddot{r} -r\dot{\theta})\vec{e_r} + (2\dot{r}\dot{\theta}
+  +r\ddot{\theta})\vec{e_{\theta}}$
+  Moreover, the angular momentum Recall that $\vec{L}= m\vec{x}\times
+  \dot{\vec{x}}$, and applying the aforementioned rules we see $\vec{L}=
+  mr^2\dot{\theta} \vec{e_z}$. In the cartesian plane we usually just consider
+  $|\vec{L}|$.
+\end{example}
+\begin{example}
+  An ant walks along a spoke of a spinning wheel, at a constant rate $u$, from the origin
+  (center of wheel) outwards. The wheel has a constant angular speed $\omega$.
+  Calculate the position, velocity, speed, acceleration, and equation for the
+  path of the ant.
+\end{example}
+\begin{proof}[Solution]
+  The position of the ant at time $t$ is $\vec{x}(t)=r(t)\vec{e_r}$ with the
+  constraints $\dot{r}=u$, $\vec{x}(0)=(0,0)$, and $\vec{e_r}(t)=\cos{\omega
+  t}\vec{e_x} + \sin{\omega t}\vec{e_y}$. It then follows that 
+  \[\dot{\vec{x}} = \dot{r}\vec{e_r} + r\dot{\theta}\vec{e_{\theta}}\]
+  \[= u\vec{e_r} + r\omega \vec{e_{\theta}} = u\vec{e_r} + ut\omega \vec{e_{\theta}}\]
+  And therefore the acceleration,
+  \[\ddot{\vec{x}} = u\dot{\vec{e_r}} + \dot{r}\omega\vec{e_{\theta}} +
+  r\omega\dot{\vec{e_{\theta}}}\]
+  \[= 2u\omega\vec{e_{\theta}} - r\omega^2
+  \vec{e_{r}}\]
+  The path can be seen in the cartesian coordinate system as
+  \[\vec{x}(t) = (r\cos\omega t )\vec{e_x} + (r\sin\omega t)\vec{e_y} \]
+  \[\vec{x}(\theta) = (\frac{u}{\omega}\theta \cos\theta)\vec{e_x} +
+  (\frac{u}{\omega}\theta \sin\theta)\vec{e_y}\]
+  Which is the parametric equation of a spiral.
+\end{proof}<++>
