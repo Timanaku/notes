@@ -55,7 +55,7 @@ More group homomorphisms and the first isomorphism theorem.
 This example illustrated the idea of changing the focus of attention, like deciding which
 question you're going to ask about your object.
 
-\begin{example} [Tuotient homomorphisms, Injections]
+\begin{example} [Quotient homomorphisms, Injections]
   Recall that for $G$ group and $N$ normal subgroup, the quotient map is a surjective
   homomorphism, $\phi:G\to G/N : g\mapsto gN$.
 
@@ -111,16 +111,23 @@ g\ker\phi=g'\ker\phi$. Writing $N=\ker\phi$ we have,
 \[g\sim g' \iff gN = g'N\]
 Observe that by defining the above we're saying that $\phi$ is well-defined on cosets, and
 is injective in the set of cosets. In Theorem \ref{firstIso1} we said the kernel of a
-homomorphism is a normal subgroup of $G$. An attempt to illustrate this was made in Figure
-\ref{fig:isomorphism-theorem}
+homomorphism is a normal subgroup of $G$.
+
+An attempt to illustrate this has been made in Figure 1:
+
+\begin{center}
+\begin{tikzcd}
+\centering
+G \arrow[rr, "\varphi"] \arrow[dr, "\pi" swap] & & \mathrm{im}(\varphi) \\
+& G/\ker(\varphi) \arrow[ur, "\widetilde{\varphi}" swap] & 
+\end{tikzcd}
+\end{center}
 
 \begin{figure}[htpb]
     \centering
-    \incfig{isomorphism-theorem}
     \caption{First isomorphism theorem, illustrated. Note how every homomorphism is really
     a composition of a trivial and surjective quotient map, an bijective (injective and
-    surjective) homomorphism from the quotient to the image, and a map form the image of
-    $phi$ to $G'$ which is where surjection is lost.} 
+    surjective) homomorphism from the quotient to the image.} 
     \label{fig:isomorphism-theorem}
 \end{figure}
 
