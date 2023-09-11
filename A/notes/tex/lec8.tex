@@ -51,7 +51,7 @@ category.
   We have the following
   \begin{enumerate}
     \item Let $G,G',G''$ be groups and $\phi:G\to G'$ and $\phi':G'\to G''$ be group
-      homomorphisms. Then the composition $\phi\circ\phi':G\to G''$ form also a group
+      homomorphisms. Then the composition $\phi'\circ\phi:G\to G''$ form also a group
       homomorphism.
     \item Let $G$ be a group. The identity map $G\to G,g\mapsto g$ is a group
       homomorphism.
@@ -62,13 +62,14 @@ category.
 \end{theorem}
 \begin{proof}
   \todo{Check the work. Improve the labeling of variables. Finish the last part}
-  Let $g,h\in G, g',h'\in G', g'',h''\in G''$ throughout.
+  Let $g,h\in G, g',h'\in G'$ throughout.
   \begin{enumerate}
-    \item We have $\phi\circ\phi'(gh)= \phi'(\phi(gh))=
-      \phi'(\phi(g)\phi(h))=\phi'(g'h')=g''h''=\phi\circ\phi'g \phi\circ\phi'h $. As
-      reqruied.
-    \item We have $\phi gh=1 = 1\cdot 1 = \phi g \phi h$ for any $g,h\in G$. As required.
-    \item We claim $\phi^{-1}(g'h')= \phi^{-1}(g')\phi^{-1}(h')$.  
+    \item Let $\omega = \phi' \circ \phi $ We have $\omega(gh)= \phi'(\phi(gh))=
+      \phi'(\phi(g)\phi(h)) =\phi'(\phi(g)) \phi'(\phi(h)) = \omega(g)\omega(h) $. As
+      required.
+    \item We have $\phi(gh) = gh = \phi(g)\phi(h)$ as required.
+    \item Without loss of generality define $\phi(g) = g'$ and $\phi(h) = h'$. We have 
+    $\phi(gh) = \phi(g)\phi(h) \iff gh = \phi^{-1}(\phi(g)\phi(h)) \iff \phi^{-1}(g')\phi^{-1}(h') = \phi^{-1}(g'h')$ As required.
 
   \end{enumerate}
 \end{proof}

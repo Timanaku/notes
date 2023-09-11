@@ -137,7 +137,7 @@ G \arrow[rr, "\varphi"] \arrow[dr, "\pi" swap] & & \mathrm{im}(\varphi) \\
   \begin{enumerate}
     \item The image $\Img\phi=\left\{ \phi(g) : g\in G \right\}$ is a subgroup of $G'$
     \item The kernel $\ker\phi$ is a normal subgroup of $G$ (also written
-        $\phi^{-1}(1_{G'}$ denoting the pre-image of the identity).
+        $\phi^{-1}(1_{G'})$ denoting the pre-image of the identity).
     \item The bijection 
       \[\psi: G/\ker\phi\to\Img\phi : g \ker\phi\mapsto \phi(g)\]
       Is well defined. Moreover, it defines a group isomorphism,
@@ -159,6 +159,11 @@ G \arrow[rr, "\varphi"] \arrow[dr, "\pi" swap] & & \mathrm{im}(\varphi) \\
   $g^{-1}g'h=l$ for some non-identity element $l$ of $G$ not necessarily in $\ker\phi$. Hence,
   \[\phi(g^{-1}g'h) = \phi(l) \iff \phi(g^{-1})\phi(g') = \phi(l) \iff
   \phi(g)\phi(l)=\phi(g')\]
-  But $\phi(l)\neq 1_{G'}$, a contradiction. Therefore, $\psi$ is a bijection.
-  \todo{Verify this proof}
+  But $\phi(l)\neq 1_{G'}$, a contradiction
+
+  Alternative direct proof for injectivity (nicer imo)
+  
+  Assume $g,g'\in G$ and $\psi(g\ker\phi) = \psi(g'\ker\phi)$. Hence,
+  \[\phi(g) = \phi(g') \iff 1_{G'} = \phi(g)^{-1}\phi(g') = \phi(g^{-1}g') \iff g^{-1}g' \in \ker\phi \iff g\ker\phi = g'\ker\phi\]
+  Therefore, $\psi$ is a bijection.
 \end{proof}
